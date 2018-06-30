@@ -1,5 +1,5 @@
 <launch>
-  <arg name="world_name" value="$(find zephyr_gazebo)/worlds/simple_city.world"/>
+  <arg name="world_name" value="$(find uav_gazebo)/worlds/zephyr_iris_runway.world"/>
   <arg name="extra_gazebo_args" value="--verbose" />
   <arg name="paused" value="false"/>
   <arg name="use_sim_time" value="true"/>

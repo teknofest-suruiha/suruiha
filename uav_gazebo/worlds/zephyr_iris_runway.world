@@ -1,11 +1,12 @@
 <?xml version="1.0" ?>
+
 <sdf version="1.6">
-  <world name="zephyr">
+  <world name="default">
     <gui>
       <camera name="user_camera">
-        <pose>0 5 1 0 0.2 -1.5707</pose>
+        <pose>1.0 5.8 1.66 0.0 0.17 -1.57</pose>
       </camera>
-    </gui>
+    </gui> 
     <physics type="ode">
       <ode>
         <solver>
@@ -22,7 +23,7 @@
       </ode>
       <real_time_update_rate>400</real_time_update_rate>
       <max_step_size>0.0025</max_step_size>
-    </physics>
+    </physics> 
 
     <include>
       <uri>model://sun</uri>
@@ -84,11 +85,17 @@
       </link>
     </model>
 
-    <model name="zephyr_with_skid_pad">
-      <pose>0 0 0 0 0 0</pose>
+    <model name="iris0">
+      <include>
+        <uri>model://iris_quadrotor_with_plugin</uri>
+        <pose>0 0 0 0 0 0</pose>
+      </include>
+    </model>
+    
+    <model name="zephyr0">
       <include>
         <uri>model://zephyr_with_skid_pad</uri>
-        <pose>0 0 0 0 0 0</pose>
+        <pose>2.0 1.0 0 0 0 0</pose>
       </include>
     </model>
   </world>

@@ -1,5 +1,4 @@
 <?xml version="1.0" ?>
-
 <sdf version="1.6">
   <world name="default">
     <physics type="ode">
@@ -84,13 +83,6 @@
       <include>
         <uri>model://iris_quadrotor_with_plugin</uri>
         <pose>0 0 0 0 0 0</pose>
-      </include>
-    </model>
-    
-    <model name="zephyr0">
-      <include>
-        <uri>model://zephyr_with_skid_pad</uri>
-        <pose>2.0 1.0 0 0 0 0</pose>
       </include>
     </model>
   </world>
