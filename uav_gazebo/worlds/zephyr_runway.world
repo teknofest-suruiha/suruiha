@@ -48,12 +48,12 @@
           </surface>
         </collision>
         <visual name="runway">
-          <pose>000 0 0.005 0 0 -1.5707</pose>
+          <pose>0 -240 0.005 0 0 -1.5707</pose>
           <cast_shadows>false</cast_shadows>
           <geometry>
             <plane>
               <normal>0 0 1</normal>
-              <size>1829 45</size>
+              <size>500 20</size>
             </plane>
           </geometry>
           <material>
@@ -80,14 +80,61 @@
             </script>
           </material>
         </visual>
-
       </link>
     </model>
+    
     <model name="zephyr0">
       <include>
         <uri>model://zephyr_with_skid_pad</uri>
-        <pose>0 0 0 0 0 0</pose>
+        <pose>8.0 8.0 0 0 0 0</pose>
       </include>
     </model>
+    
+    <model name="zephyr1">
+      <include>
+        <uri>model://zephyr_with_skid_pad</uri>
+        <pose>8.0 6.5 0 0 0 0</pose>
+      </include>
+    </model>
+    
+    <model name="zephyr2">
+      <include>
+        <uri>model://zephyr_with_skid_pad</uri>
+        <pose>8.0 5.0 0 0 0 0</pose>
+      </include>
+    </model>
+    
+    <model name="zephyr3">
+      <include>
+        <uri>model://zephyr_with_skid_pad</uri>
+        <pose>8.0 3.5 0 0 0 0</pose>
+      </include>
+    </model>
+    
+    <model name="zephyr4">
+      <include>
+        <uri>model://zephyr_with_skid_pad</uri>
+        <pose>8.0 2.0 0 0 0 0</pose>
+      </include>
+    </model>
+    
+    <model name="zephyr5">
+      <include>
+        <uri>model://zephyr_with_skid_pad</uri>
+        <pose>8.0 0.5 0 0 0 0</pose>
+      </include>
+    </model>
+
+    <plugin name="air_traffic_controller" filename="libair_traffic_controller.so">
+      <takeoff>
+        <position>0 0 0</position>
+        <height_threshold>100</height_threshold>
+        <distance_threshold>100</distance_threshold>
+      </takeoff>
+      <landing>
+        <height_treshold>0.1</height_treshold>
+        <velocity_threshold>0.1</velocity_threshold>
+      </landing>
+    </plugin>
   </world>
 </sdf>
