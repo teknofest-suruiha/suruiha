@@ -2,7 +2,7 @@
 // Created by okan on 30.04.2018.
 //
 
-#include <suruiha_gazebo_plugins/joint_control.h>
+#include <suruiha_gazebo_plugins/controllers/joint_control.h>
 
 namespace gazebo {
 

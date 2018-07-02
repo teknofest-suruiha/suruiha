@@ -2,7 +2,7 @@
 #define ZEPHYR_CONTROLLER_H
 
 #include <ros/ros.h>
-#include <sensor_msgs/JointState.h>
+#include <geometry_msgs/Twist.h>
 #include <ros/callback_queue.h>
 
 #include <gazebo/common/Plugin.hh>
@@ -10,15 +10,15 @@
 #include <gazebo/transport/TransportTypes.hh>
 #include <gazebo/common/Time.hh>
 #include <gazebo/common/Events.hh>
-#include <suruiha_gazebo_plugins/rotor_control.h>
-#include <vector>
+#include <suruiha_gazebo_plugins/controllers/joint_control.h>
 
 namespace gazebo
 {
-	class IrisController : public ModelPlugin
+	class ZephyrController : public ModelPlugin
     {
-		public: IrisController();
-		public: virtual ~IrisController();
+
+		public: ZephyrController();
+		public: virtual ~ZephyrController();
 
 		public: void Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf);
 		protected: virtual void UpdateStates();
@@ -26,24 +26,26 @@ namespace gazebo
 
 		private: physics::WorldPtr world_;
 		private: physics::ModelPtr model_;
+//		private: physics::LinkPtr bodyLink_;
 		
 		private: std::string robot_namespace_;
+//		private: std::string control_topic_name_;
+//		private: std::string pose_topic_name_;
 //		private: std::string user_command_topic_name_;
 		private: ros::NodeHandle* rosnode_;
         private: ros::Subscriber control_twist_sub_;
 //        private: ros::Subscriber user_command_sub_;
         private: ros::Publisher pose_pub_;
-//	    private: sensor_msgs::JointState last_joint_states_;
+
         private: double targetThrottle;
         private: double targetPitch;
         private: double targetRoll;
-        private: double targetYaw;
 
-        private: std::vector<RotorControl*> rotors_;
-	    private: void SetControl(const geometry_msgs::Twist::ConstPtr& control);
+        private: std::vector<JointControl*> joints_;
+        private: void SetPIDParams(JointControl* jointControl, sdf::ElementPtr _sdf);
+	    private: void SetControl(const geometry_msgs::Twist::ConstPtr& controlTwist);
 //	    private: void ProcessUserCommand(const std_msgs::String::ConstPtr& user_command);
-	    private: void CalculateRotors(double targetThrottle, double targetPitch, double targetRoll,
-	    		double targetYaw, common::Time dt);
+	    private: void CalculateJoints(double targetThrottle, double targetPitch, double targetRoll, common::Time dt);
 
 		private: boost::mutex update_mutex_;
 		private: ros::CallbackQueue queue_;

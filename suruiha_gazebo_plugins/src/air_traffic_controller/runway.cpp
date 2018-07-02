@@ -1,0 +1,83 @@
+//
+// Created by okan on 01.07.2018.
+//
+
+#include <suruiha_gazebo_plugins/air_traffic_controller/runway.h>
+#include <suruiha_gazebo_plugins/air_traffic_controller/air_traffic_constants.h>
+#include <gazebo/common/Console.hh>
+
+RunWay::RunWay() {
+    Init();
+}
+
+RunWay::RunWay(sdf::ElementPtr sdf) {
+    Init();
+    // set pose and size of the runway
+//    SetSDF(sdf);
+}
+
+void RunWay::Init() {
+    status = air_traffic_constants::AVAILABLE;
+    allocatedFlight = "";
+}
+
+RunWay::~RunWay() {}
+
+//void RunWay::SetSDF(sdf::ElementPtr sdf) {
+//    pose = sdf->Get<ignition::math::Pose3d>("pose");
+//    size = sdf->GetElement("geometry")->GetElement("plane")->Get<ignition::math::Vector2d>("size");
+//    gzdbg << "pose.x:" << pose.Pos().X() << " .y:" << pose.Pos().Y() << " .z:" << pose.Pos().Z() << std::endl;
+//    gzdbg << "size.x:" << size[0] << " .y:" << size[1] << std::endl;
+//}
+
+std::string RunWay::ProcessCommand(std::string& cmd, std::string& sender) {
+    if (cmd == AirTrafficConstants::STATUS) {
+        if (status == air_traffic_constants::ALLOCATED_TO_LAND || status == air_traffic_constants::ALLOCATED_TO_TAKEOFF ||
+                status == air_traffic_constants::LANDED) {
+            return AirTrafficConstants::TAKEN;
+        } else if (status == air_traffic_constants::READY_TO_TAKEOFF) {
+            return AirTrafficConstants::READY_TO_TAKEOFF;
+        }
+        else {
+            return AirTrafficConstants::AVAILABLE;
+        }
+    } else if (cmd == AirTrafficConstants::TAKEOFF_REQUEST) {
+        if (status != air_traffic_constants::AVAILABLE) {
+            return AirTrafficConstants::TAKEN;
+        } else {
+            allocatedFlight = sender;
+            status = air_traffic_constants::ALLOCATED_TO_TAKEOFF;
+            return AirTrafficConstants::ALLOCATED_TO_TAKEOFF;
+        }
+    } else if (cmd == AirTrafficConstants::LANDING_REQUEST) {
+        if (status != air_traffic_constants::AVAILABLE) {
+            return AirTrafficConstants::TAKEN;
+        } else {
+            allocatedFlight = sender;
+            status = air_traffic_constants::ALLOCATED_TO_LAND;
+            return AirTrafficConstants::ALLOCATED_TO_LAND;
+        }
+    } else {
+        gzdbg << "unknown command:" << cmd << " from " << sender << std::endl;
+        return "ERROR";
+    }
+}
+
+std::string RunWay::GetAllocatedFlight() {
+    return allocatedFlight;
+}
+
+air_traffic_constants::Status RunWay::GetStatus() {
+    return status;
+}
+
+void RunWay::SetStatus(air_traffic_constants::Status _status) {
+    status = _status;
+}
+//bool RunWay::GetIsLanding() {
+//    return isLanding;
+//}
+//
+//bool RunWay::GetIsTaken() {
+//    return isTaken;
+//}

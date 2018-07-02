@@ -7,7 +7,7 @@
 #include <sensor_msgs/JointState.h>
 #include <nav_msgs/Odometry.h>
 #include <std_msgs/String.h>
-#include <suruiha_gazebo_plugins/zephyr_controller.h>
+#include <suruiha_gazebo_plugins/controllers/zephyr_controller.h>
 #include <gazebo/common/Plugin.hh>
 #include <ignition/math.hh>
 #include <sdf/sdf.hh>

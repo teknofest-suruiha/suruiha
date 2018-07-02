@@ -1,0 +1,4 @@
+string sender
+string command
+---
+string result

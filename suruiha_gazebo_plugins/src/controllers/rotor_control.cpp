@@ -5,7 +5,7 @@
  *      Author: okan
  */
 
-#include <suruiha_gazebo_plugins/rotor_control.h>
+#include <suruiha_gazebo_plugins/controllers/rotor_control.h>
 
 using namespace gazebo;
 

@@ -11,7 +11,8 @@ find_package(catkin REQUIRED COMPONENTS
         roscpp
         geometry_msgs
         gazebo_ros
-        gazebo_dev)
+        gazebo_dev
+        message_generation)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -55,11 +56,10 @@ find_package(gazebo REQUIRED)
 # )
 
 ## Generate services in the 'srv' folder
-# add_service_files(
-#   FILES
-#   Service1.srv
-#   Service2.srv
-# )
+add_service_files(
+   FILES
+   AirTraffic.srv
+)
 
 ## Generate actions in the 'action' folder
 # add_action_files(
@@ -69,10 +69,10 @@ find_package(gazebo REQUIRED)
 # )
 
 ## Generate added messages and services with any dependencies listed here
-# generate_messages(
-#   DEPENDENCIES
-#   std_msgs  # Or other packages containing msgs
-# )
+generate_messages(
+   DEPENDENCIES
+   std_msgs  # Or other packages containing msgs
+)
 
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
@@ -120,6 +120,7 @@ include_directories(include
 ${Boost_INCLUDE_DIRS}
 ${catkin_INCLUDE_DIRS}
 ${GAZEBO_INCLUDE_DIRS}
+        /media/okan/depo/teknofest2018/suruiha/catkin_ws/devel/include
 )
 
 link_directories(${catkin_LIBRARY_DIRS}
@@ -130,11 +131,17 @@ link_directories(${catkin_LIBRARY_DIRS}
 #   src/${PROJECT_NAME}/suruiha_gazebo_plugins.cpp
 # )
 
-add_library(zephyr_controller src/zephyr_controller.cpp src/joint_control.cpp src/util.cpp)
+add_library(zephyr_controller src/controllers/zephyr_controller.cpp src/controllers/joint_control.cpp src/controllers/util.cpp)
 target_link_libraries(zephyr_controller ${catkin_LIBRARIES} ${Boost_LIBRARIES} ${GAZEBO_LIBRARIES})
 
-add_library(iris_controller src/iris_controller.cpp src/rotor_control.cpp src/util.cpp)
+add_library(iris_controller src/controllers/iris_controller.cpp src/controllers/rotor_control.cpp src/controllers/util.cpp)
 target_link_libraries(iris_controller ${catkin_LIBRARIES} ${Boost_LIBRARIES} ${GAZEBO_LIBRARIES})
+
+add_library(air_traffic_controller
+        src/air_traffic_controller/air_traffic_controller.cpp
+        src/air_traffic_controller/runway.cpp
+        src/air_traffic_controller/air_traffic_constants.cpp)
+target_link_libraries(air_traffic_controller ${catkin_LIBRARIES} ${Boost_LIBRARIES} ${GAZEBO_LIBRARIES})
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
@@ -185,7 +192,13 @@ install(TARGETS
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 )
-  
+
+install(TARGETS
+        air_traffic_controller
+        DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+        LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+        )
+
 ## Mark executables and/or libraries for installation
 # install(TARGETS ${PROJECT_NAME} ${PROJECT_NAME}_node
 #   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}

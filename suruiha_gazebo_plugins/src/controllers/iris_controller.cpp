@@ -7,11 +7,11 @@
 #include <geometry_msgs/Pose.h>
 #include <geometry_msgs/Twist.h>
 #include <std_msgs/String.h>
-#include <suruiha_gazebo_plugins/iris_controller.h>
+#include <suruiha_gazebo_plugins/controllers/iris_controller.h>
 #include <gazebo/common/Plugin.hh>
 #include <ignition/math.hh>
 #include <sdf/sdf.hh>
-#include <suruiha_gazebo_plugins/util.h>
+#include <suruiha_gazebo_plugins/controllers/util.h>
 
 namespace gazebo {
 
