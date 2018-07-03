@@ -107,6 +107,7 @@ catkin_package(
   INCLUDE_DIRS include
   LIBRARIES zephyr_controller iris_controller
   DEPENDS roscpp gazebo_ros geometry_msgs
+  CATKIN_DEPENDS message_runtime
 #  DEPENDS system_lib
 )
 
