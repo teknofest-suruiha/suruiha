@@ -46,6 +46,10 @@ namespace gazebo {
     protected: double landingHeightThreshold;
     protected: double landingVelocityThreshold;
 
+    private: transport::NodePtr node;
+    private: transport::PublisherPtr uavStatusPub;
+    private: std::map<std::string, bool> isUAVActive;
+    protected: void SetUAVStatus(std::string uavName, bool isActive);
 
 
     };

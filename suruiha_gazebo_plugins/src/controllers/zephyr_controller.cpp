@@ -8,6 +8,7 @@
 #include <nav_msgs/Odometry.h>
 #include <std_msgs/String.h>
 #include <suruiha_gazebo_plugins/controllers/zephyr_controller.h>
+#include <gazebo/gazebo.hh>
 #include <gazebo/common/Plugin.hh>
 #include <ignition/math.hh>
 #include <sdf/sdf.hh>
@@ -35,6 +36,7 @@ namespace gazebo {
         targetPitch = 0.0;
         targetRoll = 0.0;
         poseUpdateRate = 100;
+        isActive = false;
     }
 
     ZephyrController::~ZephyrController() {
@@ -78,11 +80,12 @@ namespace gazebo {
             return;
         }
 
-        std::string model_name = _sdf->GetParent()->GetAttribute("name")->GetAsString();
-        std::string control_topic_name = model_name + "_control";
-        std::string pose_topic_name = model_name + "_pose";
+        modelName = _sdf->GetParent()->GetAttribute("name")->GetAsString();
+        std::string control_topic_name = modelName + "_control";
+        std::string pose_topic_name = modelName + "_pose";
+        gzdbg << "control_topic:" << control_topic_name << " pose_topic:" << pose_topic_name << std::endl;
 
-        this->rosnode_ = new ros::NodeHandle(this->robot_namespace_);
+        this->rosnode_ = new ros::NodeHandle("");
 //        if (this->control_topic_name_ != "") {
             ros::SubscribeOptions joints_so =
                     ros::SubscribeOptions::create<geometry_msgs::Twist>(
@@ -107,6 +110,15 @@ namespace gazebo {
         // create the publisher
         this->pose_pub_ = this->rosnode_->advertise<geometry_msgs::Pose>(pose_topic_name, 1);
 
+        // create transport node
+        node = transport::NodePtr(new transport::Node());
+        node->Init(model_->GetWorld()->Name());
+        // topic name
+        std::string topicName = "/air_control";
+        this->subPtr = this->node->Subscribe(topicName,
+                                          &ZephyrController::OnAirControlMsg, this);
+
+
         // New Mechanism for Updating every World Cycle
         // Listen to the update event. This event is broadcast every
         // simulation iteration.
@@ -118,31 +130,32 @@ namespace gazebo {
     	boost::mutex::scoped_lock lock(this->update_mutex_);
     	common::Time currTime = this->world_->SimTime();
 
-    	if (this->pose_pub_.getNumSubscribers() > 0) {
-    		double dt_ = (currTime - lastPosePublishTime).Double()*1000; // miliseconds
-    		if (dt_ > poseUpdateRate) {
-    			ignition::math::Pose3d pose = this->model_->WorldPose();
-    			geometry_msgs::Pose poseMsg;
-    			poseMsg.position.x = pose.Pos().X();
-    			poseMsg.position.y = pose.Pos().Y();
-    			poseMsg.position.z = pose.Pos().Z();
-    			poseMsg.orientation.x = pose.Rot().X();
-    			poseMsg.orientation.y = pose.Rot().Y();
-    			poseMsg.orientation.z = pose.Rot().Z();
-    			poseMsg.orientation.w = pose.Rot().W();
-    			this->pose_pub_.publish(poseMsg);
-    			lastPosePublishTime = currTime;
-    		}
-    	}
-
-
-
-        if (control_twist_sub_.getNumPublishers() > 0) {
-            double dt_ = (currTime - lastUpdateTime).Double();
-            if (lastUpdateTime.Double() == 0.0) {
-            	dt_ = 0.0;
+        // the air traffic controller determines whether the uav is active or not
+        if (isActive) {
+            if (this->pose_pub_.getNumSubscribers() > 0) {
+                double dt_ = (currTime - lastPosePublishTime).Double() * 1000; // miliseconds
+                if (dt_ > poseUpdateRate) {
+                    ignition::math::Pose3d pose = this->model_->WorldPose();
+                    geometry_msgs::Pose poseMsg;
+                    poseMsg.position.x = pose.Pos().X();
+                    poseMsg.position.y = pose.Pos().Y();
+                    poseMsg.position.z = pose.Pos().Z();
+                    poseMsg.orientation.x = pose.Rot().X();
+                    poseMsg.orientation.y = pose.Rot().Y();
+                    poseMsg.orientation.z = pose.Rot().Z();
+                    poseMsg.orientation.w = pose.Rot().W();
+                    this->pose_pub_.publish(poseMsg);
+                    lastPosePublishTime = currTime;
+                }
             }
-        	CalculateJoints(targetThrottle, targetPitch, targetRoll, dt_);
+
+            if (control_twist_sub_.getNumPublishers() > 0) {
+                double dt_ = (currTime - lastUpdateTime).Double();
+                if (lastUpdateTime.Double() == 0.0) {
+                    dt_ = 0.0;
+                }
+                CalculateJoints(targetThrottle, targetPitch, targetRoll, dt_);
+            }
         }
 
         this->lastUpdateTime = currTime;
@@ -191,5 +204,22 @@ namespace gazebo {
             double cmdmin = _sdf->Get<double>("cmdmin");
             jointControl->SetPIDParams(p, i, d, imax, imin, cmdmax, cmdmin);
         }
+    }
+
+    void ZephyrController::OnAirControlMsg(ConstAnyPtr& airControlMsg) {
+        std::string msg = airControlMsg->string_value();
+        std::string cmd = msg.substr(0, msg.find(" "));
+        std::string param = msg.substr(msg.find(" ")+1, msg.length()-msg.find(" ")-1);
+        gzdbg << "aircontrolmsg is taken cmd:" << cmd << " param:" << param << std::endl;
+        if (param == modelName) {
+            if (cmd == "activate") {
+                isActive = true;
+            } else if (cmd == "deactivate") {
+                isActive = false;
+            } else {
+                gzdbg << "unknown command:" << cmd << " for:" << param << std::endl;
+            }
+        }
+
     }
 }

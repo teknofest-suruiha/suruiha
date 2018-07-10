@@ -4,6 +4,7 @@
 
 #include <suruiha_gazebo_plugins/air_traffic_controller/air_traffic_controller.h>
 #include <suruiha_gazebo_plugins/air_traffic_controller/air_traffic_constants.h>
+#include <gazebo/gazebo.hh>
 #include <ignition/math.hh>
 
 using namespace suruiha_gazebo_plugins;
@@ -32,6 +33,10 @@ namespace gazebo {
 
         serviceServer = rosNode->advertiseService("air_traffic_control", &AirTrafficController::AirTrafficService, this);
 
+        // create inner communication node
+        node = transport::NodePtr(new transport::Node());
+        node->Init(_parent->Name());
+        uavStatusPub = node->Advertise<msgs::Any>("/air_control");
 
         updateConnection = event::Events::ConnectWorldUpdateBegin(
                 boost::bind(&AirTrafficController::UpdateStates, this));
@@ -49,6 +54,8 @@ namespace gazebo {
             } else {
                 ignition::math::Pose3d modelPose = modelPtr->WorldPose();
                 initialPoses.insert(std::pair<std::string, ignition::math::Pose3d>(ss.str(), modelPose));
+                // also fill the uav status. at first all uavs are inactive until finishing takeoff operation being on the air again
+                isUAVActive.insert(std::pair<std::string, bool>(ss.str(), false));
             }
         }
         gzdbg << "We have " << i << " many " << baseModelName << " models" << std::endl;
@@ -67,19 +74,21 @@ namespace gazebo {
         boost::mutex::scoped_lock lock(updateMutex);
 
         if (runway.GetStatus() == air_traffic_constants::ALLOCATED_TO_TAKEOFF) {
-            std::string flight = runway.GetAllocatedFlight();
-            physics::ModelPtr modelPtr = worldPtr->ModelByName(flight);
+            std::string uavName = runway.GetAllocatedUAV();
+            physics::ModelPtr modelPtr = worldPtr->ModelByName(uavName);
             if (modelPtr != NULL) {
                 ignition::math::Pose3d pose;
                 pose.Pos().Set(takeOffPosition[0], takeOffPosition[1], takeOffPosition[2]);
                 modelPtr->SetWorldPose(pose);
+                gzdbg << "set " << uavName << " to takeoff position x:" << pose.Pos().X() << " y:" << pose.Pos().Y() << " z:" << pose.Pos().Z() << std::endl;
                 runway.SetStatus(air_traffic_constants::READY_TO_TAKEOFF);
+                SetUAVStatus(uavName, true);
             } else {
-                gzdbg << "Cannot find the flight by name:" << flight << std::endl;
+                gzdbg << "Cannot find the UAV by name:" << uavName << std::endl;
             }
         } else if (runway.GetStatus() == air_traffic_constants::ALLOCATED_TO_LAND) {
-            std::string flight = runway.GetAllocatedFlight();
-            physics::ModelPtr modelPtr = worldPtr->ModelByName(flight);
+            std::string uavName = runway.GetAllocatedUAV();
+            physics::ModelPtr modelPtr = worldPtr->ModelByName(uavName);
             if (modelPtr != NULL) {
                 ignition::math::Vector3d flightVel = modelPtr->WorldLinearVel();
                 ignition::math::Pose3d flightPose = modelPtr->WorldPose();
@@ -88,22 +97,23 @@ namespace gazebo {
                 }
             }
             else {
-                gzdbg << "Cannot find the flight by name:" << flight << std::endl;
+                gzdbg << "Cannot find the uavName by name:" << uavName << std::endl;
             }
         } else if (runway.GetStatus() == air_traffic_constants::LANDED) {
-            std::string flight = runway.GetAllocatedFlight();
-            physics::ModelPtr modelPtr = worldPtr->ModelByName(flight);
+            std::string uavName = runway.GetAllocatedUAV();
+            physics::ModelPtr modelPtr = worldPtr->ModelByName(uavName);
             if (modelPtr != NULL) {
-                ignition::math::Pose3d initialModelPose = initialPoses[flight];
+                ignition::math::Pose3d initialModelPose = initialPoses[uavName];
                 modelPtr->SetWorldPose(initialModelPose);
                 runway.SetStatus(air_traffic_constants::AVAILABLE);
+                SetUAVStatus(uavName, false);
             }
             else {
-                gzdbg << "Cannot find the flight by name:" << flight << std::endl;
+                gzdbg << "Cannot find the uavName by name:" << uavName << std::endl;
             }
         } else if (runway.GetStatus() == air_traffic_constants::READY_TO_TAKEOFF) {
-            std::string flight = runway.GetAllocatedFlight();
-            physics::ModelPtr modelPtr = worldPtr->ModelByName(flight);
+            std::string uavName = runway.GetAllocatedUAV();
+            physics::ModelPtr modelPtr = worldPtr->ModelByName(uavName);
             if (modelPtr != NULL) {
                 ignition::math::Pose3d flightPose = modelPtr->WorldPose();
 
@@ -113,6 +123,31 @@ namespace gazebo {
                 }
             }
         }
+        // BEGIN: test
+//        static bool sentMsg = false;
+//        if (worldPtr->SimTime().sec > 10 && !sentMsg) {
+//            // send air traffic message
+//            msgs::Any airTrafficMsg;
+//            airTrafficMsg.set_type(msgs::Any::STRING);
+//            airTrafficMsg.set_string_value("activate zephyr0");
+//            pubPtr->Publish(airTrafficMsg);
+//            gzdbg << "air traffic message is sent" << std::endl;
+//            sentMsg = true;
+//        }
+        // END: test
+    }
+
+    void AirTrafficController::SetUAVStatus(std::string uavName, bool isActive) {
+        isUAVActive.insert(std::pair<std::string, bool>(uavName, isActive));
+        // send air traffic information to uav controllers
+        msgs::Any airTrafficMsg;
+        airTrafficMsg.set_type(msgs::Any::STRING);
+        if (isActive) {
+            airTrafficMsg.set_string_value("activate " + uavName);
+        } else {
+            airTrafficMsg.set_string_value("deactivate " + uavName);
+        }
+        uavStatusPub->Publish(airTrafficMsg);
     }
 
     bool AirTrafficController::AirTrafficService(AirTraffic::Request& req, AirTraffic::Response& resp) {

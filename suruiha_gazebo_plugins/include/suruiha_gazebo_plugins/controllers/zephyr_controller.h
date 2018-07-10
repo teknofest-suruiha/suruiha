@@ -28,10 +28,11 @@ namespace gazebo
 		private: physics::ModelPtr model_;
 //		private: physics::LinkPtr bodyLink_;
 		
-		private: std::string robot_namespace_;
+//		private: std::string robot_namespace_;
 //		private: std::string control_topic_name_;
 //		private: std::string pose_topic_name_;
 //		private: std::string user_command_topic_name_;
+    private: std::string modelName;
 		private: ros::NodeHandle* rosnode_;
         private: ros::Subscriber control_twist_sub_;
 //        private: ros::Subscriber user_command_sub_;
@@ -56,6 +57,12 @@ namespace gazebo
 
         private: common::Time lastPosePublishTime;
         private: int poseUpdateRate;
+
+		// communcation between air traffic controller and fligh controller
+		private: transport::NodePtr node;
+		private: transport::SubscriberPtr subPtr;
+		protected: void OnAirControlMsg(ConstAnyPtr& airControlMsg);
+        protected: bool isActive;
 
 	};
 }

@@ -18,7 +18,7 @@ RunWay::RunWay(sdf::ElementPtr sdf) {
 
 void RunWay::Init() {
     status = air_traffic_constants::AVAILABLE;
-    allocatedFlight = "";
+    allocatedUAV = "";
 }
 
 RunWay::~RunWay() {}
@@ -45,7 +45,7 @@ std::string RunWay::ProcessCommand(std::string& cmd, std::string& sender) {
         if (status != air_traffic_constants::AVAILABLE) {
             return AirTrafficConstants::TAKEN;
         } else {
-            allocatedFlight = sender;
+            allocatedUAV = sender;
             status = air_traffic_constants::ALLOCATED_TO_TAKEOFF;
             return AirTrafficConstants::ALLOCATED_TO_TAKEOFF;
         }
@@ -53,7 +53,7 @@ std::string RunWay::ProcessCommand(std::string& cmd, std::string& sender) {
         if (status != air_traffic_constants::AVAILABLE) {
             return AirTrafficConstants::TAKEN;
         } else {
-            allocatedFlight = sender;
+            allocatedUAV = sender;
             status = air_traffic_constants::ALLOCATED_TO_LAND;
             return AirTrafficConstants::ALLOCATED_TO_LAND;
         }
@@ -63,8 +63,8 @@ std::string RunWay::ProcessCommand(std::string& cmd, std::string& sender) {
     }
 }
 
-std::string RunWay::GetAllocatedFlight() {
-    return allocatedFlight;
+std::string RunWay::GetAllocatedUAV() {
+    return allocatedUAV;
 }
 
 air_traffic_constants::Status RunWay::GetStatus() {
