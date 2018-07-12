@@ -105,11 +105,11 @@ namespace gazebo {
             if (modelPtr != NULL) {
                 ignition::math::Vector3d flightVel = modelPtr->WorldLinearVel();
                 ignition::math::Pose3d flightPose = modelPtr->WorldPose();
-                gzdbg << "flight velocity:" << flightVel.Length() << std::endl;
+                gzdbg << "flight velocity:" << flightVel.Length() << " pose.x:" << flightPose.Pos().X() << " pose.y:" << flightPose.Pos().Y() << std::endl;
                 if (flightPose.Pos().Z() < landingHeightThreshold && flightVel.Length() < landingVelocityThreshold) {
                     // check whether the flight is in the runway zone
                     if (flightPose.Pos().X() > landingBottomLeft.X() && flightPose.Pos().X() < landingUpperRight.X()
-                            && flightPose.Pos().Y() > landingBottomLeft.Y() && flightPose.Pos().Y() < landingBottomLeft.Y()) {
+                            && flightPose.Pos().Y() > landingBottomLeft.Y() && flightPose.Pos().Y() < landingUpperRight.Y()) {
                         runway.SetStatus(air_traffic_constants::LANDED);
                     }
                 }
