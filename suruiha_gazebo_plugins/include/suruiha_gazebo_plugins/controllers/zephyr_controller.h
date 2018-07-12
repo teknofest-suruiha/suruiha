@@ -32,7 +32,7 @@ namespace gazebo
 //		private: std::string control_topic_name_;
 //		private: std::string pose_topic_name_;
 //		private: std::string user_command_topic_name_;
-    private: std::string modelName;
+    	private: std::string modelName;
 		private: ros::NodeHandle* rosnode_;
         private: ros::Subscriber control_twist_sub_;
 //        private: ros::Subscriber user_command_sub_;
@@ -49,9 +49,9 @@ namespace gazebo
 	    private: void CalculateJoints(double targetThrottle, double targetPitch, double targetRoll, common::Time dt);
 
 		private: boost::mutex update_mutex_;
-		private: ros::CallbackQueue queue_;
-		private: boost::thread callback_queue_thread_;
-	    private: void QueueThread();
+//		private: ros::CallbackQueue queue_;
+//		private: boost::thread callback_queue_thread_;
+//	    private: void QueueThread();
 
         private: common::Time lastUpdateTime;
 

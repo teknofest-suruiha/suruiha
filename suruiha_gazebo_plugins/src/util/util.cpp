@@ -5,7 +5,7 @@
  *      Author: okan
  */
 
-#include <suruiha_gazebo_plugins/controllers/util.h>
+#include <suruiha_gazebo_plugins/util/util.h>
 
 namespace gazebo {
 

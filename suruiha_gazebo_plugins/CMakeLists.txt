@@ -49,11 +49,10 @@ find_package(gazebo REQUIRED)
 ##   * add every package in MSG_DEP_SET to generate_messages(DEPENDENCIES ...)
 
 ## Generate messages in the 'msg' folder
-# add_message_files(
-#   FILES
-#   Message1.msg
-#   Message2.msg
-# )
+add_message_files(
+   FILES
+   UAVMessage.msg
+)
 
 ## Generate services in the 'srv' folder
 add_service_files(
@@ -121,7 +120,6 @@ include_directories(include
 ${Boost_INCLUDE_DIRS}
 ${catkin_INCLUDE_DIRS}
 ${GAZEBO_INCLUDE_DIRS}
-        /media/okan/depo/teknofest2018/suruiha/catkin_ws/devel/include
 )
 
 link_directories(${catkin_LIBRARY_DIRS}
@@ -132,10 +130,10 @@ link_directories(${catkin_LIBRARY_DIRS}
 #   src/${PROJECT_NAME}/suruiha_gazebo_plugins.cpp
 # )
 
-add_library(zephyr_controller src/controllers/zephyr_controller.cpp src/controllers/joint_control.cpp src/controllers/util.cpp)
+add_library(zephyr_controller src/controllers/zephyr_controller.cpp src/controllers/joint_control.cpp src/util/util.cpp)
 target_link_libraries(zephyr_controller ${catkin_LIBRARIES} ${Boost_LIBRARIES} ${GAZEBO_LIBRARIES})
 
-add_library(iris_controller src/controllers/iris_controller.cpp src/controllers/rotor_control.cpp src/controllers/util.cpp)
+add_library(iris_controller src/controllers/iris_controller.cpp src/controllers/rotor_control.cpp src/util/util.cpp)
 target_link_libraries(iris_controller ${catkin_LIBRARIES} ${Boost_LIBRARIES} ${GAZEBO_LIBRARIES})
 
 add_library(air_traffic_controller
@@ -143,6 +141,9 @@ add_library(air_traffic_controller
         src/air_traffic_controller/runway.cpp
         src/air_traffic_controller/air_traffic_constants.cpp)
 target_link_libraries(air_traffic_controller ${catkin_LIBRARIES} ${Boost_LIBRARIES} ${GAZEBO_LIBRARIES})
+
+add_library(comm_manager src/comm_manager/comm_manager.cpp)
+target_link_libraries(comm_manager ${catkin_LIBRARIES} ${Boost_LIBRARIES} ${GAZEBO_LIBRARIES})
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
@@ -200,6 +201,14 @@ install(TARGETS
         LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
         )
 
+install(TARGETS
+        comm_manager
+        DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+        LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+        )
+
+
+
 ## Mark executables and/or libraries for installation
 # install(TARGETS ${PROJECT_NAME} ${PROJECT_NAME}_node
 #   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
@@ -208,11 +217,11 @@ install(TARGETS
 # )
 
 ## Mark cpp header files for installation
-# install(DIRECTORY include/${PROJECT_NAME}/
-#   DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
-#   FILES_MATCHING PATTERN "*.h"
-#   PATTERN ".svn" EXCLUDE
-# )
+install(DIRECTORY include/${PROJECT_NAME}/
+   DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
+   FILES_MATCHING PATTERN "*.h"
+   PATTERN ".svn" EXCLUDE
+)
 
 ## Mark other files for installation (e.g. launch and bag files, etc.)
 # install(FILES

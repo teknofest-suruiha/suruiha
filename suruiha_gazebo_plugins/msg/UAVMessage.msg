@@ -1,0 +1,2 @@
+string sender
+string msg

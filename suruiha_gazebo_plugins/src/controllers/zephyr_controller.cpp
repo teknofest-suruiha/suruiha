@@ -42,9 +42,9 @@ namespace gazebo {
     ZephyrController::~ZephyrController() {
         this->update_connection_.reset();
         this->rosnode_->shutdown();
-        this->queue_.clear();
-        this->queue_.disable();
-        this->callback_queue_thread_.join();
+//        this->queue_.clear();
+//        this->queue_.disable();
+//        this->callback_queue_thread_.join();
         delete this->rosnode_;
         for (unsigned i = 0; i < joints_.size(); i++) {
         	delete joints_[i];
@@ -86,13 +86,14 @@ namespace gazebo {
         gzdbg << "control_topic:" << control_topic_name << " pose_topic:" << pose_topic_name << std::endl;
 
         this->rosnode_ = new ros::NodeHandle("");
+        this->rosnode_->subscribe(control_topic_name.c_str(), 100, &ZephyrController::SetControl, this);
 //        if (this->control_topic_name_ != "") {
-            ros::SubscribeOptions joints_so =
-                    ros::SubscribeOptions::create<geometry_msgs::Twist>(
-                            control_topic_name, 100, boost::bind(
-                                    &ZephyrController::SetControl, this, _1),
-                            ros::VoidPtr(), &this->queue_);
-            this->control_twist_sub_ = this->rosnode_->subscribe(joints_so);
+//            ros::SubscribeOptions joints_so =
+//                    ros::SubscribeOptions::create<geometry_msgs::Twist>(
+//                            control_topic_name, 100, boost::bind(
+//                                    , this, _1),
+//                            ros::VoidPtr(), &this->queue_);
+//            this->control_twist_sub_ = this->rosnode_->subscribe(joints_so);
 //        }
 
         // subscribe for user commands
@@ -104,8 +105,8 @@ namespace gazebo {
 //        this->user_command_sub_ = this->rosnode_->subscribe(user_command_so);
 
         // start custom queue for controller plugin ros topics
-        this->callback_queue_thread_ =
-                boost::thread(boost::bind(&ZephyrController::QueueThread, this));
+//        this->callback_queue_thread_ =
+//                boost::thread(boost::bind(&ZephyrController::QueueThread, this));
 
         // create the publisher
         this->pose_pub_ = this->rosnode_->advertise<geometry_msgs::Pose>(pose_topic_name, 1);
@@ -130,31 +131,31 @@ namespace gazebo {
     	boost::mutex::scoped_lock lock(this->update_mutex_);
     	common::Time currTime = this->world_->SimTime();
 
+        // if there is any listener always publish the pose of the uav
+        if (this->pose_pub_.getNumSubscribers() > 0) {
+            double dt_ = (currTime - lastPosePublishTime).Double() * 1000; // miliseconds
+            if (dt_ > poseUpdateRate) {
+                ignition::math::Pose3d pose = this->model_->WorldPose();
+                geometry_msgs::Pose poseMsg;
+                poseMsg.position.x = pose.Pos().X();
+                poseMsg.position.y = pose.Pos().Y();
+                poseMsg.position.z = pose.Pos().Z();
+                ignition::math::Vector3d ori = pose.Rot().Euler();
+                ignition::math::Angle zOri = ori.Z() - ignition::math::Angle::Pi.Radian();
+                zOri.Normalize();
+                ori.Z(zOri.Radian());
+                ignition::math::Quaterniond quat;
+                quat.Euler(ori);
+                poseMsg.orientation.x = quat.X();
+                poseMsg.orientation.y = quat.Y();
+                poseMsg.orientation.z = quat.Z();
+                poseMsg.orientation.w = quat.W();
+                this->pose_pub_.publish(poseMsg);
+                lastPosePublishTime = currTime;
+            }
+        }
         // the air traffic controller determines whether the uav is active or not
         if (isActive) {
-            if (this->pose_pub_.getNumSubscribers() > 0) {
-                double dt_ = (currTime - lastPosePublishTime).Double() * 1000; // miliseconds
-                if (dt_ > poseUpdateRate) {
-                    ignition::math::Pose3d pose = this->model_->WorldPose();
-                    geometry_msgs::Pose poseMsg;
-                    poseMsg.position.x = pose.Pos().X();
-                    poseMsg.position.y = pose.Pos().Y();
-                    poseMsg.position.z = pose.Pos().Z();
-                    ignition::math::Vector3d ori = pose.Rot().Euler();
-                    ignition::math::Angle zOri = ori.Z() - ignition::math::Angle::Pi.Radian();
-                    zOri.Normalize();
-                    ori.Z(zOri.Radian());
-                    ignition::math::Quaterniond quat;
-                    quat.Euler(ori);
-                    poseMsg.orientation.x = quat.X();
-                    poseMsg.orientation.y = quat.Y();
-                    poseMsg.orientation.z = quat.Z();
-                    poseMsg.orientation.w = quat.W();
-                    this->pose_pub_.publish(poseMsg);
-                    lastPosePublishTime = currTime;
-                }
-            }
-
             if (control_twist_sub_.getNumPublishers() > 0) {
                 double dt_ = (currTime - lastUpdateTime).Double();
                 if (lastUpdateTime.Double() == 0.0) {
@@ -192,12 +193,12 @@ namespace gazebo {
 ////    	planner.ProcessUserCommand(user_command->data);
 //    }
 
-    void ZephyrController::QueueThread() {
-        static const double timeout = 0.01;
-        while (this->rosnode_->ok()) {
-            this->queue_.callAvailable(ros::WallDuration(timeout));
-        }
-    }
+//    void ZephyrController::QueueThread() {
+//        static const double timeout = 0.01;
+//        while (this->rosnode_->ok()) {
+//            this->queue_.callAvailable(ros::WallDuration(timeout));
+//        }
+//    }
 
     void ZephyrController::SetPIDParams(JointControl* jointControl, sdf::ElementPtr _sdf) {
         if (_sdf->HasElement("p")) {
