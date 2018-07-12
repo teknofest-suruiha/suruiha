@@ -39,7 +39,13 @@ namespace gazebo {
 
     protected: RunWay runway;
 
-    protected: ignition::math::Vector3d takeOffPosition;
+    protected: ignition::math::Pose3d takeOffPose;
+    protected: ignition::math::Pose3d landingStartPose;
+    protected: ignition::math::Pose3d landingEndPose;
+
+    protected: ignition::math::Vector3d landingBottomLeft;
+    protected: ignition::math::Vector3d landingUpperRight;
+
     protected: double takeOffHeightThreshold;
     protected: double takeOffDistanceThreshold;
 
@@ -50,6 +56,8 @@ namespace gazebo {
     private: transport::PublisherPtr uavStatusPub;
     private: std::map<std::string, bool> isUAVActive;
     protected: void SetUAVStatus(std::string uavName, bool isActive);
+
+    protected: std::set<std::string> justLanded;
 
 
     };

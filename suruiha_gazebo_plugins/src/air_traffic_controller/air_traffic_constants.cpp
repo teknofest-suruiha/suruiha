@@ -9,6 +9,7 @@ const std::string AirTrafficConstants::STATUS = "STATUS";
 const std::string AirTrafficConstants::TAKEOFF_REQUEST = "TAKEOFF_REQUEST";
 const std::string AirTrafficConstants::LANDING_REQUEST = "LANDING_REQUEST";
 const std::string AirTrafficConstants::CANCEL = "CANCEL";
+const std::string AirTrafficConstants::LANDING_POSE = "LANDING_POSE";
 
 const std::string AirTrafficConstants::AVAILABLE = "AVAILABLE";
 const std::string AirTrafficConstants::TAKEN = "TAKEN";

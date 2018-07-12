@@ -140,10 +140,16 @@ namespace gazebo {
                     poseMsg.position.x = pose.Pos().X();
                     poseMsg.position.y = pose.Pos().Y();
                     poseMsg.position.z = pose.Pos().Z();
-                    poseMsg.orientation.x = pose.Rot().X();
-                    poseMsg.orientation.y = pose.Rot().Y();
-                    poseMsg.orientation.z = pose.Rot().Z();
-                    poseMsg.orientation.w = pose.Rot().W();
+                    ignition::math::Vector3d ori = pose.Rot().Euler();
+                    ignition::math::Angle zOri = ori.Z() - ignition::math::Angle::Pi.Radian();
+                    zOri.Normalize();
+                    ori.Z(zOri.Radian());
+                    ignition::math::Quaterniond quat;
+                    quat.Euler(ori);
+                    poseMsg.orientation.x = quat.X();
+                    poseMsg.orientation.y = quat.Y();
+                    poseMsg.orientation.z = quat.Z();
+                    poseMsg.orientation.w = quat.W();
                     this->pose_pub_.publish(poseMsg);
                     lastPosePublishTime = currTime;
                 }

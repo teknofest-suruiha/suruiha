@@ -57,6 +57,18 @@ std::string RunWay::ProcessCommand(std::string& cmd, std::string& sender) {
             status = air_traffic_constants::ALLOCATED_TO_LAND;
             return AirTrafficConstants::ALLOCATED_TO_LAND;
         }
+
+    } else if (cmd == AirTrafficConstants::LANDING_POSE) {
+        std::stringstream ss;
+        // start of landing pose
+        ss << landingStartPose.Pos().X() << " " << landingStartPose.Pos().Y() << " " << landingStartPose.Pos().Z() << " ";
+        ignition::math::Vector3d startEulerRot = landingStartPose.Rot().Euler();
+        ss << startEulerRot.X() << " " << startEulerRot.Y() << " " << startEulerRot.Z();
+        // end of the lading pose
+        ss << landingEndPose.Pos().X() << " " << landingEndPose.Pos().Y() << " " << landingEndPose.Pos().Z() << " ";
+        ignition::math::Vector3d endEulerRot = landingEndPose.Rot().Euler();
+        ss << endEulerRot.X() << " " << endEulerRot.Y() << " " << endEulerRot.Z();
+        return ss.str();
     } else {
         gzdbg << "unknown command:" << cmd << " from " << sender << std::endl;
         return "ERROR";
@@ -73,6 +85,11 @@ air_traffic_constants::Status RunWay::GetStatus() {
 
 void RunWay::SetStatus(air_traffic_constants::Status _status) {
     status = _status;
+}
+
+void RunWay::SetLandingPose(ignition::math::Pose3d &startPose, ignition::math::Pose3d &endPose) {
+    landingStartPose = startPose;
+    landingEndPose = endPose;
 }
 //bool RunWay::GetIsLanding() {
 //    return isLanding;

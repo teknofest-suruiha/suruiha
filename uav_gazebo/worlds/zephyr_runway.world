@@ -127,13 +127,17 @@
 
     <plugin name="air_traffic_controller" filename="libair_traffic_controller.so">
       <takeoff>
-        <position>0 0 0</position>
-        <height_threshold>100</height_threshold>
+        <pose>0 0 0 0 0 3.1415</pose>
+        <height_threshold>10</height_threshold>
         <distance_threshold>100</distance_threshold>
       </takeoff>
       <landing>
+        <area_bottom_left>-10 -10 0</area_bottom_left>
+        <area_upper_right>10 490 0</area_upper_right>
+        <start_pose>0 300 50 0 0 3.1415</start_pose>
+        <end_pose>0 0 0 0 0 3.1415</end_pose>
         <height_treshold>0.1</height_treshold>
-        <velocity_threshold>0.1</velocity_threshold>
+        <velocity_threshold>3</velocity_threshold>
       </landing>
     </plugin>
   </world>

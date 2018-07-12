@@ -13,6 +13,7 @@ public: static const std::string STATUS;
 public: static const std::string TAKEOFF_REQUEST;
 public: static const std::string LANDING_REQUEST;
 public: static const std::string CANCEL;
+public: static const std::string LANDING_POSE;
 
 // status
 public: static const std::string AVAILABLE;

@@ -27,6 +27,7 @@ namespace gazebo {
 
         // read parameters from SDF
         SetParameters(_sdf);
+        runway.SetLandingPose(landingStartPose, landingEndPose);
 
         // create ROS node handle
         rosNode = new ros::NodeHandle();
@@ -62,25 +63,37 @@ namespace gazebo {
     }
 
     void AirTrafficController::SetParameters(sdf::ElementPtr sdf) {
-        takeOffPosition = sdf->GetElement("takeoff")->Get<ignition::math::Vector3d>("position");
+        takeOffPose = sdf->GetElement("takeoff")->Get<ignition::math::Pose3d>("pose");
         takeOffHeightThreshold = sdf->GetElement("takeoff")->Get<double>("height_threshold");
         takeOffDistanceThreshold = sdf->GetElement("takeoff")->Get<double>("distance_threshold");
 
+        landingStartPose = sdf->GetElement("landing")->Get<ignition::math::Pose3d>("start_pose");
+        landingEndPose = sdf->GetElement("landing")->Get<ignition::math::Pose3d>("end_pose");
         landingHeightThreshold = sdf->GetElement("landing")->Get<double>("height_threshold");
         landingVelocityThreshold = sdf->GetElement("landing")->Get<double>("velocity_threshold");
+
+        landingBottomLeft = sdf->GetElement("landing")->Get<ignition::math::Vector3d>("area_bottom_left");
+        landingUpperRight = sdf->GetElement("landing")->Get<ignition::math::Vector3d>("area_upper_right");
     }
 
     void AirTrafficController::UpdateStates() {
         boost::mutex::scoped_lock lock(updateMutex);
+//        physics::ModelPtr modelPtr = worldPtr->ModelByName("zephyr0");
+//        if (modelPtr != NULL) {
+//            gzdbg << "----" << std::endl;
+//            std::vector<physics::LinkPtr> links = modelPtr->GetLinks();
+//            for (physics::LinkPtr link : links) {
+//                gzdbg << "linkname:" << link->GetName() << std::endl;
+//            }
+//        }
+
 
         if (runway.GetStatus() == air_traffic_constants::ALLOCATED_TO_TAKEOFF) {
             std::string uavName = runway.GetAllocatedUAV();
             physics::ModelPtr modelPtr = worldPtr->ModelByName(uavName);
             if (modelPtr != NULL) {
-                ignition::math::Pose3d pose;
-                pose.Pos().Set(takeOffPosition[0], takeOffPosition[1], takeOffPosition[2]);
-                modelPtr->SetWorldPose(pose);
-                gzdbg << "set " << uavName << " to takeoff position x:" << pose.Pos().X() << " y:" << pose.Pos().Y() << " z:" << pose.Pos().Z() << std::endl;
+                modelPtr->SetWorldPose(takeOffPose);
+                gzdbg << "set " << uavName << " to takeoff position x:" << takeOffPose.Pos().X() << " y:" << takeOffPose.Pos().Y() << " z:" << takeOffPose.Pos().Z() << std::endl;
                 runway.SetStatus(air_traffic_constants::READY_TO_TAKEOFF);
                 SetUAVStatus(uavName, true);
             } else {
@@ -92,8 +105,13 @@ namespace gazebo {
             if (modelPtr != NULL) {
                 ignition::math::Vector3d flightVel = modelPtr->WorldLinearVel();
                 ignition::math::Pose3d flightPose = modelPtr->WorldPose();
+                gzdbg << "flight velocity:" << flightVel.Length() << std::endl;
                 if (flightPose.Pos().Z() < landingHeightThreshold && flightVel.Length() < landingVelocityThreshold) {
-                    runway.SetStatus(air_traffic_constants::LANDED);
+                    // check whether the flight is in the runway zone
+                    if (flightPose.Pos().X() > landingBottomLeft.X() && flightPose.Pos().X() < landingUpperRight.X()
+                            && flightPose.Pos().Y() > landingBottomLeft.Y() && flightPose.Pos().Y() < landingBottomLeft.Y()) {
+                        runway.SetStatus(air_traffic_constants::LANDED);
+                    }
                 }
             }
             else {
@@ -103,8 +121,25 @@ namespace gazebo {
             std::string uavName = runway.GetAllocatedUAV();
             physics::ModelPtr modelPtr = worldPtr->ModelByName(uavName);
             if (modelPtr != NULL) {
-                ignition::math::Pose3d initialModelPose = initialPoses[uavName];
-                modelPtr->SetWorldPose(initialModelPose);
+
+//                modelPtr->SetStatic(true);
+
+//                ignition::math::Vector3d zeroVelocity(0, 0, 0);
+//                modelPtr->SetLinearVel(zeroVelocity);
+//                modelPtr->SetAngularVel(zeroVelocity);
+//
+//                physics::LinkPtr wingPtr = modelPtr->GetLink("zephyr_with_skid_pad::zephyr_fixed_wing::wing");
+//                gzdbg << "wing force:" << wingPtr->WorldForce().Length() << " torque:" << wingPtr->WorldTorque().Length() << std::endl;
+//
+//                ignition::math::Vector3d negativeForce(-wingPtr->WorldForce().X(), -wingPtr->WorldForce().Y(), -wingPtr->WorldForce().Z());
+//                wingPtr->SetForce(negativeForce);
+//                ignition::math::Vector3d negativeTorque(-wingPtr->WorldTorque().X(), -wingPtr->WorldTorque().Y(), -wingPtr->WorldTorque().Z());
+//                wingPtr->SetTorque(negativeTorque);
+
+//                ignition::math::Pose3d initialModelPose = initialPoses[uavName];
+//                modelPtr->SetWorldPose(initialModelPose);
+                justLanded.insert(uavName);
+
                 runway.SetStatus(air_traffic_constants::AVAILABLE);
                 SetUAVStatus(uavName, false);
             }
@@ -115,10 +150,9 @@ namespace gazebo {
             std::string uavName = runway.GetAllocatedUAV();
             physics::ModelPtr modelPtr = worldPtr->ModelByName(uavName);
             if (modelPtr != NULL) {
-                ignition::math::Pose3d flightPose = modelPtr->WorldPose();
-
-                if (flightPose.Pos().Z() > takeOffHeightThreshold &&
-                        flightPose.Pos().Length() > takeOffDistanceThreshold) {
+                ignition::math::Pose3d uavPose = modelPtr->WorldPose();
+                if (uavPose.Pos().Z() > takeOffHeightThreshold &&
+                        uavPose.Pos().Length() > takeOffDistanceThreshold) {
                     runway.SetStatus(air_traffic_constants::AVAILABLE);
                 }
             }
@@ -135,10 +169,53 @@ namespace gazebo {
 //            sentMsg = true;
 //        }
         // END: test
+
+//        std::map<std::string, bool>::iterator uavIterator;
+//        for (uavIterator = isUAVActive.begin(); uavIterator != isUAVActive.end(); uavIterator++) {
+//            physics::ModelPtr modelPtr = worldPtr->ModelByName(uavIterator->first);
+//            if (modelPtr != NULL) {
+//                if (!(uavIterator->second)) {
+////                    gzdbg << "uav " << uavIterator->first << " is not active" << std::endl;
+//                    ignition::math::Pose3d initialModelPose = initialPoses[uavIterator->first];
+//                    modelPtr->SetWorldPose(initialModelPose);
+//                }
+//            }
+//        }
+        std::set<std::string>::iterator landedIterator;
+        for (landedIterator = justLanded.begin(); landedIterator != justLanded.end(); landedIterator++) {
+            physics::ModelPtr modelPtr = worldPtr->ModelByName(*landedIterator);
+            if (modelPtr != NULL) {
+                physics::LinkPtr wingPtr = modelPtr->GetLink("zephyr_with_skid_pad::zephyr_fixed_wing::wing");
+
+                ignition::math::Vector3d xyForce(wingPtr->WorldForce().X(), wingPtr->WorldForce().Y(), 0);
+                gzdbg << "wing force:" << wingPtr->WorldForce().Length() << " torque:"
+                      << wingPtr->WorldTorque().Length() << " xyforce:" << xyForce.Length() << std::endl;
+
+
+                if (wingPtr->WorldTorque().Length() < 0.001 && xyForce.Length() < 0.001) {
+                    justLanded.erase(*landedIterator);
+                    continue;
+                }
+
+//                ignition::math::Vector3d negativeForce(-wingPtr->WorldForce().X(), -wingPtr->WorldForce().Y(),
+//                                                       -wingPtr->WorldForce().Z());
+//                wingPtr->SetForce(negativeForce);
+//                ignition::math::Vector3d negativeTorque(-wingPtr->WorldTorque().X(), -wingPtr->WorldTorque().Y(),
+//                                                        -wingPtr->WorldTorque().Z());
+//                wingPtr->SetTorque(negativeTorque);
+                ignition::math::Vector3d zeroVelocity(0, 0, 0);
+                modelPtr->SetLinearVel(zeroVelocity);
+                modelPtr->SetAngularVel(zeroVelocity);
+
+                ignition::math::Pose3d initialModelPose = initialPoses[*landedIterator];
+                modelPtr->SetWorldPose(initialModelPose);
+            }
+        }
     }
 
     void AirTrafficController::SetUAVStatus(std::string uavName, bool isActive) {
         isUAVActive.insert(std::pair<std::string, bool>(uavName, isActive));
+        gzdbg << "uav " << uavName << " is set as " << isActive << std::endl;
         // send air traffic information to uav controllers
         msgs::Any airTrafficMsg;
         airTrafficMsg.set_type(msgs::Any::STRING);
