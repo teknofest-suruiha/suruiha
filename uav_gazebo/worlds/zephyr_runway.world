@@ -140,5 +140,11 @@
         <velocity_threshold>3</velocity_threshold>
       </landing>
     </plugin>
+    <plugin name="comm_manager" filename="libcomm_manager.so">
+      <comm_request_topic>comm_request</comm_request_topic>
+      <comm_broadcast_topic>comm</comm_broadcast_topic>
+      <!-- comm_distance 100 km secildi ki herkes tum mesajlari alabilsin -->
+      <comm_distance>100000</comm_distance>
+    </plugin>
   </world>
 </sdf>
