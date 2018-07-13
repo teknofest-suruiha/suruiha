@@ -86,7 +86,8 @@ namespace gazebo {
         gzdbg << "control_topic:" << control_topic_name << " pose_topic:" << pose_topic_name << std::endl;
 
         this->rosnode_ = new ros::NodeHandle("");
-        this->rosnode_->subscribe(control_topic_name.c_str(), 100, &ZephyrController::SetControl, this);
+        control_twist_sub_ = this->rosnode_->subscribe(control_topic_name.c_str(), 100,
+                                                       &ZephyrController::SetControl, this);
 //        if (this->control_topic_name_ != "") {
 //            ros::SubscribeOptions joints_so =
 //                    ros::SubscribeOptions::create<geometry_msgs::Twist>(
