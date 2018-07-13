@@ -1,6 +1,11 @@
 <?xml version="1.0" ?>
 <sdf version="1.6">
-  <world name="default">
+  <world name="zephyr">
+    <gui>
+      <camera name="user_camera">
+        <pose>0.259 -27 12 0 0.33 1.5707</pose>
+      </camera>
+    </gui>
     <physics type="ode">
       <ode>
         <solver>
@@ -43,12 +48,12 @@
           </surface>
         </collision>
         <visual name="runway">
-          <pose>000 0 0.005 0 0 -1.5707</pose>
+          <pose>0 240 0.005 0 0 -1.5707</pose>
           <cast_shadows>false</cast_shadows>
           <geometry>
             <plane>
               <normal>0 0 1</normal>
-              <size>1829 45</size>
+              <size>500 20</size>
             </plane>
           </geometry>
           <material>
@@ -75,15 +80,72 @@
             </script>
           </material>
         </visual>
-
       </link>
     </model>
-
+    
     <model name="iris0">
+      <pose>-8.0 -0.5 0 0 0 3.1415</pose>
       <include>
         <uri>model://iris_quadrotor_with_plugin</uri>
-        <pose>0 0 0 0 0 0</pose>
       </include>
     </model>
+    
+    <model name="iris1">
+      <pose>-8.0 -2.0 0 0 0 3.1415</pose>
+      <include>
+        <uri>model://iris_quadrotor_with_plugin</uri>
+      </include>
+    </model>
+    
+    <model name="iris2">
+      <pose>-8.0 -3.5 0 0 0 3.1415</pose>
+      <include>
+        <uri>model://iris_quadrotor_with_plugin</uri>
+      </include>
+    </model>
+    
+    <model name="iris3">
+      <pose>-8.0 -5.0 0 0 0 3.1415</pose>
+      <include>
+        <uri>model://iris_quadrotor_with_plugin</uri>
+      </include>
+    </model>
+    
+    <model name="iris4">
+      <pose>-8.0 -6.5 0 0 0 3.1415</pose>
+      <include>
+        <uri>model://iris_quadrotor_with_plugin</uri>
+      </include>
+    </model>
+    
+    <model name="iris5">
+      <pose>-8.0 -8.0 0 0 0 3.1415</pose>
+      <include>
+        <uri>model://iris_quadrotor_with_plugin</uri>
+      </include>
+    </model>
+
+    <plugin name="air_traffic_controller" filename="libair_traffic_controller.so">
+      <takeoff>
+        <pose>0 0 0 0 0 3.1415</pose>
+        <height_threshold>10</height_threshold>
+        <distance_threshold>100</distance_threshold>
+      </takeoff>
+      <landing>
+        <area_bottom_left>-10 -10 0</area_bottom_left>
+        <area_upper_right>10 490 0</area_upper_right>
+        <start_pose>0 300 50 0 0 3.1415</start_pose>
+        <end_pose>0 0 0 0 0 3.1415</end_pose>
+        <height_treshold>0.1</height_treshold>
+        <velocity_threshold>3</velocity_threshold>
+      </landing>
+    </plugin>
+    <plugin name="comm_manager" filename="libcomm_manager.so">
+      <comm_request_topic>comm_request</comm_request_topic>
+      <comm_broadcast_topic>comm</comm_broadcast_topic>
+      <!-- girilen deger metre biriminde olmali -->
+      <!-- comm_distance 100 km secildi ki herkes tum mesajlari alabilsin -->
+      <comm_distance>100000</comm_distance>
+    </plugin>
   </world>
 </sdf>
