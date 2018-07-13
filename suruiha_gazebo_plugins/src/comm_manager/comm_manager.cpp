@@ -31,8 +31,9 @@ namespace gazebo {
         // create message broadcast publishers for each model separately
         std::map<std::string, physics::ModelPtr>::iterator it;
         for (it = models.begin(); it != models.end(); it++) {
-            std::stringstream ss(commBroadcastTopic);
-            ss << "_" << it->first;
+            std::stringstream ss;
+            ss << commBroadcastTopic << "_" << it->first;
+            gzdbg << "created broadcast topic name:" << ss.str() << std::endl;
             ros::Publisher pub = rosNode->advertise<UAVMessage>(ss.str().c_str(), 100);
             modelPublishers.insert(std::pair<std::string, ros::Publisher>(it->first, pub));
         }
@@ -80,11 +81,14 @@ namespace gazebo {
                 ignition::math::Pose3d uavPose = model->WorldPose();
                 std::map<std::string, physics::ModelPtr>::iterator it;
                 for (it = models.begin(); it != models.end(); it++) {
-                    ignition::math::Pose3d otherPose = it->second->WorldPose();
-                    otherPose -= uavPose;
-                    double dist = otherPose.Pos().Length();
-                    if (dist <= commDistance) {
-                        modelPublishers[it->first].publish(msg);
+                    // do not send msg to itself
+                    if (msg.sender != it->first) {
+                        ignition::math::Pose3d otherPose = it->second->WorldPose();
+                        otherPose -= uavPose;
+                        double dist = otherPose.Pos().Length();
+                        if (dist <= commDistance) {
+                            modelPublishers[it->first].publish(msg);
+                        }
                     }
                 }
             }
