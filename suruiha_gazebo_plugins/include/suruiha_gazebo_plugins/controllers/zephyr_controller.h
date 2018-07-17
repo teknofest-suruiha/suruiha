@@ -11,6 +11,7 @@
 #include <gazebo/common/Time.hh>
 #include <gazebo/common/Events.hh>
 #include <suruiha_gazebo_plugins/controllers/joint_control.h>
+#include <suruiha_gazebo_plugins/uav_sensor/uav_sensor.h>
 
 namespace gazebo
 {
@@ -37,6 +38,7 @@ namespace gazebo
         private: ros::Subscriber control_twist_sub_;
 //        private: ros::Subscriber user_command_sub_;
         private: ros::Publisher pose_pub_;
+        private: ros::Publisher sensor_pub_;
 
         private: double targetThrottle;
         private: double targetPitch;
@@ -52,6 +54,9 @@ namespace gazebo
 //		private: ros::CallbackQueue queue_;
 //		private: boost::thread callback_queue_thread_;
 //	    private: void QueueThread();
+        private: UAVSensor uavSensor;
+        private: common::Time lastSensorTime;
+        private: int sensorUpdateReate;
 
         private: common::Time lastUpdateTime;
 

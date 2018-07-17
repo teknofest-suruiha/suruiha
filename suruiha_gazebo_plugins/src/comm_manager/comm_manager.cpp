@@ -66,7 +66,7 @@ namespace gazebo {
     }
 
     void CommManager::CommRequest(const UAVMessage::ConstPtr& uavMessage) {
-        gzdbg << "comm request msg is taken from " << uavMessage->sender << " msg:" << uavMessage->msg << std::endl;
+//        gzdbg << "comm request msg is taken from " << uavMessage->sender << " msg:" << uavMessage->msg << std::endl;
         messageRequestQueue.push(*uavMessage);
     }
 

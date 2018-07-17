@@ -12,6 +12,7 @@
 #include <gazebo/common/Plugin.hh>
 #include <ignition/math.hh>
 #include <sdf/sdf.hh>
+#include <suruiha_gazebo_plugins/UAVSensorMessage.h>
 
 namespace gazebo {
 
@@ -83,7 +84,9 @@ namespace gazebo {
         modelName = _sdf->GetParent()->GetAttribute("name")->GetAsString();
         std::string control_topic_name = modelName + "_control";
         std::string pose_topic_name = modelName + "_pose";
-        gzdbg << "control_topic:" << control_topic_name << " pose_topic:" << pose_topic_name << std::endl;
+        std::string sensor_topic_name = modelName + "_sensor";
+        gzdbg << "control_topic:" << control_topic_name << " pose_topic:" << pose_topic_name
+              << " sensor_topic:" << sensor_topic_name << std::endl;
 
         this->rosnode_ = new ros::NodeHandle("");
         control_twist_sub_ = this->rosnode_->subscribe(control_topic_name.c_str(), 100,
@@ -112,6 +115,16 @@ namespace gazebo {
         // create the publisher
         this->pose_pub_ = this->rosnode_->advertise<geometry_msgs::Pose>(pose_topic_name, 1);
 
+        // get the uav_sensor parameters
+        uavSensor.loadParams(_sdf->GetElement("uav_sensor"));
+        uavSensor.setModels(world_);
+        sensorUpdateReate = _sdf->GetElement("uav_sensor")->Get<int>("update_rate");
+
+//        uavSensor.setFOV(hfov, vfov);
+        this->sensor_pub_ = this->rosnode_->advertise<suruiha_gazebo_plugins::UAVSensorMessage>(sensor_topic_name, 1);
+        uavSensor.setPublisher(this->sensor_pub_);
+//        uavSensor.setWorldPtr(world_);
+
         // create transport node
         node = transport::NodePtr(new transport::Node());
         node->Init(model_->GetWorld()->Name());
@@ -131,6 +144,14 @@ namespace gazebo {
     void ZephyrController::UpdateStates() {
     	boost::mutex::scoped_lock lock(this->update_mutex_);
     	common::Time currTime = this->world_->SimTime();
+
+        if (this->sensor_pub_.getNumSubscribers() > 0) {
+            double dt_ = (currTime - lastSensorTime).Double() * 1000; // miliseconds
+            if (dt_ > sensorUpdateReate) {
+                uavSensor.sense(model_->WorldPose());
+                lastSensorTime = currTime;
+            }
+        }
 
         // if there is any listener always publish the pose of the uav
         if (this->pose_pub_.getNumSubscribers() > 0) {

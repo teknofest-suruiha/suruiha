@@ -93,7 +93,7 @@ namespace gazebo {
             physics::ModelPtr modelPtr = worldPtr->ModelByName(uavName);
             if (modelPtr != NULL) {
                 modelPtr->SetWorldPose(takeOffPose);
-                gzdbg << "set " << uavName << " to takeoff position x:" << takeOffPose.Pos().X() << " y:" << takeOffPose.Pos().Y() << " z:" << takeOffPose.Pos().Z() << std::endl;
+//                gzdbg << "set " << uavName << " to takeoff position x:" << takeOffPose.Pos().X() << " y:" << takeOffPose.Pos().Y() << " z:" << takeOffPose.Pos().Z() << std::endl;
                 runway.SetStatus(air_traffic_constants::READY_TO_TAKEOFF);
                 SetUAVStatus(uavName, true);
             } else {
@@ -105,7 +105,7 @@ namespace gazebo {
             if (modelPtr != NULL) {
                 ignition::math::Vector3d flightVel = modelPtr->WorldLinearVel();
                 ignition::math::Pose3d flightPose = modelPtr->WorldPose();
-                gzdbg << "flight velocity:" << flightVel.Length() << " pose.x:" << flightPose.Pos().X() << " pose.y:" << flightPose.Pos().Y() << std::endl;
+//                gzdbg << "flight velocity:" << flightVel.Length() << " pose.x:" << flightPose.Pos().X() << " pose.y:" << flightPose.Pos().Y() << std::endl;
                 if (flightPose.Pos().Z() < landingHeightThreshold && flightVel.Length() < landingVelocityThreshold) {
                     // check whether the flight is in the runway zone
                     if (flightPose.Pos().X() > landingBottomLeft.X() && flightPose.Pos().X() < landingUpperRight.X()
@@ -188,8 +188,8 @@ namespace gazebo {
                 physics::LinkPtr wingPtr = modelPtr->GetLink("zephyr_with_skid_pad::zephyr_fixed_wing::wing");
 
                 ignition::math::Vector3d xyForce(wingPtr->WorldForce().X(), wingPtr->WorldForce().Y(), 0);
-                gzdbg << "wing force:" << wingPtr->WorldForce().Length() << " torque:"
-                      << wingPtr->WorldTorque().Length() << " xyforce:" << xyForce.Length() << std::endl;
+//                gzdbg << "wing force:" << wingPtr->WorldForce().Length() << " torque:"
+//                      << wingPtr->WorldTorque().Length() << " xyforce:" << xyForce.Length() << std::endl;
 
 
                 if (wingPtr->WorldTorque().Length() < 0.001 && xyForce.Length() < 0.001) {
@@ -215,7 +215,7 @@ namespace gazebo {
 
     void AirTrafficController::SetUAVStatus(std::string uavName, bool isActive) {
         isUAVActive.insert(std::pair<std::string, bool>(uavName, isActive));
-        gzdbg << "uav " << uavName << " is set as " << isActive << std::endl;
+//        gzdbg << "uav " << uavName << " is set as " << isActive << std::endl;
         // send air traffic information to uav controllers
         msgs::Any airTrafficMsg;
         airTrafficMsg.set_type(msgs::Any::STRING);
@@ -228,7 +228,7 @@ namespace gazebo {
     }
 
     bool AirTrafficController::AirTrafficService(AirTraffic::Request& req, AirTraffic::Response& resp) {
-        gzdbg << "We get a service request command:" << req.command <<  " from " << req.sender << std::endl;
+//        gzdbg << "We get a service request command:" << req.command <<  " from " << req.sender << std::endl;
         resp.result = runway.ProcessCommand(req.command, req.sender);
         return true;
     }

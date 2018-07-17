@@ -161,6 +161,20 @@
         <update_rate>1000.0</update_rate>
       </sensor>
       -->
+      <!--
+      <sensor name="logical_camera" type="logical_camera">
+        <pose>0 0 0 0 1.57079 -1.57079</pose>
+          <logical_camera>
+            <near>0.55</near>
+            <far>5</far>
+            <horizontal_fov>1.04719755</horizontal_fov>
+            <aspect_ratio>1.778</aspect_ratio>
+          </logical_camera>
+          <visualize>true</visualize>
+          <always_on>false</always_on>
+          <update_rate>0</update_rate>
+        </sensor>
+        -->
     </link>
 
     <link name="propeller">
@@ -510,6 +524,15 @@
       <!-- if 100, publishes pose every 100 miliseconds -->
       <!-- value must be int -->
       <poseUpdateRate>10</poseUpdateRate>
+      <uav_sensor>
+        <update_rate>10</update_rate>
+        <hfov>0.5</hfov>
+        <aspect_ratio>1.3333</aspect_ratio>
+        <max_height>100</max_height>
+        <min_height>30</min_height>
+        <far>10000</far>
+        <near>0.1</near>
+      </uav_sensor>
     </plugin>
     <!--
     <plugin name="position_3d" filename="libgazebo_ros_p3d.so">
