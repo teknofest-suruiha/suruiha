@@ -2,6 +2,7 @@
 // Created by okan on 12.07.2018.
 //
 #include <suruiha_gazebo_plugins/comm_manager/comm_manager.h>
+#include <suruiha_gazebo_plugins/util/util.h>
 
 using namespace suruiha_gazebo_plugins;
 
@@ -18,8 +19,8 @@ namespace gazebo {
         worldPtr = _parent;
 
         // load zephyr and iris models currently active on the simulation
-        GetModels("zephyr", 6);
-        GetModels("iris", 6);
+        Util::GetModels(models, 6, "zephyr", _parent);
+        Util::GetModels(models, 6, "iris", _parent);
 
         SetParameters(_sdf);
 
@@ -40,23 +41,6 @@ namespace gazebo {
 
         updateConnection = event::Events::ConnectWorldUpdateBegin(
                 boost::bind(&CommManager::UpdateStates, this));
-    }
-
-    void CommManager::GetModels(std::string baseModelName, int maxCount)
-    {
-        int i = 0;
-        for (i = 0; i < maxCount; i++) {
-            std::stringstream ss;
-            ss << baseModelName << i;
-            gzdbg << "Checking model with name " << ss.str() << std::endl;
-            physics::ModelPtr modelPtr = worldPtr->ModelByName(ss.str());
-            if (modelPtr == NULL) {
-                break;
-            } else {
-                models.insert(std::pair<std::string, physics::ModelPtr>(ss.str(), modelPtr));
-            }
-        }
-        gzdbg << "We have " << i << " many " << baseModelName << " models" << std::endl;
     }
 
     void CommManager::SetParameters(sdf::ElementPtr sdf) {

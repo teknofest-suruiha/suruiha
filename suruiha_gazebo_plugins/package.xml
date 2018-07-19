@@ -36,6 +36,7 @@
   <depend>gazebo_ros</depend>
   <depend>gazebo_dev</depend>
   <depend>geometry_msgs</depend>
+  <depend>visualization_msgs</depend>
   <!--   Note that this is equivalent to the following: -->
   <!--   <build_depend>roscpp</build_depend> -->
   <!--   <exec_depend>roscpp</exec_depend> -->

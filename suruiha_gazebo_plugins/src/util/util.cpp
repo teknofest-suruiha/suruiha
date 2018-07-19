@@ -7,6 +7,7 @@
 
 #include <suruiha_gazebo_plugins/util/util.h>
 #include <geometry_msgs/Pose.h>
+#include <gazebo/common/common.hh>
 
 namespace gazebo {
 
@@ -34,7 +35,7 @@ namespace gazebo {
 		return false;
 	}
 
-    geometry_msgs::Pose Util::fromIgnitionPose(ignition::math::Pose3d& pose) {
+    geometry_msgs::Pose Util::FromIgnitionPose(ignition::math::Pose3d &pose) {
         geometry_msgs::Pose geomPose;
         geomPose.position.x = pose.Pos().X();
         geomPose.position.y = pose.Pos().Y();
@@ -46,14 +47,32 @@ namespace gazebo {
         return geomPose;
     }
 
-//
-//	void Util::rotate(ignition::math::Vector2d& myVec, float radian) {
-//		ignition::math::Vector2d rotated;
-//		rotated.X(myVec.X() * cos(radian) - myVec.Y() * sin(radian));
-//		rotated.Y(myVec.X() * sin(radian) + myVec.Y() * cos(radian));
-//		myVec.X(rotated.X());
-//		myVec.Y(rotated.Y());
-//	}
+    void Util::GetModels(std::map<std::string, physics::ModelPtr>& models, int maxCount,
+                         const std::string baseModelName, physics::WorldPtr worldPtr) {
+        int i = 0;
+        for (i = 0; i < maxCount; i++) {
+            std::stringstream ss;
+            ss << baseModelName << i;
+            gzdbg << "Checking model with name " << ss.str() << std::endl;
+            physics::ModelPtr modelPtr = worldPtr->ModelByName(ss.str());
+            if (modelPtr == NULL) {
+                break;
+            } else {
+                models.insert(std::pair<std::string, physics::ModelPtr>(ss.str(), modelPtr));
+            }
+        }
+        gzdbg << "We have " << i << " many " << baseModelName << " models" << std::endl;
+    }
+
+
+	void Util::Rotate(ignition::math::Vector2d& myVec, float radian) {
+		ignition::math::Vector2d rotated;
+		rotated.X(myVec.X() * cos(radian) - myVec.Y() * sin(radian));
+		rotated.Y(myVec.X() * sin(radian) + myVec.Y() * cos(radian));
+		myVec.X(rotated.X());
+		myVec.Y(rotated.Y());
+	}
+
 //
 //	ignition::math::Vector3d Util::toEuler(ignition::math::Quaterniond& quad) {
 //		quad.Euler().Z()

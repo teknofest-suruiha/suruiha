@@ -10,6 +10,7 @@ project(suruiha_gazebo_plugins)
 find_package(catkin REQUIRED COMPONENTS
         roscpp
         geometry_msgs
+        visualization_msgs
         gazebo_ros
         gazebo_dev
         message_generation)
@@ -144,8 +145,11 @@ add_library(air_traffic_controller
         src/air_traffic_controller/air_traffic_constants.cpp)
 target_link_libraries(air_traffic_controller ${catkin_LIBRARIES} ${Boost_LIBRARIES} ${GAZEBO_LIBRARIES})
 
-add_library(comm_manager src/comm_manager/comm_manager.cpp)
+add_library(comm_manager src/comm_manager/comm_manager.cpp src/util/util.cpp)
 target_link_libraries(comm_manager ${catkin_LIBRARIES} ${Boost_LIBRARIES} ${GAZEBO_LIBRARIES})
+
+add_library(score_calculator src/score_calculator/score_calculator.cpp src/util/util.cpp)
+target_link_libraries(score_calculator ${catkin_LIBRARIES} ${Boost_LIBRARIES} ${GAZEBO_LIBRARIES})
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
@@ -154,6 +158,7 @@ add_dependencies(zephyr_controller ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_
 add_dependencies(iris_controller ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 add_dependencies(air_traffic_controller ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 add_dependencies(comm_manager ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(score_calculator ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context

@@ -12,6 +12,8 @@
 #include <sdf/sdf.hh>
 #include <geometry_msgs/Pose.h>
 #include <ignition/math/Pose3.hh>
+#include <gazebo/physics/World.hh>
+#include <gazebo/physics/Model.hh>
 
 namespace gazebo {
 class Util {
@@ -19,9 +21,11 @@ class Util {
 	public: static bool GetSdfParam(sdf::ElementPtr _sdf, const std::string &_name,
 	  double &_param, const double &_defaultValue, const bool &_verbose = false);
 
-//	public: static void rotate(ignition::math::Vector2d& myVec, float radian);
+	public: static void Rotate(ignition::math::Vector2d& myVec, float radian);
 //	public: static ignition::math::Vector3d toEuler(ignition::math::Quaterniond& quad);
-    public: static geometry_msgs::Pose fromIgnitionPose(ignition::math::Pose3d& pose);
+    public: static geometry_msgs::Pose FromIgnitionPose(ignition::math::Pose3d &pose);
+    public: static void GetModels(std::map<std::string, physics::ModelPtr>& models, int maxCount,
+                             const std::string baseModelName, physics::WorldPtr worldPtr);
 };
 }
 

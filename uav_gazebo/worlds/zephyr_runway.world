@@ -147,5 +147,11 @@
       <!-- comm_distance 100 km secildi ki herkes tum mesajlari alabilsin -->
       <comm_distance>100000</comm_distance>
     </plugin>
+    <plugin name="score_calculator" filename="libscore_calculator.so">
+      <visualization>
+        <active>true</active>
+        <topic_name>score_area</topic_name>
+      </visualization>
+    </plugin>
   </world>
 </sdf>

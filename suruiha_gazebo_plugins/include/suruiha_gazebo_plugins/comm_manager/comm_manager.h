@@ -20,7 +20,6 @@ namespace gazebo {
     public: void Load(physics::WorldPtr _parent, sdf::ElementPtr _sdf);
     public: void CommRequest(const suruiha_gazebo_plugins::UAVMessage::ConstPtr& uavMessage);
 
-    protected: void GetModels(std::string baseModelName, int maxCount);
     protected: void SetParameters(sdf::ElementPtr sdfElement);
 
     protected: ros::NodeHandle* rosNode;

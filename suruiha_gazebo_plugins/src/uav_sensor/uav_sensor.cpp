@@ -68,7 +68,7 @@ namespace gazebo {
                 if (frustum.Contains(pose.Pos())) {
                     //TODO: use enumeration for percepted object types
                     msg.types.push_back(0); // for now we have only human type
-                    geometry_msgs::Pose rosPose = Util::fromIgnitionPose(pose);
+                    geometry_msgs::Pose rosPose = Util::FromIgnitionPose(pose);
                     msg.poses.push_back(rosPose);
                     msg.names.push_back(models[i]->GetName());
                     gzdbg << "sensed model:" << models[i]->GetName() << std::endl;
