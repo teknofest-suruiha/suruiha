@@ -147,15 +147,22 @@
       <!-- comm_distance 100 km secildi ki herkes tum mesajlari alabilsin -->
       <comm_distance>100000</comm_distance>
     </plugin>
+    
     <plugin name="score_calculator" filename="libscore_calculator.so">
-      <visualization>
-        <active>true</active>
-        <topic_name>score_area</topic_name>
-      </visualization>
       <area_coverage_score>
-        <active>true</active>
-        <!-- runs update_rate in milliseconds -->
+        <visualization>
+          <active>true</active>
+          <topic_name>score_area</topic_name>
+          <!-- runs the visualization at every given milliseconds -->
+          <update_rate>1000</update_rate>
+        </visualization>
+        <!-- runs score calculation at every update_rate milliseconds -->
         <update_rate>100</update_rate>
+        <!-- widgh and height of total area in meters -->
+        <width>5000</width>
+        <height>5000</height>
+        <!-- the size of a single cell in meters -->
+        <resolution>1.0</resolution>
       </area_coverage_score>
     </plugin>
   </world>

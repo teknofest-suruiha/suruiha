@@ -6,14 +6,14 @@
 #include <gazebo/common/Console.hh>
 #include <suruiha_gazebo_plugins/util/util.h>
 #include <chrono>
-
+#include <suruiha_gazebo_plugins/score_calculator/geometry.h>
+#include <suruiha_gazebo_plugins/score_calculator/coordinate_conversions.h>
+#include <geometry_msgs/Point32.h>
 
 using namespace gazebo;
 using namespace std::chrono;
 
 AreaCoverageScore::AreaCoverageScore() {
-map[100][100][2] = 10;
-    uint8_t* dynamicMap = new uint8_t[2500000000];
 }
 
 AreaCoverageScore::~AreaCoverageScore() {
@@ -58,8 +58,49 @@ void AreaCoverageScore::GetParameters(sdf::ElementPtr worldSdf, sdf::ElementPtr 
         }
         modelSdf = modelSdf->GetNextElement("model");
     }
+
+    // create occupancy map from parameters taken from simulator
+
+    // width and height of the total area of the map in meters
+    float height = ownSDF->Get<float>("height");
+    float width = ownSDF->Get<float>("width");
+
     updateRate = ownSDF->Get<int>("update_rate");
+    nav_msgs::MapMetaData metaData;
+    metaData.resolution = ownSDF->Get<float>("resolution");
+    metaData.height = floor(height / metaData.resolution);
+    metaData.width = floor(width / metaData.resolution);
+    gzdbg << "grid map width:" << metaData.width << " height:" << metaData.height << std::endl;
+
+    // set the origin pose of the grid map.
+    // We set the real position of the 0,0 cell as the geometric center of the whole area
+    metaData.origin.position.x = -width/2;
+    metaData.origin.position.y = -height/2;
+    metaData.origin.position.z = 0;
+
+    occupancyGridMap.info = metaData;
+    // resize and initialize with 0
+    occupancyGridMap.data.resize(metaData.width*metaData.height, 0);
+
+    // visualization
+    isVisualization = ownSDF->GetElement("visualization")->Get<bool>("active");
+    gzdbg << "visualization active:" << isVisualization << std::endl;
+    if (isVisualization) {
+        std::string visTopicName = ownSDF->GetElement("visualization")->Get<std::string>("topic_name");
+        gzdbg << "visualization topicname:" << visTopicName << std::endl;
+        rosNode = new ros::NodeHandle("");
+        visPub = rosNode->advertise<nav_msgs::OccupancyGrid>(visTopicName.c_str(), 1);
+        visualizationUpdateRate = ownSDF->GetElement("visualization")->Get<int>("update_rate");
+    }
 }
+
+//void AreaCoverageScore::SetRosNodeHandle(ros::NodeHandle *nodeHandle) {
+//    rosNode = nodeHandle;
+//    if (isVisualization) {
+//        visPub = rosNode->advertise<nav_msgs::OccupancyGrid>(visTopicName.c_str(), 1);
+//        gzdbg << "vispub is created" << std::endl;
+//    }
+//}
 
 void AreaCoverageScore::SetModels(std::map<std::string, physics::ModelPtr> _models) {
     models = _models;
@@ -70,7 +111,6 @@ void AreaCoverageScore::SetWorld(physics::WorldPtr _worldPtr) {
 }
 
 void AreaCoverageScore::UpdateStates() {
-
     common::Time currTime = worldPtr->SimTime();
     double dt_ = (currTime - lastUpdateTime).Double() * 1000; // miliseconds
     if (dt_ > updateRate) {
@@ -92,7 +132,6 @@ void AreaCoverageScore::UpdateStates() {
                 rot.Z(rot.Z() - 1.57079);
 
                 frustumPose.Rot().Euler(rot);
-
                 frustum->SetPose(frustumPose);
 
                 // calculate the intersection of frustum lines on the floor plane
@@ -102,33 +141,29 @@ void AreaCoverageScore::UpdateStates() {
                 ignition::math::Vector2d uavPoint(uavPose.Pos().X(), uavPose.Pos().Y());
 
                 // calculate rectangle points from frustum width and height
-                Polygon_2 p;
+                geometry_msgs::Polygon polygon;
                 ignition::math::Vector2d point(-farWidth, -farHeight);
                 Util::Rotate(point, uavPose.Rot().Euler().Z());
                 point += uavPoint;
-                p.push_back(Point_2(point.X(), point.Y()));
+                polygon.points.push_back(ToPoint32(point));
 
                 ignition::math::Vector2d point1(-farWidth, farHeight);
                 Util::Rotate(point1, uavPose.Rot().Euler().Z());
                 point1 += uavPoint;
-                p.push_back(Point_2(point1.X(), point1.Y()));
+                polygon.points.push_back(ToPoint32(point1));
 
                 ignition::math::Vector2d point2(farWidth, farHeight);
                 Util::Rotate(point2, uavPose.Rot().Euler().Z());
                 point2 += uavPoint;
-                p.push_back(Point_2(point2.X(), point2.Y()));
+                polygon.points.push_back(ToPoint32(point2));
 
                 ignition::math::Vector2d point3(farWidth, -farHeight);
                 Util::Rotate(point3, uavPose.Rot().Euler().Z());
                 point3 += uavPoint;
-                p.push_back(Point_2(point3.X(), point3.Y()));
+                polygon.points.push_back(ToPoint32(point3));
 
-                if (p.is_clockwise_oriented()) {
-                    p.reverse_orientation();
-                }
-
-//                perceptedPolygonSet.insert(p);
-                perceptedPolygons.push_back(p);
+                perceptedPolygons.push_back(polygon);
+                AddOccupancy(polygon);
             }
         }
         lastUpdateTime = currTime;
@@ -154,60 +189,99 @@ void AreaCoverageScore::UpdateStates() {
 //            auto duration = duration_cast<microseconds>( t2 - t1 ).count();
 //            gzdbg << "elapsed time:" << duration << " nano second." << std::endl;
     }
+
+    if (isVisualization) {
+        double diff = (currTime - lastVisUpdateTime).Double() * 1000; // miliseconds
+        if (diff > visualizationUpdateRate) {
+            if (visPub.getNumSubscribers() > 0) {
+                visPub.publish(occupancyGridMap);
+            }
+            lastVisUpdateTime = currTime;
+        }
+    }
 }
+
+void AreaCoverageScore::AddOccupancy(geometry_msgs::Polygon& polygon) {
+//    gzdbg << "started to check cells in convex polygon:" << polygon << std::endl;
+    std::set<occupancy_grid_utils::Cell> cells = occupancy_grid_utils::cellsInConvexPolygon(occupancyGridMap.info, polygon);
+//    gzdbg << "cellsInConvexPolygon.size:" << cells.size() << std::endl;
+    std::set<occupancy_grid_utils::Cell>::iterator it;
+    for (it = cells.begin(); it != cells.end(); it++) {
+        // convert to linear index to mark as occupied
+        uint32_t index = occupancy_grid_utils::cellIndex(occupancyGridMap.info, *it);
+        // set as occupied
+        // for rviz visualization purposes we set data as 100.
+        occupancyGridMap.data[index] = 100;
+    }
+}
+
+//std::pair<uint16_t, uint16_t> AreaCoverageScore::ToCell(float x, float y) {
+//    x = x - occupancyGridMap.info.origin.position.x;
+//    y = y - occupancyGridMap.info.origin.position.y;
+//    int row = floor(x/occupancyGridMap.info.resolution);
+//    int col = floor(y/occupancyGridMap.info.resolution);
+//    return std::pair<uint16_t, uint16_t>(col, row);
+//};
 
 double AreaCoverageScore::CalculateScore() {
 
-    std::vector<Polygon_2> perceptedPolygonsCopy;
-    perceptedPolygonsCopy.swap(perceptedPolygons);
-
-    Polygon_2 p1;
-    p1.push_back(Point_2(1, 1));
-    p1.push_back(Point_2(1, 3));
-    p1.push_back(Point_2(4, 3));
-    p1.push_back(Point_2(4, 1));
-    if (p1.is_clockwise_oriented()) {
-        p1.reverse_orientation();
+    int sum = 0;
+    std::vector<int8_t>::iterator it;
+    for (it = occupancyGridMap.data.begin(); it != occupancyGridMap.data.end(); it++) {
+        sum += *it;
     }
+    return (sum/100.0);
 
-    Polygon_2 p2;
-    p2.push_back(Point_2(2, 2));
-    p2.push_back(Point_2(2.5, 6));
-    p2.push_back(Point_2(7, 4));
-    p2.push_back(Point_2(6, 1.5));
-    if (p2.is_clockwise_oriented()) {
-        p2.reverse_orientation();
-    }
-
-    CGAL::set_pretty_mode(std::cout);
-    gzdbg << p1 << std::endl;
-    gzdbg << p2 << std::endl;
-    gzdbg << "p1.area:" << fabs(CGAL::to_double(p1.area())) << std::endl;
-    gzdbg << "p2.area:" << fabs(CGAL::to_double(p2.area())) << std::endl;
-
-    Polygon_with_holes_2 unionP;
-
-    high_resolution_clock::time_point t1 = high_resolution_clock::now();
-    if (CGAL::join(p1, p2, unionP)) {
-        gzdbg << "union.area:" << fabs(CGAL::to_double(unionP.outer_boundary().area())) << std::endl;
-        gzdbg << "p.union:" << unionP.outer_boundary() << std::endl;
-    }
-
-    high_resolution_clock::time_point t2 = high_resolution_clock::now();
-    auto duration = duration_cast<microseconds>( t2 - t1 ).count();
-    gzdbg << "elapsed time:" << (duration / 1000.0) << " milli second." << std::endl;
-
-    high_resolution_clock::time_point t3 = high_resolution_clock::now();
-//    MyJoin(p1, p2);
-    high_resolution_clock::time_point t4 = high_resolution_clock::now();
-    auto duration2 = duration_cast<microseconds>( t4 - t3 ).count();
-    gzdbg << "myjoin elapsed time:" << (duration2 / 1000.0) << " milli second." << std::endl;
-
-    high_resolution_clock::time_point t5 = high_resolution_clock::now();
-    MyJoin2(p1, p2);
-    high_resolution_clock::time_point t6 = high_resolution_clock::now();
-    auto duration3 = duration_cast<microseconds>( t6 - t5 ).count();
-    gzdbg << "myjoin elapsed time:" << (duration3 / 1000.0) << " milli second." << std::endl;
+//    std::vector<Polygon_2> perceptedPolygonsCopy;
+//    perceptedPolygonsCopy.swap(perceptedPolygons);
+//
+//    Polygon_2 p1;
+//    p1.push_back(Point_2(1, 1));
+//    p1.push_back(Point_2(1, 3));
+//    p1.push_back(Point_2(4, 3));
+//    p1.push_back(Point_2(4, 1));
+//    if (p1.is_clockwise_oriented()) {
+//        p1.reverse_orientation();
+//    }
+//
+//    Polygon_2 p2;
+//    p2.push_back(Point_2(2, 2));
+//    p2.push_back(Point_2(2.5, 6));
+//    p2.push_back(Point_2(7, 4));
+//    p2.push_back(Point_2(6, 1.5));
+//    if (p2.is_clockwise_oriented()) {
+//        p2.reverse_orientation();
+//    }
+//
+//    CGAL::set_pretty_mode(std::cout);
+//    gzdbg << p1 << std::endl;
+//    gzdbg << p2 << std::endl;
+//    gzdbg << "p1.area:" << fabs(CGAL::to_double(p1.area())) << std::endl;
+//    gzdbg << "p2.area:" << fabs(CGAL::to_double(p2.area())) << std::endl;
+//
+//    Polygon_with_holes_2 unionP;
+//
+//    high_resolution_clock::time_point t1 = high_resolution_clock::now();
+//    if (CGAL::join(p1, p2, unionP)) {
+//        gzdbg << "union.area:" << fabs(CGAL::to_double(unionP.outer_boundary().area())) << std::endl;
+//        gzdbg << "p.union:" << unionP.outer_boundary() << std::endl;
+//    }
+//
+//    high_resolution_clock::time_point t2 = high_resolution_clock::now();
+//    auto duration = duration_cast<microseconds>( t2 - t1 ).count();
+//    gzdbg << "elapsed time:" << (duration / 1000.0) << " milli second." << std::endl;
+//
+//    high_resolution_clock::time_point t3 = high_resolution_clock::now();
+////    MyJoin(p1, p2);
+//    high_resolution_clock::time_point t4 = high_resolution_clock::now();
+//    auto duration2 = duration_cast<microseconds>( t4 - t3 ).count();
+//    gzdbg << "myjoin elapsed time:" << (duration2 / 1000.0) << " milli second." << std::endl;
+//
+//    high_resolution_clock::time_point t5 = high_resolution_clock::now();
+//    MyJoin2(p1, p2);
+//    high_resolution_clock::time_point t6 = high_resolution_clock::now();
+//    auto duration3 = duration_cast<microseconds>( t6 - t5 ).count();
+//    gzdbg << "myjoin elapsed time:" << (duration3 / 1000.0) << " milli second." << std::endl;
 
 
 
@@ -244,126 +318,138 @@ double AreaCoverageScore::CalculateScore() {
 //
 //    return CGAL::to_double(p.outer_boundary().area());
 
-    return 0;
+//    return 0;
 
 }
 
-void AreaCoverageScore::MyJoin(Polygon_2 p1, Polygon_2 p2) {
-    Polygon_2 unionP;
-    EdgeIterator ei1;
-    VertexIterator vi1 = p1.vertices_begin();
-    for (ei1 = p1.edges_begin(); ei1 != p1.edges_end(); ei1++) {
-        Point_2 intersection;
-        EdgeIterator ei2;
-        if (IsIntersection(*ei1, p2, intersection, ei2)) {
-            if (IsInside(p2, ei1->source())) {
-                unionP.push_back(intersection);
-            } else {
-                unionP.push_back(ei1->source());
-                unionP.push_back(intersection);
-            }
-        }
-
-        if (IsInside(p2, ei1->source())) {
-
-        } else {
-
-        }
-//        gzdbg << "p1 edge:" << *ei1 << std::endl;
+//void AreaCoverageScore::MyJoin(Polygon_2 p1, Polygon_2 p2) {
+//    Polygon_2 unionP;
+//    EdgeIterator ei1;
+//    VertexIterator vi1 = p1.vertices_begin();
+//    for (ei1 = p1.edges_begin(); ei1 != p1.edges_end(); ei1++) {
+//        Point_2 intersection;
 //        EdgeIterator ei2;
-//        bool intersected = false;
-//        Point_2 intersectionPoint;
-//        for (ei2 = p2.edges_begin(); ei2 != p2.edges_end(); ei2++) {
-//            CGAL::Object result = CGAL::intersection(*ei1, *ei2);
-//            if (CGAL::assign(intersectionPoint, result)) {
-//                gzdbg << "intersected e1:" << *ei1 << " e2:" << *ei2 << " point:" << intersectionPoint << std::endl;
-//                intersected = true;
-//                break;
+//        if (IsIntersection(*ei1, p2, intersection, ei2)) {
+//            if (IsInside(p2, ei1->source())) {
+//                unionP.push_back(intersection);
+//            } else {
+//                unionP.push_back(ei1->source());
+//                unionP.push_back(intersection);
 //            }
 //        }
-////        unionP.push_back(*ei1[0]);
-//        if (intersected) {
-//            unionP.push_back(intersectionPoint);
-//        }
-    }
-
-    for (unsigned int i = 0; i < p1.size(); i++) {
-        gzdbg << "p1.x:" << p1[i][0] << " p1.y:" << p1[i][1] << std::endl;
-        //if (p2.)
-        switch(CGAL::bounded_side_2(p2.vertices_begin(), p2.vertices_end(), p1[i], Kernel())) {
-            case CGAL::ON_BOUNDED_SIDE :
-                gzdbg << " is inside the polygon.\n";
-                break;
-            case CGAL::ON_BOUNDARY:
-            case CGAL::ON_UNBOUNDED_SIDE:
-                gzdbg << " is outside the polygon.\n";
-                unionP.push_back(p1[i]);
-                break;
-        }
-    }
-
-    EdgeIterator ei;
-    for (ei = unionP.edges_begin(); ei != unionP.edges_end(); ei++) {
-        gzdbg << "union 1 edge:" << *ei << std::endl;
-    }
-
-    if (unionP.is_clockwise_oriented()) {
-        unionP.reverse_orientation();
-    }
-
-    for (ei = unionP.edges_begin(); ei != unionP.edges_end(); ei++) {
-        gzdbg << "union 2 edge:" << *ei << std::endl;
-    }
-
-    gzdbg << "union area:" << fabs(CGAL::to_double(unionP.area())) << std::endl;
-}
-
-void AreaCoverageScore::MyJoin2(Polygon_2 p1, Polygon_2 p2) {
-
-    // Compute the intersection of p1 and p2.
-    Pwh_list_2                  intR;
-    Pwh_list_2::const_iterator  it;
-    CGAL::intersection (p1, p2, std::back_inserter(intR));
-    std::cout << "The intersection:" << std::endl;
-    for (it = intR.begin(); it != intR.end(); ++it) {
-        std::cout << "--> " << *it << std::endl;
-    }
-
-    double totalArea = CGAL::to_double(p1.area()) + CGAL::to_double(p2.area());
-    double unionArea = totalArea - CGAL::to_double((*intR.begin()).outer_boundary().area());
-    gzdbg << "totalArea:" << totalArea << " unionArea:" << unionArea << std::endl;
-
 //
-//    if ((CGAL::intersection(p1, p2)))
-//        std::cout << "The two polygons intersect in their interior." << std::endl;
-//    else
-//        std::cout << "The two polygons do not intersect." << std::endl;
-}
+//        if (IsInside(p2, ei1->source())) {
+//
+//        } else {
+//
+//        }
+////        gzdbg << "p1 edge:" << *ei1 << std::endl;
+////        EdgeIterator ei2;
+////        bool intersected = false;
+////        Point_2 intersectionPoint;
+////        for (ei2 = p2.edges_begin(); ei2 != p2.edges_end(); ei2++) {
+////            CGAL::Object result = CGAL::intersection(*ei1, *ei2);
+////            if (CGAL::assign(intersectionPoint, result)) {
+////                gzdbg << "intersected e1:" << *ei1 << " e2:" << *ei2 << " point:" << intersectionPoint << std::endl;
+////                intersected = true;
+////                break;
+////            }
+////        }
+//////        unionP.push_back(*ei1[0]);
+////        if (intersected) {
+////            unionP.push_back(intersectionPoint);
+////        }
+//    }
+//
+//    for (unsigned int i = 0; i < p1.size(); i++) {
+//        gzdbg << "p1.x:" << p1[i][0] << " p1.y:" << p1[i][1] << std::endl;
+//        //if (p2.)
+//        switch(CGAL::bounded_side_2(p2.vertices_begin(), p2.vertices_end(), p1[i], Kernel())) {
+//            case CGAL::ON_BOUNDED_SIDE :
+//                gzdbg << " is inside the polygon.\n";
+//                break;
+//            case CGAL::ON_BOUNDARY:
+//            case CGAL::ON_UNBOUNDED_SIDE:
+//                gzdbg << " is outside the polygon.\n";
+//                unionP.push_back(p1[i]);
+//                break;
+//        }
+//    }
+//
+//    EdgeIterator ei;
+//    for (ei = unionP.edges_begin(); ei != unionP.edges_end(); ei++) {
+//        gzdbg << "union 1 edge:" << *ei << std::endl;
+//    }
+//
+//    if (unionP.is_clockwise_oriented()) {
+//        unionP.reverse_orientation();
+//    }
+//
+//    for (ei = unionP.edges_begin(); ei != unionP.edges_end(); ei++) {
+//        gzdbg << "union 2 edge:" << *ei << std::endl;
+//    }
+//
+//    gzdbg << "union area:" << fabs(CGAL::to_double(unionP.area())) << std::endl;
+//}
 
-bool AreaCoverageScore::IsInside(Polygon_2& polygon, const Point_2& point) {
-    switch (CGAL::bounded_side_2(polygon.vertices_begin(), polygon.vertices_end(), point, Kernel())) {
-        case CGAL::ON_BOUNDED_SIDE:
-            return true;
-            break;
-    }
-    return false;
-}
+//void AreaCoverageScore::MyJoin2(Polygon_2 p1, Polygon_2 p2) {
+//
+//    // Compute the intersection of p1 and p2.
+//    Pwh_list_2                  intR;
+//    Pwh_list_2::const_iterator  it;
+//    CGAL::intersection (p1, p2, std::back_inserter(intR));
+//    std::cout << "The intersection:" << std::endl;
+//    for (it = intR.begin(); it != intR.end(); ++it) {
+//        std::cout << "--> " << *it << std::endl;
+//    }
+//
+//    double totalArea = CGAL::to_double(p1.area()) + CGAL::to_double(p2.area());
+//    double unionArea = totalArea - CGAL::to_double((*intR.begin()).outer_boundary().area());
+//    gzdbg << "totalArea:" << totalArea << " unionArea:" << unionArea << std::endl;
+//
+////
+////    if ((CGAL::intersection(p1, p2)))
+////        std::cout << "The two polygons intersect in their interior." << std::endl;
+////    else
+////        std::cout << "The two polygons do not intersect." << std::endl;
+//}
 
-bool AreaCoverageScore::IsIntersection(const Segment_2& seg1, const Segment_2& seg2, Point_2& intersection) {
-    CGAL::Object result = CGAL::intersection(seg1, seg2);
-    if (CGAL::assign(intersection, result)) {
-        return true;
-    }
-    return false;
-}
+//bool AreaCoverageScore::IsInside(Polygon_2& polygon, const Point_2& point) {
+//    switch (CGAL::bounded_side_2(polygon.vertices_begin(), polygon.vertices_end(), point, Kernel())) {
+//        case CGAL::ON_BOUNDED_SIDE:
+//            return true;
+//            break;
+//    }
+//    return false;
+//}
+//
+//bool AreaCoverageScore::IsIntersection(const Segment_2& seg1, const Segment_2& seg2, Point_2& intersection) {
+//    CGAL::Object result = CGAL::intersection(seg1, seg2);
+//    if (CGAL::assign(intersection, result)) {
+//        return true;
+//    }
+//    return false;
+//}
+//
+//bool AreaCoverageScore::IsIntersection(const Segment_2& seg, const Polygon_2& polygon, Point_2& intersection, EdgeIterator& polygonEi) {
+//    EdgeIterator ei;
+//    for (ei = polygon.edges_begin(); ei != polygon.edges_end(); ei++) {
+//        if (IsIntersection(seg, *ei, intersection)) {
+//            polygonEi = ei;
+//            return true;
+//        }
+//    }
+//    return false;
+//}
 
-bool AreaCoverageScore::IsIntersection(const Segment_2& seg, const Polygon_2& polygon, Point_2& intersection, EdgeIterator& polygonEi) {
-    EdgeIterator ei;
-    for (ei = polygon.edges_begin(); ei != polygon.edges_end(); ei++) {
-        if (IsIntersection(seg, *ei, intersection)) {
-            polygonEi = ei;
-            return true;
-        }
-    }
-    return false;
+//nav_msgs::OccupancyGrid::ConstPtr AreaCoverageScore::GetOccupancyMap() {
+//    return new ;
+//}
+
+geometry_msgs::Point32 AreaCoverageScore::ToPoint32(ignition::math::Vector2d& vec) {
+    geometry_msgs::Point32 p;
+    p.x = vec.X();
+    p.y = vec.Y();
+    p.z = 0;
+    return p;
 }

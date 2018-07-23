@@ -13,8 +13,8 @@ namespace gazebo{
     GZ_REGISTER_WORLD_PLUGIN(ScoreCalculator);
 
     ScoreCalculator::ScoreCalculator() {
-        isVisualization = false;
-        markerCounter = 0;
+//        isVisualization = false;
+//        markerCounter = 0;
     }
 
     ScoreCalculator::~ScoreCalculator() {
@@ -31,10 +31,6 @@ namespace gazebo{
         // get sensor parameters from models itself not to duplicate parameters
         areaScore.GetParameters(_parent->SDF(), _sdf->GetElement("area_coverage_score"));
 
-        if (_sdf->GetElement("visualization")->Get<bool>("active")) {
-            isVisualization = true;
-        }
-
         rosNode = new ros::NodeHandle("");
         serviceServer = rosNode->advertiseService("score", &ScoreCalculator::ScoreService, this);
 
@@ -46,10 +42,10 @@ namespace gazebo{
 //            sensorSubs.push_back(sub);
 //        }
 
-        if (isVisualization) {
-            std::string topicName = _sdf->GetElement("visualization")->Get<std::string>("topic_name");
-            visPub = rosNode->advertise<visualization_msgs::MarkerArray>(topicName, 1);
-        }
+//        if (isVisualization) {
+//            std::string topicName = _sdf->GetElement("visualization")->Get<std::string>("topic_name");
+//            visPub = rosNode->advertise<visualization_msgs::MarkerArray>(topicName, 1);
+//        }
 
 
         // New Mechanism for Updating every World Cycle
@@ -64,38 +60,6 @@ namespace gazebo{
         boost::mutex::scoped_lock lock(updateMutex);
 
         areaScore.UpdateStates();
-
-//TODO: get data from areaScore and visualize it
-//        if (isVisualization) {
-//            // create marker message
-//            visualization_msgs::Marker marker;
-//            marker.header.frame_id = "world";
-//            marker.header.stamp = ros::Time::now();
-//            marker.ns = "area";
-//            marker.id = markerCounter;
-//            marker.type = visualization_msgs::Marker::CUBE;
-//            marker.pose.position.x = uavPose.Pos().X();
-//            marker.pose.position.y = uavPose.Pos().Y();
-//            marker.pose.position.z = 0;
-//            marker.pose.orientation.x = 0;
-//            marker.pose.orientation.y = 0;
-//            marker.pose.orientation.z = 0;
-//            marker.pose.orientation.w = 1.0;
-//            marker.scale.x = 2*farWidth;
-//            marker.scale.y = 2*farHeight;
-//            marker.scale.z = 0.05; // 5cm height
-//            marker.color.r = 0.0f;
-//            marker.color.g = 1.0f;
-//            marker.color.b = 0.0f;
-//            marker.color.a = 1.0f;
-//            marker.lifetime = ros::Duration();
-//            markerCounter++;
-//            if ((markerCounter%100) == 0) {
-//                markersCache.markers.clear();
-//                markersCache.markers.push_back(marker);
-//                visPub.publish(markersCache);
-//            }
-//        }
 
     }
 

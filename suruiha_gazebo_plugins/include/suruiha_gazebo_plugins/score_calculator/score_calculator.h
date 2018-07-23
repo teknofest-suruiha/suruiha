@@ -31,15 +31,15 @@ namespace gazebo {
         private: event::ConnectionPtr updateConnection;
         private: boost::mutex updateMutex;
 
-        protected: bool isVisualization;
-        protected: ros::NodeHandle* rosNode;
-        protected: ros::Publisher visPub;
-        protected: visualization_msgs::MarkerArray markersCache;
-        protected: int markerCounter;
+//        protected: bool isVisualization;
+
+    protected: ros::ServiceServer serviceServer;
+    protected: ros::NodeHandle* rosNode;
+//        protected: ros::Publisher visPub;
+//        protected: visualization_msgs::MarkerArray markersCache;
+//        protected: int markerCounter;
 
         protected: AreaCoverageScore areaScore;
-
-        protected: ros::ServiceServer serviceServer;
 
         protected: bool ScoreService(suruiha_gazebo_plugins::Score::Request& request,
                                      suruiha_gazebo_plugins::Score::Response& resp);
