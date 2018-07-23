@@ -6,13 +6,16 @@
 #define SURUIHA_GAZEBO_PLUGINS_SCORE_MANAGER_H
 
 #include <map>
-#include <gazebo/physics/Model.hh>
-#include <gazebo/physics/World.hh>
+#include <gazebo/physics/PhysicsTypes.hh>
 #include <gazebo/common/Plugin.hh>
 #include <sdf/sdf.hh>
 #include <boost/thread/mutex.hpp>
 #include <ros/ros.h>
 #include <visualization_msgs/MarkerArray.h>
+#include <suruiha_gazebo_plugins/score_calculator/area_coverage_score.h>
+#include <suruiha_gazebo_plugins/Score.h>
+#include <suruiha_gazebo_plugins/UAVSensorMessage.h>
+
 
 namespace gazebo {
     class ScoreCalculator : public WorldPlugin {
@@ -24,11 +27,6 @@ namespace gazebo {
 
         protected: std::map<std::string, physics::ModelPtr> models;
 
-        protected: std::map<std::string, float> modelMaxPerceptionHeights;
-        protected: std::map<std::string, ignition::math::Frustum*> modelFrustums;
-
-        protected: std::vector<std::vector<ignition::math::Vector2d> > perceptedRectangles;
-
         protected: virtual void UpdateStates();
         private: event::ConnectionPtr updateConnection;
         private: boost::mutex updateMutex;
@@ -38,6 +36,14 @@ namespace gazebo {
         protected: ros::Publisher visPub;
         protected: visualization_msgs::MarkerArray markersCache;
         protected: int markerCounter;
+
+        protected: AreaCoverageScore areaScore;
+
+        protected: ros::ServiceServer serviceServer;
+
+        protected: bool ScoreService(suruiha_gazebo_plugins::Score::Request& request,
+                                     suruiha_gazebo_plugins::Score::Response& resp);
+
     };
 }
 

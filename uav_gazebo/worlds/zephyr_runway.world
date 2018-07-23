@@ -152,6 +152,11 @@
         <active>true</active>
         <topic_name>score_area</topic_name>
       </visualization>
+      <area_coverage_score>
+        <active>true</active>
+        <!-- runs update_rate in milliseconds -->
+        <update_rate>100</update_rate>
+      </area_coverage_score>
     </plugin>
   </world>
 </sdf>

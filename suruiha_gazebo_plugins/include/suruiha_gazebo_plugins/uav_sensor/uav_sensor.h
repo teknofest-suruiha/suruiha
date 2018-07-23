@@ -30,6 +30,8 @@ namespace gazebo {
         protected: float maxHeight;
         protected: float minHeight;
         protected: std::vector<physics::ModelPtr> models;
+
+//        protected: int senseCount;
     };
 }
 #endif //SURUIHA_GAZEBO_PLUGINS_UAV_SENSOR_H

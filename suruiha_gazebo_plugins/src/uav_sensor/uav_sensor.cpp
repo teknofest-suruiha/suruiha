@@ -9,8 +9,12 @@
 #include <geometry_msgs/Pose.h>
 
 namespace gazebo {
-    UAVSensor::UAVSensor() {}
-    UAVSensor::~UAVSensor() {}
+    UAVSensor::UAVSensor() {
+//        senseCount = 0;
+    }
+    UAVSensor::~UAVSensor() {
+//        gzdbg << "uavsensor sense_count=" << senseCount << std::endl;
+    }
 
     void UAVSensor::setPublisher(ros::Publisher pub) {
         sensorPublisher = pub;

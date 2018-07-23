@@ -19,6 +19,7 @@ find_package(catkin REQUIRED COMPONENTS
 # find_package(Boost REQUIRED COMPONENTS system)
 find_package(Boost REQUIRED COMPONENTS thread)
 find_package(gazebo REQUIRED)
+find_package(CGAL REQUIRED)
 
 ## Uncomment this if the package has a setup.py. This macro ensures
 ## modules and global scripts declared therein get installed
@@ -60,6 +61,7 @@ add_message_files(
 add_service_files(
    FILES
    AirTraffic.srv
+   Score.srv
 )
 
 ## Generate actions in the 'action' folder
@@ -110,7 +112,7 @@ catkin_package(
   LIBRARIES zephyr_controller iris_controller
   DEPENDS roscpp gazebo_ros geometry_msgs
   CATKIN_DEPENDS message_runtime
-#  DEPENDS system_lib
+  DEPENDS CGAL
 )
 
 ###########
@@ -123,10 +125,12 @@ include_directories(include
 ${Boost_INCLUDE_DIRS}
 ${catkin_INCLUDE_DIRS}
 ${GAZEBO_INCLUDE_DIRS}
+${CGAL_INCLUDE_DIRS}
 )
 
 link_directories(${catkin_LIBRARY_DIRS}
-        ${GAZEBO_LIBRARY_DIRS})
+        ${GAZEBO_LIBRARY_DIRS}
+        ${CGAL_LIBRARY_DIRS})
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
@@ -148,8 +152,8 @@ target_link_libraries(air_traffic_controller ${catkin_LIBRARIES} ${Boost_LIBRARI
 add_library(comm_manager src/comm_manager/comm_manager.cpp src/util/util.cpp)
 target_link_libraries(comm_manager ${catkin_LIBRARIES} ${Boost_LIBRARIES} ${GAZEBO_LIBRARIES})
 
-add_library(score_calculator src/score_calculator/score_calculator.cpp src/util/util.cpp)
-target_link_libraries(score_calculator ${catkin_LIBRARIES} ${Boost_LIBRARIES} ${GAZEBO_LIBRARIES})
+add_library(score_calculator src/score_calculator/score_calculator.cpp src/score_calculator/area_coverage_score.cpp src/util/util.cpp)
+target_link_libraries(score_calculator ${catkin_LIBRARIES} ${Boost_LIBRARIES} ${GAZEBO_LIBRARIES} CGAL mpfr)
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
