@@ -533,6 +533,13 @@
         <far>10000</far>
         <near>0.1</near>
       </uav_sensor>
+      <battery>
+        <capacity>1000</capacity>
+        <force_factor>0.003</force_factor>
+        <!-- determines how often remaining battery is going to be published -->
+        <!-- every publish_rate millisecond -->
+        <publish_rate>1000</publish_rate>
+      </battery>
     </plugin>
     <!--
     <plugin name="position_3d" filename="libgazebo_ros_p3d.so">
