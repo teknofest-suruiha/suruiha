@@ -1,6 +1,6 @@
 /**
  *  \author Okan Asik
- *  \desc   Gazebo Plugin to control Zephyr fixed wing plane
+ *  \desc   Gazebo Plugin to control Iris quadrotor
  */
 
 #include <ros/ros.h>
@@ -12,6 +12,7 @@
 #include <ignition/math.hh>
 #include <sdf/sdf.hh>
 #include <suruiha_gazebo_plugins/util/util.h>
+#include <suruiha_gazebo_plugins/UAVSensorMessage.h>
 
 namespace gazebo {
 
@@ -58,6 +59,8 @@ namespace gazebo {
 //        std::cout <<"pose_topic:" << pose_topic << std::endl;
         std::string control_topic = model_name + "_control";
 //        std::cout <<"control_topic:" << control_topic << std::endl;
+        std::string sensor_topic = model_name + "_sensor";
+
         poseUpdateRate = _sdf->Get<int>("poseUpdateRate");
 
          if (_sdf->HasElement("rotor"))
@@ -209,6 +212,15 @@ namespace gazebo {
         // create the publisher
         this->pose_pub_ = this->rosnode_->advertise<geometry_msgs::Pose>(pose_topic, 1);
 
+        // get the uav_sensor parameters
+        uavSensor.loadParams(_sdf->GetElement("uav_sensor"));
+        uavSensor.setModels(world_);
+        sensorUpdateReate = _sdf->GetElement("uav_sensor")->Get<int>("update_rate");
+
+//        uavSensor.setFOV(hfov, vfov);
+        this->sensor_pub_ = this->rosnode_->advertise<suruiha_gazebo_plugins::UAVSensorMessage>(sensor_topic, 1);
+        uavSensor.setPublisher(this->sensor_pub_);
+
         // New Mechanism for Updating every World Cycle
         // Listen to the update event. This event is broadcast every
         // simulation iteration.
@@ -219,6 +231,14 @@ namespace gazebo {
     void IrisController::UpdateStates() {
     	boost::mutex::scoped_lock lock(this->update_mutex_);
     	common::Time currTime = this->world_->SimTime();
+
+        if (this->sensor_pub_.getNumSubscribers() > 0) {
+            double dt_ = (currTime - lastSensorTime).Double() * 1000; // miliseconds
+            if (dt_ > sensorUpdateReate) {
+                uavSensor.sense(model_->WorldPose());
+                lastSensorTime = currTime;
+            }
+        }
 
     	if (this->pose_pub_.getNumSubscribers() > 0) {
     		double dt_ = (currTime - lastPosePublishTime).Double()*1000; // miliseconds

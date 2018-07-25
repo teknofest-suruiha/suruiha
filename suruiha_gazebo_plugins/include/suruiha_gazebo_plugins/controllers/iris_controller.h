@@ -12,6 +12,7 @@
 #include <gazebo/common/Events.hh>
 #include <suruiha_gazebo_plugins/controllers/rotor_control.h>
 #include <vector>
+#include <suruiha_gazebo_plugins/uav_sensor/uav_sensor.h>
 
 namespace gazebo
 {
@@ -44,6 +45,11 @@ namespace gazebo
 //	    private: void ProcessUserCommand(const std_msgs::String::ConstPtr& user_command);
 	    private: void CalculateRotors(double targetThrottle, double targetPitch, double targetRoll,
 	    		double targetYaw, common::Time dt);
+
+		private: UAVSensor uavSensor;
+		private: common::Time lastSensorTime;
+		private: int sensorUpdateReate;
+		private: ros::Publisher sensor_pub_;
 
 		private: boost::mutex update_mutex_;
 		private: ros::CallbackQueue queue_;
