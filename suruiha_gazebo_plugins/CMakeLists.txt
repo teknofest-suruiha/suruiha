@@ -145,7 +145,11 @@ add_library(zephyr_controller
         src/battery/battery_manager.cpp)
 target_link_libraries(zephyr_controller ${catkin_LIBRARIES} ${Boost_LIBRARIES} ${GAZEBO_LIBRARIES})
 
-add_library(iris_controller src/controllers/iris_controller.cpp src/controllers/rotor_control.cpp src/util/util.cpp)
+add_library(iris_controller
+        src/controllers/iris_controller.cpp
+        src/controllers/rotor_control.cpp
+        src/util/util.cpp
+        src/uav_sensor/uav_sensor.cpp)
 target_link_libraries(iris_controller ${catkin_LIBRARIES} ${Boost_LIBRARIES} ${GAZEBO_LIBRARIES})
 
 add_library(air_traffic_controller
