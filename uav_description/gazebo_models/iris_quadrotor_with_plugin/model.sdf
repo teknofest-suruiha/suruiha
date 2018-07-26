@@ -494,7 +494,7 @@
     </plugin>
     <plugin name="iris_controller" filename="libiris_controller.so">
       <rotor id="0">
-        <vel_p_gain>0.2</vel_p_gain>
+        <vel_p_gain>0.1</vel_p_gain>
         <vel_i_gain>0</vel_i_gain>
         <vel_d_gain>0</vel_d_gain>
         <vel_i_max>0</vel_i_max>
@@ -506,7 +506,7 @@
         <rotorVelocitySlowdownSim>1</rotorVelocitySlowdownSim>
       </rotor>
       <rotor id="1">
-        <vel_p_gain>0.2</vel_p_gain>
+        <vel_p_gain>0.1</vel_p_gain>
         <vel_i_gain>0</vel_i_gain>
         <vel_d_gain>0</vel_d_gain>
         <vel_i_max>0</vel_i_max>
@@ -518,7 +518,7 @@
         <rotorVelocitySlowdownSim>1</rotorVelocitySlowdownSim>
       </rotor>
       <rotor id="2">
-        <vel_p_gain>0.2</vel_p_gain>
+        <vel_p_gain>0.1</vel_p_gain>
         <vel_i_gain>0</vel_i_gain>
         <vel_d_gain>0</vel_d_gain>
         <vel_i_max>0</vel_i_max>
@@ -530,7 +530,7 @@
         <rotorVelocitySlowdownSim>1</rotorVelocitySlowdownSim>
       </rotor>
       <rotor id="3">
-        <vel_p_gain>0.2</vel_p_gain>
+        <vel_p_gain>0.1</vel_p_gain>
         <vel_i_gain>0</vel_i_gain>
         <vel_d_gain>0</vel_d_gain>
         <vel_i_max>0</vel_i_max>

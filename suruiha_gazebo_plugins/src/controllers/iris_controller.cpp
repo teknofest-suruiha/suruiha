@@ -221,6 +221,8 @@ namespace gazebo {
         this->sensor_pub_ = this->rosnode_->advertise<suruiha_gazebo_plugins::UAVSensorMessage>(sensor_topic, 1);
         uavSensor.setPublisher(this->sensor_pub_);
 
+        lastUpdateTime = this->world_->SimTime();
+
         // New Mechanism for Updating every World Cycle
         // Listen to the update event. This event is broadcast every
         // simulation iteration.
@@ -259,11 +261,11 @@ namespace gazebo {
 
     	if (control_twist_sub_.getNumPublishers() > 0) {
     		double dt_ = (currTime - lastUpdateTime).Double();
+//            gzdbg << "targetThrottle:" << targetThrottle << " dt:" << dt_ << std::endl;
 
 			// get joint values from planner and set joints
 			CalculateRotors(targetThrottle, targetPitch, targetRoll, targetYaw, dt_);
     	}
-
         this->lastUpdateTime = currTime;
     }
 
@@ -278,13 +280,16 @@ namespace gazebo {
 	double frontRollRotors = 1.0 - rollFactor;
 	double rearRollRotors = 1.0 + rollFactor;
 
-	double yawFactor = pose.Rot().Euler().Z() - targetYaw; //Normalize(pose.Rot().Euler().Z());
+	double yawFactor = IGN_NORMALIZE(pose.Rot().Euler().Z() - targetYaw);
+
+//        gzdbg << "yawFactor:" << yawFactor << " pitchFactor:" <<  pitchFactor << " rollFactor:" << rollFactor << std::endl;
 	//if (yawFactor > 1.0) yawFactor = 0.5;
 	//if (yawFactor < -1.0) yawFactor = -0.5;
 	double frontYawRotors = 1.0 - yawFactor;
 	double rearYawRotors = 1.0 + yawFactor;
 
 	for (unsigned i = 0; i < rotors_.size(); ++i) {
+//        gzdbg << "rotor[" << i << "] throttle:" << targetThrottle << std::endl;
 		rotors_[i]->cmd = targetThrottle;
 	}
 
@@ -294,9 +299,10 @@ namespace gazebo {
 	rotors_[0]->cmd = rotors_[0]->cmd * rearPitchRotors;
 	rotors_[2]->cmd = rotors_[2]->cmd * rearPitchRotors;
 
-//	for (unsigned i = 0; i < rotors_.size(); ++i) {
-//		std::cout << "pitch control:" << rotors_[i]->cmd << std::endl;
-//	}
+//        for (unsigned i = 0; i < rotors_.size(); ++i) {
+//            gzdbg << "after pitch control:" << rotors_[i]->cmd
+//                  << std::endl;
+//        }
 
 	rotors_[3]->cmd = rotors_[3]->cmd * rearRollRotors;
 	rotors_[0]->cmd = rotors_[0]->cmd * rearRollRotors;
@@ -304,9 +310,10 @@ namespace gazebo {
 	rotors_[1]->cmd = rotors_[1]->cmd * frontRollRotors;
 	rotors_[2]->cmd = rotors_[2]->cmd * frontRollRotors;
 
-//	for (unsigned i = 0; i < rotors_.size(); ++i) {
-//		std::cout << "pitch and roll control:" << rotors_[i]->cmd << std::endl;
-//	}
+//        for (unsigned i = 0; i < rotors_.size(); ++i) {
+//            gzdbg << "after roll control:" << rotors_[i]->cmd
+//                  << std::endl;
+//        }
 
 	rotors_[3]->cmd = rotors_[3]->cmd * frontYawRotors;
 	rotors_[2]->cmd = rotors_[2]->cmd * frontYawRotors;
@@ -315,7 +322,7 @@ namespace gazebo {
 	rotors_[0]->cmd = rotors_[0]->cmd * rearYawRotors;
 
 //	for (unsigned i = 0; i < rotors_.size(); ++i) {
-//		std::cout << "pitch and roll and yaw control:" << rotors_[i]->cmd
+//		gzdbg << "after yaw control:" << rotors_[i]->cmd
 //				<< std::endl;
 //	}
 
@@ -337,18 +344,18 @@ namespace gazebo {
 
 //	    gzdbg << "joint" << i << " cmd:" << rotors_[i]->cmd <<
 //	    " velTarget:" <<  velTarget << " currentVel:" << vel << " error:" << error
-//	    << " force:" << force << " dt:" << dt.Double() << "\n";
+//	    << " force:" << force << " dt:" << dt.Double() << std::endl;
 	    rotors_[i]->joint->SetForce(0, force);
 	  }
 }
 
     void IrisController::SetControl(const geometry_msgs::Twist::ConstPtr& control_twist) {
-        boost::mutex::scoped_lock lock(this->update_mutex_);
+//        boost::mutex::scoped_lock lock(this->set_control_mutex_);
         targetThrottle = control_twist->linear.z;
         targetPitch = control_twist->angular.y;
         targetRoll = control_twist->angular.x;
         targetYaw = control_twist->angular.z;
-//        std::cout << "SetControl thorttle:" << targetThrottle << " pitch:" << targetPitch <<
+//        gzdbg << "SetControl throttle:" << targetThrottle << " pitch:" << targetPitch <<
 //        		" roll:" << targetRoll << " yaw:" << targetYaw << std::endl;
     }
 
