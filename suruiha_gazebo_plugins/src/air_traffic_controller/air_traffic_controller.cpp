@@ -185,16 +185,27 @@ namespace gazebo {
         for (landedIterator = justLanded.begin(); landedIterator != justLanded.end(); landedIterator++) {
             physics::ModelPtr modelPtr = worldPtr->ModelByName(*landedIterator);
             if (modelPtr != NULL) {
-                physics::LinkPtr wingPtr = modelPtr->GetLink("zephyr_with_skid_pad::zephyr_fixed_wing::wing");
+                physics::LinkPtr uavBodyPtr = nullptr;
+                if (modelPtr->GetName().find("zephyr") != std::string::npos) {
+                    uavBodyPtr = modelPtr->GetLink("zephyr_with_skid_pad::zephyr_fixed_wing::wing");
+                } else if (modelPtr->GetName().find("iris") != std::string::npos) {
+                    gzdbg << modelPtr->GetSDF() << std::endl;
+                    uavBodyPtr = modelPtr->GetLink("iris_quadrotor_with_plugin::iris_quadrotor::base_link");
+                }
 
-                ignition::math::Vector3d xyForce(wingPtr->WorldForce().X(), wingPtr->WorldForce().Y(), 0);
+                if (uavBodyPtr != nullptr) {
+
+                    ignition::math::Vector3d xyForce(uavBodyPtr->WorldForce().X(), uavBodyPtr->WorldForce().Y(), 0);
 //                gzdbg << "wing force:" << wingPtr->WorldForce().Length() << " torque:"
 //                      << wingPtr->WorldTorque().Length() << " xyforce:" << xyForce.Length() << std::endl;
 
 
-                if (wingPtr->WorldTorque().Length() < 0.001 && xyForce.Length() < 0.001) {
-                    justLanded.erase(*landedIterator);
-                    continue;
+                    if (uavBodyPtr->WorldTorque().Length() < 0.001 && xyForce.Length() < 0.001) {
+                        justLanded.erase(*landedIterator);
+                        continue;
+                    }
+                } else {
+                    gzdbg << "null uav body ptr" << std::endl;
                 }
 
 //                ignition::math::Vector3d negativeForce(-wingPtr->WorldForce().X(), -wingPtr->WorldForce().Y(),
