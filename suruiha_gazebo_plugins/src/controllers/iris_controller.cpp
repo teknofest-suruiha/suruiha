@@ -283,14 +283,16 @@ namespace gazebo {
     		}
     	}
 
-    	if (control_twist_sub_.getNumPublishers() > 0) {
-    		double dt_ = (currTime - lastUpdateTime).Double();
+        if (isActive) {
+            if (control_twist_sub_.getNumPublishers() > 0) {
+                double dt_ = (currTime - lastUpdateTime).Double();
 //            gzdbg << "targetThrottle:" << targetThrottle << " dt:" << dt_ << std::endl;
 
-			// get joint values from planner and set joints
-			CalculateRotors(targetThrottle, targetPitch, targetRoll, targetYaw, dt_);
-    	}
-        this->lastUpdateTime = currTime;
+                // get joint values from planner and set joints
+                CalculateRotors(targetThrottle, targetPitch, targetRoll, targetYaw, dt_);
+                this->lastUpdateTime = currTime;
+            }
+        }
     }
 
     void IrisController::CalculateRotors(double targetThrottle, double targetPitch, double targetRoll,
