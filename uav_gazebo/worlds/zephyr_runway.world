@@ -152,7 +152,7 @@
       <area_coverage_score>
         <visualization>
           <active>true</active>
-          <topic_name>score_area</topic_name>
+          <topic_name>score_area_visual</topic_name>
           <!-- runs the visualization at every given milliseconds -->
           <update_rate>1000</update_rate>
         </visualization>
@@ -164,6 +164,8 @@
         <!-- the size of a single cell in meters -->
         <resolution>1.0</resolution>
       </area_coverage_score>
+      <!-- calculates the score value and publishes at every publish rate milliseconds -->
+      <publish_rate>1000</publish_rate>
     </plugin>
   </world>
 </sdf>

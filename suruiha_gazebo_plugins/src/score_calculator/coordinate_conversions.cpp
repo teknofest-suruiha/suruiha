@@ -1,5 +1,6 @@
 //
 // Created by okan on 23.07.2018.
+// Taken from: https://github.com/clearpathrobotics/occupancy_grid_utils/blob/indigo-devel/src/coordinate_conversions.cpp
 //
 
 #include <suruiha_gazebo_plugins/score_calculator/coordinate_conversions.h>

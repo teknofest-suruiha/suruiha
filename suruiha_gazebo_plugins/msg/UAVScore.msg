@@ -1,5 +1,4 @@
-string sender
----
 float32 area_score
 float32 detection_score
 float32 tracking_score
+float32 total_score

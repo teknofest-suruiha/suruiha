@@ -56,13 +56,13 @@ add_message_files(
    FILES
    UAVMessage.msg
    UAVSensorMessage.msg
+   UAVScore.msg
 )
 
 ## Generate services in the 'srv' folder
 add_service_files(
    FILES
    AirTraffic.srv
-   Score.srv
 )
 
 ## Generate actions in the 'action' folder

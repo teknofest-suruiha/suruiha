@@ -2,8 +2,8 @@
 // Created by okan on 11.07.2018.
 //
 
-#ifndef SURUIHA_GAZEBO_PLUGINS_SCORE_MANAGER_H
-#define SURUIHA_GAZEBO_PLUGINS_SCORE_MANAGER_H
+#ifndef SURUIHA_GAZEBO_PLUGINS_SCORE_CALCULATOR_H
+#define SURUIHA_GAZEBO_PLUGINS_SCORE_CALCULATOR_H
 
 #include <map>
 #include <gazebo/physics/PhysicsTypes.hh>
@@ -31,20 +31,23 @@ namespace gazebo {
         private: event::ConnectionPtr updateConnection;
         private: boost::mutex updateMutex;
 
-//        protected: bool isVisualization;
+    protected: physics::WorldPtr world;
 
-    protected: ros::ServiceServer serviceServer;
+    protected: void CalculateAndPublishScore();
+
+    protected: ros::Publisher scorePublisher;
     protected: ros::NodeHandle* rosNode;
-//        protected: ros::Publisher visPub;
-//        protected: visualization_msgs::MarkerArray markersCache;
-//        protected: int markerCounter;
+    protected: bool isCalculateScore;
+    protected: bool isThreadAlive;
+
+    protected: double publishRate;
+    protected: gazebo::common::Time lastPublishTime;
 
         protected: AreaCoverageScore areaScore;
 
-        protected: bool ScoreService(suruiha_gazebo_plugins::Score::Request& request,
-                                     suruiha_gazebo_plugins::Score::Response& resp);
+    protected: boost::thread* scoreCalculationThread;
 
     };
 }
 
-#endif //SURUIHA_GAZEBO_PLUGINS_SCORE_MANAGER_H
+#endif //SURUIHA_GAZEBO_PLUGINS_SCORE_CALCULATOR_H
