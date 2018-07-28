@@ -13,6 +13,7 @@
 #include <ignition/math.hh>
 #include <sdf/sdf.hh>
 #include <suruiha_gazebo_plugins/UAVSensorMessage.h>
+#include <suruiha_gazebo_plugins/util/util.h>
 
 namespace gazebo {
 
@@ -74,13 +75,6 @@ namespace gazebo {
             jointControlSDF = jointControlSDF->GetNextElement("joint_control");
         }
 
-        // Make sure the ROS node for Gazebo has already been initalized
-        if (!ros::isInitialized()) {
-            ROS_FATAL_STREAM_NAMED("template", "A ROS node for Gazebo has not been initialized, unable to load plugin. "
-                    << "Load the Gazebo system plugin 'libgazebo_ros_api_plugin.so' in the gazebo_ros package)");
-            return;
-        }
-
         modelName = _sdf->GetParent()->GetAttribute("name")->GetAsString();
         std::string control_topic_name = modelName + "_control";
         std::string pose_topic_name = modelName + "_pose";
@@ -88,7 +82,7 @@ namespace gazebo {
         gzdbg << "control_topic:" << control_topic_name << " pose_topic:" << pose_topic_name
               << " sensor_topic:" << sensor_topic_name << std::endl;
 
-        this->rosnode_ = new ros::NodeHandle("");
+        this->rosnode_ = Util::CreateROSNodeHandle("");
         control_twist_sub_ = this->rosnode_->subscribe(control_topic_name.c_str(), 100,
                                                        &ZephyrController::SetControl, this);
 //        if (this->control_topic_name_ != "") {
@@ -127,12 +121,19 @@ namespace gazebo {
 
         // create transport node
         node = transport::NodePtr(new transport::Node());
-        node->Init(model_->GetWorld()->Name());
+        node->Init(world_->Name());
         // topic name
         std::string topicName = "/air_control";
         this->subPtr = this->node->Subscribe(topicName,
                                           &ZephyrController::OnAirControlMsg, this);
 
+//        gzdbg << "just before battery stuff" << std::endl;
+        battery.SetWorld(world_);
+//        gzdbg << "battery set world" << std::endl;
+        battery.GetParams(_sdf->GetElement("battery"), modelName);
+//        gzdbg << "battery get params" << std::endl;
+        battery.SetJoints(this->model_->GetJoints());
+//        gzdbg << "battery set joints" << std::endl;
 
         // New Mechanism for Updating every World Cycle
         // Listen to the update event. This event is broadcast every
@@ -143,7 +144,20 @@ namespace gazebo {
 
     void ZephyrController::UpdateStates() {
     	boost::mutex::scoped_lock lock(this->update_mutex_);
+//
+//        for (unsigned int i = 0; i < jointPtrs.size(); i++) {
+//            gzdbg << "joint:" << jointPtrs.at(i)->GetName() << " external force:" <<
+//                  jointPtrs.at(i)->GetForce(0) << std::endl;
+//        }
+
     	common::Time currTime = this->world_->SimTime();
+
+        battery.UpdateStates(isActive);
+        if (battery.GetRemaining() == 0) {
+            SetZeroForceToJoints();
+            isActive = false;
+            gzdbg << "battery is empty!!!!" << std::endl;
+        }
 
         if (this->sensor_pub_.getNumSubscribers() > 0) {
             double dt_ = (currTime - lastSensorTime).Double() * 1000; // miliseconds
@@ -184,10 +198,9 @@ namespace gazebo {
                     dt_ = 0.0;
                 }
                 CalculateJoints(targetThrottle, targetPitch, targetRoll, dt_);
+                this->lastUpdateTime = currTime;
             }
         }
-
-        this->lastUpdateTime = currTime;
     }
 
     void ZephyrController::CalculateJoints(double targetThrottle, double targetPitch, double targetRoll, common::Time dt) {
@@ -245,10 +258,20 @@ namespace gazebo {
                 isActive = true;
             } else if (cmd == "deactivate") {
                 isActive = false;
+                SetZeroForceToJoints();
             } else {
                 gzdbg << "unknown command:" << cmd << " for:" << param << std::endl;
             }
         }
+    }
 
+    void ZephyrController::SetZeroForceToJoints() {
+//        boost::mutex::scoped_lock lock(this->update_mutex_);
+        std::vector<physics::JointPtr> jointPtrs = model_->GetJoints();
+        for (unsigned int i = 0; i < jointPtrs.size(); i++) {
+            double f = jointPtrs.at(i)->GetForce(0);
+            jointPtrs.at(i)->SetForce(0, -f);
+//            gzdbg << " joint " << jointPtrs.at(i)->GetName() << " set force to " << -f << std::endl;
+        }
     }
 }

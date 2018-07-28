@@ -56,6 +56,7 @@ add_message_files(
    FILES
    UAVMessage.msg
    UAVSensorMessage.msg
+   UAVBattery.msg
 )
 
 ## Generate services in the 'srv' folder
@@ -136,14 +137,20 @@ link_directories(${catkin_LIBRARY_DIRS}
 #   src/${PROJECT_NAME}/suruiha_gazebo_plugins.cpp
 # )
 
-add_library(zephyr_controller src/controllers/zephyr_controller.cpp src/controllers/joint_control.cpp src/util/util.cpp src/uav_sensor/uav_sensor.cpp)
+add_library(zephyr_controller
+        src/controllers/zephyr_controller.cpp
+        src/controllers/joint_control.cpp
+        src/util/util.cpp
+        src/uav_sensor/uav_sensor.cpp
+        src/battery/battery_manager.cpp)
 target_link_libraries(zephyr_controller ${catkin_LIBRARIES} ${Boost_LIBRARIES} ${GAZEBO_LIBRARIES})
 
 add_library(iris_controller
         src/controllers/iris_controller.cpp
         src/controllers/rotor_control.cpp
         src/util/util.cpp
-        src/uav_sensor/uav_sensor.cpp)
+        src/uav_sensor/uav_sensor.cpp
+        src/battery/battery_manager.cpp)
 target_link_libraries(iris_controller ${catkin_LIBRARIES} ${Boost_LIBRARIES} ${GAZEBO_LIBRARIES})
 
 add_library(air_traffic_controller

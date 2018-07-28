@@ -12,6 +12,7 @@
 #include <gazebo/common/Events.hh>
 #include <suruiha_gazebo_plugins/controllers/joint_control.h>
 #include <suruiha_gazebo_plugins/uav_sensor/uav_sensor.h>
+#include <suruiha_gazebo_plugins/battery/battery_manager.h>
 
 namespace gazebo
 {
@@ -28,6 +29,7 @@ namespace gazebo
 		private: physics::WorldPtr world_;
 		private: physics::ModelPtr model_;
 //		private: physics::LinkPtr bodyLink_;
+//		private: std::vector<physics::JointPtr> jointPtrs;
 		
 //		private: std::string robot_namespace_;
 //		private: std::string control_topic_name_;
@@ -49,6 +51,7 @@ namespace gazebo
 	    private: void SetControl(const geometry_msgs::Twist::ConstPtr& controlTwist);
 //	    private: void ProcessUserCommand(const std_msgs::String::ConstPtr& user_command);
 	    private: void CalculateJoints(double targetThrottle, double targetPitch, double targetRoll, common::Time dt);
+        protected: void SetZeroForceToJoints();
 
 		private: boost::mutex update_mutex_;
 //		private: ros::CallbackQueue queue_;
@@ -68,6 +71,9 @@ namespace gazebo
 		private: transport::SubscriberPtr subPtr;
 		protected: void OnAirControlMsg(ConstAnyPtr& airControlMsg);
         protected: bool isActive;
+
+		// battery manager
+		protected: BatteryManager battery;
 
 	};
 }

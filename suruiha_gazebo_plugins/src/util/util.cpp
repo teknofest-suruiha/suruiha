@@ -73,6 +73,17 @@ namespace gazebo {
 		myVec.Y(rotated.Y());
 	}
 
+    ros::NodeHandle* Util::CreateROSNodeHandle(std::string namespace_) {
+        // Make sure the ROS node for Gazebo has already been initalized
+        if (!ros::isInitialized()) {
+            ROS_FATAL_STREAM_NAMED("ros_node_creation", "A ROS node for Gazebo has not been initialized, unable to load plugin.");
+            return NULL;
+        }
+
+        ros::NodeHandle* node = new ros::NodeHandle(namespace_);
+        return node;
+    }
+
 //
 //	ignition::math::Vector3d Util::toEuler(ignition::math::Quaterniond& quad) {
 //		quad.Euler().Z()

@@ -8,6 +8,7 @@
 #include <geometry_msgs/Twist.h>
 #include <std_msgs/String.h>
 #include <suruiha_gazebo_plugins/controllers/iris_controller.h>
+#include <gazebo/gazebo.hh>
 #include <gazebo/common/Plugin.hh>
 #include <ignition/math.hh>
 #include <sdf/sdf.hh>
@@ -35,6 +36,7 @@ namespace gazebo {
         targetRoll = 0.0;
         targetYaw = 0.0;
         poseUpdateRate = 100;
+        isActive = false;
     }
 
     IrisController::~IrisController() {
@@ -54,12 +56,12 @@ namespace gazebo {
         this->model_ = _parent;
         this->world_ = this->model_->GetWorld();
 
-        std::string model_name = _sdf->GetParent()->GetAttribute("name")->GetAsString();
-        std::string pose_topic = model_name + "_pose";
+        modelName = _sdf->GetParent()->GetAttribute("name")->GetAsString();
+        std::string pose_topic = modelName + "_pose";
 //        std::cout <<"pose_topic:" << pose_topic << std::endl;
-        std::string control_topic = model_name + "_control";
+        std::string control_topic = modelName + "_control";
 //        std::cout <<"control_topic:" << control_topic << std::endl;
-        std::string sensor_topic = model_name + "_sensor";
+        std::string sensor_topic = modelName + "_sensor";
 
         poseUpdateRate = _sdf->Get<int>("poseUpdateRate");
 
@@ -189,7 +191,7 @@ namespace gazebo {
             return;
         }
 
-        this->rosnode_ = new ros::NodeHandle(this->robot_namespace_);
+        this->rosnode_ = Util::CreateROSNodeHandle("");
             ros::SubscribeOptions joints_so =
                     ros::SubscribeOptions::create<geometry_msgs::Twist>(
                             control_topic, 100, boost::bind(
@@ -222,6 +224,21 @@ namespace gazebo {
         uavSensor.setPublisher(this->sensor_pub_);
 
         lastUpdateTime = this->world_->SimTime();
+        // create transport node
+        node = transport::NodePtr(new transport::Node());
+        node->Init(world_->Name());
+        // topic name
+        std::string topicName = "/air_control";
+        this->subPtr = this->node->Subscribe(topicName,
+                                             &IrisController::OnAirControlMsg, this);
+
+        //        gzdbg << "just before battery stuff" << std::endl;
+        battery.SetWorld(world_);
+//        gzdbg << "battery set world" << std::endl;
+        battery.GetParams(_sdf->GetElement("battery"), modelName);
+//        gzdbg << "battery get params" << std::endl;
+        battery.SetJoints(this->model_->GetJoints());
+//        gzdbg << "battery set joints" << std::endl;
 
         // New Mechanism for Updating every World Cycle
         // Listen to the update event. This event is broadcast every
@@ -233,6 +250,13 @@ namespace gazebo {
     void IrisController::UpdateStates() {
     	boost::mutex::scoped_lock lock(this->update_mutex_);
     	common::Time currTime = this->world_->SimTime();
+
+        battery.UpdateStates(isActive);
+        if (battery.GetRemaining() == 0) {
+            SetZeroForceToJoints();
+            isActive = false;
+            gzdbg << "battery is empty!!!!" << std::endl;
+        }
 
         if (this->sensor_pub_.getNumSubscribers() > 0) {
             double dt_ = (currTime - lastSensorTime).Double() * 1000; // miliseconds
@@ -281,15 +305,18 @@ namespace gazebo {
 	double rearRollRotors = 1.0 + rollFactor;
 
 	double yawFactor = IGN_NORMALIZE(pose.Rot().Euler().Z() - targetYaw);
-
 //        gzdbg << "yawFactor:" << yawFactor << " pitchFactor:" <<  pitchFactor << " rollFactor:" << rollFactor << std::endl;
+
 	//if (yawFactor > 1.0) yawFactor = 0.5;
 	//if (yawFactor < -1.0) yawFactor = -0.5;
 	double frontYawRotors = 1.0 - yawFactor;
 	double rearYawRotors = 1.0 + yawFactor;
 
 	for (unsigned i = 0; i < rotors_.size(); ++i) {
-//        gzdbg << "rotor[" << i << "] throttle:" << targetThrottle << std::endl;
+//        gzdbg << "targetThrottle:" << targetThrottle <<
+//              "frontPitchRotors:" << frontPitchRotors <<
+//              "frontRollRotors" << frontRollRotors <<
+//              "frontYawRotors" << frontYawRotors << std::endl;
 		rotors_[i]->cmd = targetThrottle;
 	}
 
@@ -368,6 +395,33 @@ namespace gazebo {
         static const double timeout = 0.01;
         while (this->rosnode_->ok()) {
             this->queue_.callAvailable(ros::WallDuration(timeout));
+        }
+    }
+
+    void IrisController::OnAirControlMsg(ConstAnyPtr& airControlMsg) {
+        std::string msg = airControlMsg->string_value();
+        std::string cmd = msg.substr(0, msg.find(" "));
+        std::string param = msg.substr(msg.find(" ")+1, msg.length()-msg.find(" ")-1);
+        gzdbg << "aircontrolmsg is taken cmd:" << cmd << " param:" << param << std::endl;
+        if (param == modelName) {
+            if (cmd == "activate") {
+                isActive = true;
+            } else if (cmd == "deactivate") {
+                isActive = false;
+                SetZeroForceToJoints();
+            } else {
+                gzdbg << "unknown command:" << cmd << " for:" << param << std::endl;
+            }
+        }
+    }
+
+    void IrisController::SetZeroForceToJoints() {
+//        boost::mutex::scoped_lock lock(this->update_mutex_);
+        std::vector<physics::JointPtr> jointPtrs = model_->GetJoints();
+        for (unsigned int i = 0; i < jointPtrs.size(); i++) {
+            double f = jointPtrs.at(i)->GetForce(0);
+            jointPtrs.at(i)->SetForce(0, -f);
+//            gzdbg << " joint " << jointPtrs.at(i)->GetName() << " set force to " << -f << std::endl;
         }
     }
 }
