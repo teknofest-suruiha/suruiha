@@ -20,6 +20,7 @@ namespace gazebo {
         // reduce battery if the uav is active
         if (isUAVActive) {
             for (unsigned int i = 0; i < joints.size(); i++) {
+//                gzdbg << "joint[" << i << "] force:" << joints.at(i)->GetForce(0) << std::endl;
                 remaining -= fabs(joints.at(i)->GetForce(0)) * forceFactor;
                 if (remaining < 0) {
                     remaining = 0;

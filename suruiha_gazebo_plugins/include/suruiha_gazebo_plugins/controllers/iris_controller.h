@@ -13,6 +13,7 @@
 #include <suruiha_gazebo_plugins/controllers/rotor_control.h>
 #include <vector>
 #include <suruiha_gazebo_plugins/uav_sensor/uav_sensor.h>
+#include <suruiha_gazebo_plugins/battery/battery_manager.h>
 
 namespace gazebo
 {
@@ -28,8 +29,9 @@ namespace gazebo
 		private: physics::WorldPtr world_;
 		private: physics::ModelPtr model_;
 		
-		private: std::string robot_namespace_;
+//		private: std::string robot_namespace_;
 //		private: std::string user_command_topic_name_;
+        private: std::string modelName;
 		private: ros::NodeHandle* rosnode_;
         private: ros::Subscriber control_twist_sub_;
 //        private: ros::Subscriber user_command_sub_;
@@ -45,6 +47,7 @@ namespace gazebo
 //	    private: void ProcessUserCommand(const std_msgs::String::ConstPtr& user_command);
 	    private: void CalculateRotors(double targetThrottle, double targetPitch, double targetRoll,
 	    		double targetYaw, common::Time dt);
+        protected: void SetZeroForceToJoints();
 
 		private: UAVSensor uavSensor;
 		private: common::Time lastSensorTime;
@@ -60,6 +63,15 @@ namespace gazebo
 
         private: common::Time lastPosePublishTime;
         private: int poseUpdateRate;
+
+        // communcation between air traffic controller and fligh controller
+        private: transport::NodePtr node;
+        private: transport::SubscriberPtr subPtr;
+        protected: void OnAirControlMsg(ConstAnyPtr& airControlMsg);
+        protected: bool isActive;
+
+        // battery manager
+        protected: BatteryManager battery;
 
 	};
 }

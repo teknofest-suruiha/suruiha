@@ -127,13 +127,13 @@ namespace gazebo {
         this->subPtr = this->node->Subscribe(topicName,
                                           &ZephyrController::OnAirControlMsg, this);
 
-        gzdbg << "just before battery stuff" << std::endl;
+//        gzdbg << "just before battery stuff" << std::endl;
         battery.SetWorld(world_);
-        gzdbg << "battery set world" << std::endl;
+//        gzdbg << "battery set world" << std::endl;
         battery.GetParams(_sdf->GetElement("battery"), modelName);
-        gzdbg << "battery get params" << std::endl;
+//        gzdbg << "battery get params" << std::endl;
         battery.SetJoints(this->model_->GetJoints());
-        gzdbg << "battery set joints" << std::endl;
+//        gzdbg << "battery set joints" << std::endl;
 
         // New Mechanism for Updating every World Cycle
         // Listen to the update event. This event is broadcast every
