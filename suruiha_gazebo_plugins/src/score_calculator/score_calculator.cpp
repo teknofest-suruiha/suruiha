@@ -39,6 +39,12 @@ namespace gazebo{
         // get sensor parameters from models itself not to duplicate parameters
         areaScore.GetParameters(_parent->SDF(), _sdf->GetElement("area_coverage_score"));
 
+        detectionScore.SetWorld(_parent);
+        detectionScore.GetParameters(_sdf->GetElement("detection_score"));
+
+        trackingScore.SetWorld(_parent);
+        trackingScore.GetParameters(_parent->SDF(), _sdf->GetElement("tracking_score"));
+
         // how often score is going to be published
         publishRate = _sdf->Get<double>("publish_rate");
 
@@ -59,6 +65,9 @@ namespace gazebo{
         boost::mutex::scoped_lock lock(updateMutex);
 
         areaScore.UpdateStates();
+        detectionScore.UpdateStates();
+        trackingScore.UpdateStates();
+
         common::Time currTime = world->SimTime();
         double dt = (currTime - lastPublishTime).Double() * 1000; // miliseconds
         if (dt > publishRate && !isCalculateScore) {
@@ -72,11 +81,12 @@ namespace gazebo{
             if (isCalculateScore) {
                 suruiha_gazebo_plugins::UAVScore scoreMsg;
                 scoreMsg.area_score = areaScore.CalculateScore();
-                scoreMsg.detection_score = 0;
-                scoreMsg.tracking_score = 0;
-                scoreMsg.total_score = 0;
+                scoreMsg.detection_score = detectionScore.CalculateScore();
+                scoreMsg.tracking_score = trackingScore.CalculateScore();
+                scoreMsg.total_score = scoreMsg.area_score * areaScore.GetFactor() +
+                        scoreMsg.detection_score * detectionScore.GetFactor() +
+                        scoreMsg.tracking_score * trackingScore.GetFactor();
                 scorePublisher.publish(scoreMsg);
-                gzdbg << "score is published area:" << scoreMsg.area_score << std::endl;
                 isCalculateScore = false;
             } else {
                 boost::this_thread::sleep_for(boost::chrono::milliseconds(10));

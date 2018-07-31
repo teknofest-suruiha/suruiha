@@ -23,7 +23,6 @@ class AreaCoverageScore {
     public: ~AreaCoverageScore();
 
     public: void GetParameters(sdf::ElementPtr worldSDF, sdf::ElementPtr ownSDF);
-    public: void SetRosNodeHandle(ros::NodeHandle* nodeHandle);
     public: void SetModels(std::map<std::string, gazebo::physics::ModelPtr> _models);
     public: void UpdateStates();
     public: void SetWorld(gazebo::physics::WorldPtr _worldPtr);
@@ -47,6 +46,8 @@ class AreaCoverageScore {
     protected: int visualizationUpdateRate;
     protected: gazebo::common::Time lastVisUpdateTime;
 
+    protected: double sumOccupancy;
+
 //    protected: void MyJoin(Polygon_2 p1, Polygon_2 p2);
 //    protected: void MyJoin2(Polygon_2 p1, Polygon_2 p2);
 //
@@ -59,6 +60,9 @@ class AreaCoverageScore {
 
     protected: nav_msgs::OccupancyGrid occupancyGridMap;
     protected: std::vector<geometry_msgs::Polygon> perceptedPolygons;
+
+    protected: double scoreFactor;
+    public: double GetFactor();
 
 };
 

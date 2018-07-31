@@ -1,0 +1,754 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <world name="zephyr">
+    <gui>
+      <camera name="user_camera">
+        <pose>489 -525 20 0 0.33 1.5707</pose>
+      </camera>
+    </gui>
+    <physics type="ode">
+      <ode>
+        <solver>
+          <type>quick</type>
+          <iters>100</iters>
+          <sor>1.0</sor>
+        </solver>
+        <constraints>
+          <cfm>0.0</cfm>
+          <erp>0.2</erp>
+          <contact_max_correcting_vel>0.1</contact_max_correcting_vel>
+          <contact_surface_layer>0.0</contact_surface_layer>
+        </constraints>
+      </ode>
+      <real_time_update_rate>400</real_time_update_rate>
+      <max_step_size>0.0025</max_step_size>
+    </physics>
+
+    <include>
+      <uri>model://sun</uri>
+    </include>
+
+    <model name="ground_plane">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>1000 1000</size>
+            </plane>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1</mu>
+                <mu2>1</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="runway">
+          <pose>490 -450 0.005 0 0 -1.5707</pose>
+          <cast_shadows>false</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Runway</name>
+            </script>
+          </material>
+        </visual>
+
+        <visual name="grass">
+          <pose>0 0 0 0 0 0</pose>
+          <cast_shadows>false</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>1000 1000</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grass</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+    
+    <model name="building_0">
+      <include>
+        <uri>model://osrf_first_office</uri>
+        <pose>-300 300 0 0 0 0</pose>
+      </include>
+    </model>
+    
+    <model name="building_1">
+      <include>
+        <uri>model://osrf_first_office</uri>
+        <pose>300 300 0 0 0 0</pose>
+      </include>
+    </model>
+    
+    <model name="building_2">
+      <include>
+        <uri>model://osrf_first_office</uri>
+        <pose>-300 -300 0 0 0 0</pose>
+      </include>
+    </model>
+    
+    <model name="building_3">
+      <include>
+        <uri>model://osrf_first_office</uri>
+        <pose>300 -300 0 0 0 0</pose>
+      </include>
+    </model>
+    
+    <actor name="terrorist_0">
+      <pose>300 300 1.07 0 0 -1.5708</pose>
+      <skin>
+        <filename>model://actor/meshes/SKIN_man_red_shirt.dae</filename>
+        <scale>1.0</scale>
+      </skin>
+      <animation name="walking">
+        <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+        <interpolate_x>true</interpolate_x>
+      </animation>
+      <script>
+        <loop>false</loop>
+        <delay_start>50.0</delay_start>
+        <auto_start>true</auto_start>
+        <trajectory id="0" type="walking">
+          <waypoint>
+            <time>0</time>
+            <pose>300 300 0 0 0 -1.5708</pose>
+          </waypoint>
+          <waypoint>
+            <time>180.00</time>
+            <pose>300 -300 0 0 0 -1.5708</pose>
+          </waypoint>
+        </trajectory>
+      </script>
+    </actor>
+    
+    <actor name="terrorist_1">
+      <pose>300 300 1.07 0 0 -1.5708</pose>
+      <skin>
+        <filename>model://actor/meshes/SKIN_man_red_shirt.dae</filename>
+        <scale>1.0</scale>
+      </skin>
+      <animation name="walking">
+        <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+        <interpolate_x>true</interpolate_x>
+      </animation>
+      <script>
+        <loop>false</loop>
+        <delay_start>51.0</delay_start>
+        <auto_start>true</auto_start>
+        <trajectory id="0" type="walking">
+          <waypoint>
+            <time>0</time>
+            <pose>300 300 0 0 0 -1.5708</pose>
+          </waypoint>
+          <waypoint>
+            <time>180.00</time>
+            <pose>300 -300 0 0 0 -1.5708</pose>
+          </waypoint>
+        </trajectory>
+      </script>
+    </actor>
+
+
+    <actor name="terrorist_2">
+      <pose>300 300 1.07 0 0 -1.5708</pose>
+      <skin>
+        <filename>model://actor/meshes/SKIN_man_red_shirt.dae</filename>
+        <scale>1.0</scale>
+      </skin>
+      <animation name="walking">
+        <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+        <interpolate_x>true</interpolate_x>
+      </animation>
+      <script>
+        <loop>false</loop>
+        <delay_start>52.0</delay_start>
+        <auto_start>true</auto_start>
+        <trajectory id="0" type="walking">
+          <waypoint>
+            <time>0</time>
+            <pose>300 300 0 0 0 -1.5708</pose>
+          </waypoint>
+          <waypoint>
+            <time>180.00</time>
+            <pose>300 -300 0 0 0 -1.5708</pose>
+          </waypoint>
+        </trajectory>
+      </script>
+    </actor>
+    
+    <actor name="terrorist_3">
+      <pose>300 300 1.07 0 0 -1.5708</pose>
+      <skin>
+        <filename>model://actor/meshes/SKIN_man_red_shirt.dae</filename>
+        <scale>1.0</scale>
+      </skin>
+      <animation name="walking">
+        <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+        <interpolate_x>true</interpolate_x>
+      </animation>
+      <script>
+        <loop>false</loop>
+        <delay_start>53.0</delay_start>
+        <auto_start>true</auto_start>
+        <trajectory id="0" type="walking">
+          <waypoint>
+            <time>0</time>
+            <pose>300 300 0 0 0 -1.5708</pose>
+          </waypoint>
+          <waypoint>
+            <time>180.00</time>
+            <pose>300 -300 0 0 0 -1.5708</pose>
+          </waypoint>
+        </trajectory>
+      </script>
+    </actor>
+    
+    <actor name="terrorist_4">
+      <pose>300 300 1.07 0 0 -1.5708</pose>
+      <skin>
+        <filename>model://actor/meshes/SKIN_man_red_shirt.dae</filename>
+        <scale>1.0</scale>
+      </skin>
+      <animation name="walking">
+        <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+        <interpolate_x>true</interpolate_x>
+      </animation>
+      <script>
+        <loop>false</loop>
+        <delay_start>54.0</delay_start>
+        <auto_start>true</auto_start>
+        <trajectory id="0" type="walking">
+          <waypoint>
+            <time>0</time>
+            <pose>300 300 0 0 0 -1.5708</pose>
+          </waypoint>
+          <waypoint>
+            <time>180.00</time>
+            <pose>300 -300 0 0 0 -1.5708</pose>
+          </waypoint>
+        </trajectory>
+      </script>
+    </actor>
+    
+   <actor name="terrorist_5">
+      <pose>300 300 1.07 0 0 -1.5708</pose>
+      <skin>
+        <filename>model://actor/meshes/SKIN_man_red_shirt.dae</filename>
+        <scale>1.0</scale>
+      </skin>
+      <animation name="walking">
+        <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+        <interpolate_x>true</interpolate_x>
+      </animation>
+      <script>
+        <loop>false</loop>
+        <delay_start>55.0</delay_start>
+        <auto_start>true</auto_start>
+        <trajectory id="0" type="walking">
+          <waypoint>
+            <time>0</time>
+            <pose>300 300 0 0 0 -1.5708</pose>
+          </waypoint>
+          <waypoint>
+            <time>180.00</time>
+            <pose>300 -300 0 0 0 -1.5708</pose>
+          </waypoint>
+        </trajectory>
+      </script>
+    </actor>
+    
+   <actor name="terrorist_6">
+      <pose>300 300 1.07 0 0 -1.5708</pose>
+      <skin>
+        <filename>model://actor/meshes/SKIN_man_red_shirt.dae</filename>
+        <scale>1.0</scale>
+      </skin>
+      <animation name="walking">
+        <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+        <interpolate_x>true</interpolate_x>
+      </animation>
+      <script>
+        <loop>false</loop>
+        <delay_start>56.0</delay_start>
+        <auto_start>true</auto_start>
+        <trajectory id="0" type="walking">
+          <waypoint>
+            <time>0</time>
+            <pose>300 300 0 0 0 -1.5708</pose>
+          </waypoint>
+          <waypoint>
+            <time>180.00</time>
+            <pose>300 -300 0 0 0 -1.5708</pose>
+          </waypoint>
+        </trajectory>
+      </script>
+    </actor>
+
+   <actor name="terrorist_7">
+      <pose>300 300 1.07 0 0 -1.5708</pose>
+      <skin>
+        <filename>model://actor/meshes/SKIN_man_red_shirt.dae</filename>
+        <scale>1.0</scale>
+      </skin>
+      <animation name="walking">
+        <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+        <interpolate_x>true</interpolate_x>
+      </animation>
+      <script>
+        <loop>false</loop>
+        <delay_start>57.0</delay_start>
+        <auto_start>true</auto_start>
+        <trajectory id="0" type="walking">
+          <waypoint>
+            <time>0</time>
+            <pose>300 300 0 0 0 -1.5708</pose>
+          </waypoint>
+          <waypoint>
+            <time>180.00</time>
+            <pose>300 -300 0 0 0 -1.5708</pose>
+          </waypoint>
+        </trajectory>
+      </script>
+    </actor>
+    
+   <actor name="terrorist_8">
+      <pose>300 300 1.07 0 0 -1.5708</pose>
+      <skin>
+        <filename>model://actor/meshes/SKIN_man_red_shirt.dae</filename>
+        <scale>1.0</scale>
+      </skin>
+      <animation name="walking">
+        <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+        <interpolate_x>true</interpolate_x>
+      </animation>
+      <script>
+        <loop>false</loop>
+        <delay_start>58.0</delay_start>
+        <auto_start>true</auto_start>
+        <trajectory id="0" type="walking">
+          <waypoint>
+            <time>0</time>
+            <pose>300 300 0 0 0 -1.5708</pose>
+          </waypoint>
+          <waypoint>
+            <time>180.00</time>
+            <pose>300 -300 0 0 0 -1.5708</pose>
+          </waypoint>
+        </trajectory>
+      </script>
+    </actor>
+    
+   <actor name="terrorist_9">
+      <pose>300 300 1.07 0 0 -1.5708</pose>
+      <skin>
+        <filename>model://actor/meshes/SKIN_man_red_shirt.dae</filename>
+        <scale>1.0</scale>
+      </skin>
+      <animation name="walking">
+        <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+        <interpolate_x>true</interpolate_x>
+      </animation>
+      <script>
+        <loop>false</loop>
+        <delay_start>59.0</delay_start>
+        <auto_start>true</auto_start>
+        <trajectory id="0" type="walking">
+          <waypoint>
+            <time>0</time>
+            <pose>300 300 0 0 0 -1.5708</pose>
+          </waypoint>
+          <waypoint>
+            <time>180.00</time>
+            <pose>300 -300 0 0 0 -1.5708</pose>
+          </waypoint>
+        </trajectory>
+      </script>
+    </actor>
+    
+   <actor name="terrorist_10">
+      <pose>300 300 1.07 0 0 -1.5708</pose>
+      <skin>
+        <filename>model://actor/meshes/SKIN_man_red_shirt.dae</filename>
+        <scale>1.0</scale>
+      </skin>
+      <animation name="walking">
+        <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+        <interpolate_x>true</interpolate_x>
+      </animation>
+      <script>
+        <loop>false</loop>
+        <delay_start>60.0</delay_start>
+        <auto_start>true</auto_start>
+        <trajectory id="0" type="walking">
+          <waypoint>
+            <time>0</time>
+            <pose>300 300 0 0 0 -1.5708</pose>
+          </waypoint>
+          <waypoint>
+            <time>180.00</time>
+            <pose>300 -300 0 0 0 -1.5708</pose>
+          </waypoint>
+        </trajectory>
+      </script>
+    </actor>
+    
+   <actor name="terrorist_11">
+      <pose>300 300 1.07 0 0 -1.5708</pose>
+      <skin>
+        <filename>model://actor/meshes/SKIN_man_red_shirt.dae</filename>
+        <scale>1.0</scale>
+      </skin>
+      <animation name="walking">
+        <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+        <interpolate_x>true</interpolate_x>
+      </animation>
+      <script>
+        <loop>false</loop>
+        <delay_start>65.0</delay_start>
+        <auto_start>true</auto_start>
+        <trajectory id="0" type="walking">
+          <waypoint>
+            <time>0</time>
+            <pose>300 300 0 0 0 -1.5708</pose>
+          </waypoint>
+          <waypoint>
+            <time>180.00</time>
+            <pose>300 -300 0 0 0 -1.5708</pose>
+          </waypoint>
+        </trajectory>
+      </script>
+    </actor>
+
+   <actor name="terrorist_12">
+      <pose>300 300 1.07 0 0 -1.5708</pose>
+      <skin>
+        <filename>model://actor/meshes/SKIN_man_red_shirt.dae</filename>
+        <scale>1.0</scale>
+      </skin>
+      <animation name="walking">
+        <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+        <interpolate_x>true</interpolate_x>
+      </animation>
+      <script>
+        <loop>false</loop>
+        <delay_start>70.0</delay_start>
+        <auto_start>true</auto_start>
+        <trajectory id="0" type="walking">
+          <waypoint>
+            <time>0</time>
+            <pose>300 300 0 0 0 -1.5708</pose>
+          </waypoint>
+          <waypoint>
+            <time>180.00</time>
+            <pose>300 -300 0 0 0 -1.5708</pose>
+          </waypoint>
+        </trajectory>
+      </script>
+    </actor>
+    
+   <actor name="terrorist_13">
+      <pose>300 300 1.07 0 0 -1.5708</pose>
+      <skin>
+        <filename>model://actor/meshes/SKIN_man_red_shirt.dae</filename>
+        <scale>1.0</scale>
+      </skin>
+      <animation name="walking">
+        <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+        <interpolate_x>true</interpolate_x>
+      </animation>
+      <script>
+        <loop>false</loop>
+        <delay_start>75.0</delay_start>
+        <auto_start>true</auto_start>
+        <trajectory id="0" type="walking">
+          <waypoint>
+            <time>0</time>
+            <pose>300 300 0 0 0 -1.5708</pose>
+          </waypoint>
+          <waypoint>
+            <time>180.00</time>
+            <pose>300 -300 0 0 0 -1.5708</pose>
+          </waypoint>
+        </trajectory>
+      </script>
+    </actor>
+    
+   <actor name="terrorist_14">
+      <pose>300 300 1.07 0 0 -1.5708</pose>
+      <skin>
+        <filename>model://actor/meshes/SKIN_man_red_shirt.dae</filename>
+        <scale>1.0</scale>
+      </skin>
+      <animation name="walking">
+        <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+        <interpolate_x>true</interpolate_x>
+      </animation>
+      <script>
+        <loop>false</loop>
+        <delay_start>80.0</delay_start>
+        <auto_start>true</auto_start>
+        <trajectory id="0" type="walking">
+          <waypoint>
+            <time>0</time>
+            <pose>300 300 0 0 0 -1.5708</pose>
+          </waypoint>
+          <waypoint>
+            <time>180.00</time>
+            <pose>300 -300 0 0 0 -1.5708</pose>
+          </waypoint>
+        </trajectory>
+      </script>
+    </actor>
+    
+   <actor name="terrorist_15">
+      <pose>300 300 1.07 0 0 -1.5708</pose>
+      <skin>
+        <filename>model://actor/meshes/SKIN_man_red_shirt.dae</filename>
+        <scale>1.0</scale>
+      </skin>
+      <animation name="walking">
+        <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+        <interpolate_x>true</interpolate_x>
+      </animation>
+      <script>
+        <loop>false</loop>
+        <delay_start>85.0</delay_start>
+        <auto_start>true</auto_start>
+        <trajectory id="0" type="walking">
+          <waypoint>
+            <time>0</time>
+            <pose>300 300 0 0 0 -1.5708</pose>
+          </waypoint>
+          <waypoint>
+            <time>180.00</time>
+            <pose>300 -300 0 0 0 -1.5708</pose>
+          </waypoint>
+        </trajectory>
+      </script>
+    </actor>
+    
+   <actor name="terrorist_16">
+      <pose>300 300 1.07 0 0 -1.5708</pose>
+      <skin>
+        <filename>model://actor/meshes/SKIN_man_red_shirt.dae</filename>
+        <scale>1.0</scale>
+      </skin>
+      <animation name="walking">
+        <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+        <interpolate_x>true</interpolate_x>
+      </animation>
+      <script>
+        <loop>false</loop>
+        <delay_start>90.0</delay_start>
+        <auto_start>true</auto_start>
+        <trajectory id="0" type="walking">
+          <waypoint>
+            <time>0</time>
+            <pose>300 300 0 0 0 -1.5708</pose>
+          </waypoint>
+          <waypoint>
+            <time>180.00</time>
+            <pose>300 -300 0 0 0 -1.5708</pose>
+          </waypoint>
+        </trajectory>
+      </script>
+    </actor>
+    
+   <actor name="terrorist_17">
+      <pose>300 300 1.07 0 0 -1.5708</pose>
+      <skin>
+        <filename>model://actor/meshes/SKIN_man_red_shirt.dae</filename>
+        <scale>1.0</scale>
+      </skin>
+      <animation name="walking">
+        <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+        <interpolate_x>true</interpolate_x>
+      </animation>
+      <script>
+        <loop>false</loop>
+        <delay_start>95.0</delay_start>
+        <auto_start>true</auto_start>
+        <trajectory id="0" type="walking">
+          <waypoint>
+            <time>0</time>
+            <pose>300 300 0 0 0 -1.5708</pose>
+          </waypoint>
+          <waypoint>
+            <time>180.00</time>
+            <pose>300 -300 0 0 0 -1.5708</pose>
+          </waypoint>
+        </trajectory>
+      </script>
+    </actor>
+    
+   <actor name="terrorist_18">
+      <pose>300 300 1.07 0 0 -1.5708</pose>
+      <skin>
+        <filename>model://actor/meshes/SKIN_man_red_shirt.dae</filename>
+        <scale>1.0</scale>
+      </skin>
+      <animation name="walking">
+        <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+        <interpolate_x>true</interpolate_x>
+      </animation>
+      <script>
+        <loop>false</loop>
+        <delay_start>98.0</delay_start>
+        <auto_start>true</auto_start>
+        <trajectory id="0" type="walking">
+          <waypoint>
+            <time>0</time>
+            <pose>300 300 0 0 0 -1.5708</pose>
+          </waypoint>
+          <waypoint>
+            <time>180.00</time>
+            <pose>300 -300 0 0 0 -1.5708</pose>
+          </waypoint>
+        </trajectory>
+      </script>
+    </actor>
+    
+   <actor name="terrorist_19">
+      <pose>300 300 1.07 0 0 -1.5708</pose>
+      <skin>
+        <filename>model://actor/meshes/SKIN_man_red_shirt.dae</filename>
+        <scale>1.0</scale>
+      </skin>
+      <animation name="walking">
+        <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+        <interpolate_x>true</interpolate_x>
+      </animation>
+      <script>
+        <loop>false</loop>
+        <delay_start>100.0</delay_start>
+        <auto_start>true</auto_start>
+        <trajectory id="0" type="walking">
+          <waypoint>
+            <time>0</time>
+            <pose>300 300 0 0 0 -1.5708</pose>
+          </waypoint>
+          <waypoint>
+            <time>180.00</time>
+            <pose>300 -300 0 0 0 -1.5708</pose>
+          </waypoint>
+        </trajectory>
+      </script>
+    </actor>
+    
+    <model name="zephyr0">
+      <pose>485 -493 0 0 0 3.1415</pose>
+      <include>
+        <uri>model://zephyr_with_skid_pad</uri>
+      </include>
+    </model>
+    
+    <model name="zephyr1">
+      <pose>485 -495 0 0 0 3.1415</pose>
+      <include>
+        <uri>model://zephyr_with_skid_pad</uri>
+      </include>
+    </model>
+    
+    <model name="iris0">
+      <pose>485 -497 0 0 0 3.1415</pose>
+      <include>
+        <uri>model://iris_quadrotor_with_plugin</uri>
+      </include>
+    </model>
+    
+    <model name="iris1">
+      <pose>485 -499 0 0 0 3.1415</pose>
+      <include>
+        <uri>model://iris_quadrotor_with_plugin</uri>
+      </include>
+    </model>
+
+    <plugin name="air_traffic_controller" filename="libair_traffic_controller.so">
+      <takeoff>
+        <pose>490 -490 0 0 0 3.1415</pose>
+        <height_threshold>10</height_threshold>
+        <distance_threshold>50</distance_threshold>
+      </takeoff>
+      <landing>
+        <area_bottom_left>480 -500 0</area_bottom_left>
+        <area_upper_right>500 -400 0</area_upper_right>
+        <start_pose>490 -400 50 0 0 3.1415</start_pose>
+        <end_pose>490 -490 0 0 0 3.1415</end_pose>
+        <height_treshold>0.1</height_treshold>
+        <velocity_threshold>3</velocity_threshold>
+      </landing>
+    </plugin>
+    <plugin name="comm_manager" filename="libcomm_manager.so">
+      <comm_request_topic>comm_request</comm_request_topic>
+      <comm_broadcast_topic>comm</comm_broadcast_topic>
+      <!-- girilen deger metre biriminde olmali -->
+      <!-- comm_distance 100 km secildi ki herkes tum mesajlari alabilsin -->
+      <comm_distance>10000</comm_distance>
+    </plugin>
+    <plugin name="score_calculator" filename="libscore_calculator.so">
+      <area_coverage_score>
+        <visualization>
+          <active>true</active>
+          <topic_name>score_area_visual</topic_name>
+          <!-- runs the visualization at every given milliseconds -->
+          <update_rate>1000</update_rate>
+        </visualization>
+        <!-- runs score calculation at every update_rate milliseconds -->
+        <update_rate>100</update_rate>
+        <!-- widgh and height of total area in meters -->
+        <width>1000</width>
+        <height>1000</height>
+        <!-- the size of a single cell in meters -->
+        <resolution>0.5</resolution>
+        <factor>0.3</factor>
+      </area_coverage_score>
+      <detection_score>
+        <!-- this shows the millisecond when the terrorists start to go away from their house -->
+        <start_time>50000</start_time>
+        <building_name>building_1</building_name>
+        <!-- when false building is detected or detection occurs before the movement of terrorists, false detection penalty is going to be applied -->
+        <!-- for details please refer the technical documentation -->
+        <false_detection_penalty>0.1</false_detection_penalty>
+        <detection_topic>terrorist_detection</detection_topic>
+        <factor>0.4</factor>
+        <base_score>10</base_score>
+        <time_to_detect>200000</time_to_detect>
+      </detection_score>
+      <tracking_score>
+        <!-- this shows the millisecond when the terrorists start to go away from their house -->
+        <start_time>50000</start_time>
+        <factor>0.4</factor>
+        <terrorist_prefix>terrorist</terrorist_prefix>
+        <tracking_topic>terrorist_tracking</tracking_topic>
+        <!-- birimi metredir not used for now-->
+        <max_dist_error>10</max_dist_error>
+        <!-- birimi milliseconds dır. -->
+        <message_rate>100</message_rate>
+        <update_rate>100</update_rate>
+      </tracking_score>
+      <!-- calculates the score value and publishes at every publish rate milliseconds -->
+      <publish_rate>1000</publish_rate>
+    </plugin>
+    <plugin name="scenario_manager" filename="libscenario_manager.so">
+      <!-- how long the scenario is going to run unit is milliseconds-->
+      <sim_duration>300000</sim_duration>
+    </plugin>
+  </world>
+</sdf>

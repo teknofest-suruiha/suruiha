@@ -1,0 +1,112 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <world name="zephyr">
+    <scene>
+      <grid>false</grid>
+    </scene>
+    <gui>
+      <camera name="user_camera">
+        <pose>0 0 10 0 0.33 1.5707</pose>
+      </camera>
+    </gui>
+    <physics type="ode">
+      <ode>
+        <solver>
+          <type>quick</type>
+          <iters>100</iters>
+          <sor>1.0</sor>
+        </solver>
+        <constraints>
+          <cfm>0.0</cfm>
+          <erp>0.2</erp>
+          <contact_max_correcting_vel>0.1</contact_max_correcting_vel>
+          <contact_surface_layer>0.0</contact_surface_layer>
+        </constraints>
+      </ode>
+      <real_time_update_rate>400</real_time_update_rate>
+      <max_step_size>0.0025</max_step_size>
+    </physics>
+
+    <include>
+      <uri>model://sun</uri>
+    </include>
+
+    <model name="ground_plane">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1</mu>
+                <mu2>1</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>        
+        <visual name="grass">
+          <pose>0 0 0 0 0 0</pose>
+          <cast_shadows>false</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grass</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+<!--    
+    <actor name="actor">
+      <skin>
+        <filename>model://actor/meshes/walk.dae</filename>
+      </skin>
+    </actor>
+    -->
+    
+<actor name="actor_0">
+<pose> 0 0 1.07 0 0 0</pose>
+<skin>
+	<filename>model://actor/meshes/SKIN_man_red_shirt.dae</filename>
+	<scale>1.0</scale>
+</skin>
+<animation name="walking">
+<filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+</animation>
+<script>
+	<loop>false</loop>
+	<delay_start>20.000000</delay_start>
+	<auto_start>true</auto_start>
+	<trajectory id="0" type="walking">
+<waypoint>
+<time>0</time>
+<pose>0 0 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>5</time>
+<pose>2 0 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>10</time>
+<pose>3 0 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>15</time>
+<pose>5 0 0 0 0 0</pose>
+</waypoint>
+</trajectory></script>
+</actor>
+  </world>
+</sdf>

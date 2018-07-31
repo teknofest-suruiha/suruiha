@@ -1,0 +1,1443 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <world name="zephyr">
+    <scene>
+      <grid>false</grid>
+    </scene>
+    <gui>
+      <camera name="user_camera">
+        <pose>990 -1015 10 0 0.33 1.5707</pose>
+      </camera>
+    </gui>
+    <physics type="ode">
+      <ode>
+        <solver>
+          <type>quick</type>
+          <iters>100</iters>
+          <sor>1.0</sor>
+        </solver>
+        <constraints>
+          <cfm>0.0</cfm>
+          <erp>0.2</erp>
+          <contact_max_correcting_vel>0.1</contact_max_correcting_vel>
+          <contact_surface_layer>0.0</contact_surface_layer>
+        </constraints>
+      </ode>
+      <real_time_update_rate>400</real_time_update_rate>
+      <max_step_size>0.0025</max_step_size>
+    </physics>
+
+    <include>
+      <uri>model://sun</uri>
+    </include>
+
+    <model name="ground_plane">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>2000 2000</size>
+            </plane>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1</mu>
+                <mu2>1</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        
+        <visual name="runway">
+          <pose>990 -900 0.01 0 0 -1.5707</pose>
+          <cast_shadows>false</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>200 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Runway</name>
+            </script>
+          </material>
+        </visual>
+        
+        <visual name="grass">
+          <pose>0 0 0 0 0 0</pose>
+          <cast_shadows>false</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>2000 2000</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grass</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+ 
+ 
+ <model name="powerplant_0">
+  <include>
+    <uri>model://powerplant</uri>
+    <pose>-233 -397 0 0 0 0</pose>
+  </include>
+</model>
+<model name="fire_station_1">
+  <include>
+    <uri>model://fire_station</uri>
+    <pose>721 593 0 0 0 0</pose>
+  </include>
+</model>
+<model name="apartment_2">
+  <include>
+    <uri>model://apartment</uri>
+    <pose>-854 -610 0 0 0 0</pose>
+  </include>
+</model>
+<model name="playground_3">
+  <include>
+    <uri>model://playground</uri>
+    <pose>419 -176 0 0 0 0</pose>
+  </include>
+</model>
+<model name="office_building_4">
+  <include>
+    <uri>model://office_building</uri>
+    <pose>-360 -390 0 0 0 0</pose>
+  </include>
+</model>
+<model name="water_tower_5">
+  <include>
+    <uri>model://water_tower</uri>
+    <pose>-348 343 0 0 0 0</pose>
+  </include>
+</model>
+<model name="house_1_6">
+  <include>
+    <uri>model://house_1</uri>
+    <pose>773 -279 0 0 0 0</pose>
+  </include>
+</model>
+<model name="osrf_first_office_7">
+  <include>
+    <uri>model://osrf_first_office</uri>
+    <pose>-236 -77 0 0 0 0</pose>
+  </include>
+</model>
+<model name="water_tower_8">
+  <include>
+    <uri>model://water_tower</uri>
+    <pose>648 136 0 0 0 0</pose>
+  </include>
+</model>
+<model name="house_2_9">
+  <include>
+    <uri>model://house_2</uri>
+    <pose>-542 951 0 0 0 0</pose>
+  </include>
+</model>
+<model name="apartment_10">
+  <include>
+    <uri>model://apartment</uri>
+    <pose>-700 -798 0 0 0 0</pose>
+  </include>
+</model>
+<model name="house_2_11">
+  <include>
+    <uri>model://house_2</uri>
+    <pose>206 176 0 0 0 0</pose>
+  </include>
+</model>
+<model name="osrf_first_office_12">
+  <include>
+    <uri>model://osrf_first_office</uri>
+    <pose>986 180 0 0 0 0</pose>
+  </include>
+</model>
+<model name="house_2_13">
+  <include>
+    <uri>model://house_2</uri>
+    <pose>-731 424 0 0 0 0</pose>
+  </include>
+</model>
+<model name="office_building_14">
+  <include>
+    <uri>model://office_building</uri>
+    <pose>-885 -250 0 0 0 0</pose>
+  </include>
+</model>
+<model name="apartment_15">
+  <include>
+    <uri>model://apartment</uri>
+    <pose>435 -905 0 0 0 0</pose>
+  </include>
+</model>
+<model name="water_tower_16">
+  <include>
+    <uri>model://water_tower</uri>
+    <pose>37 -482 0 0 0 0</pose>
+  </include>
+</model>
+<model name="post_office_17">
+  <include>
+    <uri>model://post_office</uri>
+    <pose>-52 754 0 0 0 0</pose>
+  </include>
+</model>
+<model name="cafe_18">
+  <include>
+    <uri>model://cafe</uri>
+    <pose>202 -972 0 0 0 0</pose>
+  </include>
+</model>
+<model name="fire_station_19">
+  <include>
+    <uri>model://fire_station</uri>
+    <pose>-901 520 0 0 0 0</pose>
+  </include>
+</model>
+<model name="school_20">
+  <include>
+    <uri>model://school</uri>
+    <pose>977 990 0 0 0 0</pose>
+  </include>
+</model>
+<model name="parking_garage_21">
+  <include>
+    <uri>model://parking_garage</uri>
+    <pose>88 -194 0 0 0 0</pose>
+  </include>
+</model>
+<model name="water_tower_22">
+  <include>
+    <uri>model://water_tower</uri>
+    <pose>-544 -133 0 0 0 0</pose>
+  </include>
+</model>
+<model name="school_23">
+  <include>
+    <uri>model://school</uri>
+    <pose>8 522 0 0 0 0</pose>
+  </include>
+</model>
+<model name="parking_garage_24">
+  <include>
+    <uri>model://parking_garage</uri>
+    <pose>-686 908 0 0 0 0</pose>
+  </include>
+</model>
+<model name="house_3_25">
+  <include>
+    <uri>model://house_3</uri>
+    <pose>347 248 0 0 0 0</pose>
+  </include>
+</model>
+<model name="school_26">
+  <include>
+    <uri>model://school</uri>
+    <pose>559 819 0 0 0 0</pose>
+  </include>
+</model>
+<model name="grocery_store_27">
+  <include>
+    <uri>model://grocery_store</uri>
+    <pose>275 -794 0 0 0 0</pose>
+  </include>
+</model>
+<model name="house_1_28">
+  <include>
+    <uri>model://house_1</uri>
+    <pose>967 -698 0 0 0 0</pose>
+  </include>
+</model>
+<model name="cafe_29">
+  <include>
+    <uri>model://cafe</uri>
+    <pose>-218 461 0 0 0 0</pose>
+  </include>
+</model>
+<model name="parking_garage_30">
+  <include>
+    <uri>model://parking_garage</uri>
+    <pose>422 -725 0 0 0 0</pose>
+  </include>
+</model>
+<model name="police_station_31">
+  <include>
+    <uri>model://police_station</uri>
+    <pose>746 -847 0 0 0 0</pose>
+  </include>
+</model>
+<model name="house_2_32">
+  <include>
+    <uri>model://house_2</uri>
+    <pose>286 812 0 0 0 0</pose>
+  </include>
+</model>
+<model name="reactor_33">
+  <include>
+    <uri>model://reactor</uri>
+    <pose>91 636 0 0 0 0</pose>
+  </include>
+</model>
+<model name="powerplant_34">
+  <include>
+    <uri>model://powerplant</uri>
+    <pose>-939 -683 0 0 0 0</pose>
+  </include>
+</model>
+<model name="apartment_35">
+  <include>
+    <uri>model://apartment</uri>
+    <pose>-505 -780 0 0 0 0</pose>
+  </include>
+</model>
+<model name="office_building_36">
+  <include>
+    <uri>model://office_building</uri>
+    <pose>864 -60 0 0 0 0</pose>
+  </include>
+</model>
+<model name="fire_station_37">
+  <include>
+    <uri>model://fire_station</uri>
+    <pose>-826 754 0 0 0 0</pose>
+  </include>
+</model>
+<model name="parking_garage_38">
+  <include>
+    <uri>model://parking_garage</uri>
+    <pose>265 910 0 0 0 0</pose>
+  </include>
+</model>
+<model name="school_39">
+  <include>
+    <uri>model://school</uri>
+    <pose>37 976 0 0 0 0</pose>
+  </include>
+</model>
+<model name="radio_tower_40">
+  <include>
+    <uri>model://radio_tower</uri>
+    <pose>-478 809 0 0 0 0</pose>
+  </include>
+</model>
+<model name="house_3_41">
+  <include>
+    <uri>model://house_3</uri>
+    <pose>-36 -864 0 0 0 0</pose>
+  </include>
+</model>
+<model name="cafe_42">
+  <include>
+    <uri>model://cafe</uri>
+    <pose>293 -455 0 0 0 0</pose>
+  </include>
+</model>
+<model name="house_3_43">
+  <include>
+    <uri>model://house_3</uri>
+    <pose>-141 -823 0 0 0 0</pose>
+  </include>
+</model>
+<model name="osrf_first_office_44">
+  <include>
+    <uri>model://osrf_first_office</uri>
+    <pose>-391 526 0 0 0 0</pose>
+  </include>
+</model>
+<model name="office_building_45">
+  <include>
+    <uri>model://office_building</uri>
+    <pose>527 -12 0 0 0 0</pose>
+  </include>
+</model>
+<model name="office_building_46">
+  <include>
+    <uri>model://office_building</uri>
+    <pose>241 503 0 0 0 0</pose>
+  </include>
+</model>
+<model name="fire_station_47">
+  <include>
+    <uri>model://fire_station</uri>
+    <pose>-97 957 0 0 0 0</pose>
+  </include>
+</model>
+<model name="house_1_48">
+  <include>
+    <uri>model://house_1</uri>
+    <pose>465 948 0 0 0 0</pose>
+  </include>
+</model>
+<model name="law_office_49">
+  <include>
+    <uri>model://law_office</uri>
+    <pose>-979 -43 0 0 0 0</pose>
+  </include>
+</model>
+<model name="house_3_50">
+  <include>
+    <uri>model://house_3</uri>
+    <pose>42 313 0 0 0 0</pose>
+  </include>
+</model>
+<model name="law_office_51">
+  <include>
+    <uri>model://law_office</uri>
+    <pose>-683 -394 0 0 0 0</pose>
+  </include>
+</model>
+<model name="fire_station_52">
+  <include>
+    <uri>model://fire_station</uri>
+    <pose>-575 490 0 0 0 0</pose>
+  </include>
+</model>
+<model name="school_53">
+  <include>
+    <uri>model://school</uri>
+    <pose>112 -817 0 0 0 0</pose>
+  </include>
+</model>
+<model name="house_1_54">
+  <include>
+    <uri>model://house_1</uri>
+    <pose>787 921 0 0 0 0</pose>
+  </include>
+</model>
+<model name="house_2_55">
+  <include>
+    <uri>model://house_2</uri>
+    <pose>-576 288 0 0 0 0</pose>
+  </include>
+</model>
+<model name="water_tower_56">
+  <include>
+    <uri>model://water_tower</uri>
+    <pose>-119 -526 0 0 0 0</pose>
+  </include>
+</model>
+<model name="parking_garage_57">
+  <include>
+    <uri>model://parking_garage</uri>
+    <pose>-537 596 0 0 0 0</pose>
+  </include>
+</model>
+<model name="cafe_58">
+  <include>
+    <uri>model://cafe</uri>
+    <pose>552 -483 0 0 0 0</pose>
+  </include>
+</model>
+<model name="office_building_59">
+  <include>
+    <uri>model://office_building</uri>
+    <pose>-784 -197 0 0 0 0</pose>
+  </include>
+</model>
+<model name="apartment_60">
+  <include>
+    <uri>model://apartment</uri>
+    <pose>-691 674 0 0 0 0</pose>
+  </include>
+</model>
+<model name="water_tower_61">
+  <include>
+    <uri>model://water_tower</uri>
+    <pose>515 209 0 0 0 0</pose>
+  </include>
+</model>
+<model name="gas_station_62">
+  <include>
+    <uri>model://gas_station</uri>
+    <pose>195 -127 0 0 0 0</pose>
+  </include>
+</model>
+<model name="school_63">
+  <include>
+    <uri>model://school</uri>
+    <pose>-269 -660 0 0 0 0</pose>
+  </include>
+</model>
+<model name="reactor_64">
+  <include>
+    <uri>model://reactor</uri>
+    <pose>727 295 0 0 0 0</pose>
+  </include>
+</model>
+<model name="grocery_store_65">
+  <include>
+    <uri>model://grocery_store</uri>
+    <pose>556 -283 0 0 0 0</pose>
+  </include>
+</model>
+<model name="law_office_66">
+  <include>
+    <uri>model://law_office</uri>
+    <pose>-701 -686 0 0 0 0</pose>
+  </include>
+</model>
+<model name="parking_garage_67">
+  <include>
+    <uri>model://parking_garage</uri>
+    <pose>76 735 0 0 0 0</pose>
+  </include>
+</model>
+<model name="apartment_68">
+  <include>
+    <uri>model://apartment</uri>
+    <pose>-595 -628 0 0 0 0</pose>
+  </include>
+</model>
+<model name="playground_69">
+  <include>
+    <uri>model://playground</uri>
+    <pose>-943 158 0 0 0 0</pose>
+  </include>
+</model>
+<model name="house_1_70">
+  <include>
+    <uri>model://house_1</uri>
+    <pose>526 589 0 0 0 0</pose>
+  </include>
+</model>
+<model name="fire_station_71">
+  <include>
+    <uri>model://fire_station</uri>
+    <pose>-551 -21 0 0 0 0</pose>
+  </include>
+</model>
+<model name="parking_garage_72">
+  <include>
+    <uri>model://parking_garage</uri>
+    <pose>559 -657 0 0 0 0</pose>
+  </include>
+</model>
+<model name="post_office_73">
+  <include>
+    <uri>model://post_office</uri>
+    <pose>525 -825 0 0 0 0</pose>
+  </include>
+</model>
+<model name="grocery_store_74">
+  <include>
+    <uri>model://grocery_store</uri>
+    <pose>-246 816 0 0 0 0</pose>
+  </include>
+</model>
+<model name="fire_station_75">
+  <include>
+    <uri>model://fire_station</uri>
+    <pose>121 63 0 0 0 0</pose>
+  </include>
+</model>
+<model name="house_2_76">
+  <include>
+    <uri>model://house_2</uri>
+    <pose>-831 -968 0 0 0 0</pose>
+  </include>
+</model>
+<model name="grocery_store_77">
+  <include>
+    <uri>model://grocery_store</uri>
+    <pose>-773 -314 0 0 0 0</pose>
+  </include>
+</model>
+<model name="office_building_78">
+  <include>
+    <uri>model://office_building</uri>
+    <pose>-838 206 0 0 0 0</pose>
+  </include>
+</model>
+<model name="parking_garage_79">
+  <include>
+    <uri>model://parking_garage</uri>
+    <pose>-53 -233 0 0 0 0</pose>
+  </include>
+</model>
+<model name="gas_station_80">
+  <include>
+    <uri>model://gas_station</uri>
+    <pose>107 406 0 0 0 0</pose>
+  </include>
+</model>
+<model name="law_office_81">
+  <include>
+    <uri>model://law_office</uri>
+    <pose>990 281 0 0 0 0</pose>
+  </include>
+</model>
+<model name="osrf_first_office_82">
+  <include>
+    <uri>model://osrf_first_office</uri>
+    <pose>-490 705 0 0 0 0</pose>
+  </include>
+</model>
+<model name="house_2_83">
+  <include>
+    <uri>model://house_2</uri>
+    <pose>-374 -533 0 0 0 0</pose>
+  </include>
+</model>
+<model name="apartment_84">
+  <include>
+    <uri>model://apartment</uri>
+    <pose>-260 963 0 0 0 0</pose>
+  </include>
+</model>
+<model name="cafe_85">
+  <include>
+    <uri>model://cafe</uri>
+    <pose>-933 721 0 0 0 0</pose>
+  </include>
+</model>
+<model name="house_3_86">
+  <include>
+    <uri>model://house_3</uri>
+    <pose>-125 -27 0 0 0 0</pose>
+  </include>
+</model>
+<model name="powerplant_87">
+  <include>
+    <uri>model://powerplant</uri>
+    <pose>-541 115 0 0 0 0</pose>
+  </include>
+</model>
+<model name="reactor_88">
+  <include>
+    <uri>model://reactor</uri>
+    <pose>-67 -694 0 0 0 0</pose>
+  </include>
+</model>
+<model name="office_building_89">
+  <include>
+    <uri>model://office_building</uri>
+    <pose>638 907 0 0 0 0</pose>
+  </include>
+</model>
+<model name="osrf_first_office_90">
+  <include>
+    <uri>model://osrf_first_office</uri>
+    <pose>996 571 0 0 0 0</pose>
+  </include>
+</model>
+<model name="apartment_91">
+  <include>
+    <uri>model://apartment</uri>
+    <pose>-698 77 0 0 0 0</pose>
+  </include>
+</model>
+<model name="reactor_92">
+  <include>
+    <uri>model://reactor</uri>
+    <pose>25 -40 0 0 0 0</pose>
+  </include>
+</model>
+<model name="school_93">
+  <include>
+    <uri>model://school</uri>
+    <pose>965 399 0 0 0 0</pose>
+  </include>
+</model>
+<model name="post_office_94">
+  <include>
+    <uri>model://post_office</uri>
+    <pose>876 -255 0 0 0 0</pose>
+  </include>
+</model>
+<model name="parking_garage_95">
+  <include>
+    <uri>model://parking_garage</uri>
+    <pose>781 28 0 0 0 0</pose>
+  </include>
+</model>
+<model name="playground_96">
+  <include>
+    <uri>model://playground</uri>
+    <pose>-264 146 0 0 0 0</pose>
+  </include>
+</model>
+<model name="police_station_97">
+  <include>
+    <uri>model://police_station</uri>
+    <pose>227 615 0 0 0 0</pose>
+  </include>
+</model>
+<model name="house_3_98">
+  <include>
+    <uri>model://house_3</uri>
+    <pose>461 438 0 0 0 0</pose>
+  </include>
+</model>
+<model name="house_3_99">
+  <include>
+    <uri>model://house_3</uri>
+    <pose>-792 523 0 0 0 0</pose>
+  </include>
+</model>
+
+ 
+ 
+    <model name="zephyr0">
+      <pose>995 -990.5 0 0 0 3.1415</pose>
+      <include>
+        <uri>model://zephyr_with_skid_pad</uri>
+      </include>
+    </model>
+    
+    <model name="zephyr1">
+      <pose>995 -992.0 0 0 0 3.1415</pose>
+      <include>
+        <uri>model://zephyr_with_skid_pad</uri>
+      </include>
+    </model>
+    
+    <model name="zephyr2">
+      <pose>995 -993.5 0 0 0 3.1415</pose>
+      <include>
+        <uri>model://zephyr_with_skid_pad</uri>
+      </include>
+    </model>
+    
+    <model name="zephyr3">
+      <pose>995 -995 0 0 0 3.1415</pose>
+      <include>
+        <uri>model://zephyr_with_skid_pad</uri>
+      </include>
+    </model>
+    
+    <model name="zephyr4">
+      <pose>995 -996.5 0 0 0 3.1415</pose>
+      <include>
+        <uri>model://zephyr_with_skid_pad</uri>
+      </include>
+    </model>
+    
+    <model name="zephyr5">
+      <pose>995 -998 0 0 0 3.1415</pose>
+      <include>
+        <uri>model://zephyr_with_skid_pad</uri>
+      </include>
+    </model>
+    
+    <model name="iris0">
+      <pose>985 -990.5 0 0 0 3.1415</pose>
+      <include>
+        <uri>model://iris_quadrotor_with_plugin</uri>
+      </include>
+    </model>
+    
+    <model name="iris1">
+      <pose>985 -992.0 0 0 0 3.1415</pose>
+      <include>
+        <uri>model://iris_quadrotor_with_plugin</uri>
+      </include>
+    </model>
+    
+    <model name="iris2">
+      <pose>985 -993.5 0 0 0 3.1415</pose>
+      <include>
+        <uri>model://iris_quadrotor_with_plugin</uri>
+      </include>
+    </model>
+    
+    <model name="iris3">
+      <pose>985 -995 0 0 0 3.1415</pose>
+      <include>
+        <uri>model://iris_quadrotor_with_plugin</uri>
+      </include>
+    </model>
+    
+    <model name="iris4">
+      <pose>985 -996.5 0 0 0 3.1415</pose>
+      <include>
+        <uri>model://iris_quadrotor_with_plugin</uri>
+      </include>
+    </model>
+    
+    <model name="iris5">
+      <pose>985 -998 0 0 0 3.1415</pose>
+      <include>
+        <uri>model://iris_quadrotor_with_plugin</uri>
+      </include>
+    </model>
+    
+    
+<actor name="actor_0">
+<pose>-44 92 0 0 0 0</pose>
+<skin><filename>model://actor/meshes/SKIN_man_red_shirt.dae</filename></skin>
+<animation name="animation">
+<filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+<interpolate_x>true</interpolate_x>
+</animation>
+<script><trajectory id="0" type="walking">
+<waypoint>
+<time>73</time>
+<pose>-44 92 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>76.9703386197</time>
+<pose>-47 91 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>80.6054019532</time>
+<pose>-49 89 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>86.095272388</time>
+<pose>-51 86 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>89.1728018788</time>
+<pose>-49 87 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>92.8535955145</time>
+<pose>-52 86 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>94.5891979882</time>
+<pose>-53 87 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>99.442513364</time>
+<pose>-50 90 0 0 0 0</pose>
+</waypoint>
+</trajectory></script></actor>
+<actor name="actor_1">
+<pose>76 -246 0 0 0 0</pose>
+<skin><filename>model://actor/meshes/SKIN_man_red_shirt.dae</filename></skin>
+<animation name="animation">
+<filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+<interpolate_x>true</interpolate_x>
+</animation>
+<script><trajectory id="1" type="walking">
+<waypoint>
+<time>51</time>
+<pose>76 -246 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>54.0119092753</time>
+<pose>78 -244 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>60.3360525136</time>
+<pose>75 -243 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>63.3968016566</time>
+<pose>77 -243 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>65.0912752754</time>
+<pose>78 -242 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>68.1041802277</time>
+<pose>76 -243 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>68.1041802277</time>
+<pose>76 -243 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>72.7871955151</time>
+<pose>74 -240 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>78.4319868097</time>
+<pose>76 -243 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>79.5296974327</time>
+<pose>76 -242 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>81.4249887954</time>
+<pose>77 -243 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>86.3024604976</time>
+<pose>74 -240 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>90.4741002349</time>
+<pose>77 -241 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>91.5526042911</time>
+<pose>77 -242 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>95.3170135647</time>
+<pose>75 -239 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>97.6962520256</time>
+<pose>76 -237 0 0 0 0</pose>
+</waypoint>
+</trajectory></script></actor>
+<actor name="actor_2">
+<pose>-469 80 0 0 0 0</pose>
+<skin><filename>model://actor/meshes/SKIN_man_red_shirt.dae</filename></skin>
+<animation name="animation">
+<filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+<interpolate_x>true</interpolate_x>
+</animation>
+<script><trajectory id="2" type="walking">
+<waypoint>
+<time>83</time>
+<pose>-469 80 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>86.660157276</time>
+<pose>-472 78 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>91.3608843611</time>
+<pose>-475 76 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>96.8780447042</time>
+<pose>-477 73 0 0 0 0</pose>
+</waypoint>
+</trajectory></script></actor>
+<actor name="actor_3">
+<pose>83 21 0 0 0 0</pose>
+<skin><filename>model://actor/meshes/SKIN_man_red_shirt.dae</filename></skin>
+<animation name="animation">
+<filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+<interpolate_x>true</interpolate_x>
+</animation>
+<script><trajectory id="3" type="walking">
+<waypoint>
+<time>79</time>
+<pose>83 21 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>81.7272002903</time>
+<pose>82 23 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>86.3607058146</time>
+<pose>85 21 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>89.0974776382</time>
+<pose>87 20 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>92.7169187349</time>
+<pose>86 18 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>97.5120468047</time>
+<pose>83 19 0 0 0 0</pose>
+</waypoint>
+</trajectory></script></actor>
+<actor name="actor_4">
+<pose>41 187 0 0 0 0</pose>
+<skin><filename>model://actor/meshes/SKIN_man_red_shirt.dae</filename></skin>
+<animation name="animation">
+<filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+<interpolate_x>true</interpolate_x>
+</animation>
+<script><trajectory id="4" type="walking">
+<waypoint>
+<time>30</time>
+<pose>41 187 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>33.5814157991</time>
+<pose>39 185 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>37.9196395156</time>
+<pose>42 186 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>42.4913997396</time>
+<pose>40 183 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>46.4116940169</time>
+<pose>37 181 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>49.2171081878</time>
+<pose>38 179 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>55.7844857354</time>
+<pose>35 177 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>60.5206061633</time>
+<pose>38 174 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>64.3012604054</time>
+<pose>41 173 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>67.0949386315</time>
+<pose>41 171 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>69.5049933077</time>
+<pose>42 169 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>74.5112796356</time>
+<pose>39 170 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>78.7582725663</time>
+<pose>41 173 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>82.3668536063</time>
+<pose>44 173 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>87.8041024537</time>
+<pose>42 170 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>91.6980150215</time>
+<pose>39 168 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>94.3798507115</time>
+<pose>37 169 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>98.7834591027</time>
+<pose>40 172 0 0 0 0</pose>
+</waypoint>
+</trajectory></script></actor>
+<actor name="actor_5">
+<pose>76 -246 0 0 0 0</pose>
+<skin><filename>model://actor/meshes/SKIN_man_red_shirt.dae</filename></skin>
+<animation name="animation">
+<filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+<interpolate_x>true</interpolate_x>
+</animation>
+<script><trajectory id="5" type="walking">
+<waypoint>
+<time>57</time>
+<pose>76 -246 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>60.5173554626</time>
+<pose>74 -245 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>63.5757202041</time>
+<pose>72 -244 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>67.7764384651</time>
+<pose>74 -245 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>72.6610778842</time>
+<pose>77 -242 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>78.2422822875</time>
+<pose>79 -239 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>81.4624922053</time>
+<pose>80 -242 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>85.612797769</time>
+<pose>81 -244 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>90.1117693034</time>
+<pose>78 -247 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>92.4858573736</time>
+<pose>79 -245 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>94.7344161132</time>
+<pose>77 -245 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>96.3794449071</time>
+<pose>77 -246 0 0 0 0</pose>
+</waypoint>
+</trajectory></script></actor>
+<actor name="actor_6">
+<pose>470 34 0 0 0 0</pose>
+<skin><filename>model://actor/meshes/SKIN_man_red_shirt.dae</filename></skin>
+<animation name="animation">
+<filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+<interpolate_x>true</interpolate_x>
+</animation>
+<script><trajectory id="6" type="walking">
+<waypoint>
+<time>4</time>
+<pose>470 34 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>8.1020399627</time>
+<pose>468 32 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>10.1308144978</time>
+<pose>466 32 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>15.1798078093</time>
+<pose>463 34 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>16.2081496173</time>
+<pose>463 35 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>20.6357525362</time>
+<pose>460 33 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>27.0245072265</time>
+<pose>457 31 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>28.816116897</time>
+<pose>458 32 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>33.6166960256</time>
+<pose>456 35 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>36.7131235918</time>
+<pose>459 35 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>41.2582076188</time>
+<pose>460 38 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>44.2394906076</time>
+<pose>459 36 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>48.4484221441</time>
+<pose>457 39 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>53.9700936112</time>
+<pose>460 40 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>56.3614822032</time>
+<pose>462 41 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>58.9446859429</time>
+<pose>460 41 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>66.3539681642</time>
+<pose>457 38 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>69.975170106</time>
+<pose>455 41 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>71.5716299534</time>
+<pose>454 42 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>74.3423662268</time>
+<pose>455 44 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>80.3950960599</time>
+<pose>458 46 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>82.9247323226</time>
+<pose>460 47 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>84.4009405793</time>
+<pose>460 48 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>88.0886900446</time>
+<pose>463 47 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>89.403161912</time>
+<pose>462 47 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>91.8933637953</time>
+<pose>463 48 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>96.0130746737</time>
+<pose>466 48 0 0 0 0</pose>
+</waypoint>
+</trajectory></script></actor>
+<actor name="actor_7">
+<pose>336 367 0 0 0 0</pose>
+<skin><filename>model://actor/meshes/SKIN_man_red_shirt.dae</filename></skin>
+<animation name="animation">
+<filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+<interpolate_x>true</interpolate_x>
+</animation>
+<script><trajectory id="7" type="walking">
+<waypoint>
+<time>66</time>
+<pose>336 367 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>68.4496912033</time>
+<pose>337 369 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>75.4815564976</time>
+<pose>340 366 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>82.5132719009</time>
+<pose>343 363 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>87.3229948097</time>
+<pose>340 366 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>89.1898731059</time>
+<pose>339 367 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>92.1382790432</time>
+<pose>341 365 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>94.6646637534</time>
+<pose>341 363 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>98.8556225586</time>
+<pose>343 362 0 0 0 0</pose>
+</waypoint>
+</trajectory></script></actor>
+<actor name="actor_8">
+<pose>209 368 0 0 0 0</pose>
+<skin><filename>model://actor/meshes/SKIN_man_red_shirt.dae</filename></skin>
+<animation name="animation">
+<filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+<interpolate_x>true</interpolate_x>
+</animation>
+<script><trajectory id="8" type="walking">
+<waypoint>
+<time>41</time>
+<pose>209 368 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>46.6331303252</time>
+<pose>206 368 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>50.9651038247</time>
+<pose>203 365 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>55.2763994287</time>
+<pose>200 365 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>60.0325730478</time>
+<pose>200 368 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>63.7972618046</time>
+<pose>197 369 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>66.1140642929</time>
+<pose>196 368 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>72.1085740547</time>
+<pose>199 366 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>76.8287063839</time>
+<pose>196 363 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>81.1910925343</time>
+<pose>193 364 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>82.5064493749</time>
+<pose>194 364 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>87.8747542086</time>
+<pose>192 367 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>93.3374712452</time>
+<pose>195 370 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>94.8172977415</time>
+<pose>196 369 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>99.2014713391</time>
+<pose>193 366 0 0 0 0</pose>
+</waypoint>
+</trajectory></script></actor>
+<actor name="actor_9">
+<pose>-469 80 0 0 0 0</pose>
+<skin><filename>model://actor/meshes/SKIN_man_red_shirt.dae</filename></skin>
+<animation name="animation">
+<filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+<interpolate_x>true</interpolate_x>
+</animation>
+<script><trajectory id="9" type="walking">
+<waypoint>
+<time>37</time>
+<pose>-469 80 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>39.8273423319</time>
+<pose>-468 78 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>42.6156020216</time>
+<pose>-468 80 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>46.6503821394</time>
+<pose>-468 83 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>51.4282861628</time>
+<pose>-465 80 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>55.3484202873</time>
+<pose>-462 82 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>57.8703204405</time>
+<pose>-463 84 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>63.7566205014</time>
+<pose>-460 82 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>68.2156701567</time>
+<pose>-463 81 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>72.171856632</time>
+<pose>-465 84 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>75.8010005081</time>
+<pose>-463 87 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>79.4996966652</time>
+<pose>-466 87 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>80.8257792613</time>
+<pose>-466 88 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>86.1322658305</time>
+<pose>-464 91 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>89.9748509021</time>
+<pose>-462 90 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>92.5737682123</time>
+<pose>-463 92 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>96.0101543695</time>
+<pose>-464 89 0 0 0 0</pose>
+</waypoint>
+<waypoint>
+<time>99.8288864337</time>
+<pose>-467 87 0 0 0 0</pose>
+</waypoint>
+</trajectory></script></actor>
+
+    <plugin name="air_traffic_controller" filename="libair_traffic_controller.so">
+      <takeoff>
+        <pose>990 -980 0 0 0 3.1415</pose>
+        <height_threshold>10</height_threshold>
+        <distance_threshold>100</distance_threshold>
+      </takeoff>
+      <landing>
+        <area_bottom_left>980 -1000 0</area_bottom_left>
+        <area_upper_right>1000 -800 0</area_upper_right>
+        <start_pose>990 -800 50 0 0 3.1415</start_pose>
+        <end_pose>990 -980 0 0 0 3.1415</end_pose>
+        <height_treshold>0.1</height_treshold>
+        <velocity_threshold>3</velocity_threshold>
+      </landing>
+    </plugin>
+    <plugin name="comm_manager" filename="libcomm_manager.so">
+      <comm_request_topic>comm_request</comm_request_topic>
+      <comm_broadcast_topic>comm</comm_broadcast_topic>
+      <!-- girilen deger metre biriminde olmali -->
+      <!-- comm_distance 100 km secildi ki herkes tum mesajlari alabilsin -->
+      <comm_distance>100000</comm_distance>
+    </plugin>
+    
+    <plugin name="score_calculator" filename="libscore_calculator.so">
+      <area_coverage_score>
+        <visualization>
+          <active>true</active>
+          <topic_name>score_area</topic_name>
+          <!-- runs the visualization at every given milliseconds -->
+          <update_rate>1000</update_rate>
+        </visualization>
+        <!-- runs score calculation at every update_rate milliseconds -->
+        <update_rate>100</update_rate>
+        <!-- widgh and height of total area in meters -->
+        <width>2000</width>
+        <height>2000</height>
+        <!-- the size of a single cell in meters -->
+        <resolution>1.0</resolution>
+      </area_coverage_score>
+    </plugin>
+  </world>
+</sdf>

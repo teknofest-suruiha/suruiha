@@ -11,13 +11,13 @@
 #include <geometry_msgs/Point32.h>
 
 using namespace gazebo;
-using namespace std::chrono;
+//using namespace std::chrono;
 
 AreaCoverageScore::AreaCoverageScore() {
+    sumOccupancy = 0;
 }
 
 AreaCoverageScore::~AreaCoverageScore() {
-    gzdbg << "# of percepted polygons:" << perceptedPolygons.size() << std::endl;
 }
 
 void AreaCoverageScore::GetParameters(sdf::ElementPtr worldSdf, sdf::ElementPtr ownSDF) {
@@ -64,6 +64,7 @@ void AreaCoverageScore::GetParameters(sdf::ElementPtr worldSdf, sdf::ElementPtr 
     // width and height of the total area of the map in meters
     float height = ownSDF->Get<float>("height");
     float width = ownSDF->Get<float>("width");
+    scoreFactor = ownSDF->Get<double>("factor");
 
     updateRate = ownSDF->Get<int>("update_rate");
     nav_msgs::MapMetaData metaData;
@@ -182,19 +183,23 @@ void AreaCoverageScore::AddOccupancy(geometry_msgs::Polygon& polygon) {
         uint32_t index = occupancy_grid_utils::cellIndex(occupancyGridMap.info, *it);
         // set as occupied
         // for rviz visualization purposes we set data as 100.
-        occupancyGridMap.data[index] = 100;
+        if (occupancyGridMap.data[index] != 100) {
+            occupancyGridMap.data[index] = 100;
+            sumOccupancy += 100;
+        }
     }
 }
 
 double AreaCoverageScore::CalculateScore() {
 
-    int sum = 0;
-    std::vector<int8_t>::iterator it;
-    for (it = occupancyGridMap.data.begin(); it != occupancyGridMap.data.end(); it++) {
-        sum += *it;
-    }
-    return (sum/100.0);
-
+//    int sum = 0;
+//    std::vector<int8_t>::iterator it;
+//    for (it = occupancyGridMap.data.begin(); it != occupancyGridMap.data.end(); it++) {
+//        sum += *it;
+//    }
+    // return the value in between 0 and 100
+    double numCells = occupancyGridMap.info.width*occupancyGridMap.info.height;
+    return sumOccupancy/numCells;
 }
 
 geometry_msgs::Point32 AreaCoverageScore::ToPoint32(ignition::math::Vector2d& vec) {
@@ -203,4 +208,8 @@ geometry_msgs::Point32 AreaCoverageScore::ToPoint32(ignition::math::Vector2d& ve
     p.y = vec.Y();
     p.z = 0;
     return p;
+}
+
+double AreaCoverageScore::GetFactor() {
+    return scoreFactor;
 }

@@ -73,6 +73,13 @@ namespace gazebo {
 		myVec.Y(rotated.Y());
 	}
 
+	double Util::CalDist(const ignition::math::Pose3d& modelPose, const geometry_msgs::Pose& trackingPose) {
+		double dist = pow(modelPose.Pos().X() - trackingPose.position.x, 2) +
+				pow(modelPose.Pos().Y() - trackingPose.position.y, 2);
+		dist = sqrt(dist);
+		return dist;
+	}
+
 //
 //	ignition::math::Vector3d Util::toEuler(ignition::math::Quaterniond& quad) {
 //		quad.Euler().Z()

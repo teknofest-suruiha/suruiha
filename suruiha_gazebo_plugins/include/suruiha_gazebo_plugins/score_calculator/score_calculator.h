@@ -13,9 +13,10 @@
 #include <ros/ros.h>
 #include <visualization_msgs/MarkerArray.h>
 #include <suruiha_gazebo_plugins/score_calculator/area_coverage_score.h>
+#include <suruiha_gazebo_plugins/score_calculator/detection_score.h>
+#include <suruiha_gazebo_plugins/score_calculator/tracking_score.h>
 #include <suruiha_gazebo_plugins/Score.h>
 #include <suruiha_gazebo_plugins/UAVSensorMessage.h>
-
 
 namespace gazebo {
     class ScoreCalculator : public WorldPlugin {
@@ -43,7 +44,9 @@ namespace gazebo {
     protected: double publishRate;
     protected: gazebo::common::Time lastPublishTime;
 
-        protected: AreaCoverageScore areaScore;
+    protected: AreaCoverageScore areaScore;
+    protected: DetectionScore detectionScore;
+    protected: TrackingScore trackingScore;
 
     protected: boost::thread* scoreCalculationThread;
 

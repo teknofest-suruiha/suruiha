@@ -1,0 +1,54 @@
+num_uavs: 2
+comm_distance: 10000
+area_size: {
+  width: 1000,
+  height: 1000
+}
+runway: {
+  left_bottom: {
+    x: 980,
+    y: -1000
+  },
+  right_top: {
+    x: 1000,
+    y: -800
+  }
+}
+uavs: [
+  {
+  index: 0,
+  type: 'zephyr',
+  sensor: {
+    min_height: 30,
+    max_height: 100
+  },
+  battery_capacity: 980
+  },
+  {
+  index: 0,
+  type: 'iris',
+  sensor: {
+    min_height: 30,
+    max_height: 80
+  },
+  battery_capacity: 2000
+  },
+  {
+  index: 1,
+  type: 'zephyr',
+  sensor: {
+    min_height: 50,
+    max_height: 120
+  },
+  battery_capacity: 500
+  },
+  {
+  index: 1,
+  type: 'iris',
+  sensor: {
+    min_height: 10,
+    max_height: 90
+  },
+  battery_capacity: 1000
+  }
+]
