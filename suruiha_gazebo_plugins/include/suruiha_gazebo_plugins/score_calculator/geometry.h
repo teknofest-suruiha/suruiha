@@ -4,8 +4,8 @@
 // This file is taken from: https://github.com/clearpathrobotics/occupancy_grid_utils/blob/indigo-devel/include/occupancy_grid_utils/geometry.h
 //
 
-#ifndef SURUIHA_GAZEBO_PLUGINS_OCCUPANCY_GRID_UTILS_H
-#define SURUIHA_GAZEBO_PLUGINS_OCCUPANCY_GRID_UTILS_H
+#ifndef SURUIHA_GAZEBO_PLUGINS_GEOMETRY_H
+#define SURUIHA_GAZEBO_PLUGINS_GEOMETRY_H
 
 #include <suruiha_gazebo_plugins/score_calculator/coordinate_conversions.h>
 #include <set>

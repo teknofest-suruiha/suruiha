@@ -57,13 +57,14 @@ add_message_files(
    UAVMessage.msg
    UAVSensorMessage.msg
    UAVBattery.msg
+   UAVScore.msg
+   UAVTracking.msg
 )
 
 ## Generate services in the 'srv' folder
 add_service_files(
    FILES
    AirTraffic.srv
-   Score.srv
 )
 
 ## Generate actions in the 'action' folder
@@ -167,8 +168,15 @@ add_library(score_calculator
         src/score_calculator/area_coverage_score.cpp
         src/score_calculator/geometry.cpp
         src/score_calculator/coordinate_conversions.cpp
+        src/score_calculator/detection_score.cpp
+        src/score_calculator/dtw.cpp
+        src/score_calculator/tracking_score.cpp
         src/util/util.cpp)
 target_link_libraries(score_calculator ${catkin_LIBRARIES} ${Boost_LIBRARIES} ${GAZEBO_LIBRARIES})
+
+add_library(scenario_manager
+        src/scenario_manager/scenario_manager.cpp)
+target_link_libraries(scenario_manager ${catkin_LIBRARIES} ${Boost_LIBRARIES} ${GAZEBO_LIBRARIES})
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
@@ -178,6 +186,7 @@ add_dependencies(iris_controller ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EX
 add_dependencies(air_traffic_controller ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 add_dependencies(comm_manager ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 add_dependencies(score_calculator ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(scenario_manager ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
@@ -238,6 +247,12 @@ install(TARGETS
 
 install(TARGETS
         score_calculator
+        DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+        LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+        )
+
+install(TARGETS
+        scenario_manager
         DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
         LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
         )

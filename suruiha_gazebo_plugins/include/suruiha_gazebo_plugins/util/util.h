@@ -27,8 +27,9 @@ class Util {
     public: static geometry_msgs::Pose FromIgnitionPose(ignition::math::Pose3d &pose);
     public: static void GetModels(std::map<std::string, physics::ModelPtr>& models, int maxCount,
                              const std::string baseModelName, physics::WorldPtr worldPtr);
-
+		
 	public: static ros::NodeHandle* CreateROSNodeHandle(std::string namespace_);
+	public: static double CalDist(const ignition::math::Pose3d& modelPose, const geometry_msgs::Pose& trackingPose);
 };
 }
 

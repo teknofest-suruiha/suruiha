@@ -6,22 +6,30 @@
 #include <suruiha_gazebo_plugins/util/util.h>
 #include <gazebo/common/common.hh>
 #include <visualization_msgs/Marker.h>
+#include <boost/thread/thread.hpp>
+#include <boost/chrono.hpp>
+#include <suruiha_gazebo_plugins/UAVScore.h>
 
 namespace gazebo{
-
     // Register this plugin with the simulator
     GZ_REGISTER_WORLD_PLUGIN(ScoreCalculator);
 
     ScoreCalculator::ScoreCalculator() {
-//        isVisualization = false;
-//        markerCounter = 0;
+        isCalculateScore = false;
+        isThreadAlive = true;
     }
 
     ScoreCalculator::~ScoreCalculator() {
-
+        isThreadAlive = false;
+        scoreCalculationThread->join();
+        delete scoreCalculationThread;
     }
 
     void ScoreCalculator::Load(physics::WorldPtr _parent, sdf::ElementPtr _sdf) {
+
+        world = _parent;
+        lastPublishTime = world->SimTime();
+
         // load models in to the map
         Util::GetModels(models, 6, "zephyr", _parent);
         Util::GetModels(models, 6, "iris", _parent);
@@ -31,22 +39,19 @@ namespace gazebo{
         // get sensor parameters from models itself not to duplicate parameters
         areaScore.GetParameters(_parent->SDF(), _sdf->GetElement("area_coverage_score"));
 
+        detectionScore.SetWorld(_parent);
+        detectionScore.GetParameters(_sdf->GetElement("detection_score"));
+
+        trackingScore.SetWorld(_parent);
+        trackingScore.GetParameters(_parent->SDF(), _sdf->GetElement("tracking_score"));
+
+        // how often score is going to be published
+        publishRate = _sdf->Get<double>("publish_rate");
+
         rosNode = new ros::NodeHandle("");
-        serviceServer = rosNode->advertiseService("score", &ScoreCalculator::ScoreService, this);
+        scorePublisher = rosNode->advertise<suruiha_gazebo_plugins::UAVScore>("/score", 1);
 
-//        std::map<std::string, physics::ModelPtr>::iterator it;
-//        for (it = models.begin(); it != models.end(); it++) {
-//            std::stringstream ss(it->first);
-//            ss << "_sensor";
-//            ros::Subscriber sub = rosNode->subscribe(ss.str().c_str(), 100, &ScoreCalculator::SensorMessage, this);
-//            sensorSubs.push_back(sub);
-//        }
-
-//        if (isVisualization) {
-//            std::string topicName = _sdf->GetElement("visualization")->Get<std::string>("topic_name");
-//            visPub = rosNode->advertise<visualization_msgs::MarkerArray>(topicName, 1);
-//        }
-
+        scoreCalculationThread = new boost::thread(boost::bind(&ScoreCalculator::CalculateAndPublishScore, this));
 
         // New Mechanism for Updating every World Cycle
         // Listen to the update event. This event is broadcast every
@@ -60,17 +65,33 @@ namespace gazebo{
         boost::mutex::scoped_lock lock(updateMutex);
 
         areaScore.UpdateStates();
+        detectionScore.UpdateStates();
+        trackingScore.UpdateStates();
 
+        common::Time currTime = world->SimTime();
+        double dt = (currTime - lastPublishTime).Double() * 1000; // miliseconds
+        if (dt > publishRate && !isCalculateScore) {
+            isCalculateScore = true;
+            lastPublishTime = currTime;
+        }
     }
 
-    bool ScoreCalculator::ScoreService(suruiha_gazebo_plugins::Score::Request& request,
-                      suruiha_gazebo_plugins::Score::Response& resp) {
-        std::string sender = request.sender; // actually not important :)
-
-        resp.area_score = areaScore.CalculateScore();
-        resp.detection_score = 0;
-        resp.tracking_score = 0;
-        return true;
+    void ScoreCalculator::CalculateAndPublishScore() {
+        while (isThreadAlive) {
+            if (isCalculateScore) {
+                suruiha_gazebo_plugins::UAVScore scoreMsg;
+                scoreMsg.area_score = areaScore.CalculateScore();
+                scoreMsg.detection_score = detectionScore.CalculateScore();
+                scoreMsg.tracking_score = trackingScore.CalculateScore();
+                scoreMsg.total_score = scoreMsg.area_score * areaScore.GetFactor() +
+                        scoreMsg.detection_score * detectionScore.GetFactor() +
+                        scoreMsg.tracking_score * trackingScore.GetFactor();
+                scorePublisher.publish(scoreMsg);
+                isCalculateScore = false;
+            } else {
+                boost::this_thread::sleep_for(boost::chrono::milliseconds(10));
+            }
+        }
     }
 
 }
