@@ -124,6 +124,48 @@
         <uri>model://zephyr_with_skid_pad</uri>
       </include>
     </model>
+    
+     <model name="iris0">
+      <pose>8.0 -0.5 0 0 0 3.1415</pose>
+      <include>
+        <uri>model://iris_quadrotor_with_plugin</uri>
+      </include>
+    </model>
+    
+    <model name="iris1">
+      <pose>8.0 -2.0 0 0 0 3.1415</pose>
+      <include>
+        <uri>model://iris_quadrotor_with_plugin</uri>
+      </include>
+    </model>
+    
+    <model name="iris2">
+      <pose>8.0 -3.5 0 0 0 3.1415</pose>
+      <include>
+        <uri>model://iris_quadrotor_with_plugin</uri>
+      </include>
+    </model>
+    
+    <model name="iris3">
+      <pose>8.0 -5.0 0 0 0 3.1415</pose>
+      <include>
+        <uri>model://iris_quadrotor_with_plugin</uri>
+      </include>
+    </model>
+    
+    <model name="iris4">
+      <pose>8.0 -6.5 0 0 0 3.1415</pose>
+      <include>
+        <uri>model://iris_quadrotor_with_plugin</uri>
+      </include>
+    </model>
+    
+    <model name="iris5">
+      <pose>8.0 -8.0 0 0 0 3.1415</pose>
+      <include>
+        <uri>model://iris_quadrotor_with_plugin</uri>
+      </include>
+    </model>
 
     <plugin name="air_traffic_controller" filename="libair_traffic_controller.so">
       <takeoff>
@@ -139,56 +181,6 @@
         <height_treshold>0.1</height_treshold>
         <velocity_threshold>3</velocity_threshold>
       </landing>
-    </plugin>
-    <plugin name="comm_manager" filename="libcomm_manager.so">
-      <comm_request_topic>comm_request</comm_request_topic>
-      <comm_broadcast_topic>comm</comm_broadcast_topic>
-      <!-- girilen deger metre biriminde olmali -->
-      <!-- comm_distance 100 km secildi ki herkes tum mesajlari alabilsin -->
-      <comm_distance>100000</comm_distance>
-    </plugin>
-    <plugin name="score_calculator" filename="libscore_calculator.so">
-      <area_coverage_score>
-        <visualization>
-          <active>true</active>
-          <topic_name>score_area_visual</topic_name>
-          <!-- runs the visualization at every given milliseconds -->
-          <update_rate>1000</update_rate>
-        </visualization>
-        <!-- runs score calculation at every update_rate milliseconds -->
-        <update_rate>100</update_rate>
-        <!-- widgh and height of total area in meters -->
-        <width>5000</width>
-        <height>5000</height>
-        <!-- the size of a single cell in meters -->
-        <resolution>1.0</resolution>
-        <factor>0.3</factor>
-      </area_coverage_score>
-      <detection_score>
-        <!-- this shows the millisecond when the terrorists start to go away from their house -->
-        <start_time>10000</start_time>
-        <building_name>house_0</building_name>
-        <!-- when false building is detected or detection occurs before the movement of terrorists, false detection penalty is going to be applied -->
-        <!-- for details please refer the technical documentation -->
-        <false_detection_penalty>0.1</false_detection_penalty>
-        <detection_topic>terrorist_detection</detection_topic>
-        <factor>0.4</factor>
-        <base_score>10</base_score>
-        <time_to_detect>100000</time_to_detect>
-      </detection_score>
-      <tracking_score>
-        <!-- this shows the millisecond when the terrorists start to go away from their house -->
-        <start_time>10000</start_time>
-        <factor>0.4</factor>
-        <terrorist_prefix>terrorist</terrorist_prefix>
-        <tracking_topic>terrorist_tracking</tracking_topic>
-        <!-- birimi metredir -->
-        <max_dist_error>10</max_dist_error>
-        <!-- birimi milliseconds dır. -->
-        <message_rate>10</message_rate>
-      </tracking_score>
-      <!-- calculates the score value and publishes at every publish rate milliseconds -->
-      <publish_rate>1000</publish_rate>
     </plugin>
   </world>
 </sdf>

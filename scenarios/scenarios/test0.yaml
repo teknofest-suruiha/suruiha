@@ -22,32 +22,32 @@ uavs: [
     min_height: 30,
     max_height: 100
   },
-  battery_capacity: 980
+  battery_capacity: 1000
   },
   {
   index: 0,
   type: 'iris',
   sensor: {
     min_height: 30,
-    max_height: 80
+    max_height: 100
   },
-  battery_capacity: 2000
+  battery_capacity: 1000
   },
   {
   index: 1,
   type: 'zephyr',
   sensor: {
-    min_height: 50,
-    max_height: 120
+    min_height: 30,
+    max_height: 100
   },
-  battery_capacity: 500
+  battery_capacity: 1000
   },
   {
   index: 1,
   type: 'iris',
   sensor: {
-    min_height: 10,
-    max_height: 90
+    min_height: 30,
+    max_height: 100
   },
   battery_capacity: 1000
   }

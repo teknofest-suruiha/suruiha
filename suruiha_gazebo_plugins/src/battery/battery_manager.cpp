@@ -51,11 +51,8 @@ namespace gazebo {
         gzdbg << "just before creating ros node" << std::endl;
         // create ros node and battery state publisher
         rosNode = Util::CreateROSNodeHandle("");
-        std::stringstream ss;
-        ss << uavName << "_battery";
-        gzdbg << "ros node created with address:" << rosNode << " topicname:" << ss.str() << std::endl;
-        pub = rosNode->advertise<suruiha_gazebo_plugins::UAVBattery>(ss.str(), 1);
-        gzdbg << "publisher is created with topic name:" << ss.str() << std::endl;
+        uavName = uavName + "_battery";
+        pub = rosNode->advertise<suruiha_gazebo_plugins::UAVBattery>(uavName, 1);
     }
 
     void BatteryManager::SetJoints(const std::vector<physics::JointPtr>& joints_) {
