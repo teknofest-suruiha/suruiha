@@ -15,7 +15,6 @@
 #include <suruiha_gazebo_plugins/score_calculator/area_coverage_score.h>
 #include <suruiha_gazebo_plugins/score_calculator/detection_score.h>
 #include <suruiha_gazebo_plugins/score_calculator/tracking_score.h>
-#include <suruiha_gazebo_plugins/Score.h>
 #include <suruiha_gazebo_plugins/UAVSensorMessage.h>
 
 namespace gazebo {
