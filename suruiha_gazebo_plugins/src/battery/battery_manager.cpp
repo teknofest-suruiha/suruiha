@@ -26,13 +26,13 @@ namespace gazebo {
                     remaining = 0;
                 }
             }
-        }
 
-        common::Time currTime = world->SimTime();
-        double dt = (currTime - lastPublishTime).Double() * 1000; // miliseconds
-        if (dt > publishRate) {
-            PublishBatteryState();
-            lastPublishTime = currTime;
+            common::Time currTime = world->SimTime();
+            double dt = (currTime - lastPublishTime).Double() * 1000; // miliseconds
+            if (dt > publishRate) {
+                PublishBatteryState();
+                lastPublishTime = currTime;
+            }
         }
     }
 

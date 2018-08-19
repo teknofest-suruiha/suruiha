@@ -7,6 +7,17 @@
 
 #include <string>
 
+namespace air_traffic_constants {
+    enum Status {
+        AVAILABLE,
+        ALLOCATED_TO_TAKEOFF,
+        ALLOCATED_TO_LAND,
+        READY_TO_TAKEOFF,
+        LANDED
+    };
+}
+
+
 class AirTrafficConstants {
 // commands
 public: static const std::string STATUS;
@@ -21,18 +32,10 @@ public: static const std::string TAKEN;
 public: static const std::string ALLOCATED_TO_LAND;
 public: static const std::string ALLOCATED_TO_TAKEOFF;
 public: static const std::string READY_TO_TAKEOFF;
+public: static const std::string LANDED;
+
+public: static std::string ToString(air_traffic_constants::Status status);
 };
-
-namespace air_traffic_constants {
-    enum Status {
-        AVAILABLE,
-        ALLOCATED_TO_TAKEOFF,
-        ALLOCATED_TO_LAND,
-        READY_TO_TAKEOFF,
-        LANDED
-    };
-}
-
 
 
 #endif //SURUIHA_GAZEBO_PLUGINS_AIR_TRAFFIC_CONSTANTS_H

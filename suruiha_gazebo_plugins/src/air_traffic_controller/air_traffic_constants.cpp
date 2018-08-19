@@ -3,6 +3,7 @@
 //
 
 #include <suruiha_gazebo_plugins/air_traffic_controller/air_traffic_constants.h>
+#include <iostream>
 
 // command strings
 const std::string AirTrafficConstants::STATUS = "STATUS";
@@ -16,3 +17,21 @@ const std::string AirTrafficConstants::TAKEN = "TAKEN";
 const std::string AirTrafficConstants::ALLOCATED_TO_LAND = "ALLOCATED_TO_LAND";
 const std::string AirTrafficConstants::ALLOCATED_TO_TAKEOFF = "ALLOCATED_TO_TAKEOFF";
 const std::string AirTrafficConstants::READY_TO_TAKEOFF = "READY_TO_TAKEOFF";
+const std::string AirTrafficConstants::LANDED = "LANDED";
+
+std::string AirTrafficConstants::ToString(air_traffic_constants::Status status) {
+    if (status == air_traffic_constants::AVAILABLE) {
+        return AVAILABLE;
+    } else if (status == air_traffic_constants::READY_TO_TAKEOFF) {
+        return READY_TO_TAKEOFF;
+    } else if (status == air_traffic_constants::ALLOCATED_TO_LAND) {
+        return ALLOCATED_TO_LAND;
+    } else if (status == air_traffic_constants::ALLOCATED_TO_TAKEOFF) {
+        return ALLOCATED_TO_TAKEOFF;
+    } else if (status == air_traffic_constants::LANDED) {
+        return LANDED;
+    } else {
+        std::cerr << "ERROR: AirTrafficConstants::ToString undefined status" << std::endl;
+        return "ERROR";
+    }
+}

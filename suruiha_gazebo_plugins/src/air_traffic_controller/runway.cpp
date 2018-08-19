@@ -32,14 +32,14 @@ RunWay::~RunWay() {}
 
 std::string RunWay::ProcessCommand(std::string& cmd, std::string& sender) {
     if (cmd == AirTrafficConstants::STATUS) {
-        if (status == air_traffic_constants::ALLOCATED_TO_LAND || status == air_traffic_constants::ALLOCATED_TO_TAKEOFF ||
-                status == air_traffic_constants::LANDED) {
-            return AirTrafficConstants::TAKEN;
-        } else if (status == air_traffic_constants::READY_TO_TAKEOFF) {
-            return AirTrafficConstants::READY_TO_TAKEOFF;
-        }
-        else {
-            return AirTrafficConstants::AVAILABLE;
+        if (!allocatedUAV.empty() && allocatedUAV == sender) {
+            return AirTrafficConstants::ToString(status);
+        } else {
+            if (status == air_traffic_constants::AVAILABLE) {
+                return AirTrafficConstants::AVAILABLE;
+            } else {
+                return AirTrafficConstants::TAKEN;
+            }
         }
     } else if (cmd == AirTrafficConstants::TAKEOFF_REQUEST) {
         if (status != air_traffic_constants::AVAILABLE) {
@@ -57,7 +57,6 @@ std::string RunWay::ProcessCommand(std::string& cmd, std::string& sender) {
             status = air_traffic_constants::ALLOCATED_TO_LAND;
             return AirTrafficConstants::ALLOCATED_TO_LAND;
         }
-
     } else if (cmd == AirTrafficConstants::LANDING_POSE) {
         std::stringstream ss;
         // start of landing pose
