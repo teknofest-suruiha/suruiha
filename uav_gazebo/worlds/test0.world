@@ -736,14 +736,10 @@
         <time_to_detect>200000</time_to_detect>
       </detection_score>
       <tracking_score>
-        <!-- this shows the millisecond when the terrorists start to go away from their house -->
-        <start_time>50000</start_time>
         <factor>0.4</factor>
         <terrorist_prefix>terrorist</terrorist_prefix>
         <tracking_topic>terrorist_tracking</tracking_topic>
-        <!-- birimi metredir not used for now-->
-        <max_dist_error>10</max_dist_error>
-        <!-- birimi milliseconds dır. -->
+        <!-- birimi milliseconds. -->
         <message_rate>100</message_rate>
         <update_rate>100</update_rate>
       </tracking_score>

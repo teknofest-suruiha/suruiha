@@ -73,26 +73,19 @@ class TrackingScore {
 //    protected: bool isDetected;
     protected: double scoreFactor;
 
-    protected: gazebo::common::Time trackingStartTime;
-
     protected: double messageRate;
     protected: gazebo::common::Time lastTrackingMessageTime;
 
     protected: double updateRate;
     protected: gazebo::common::Time lastUpdateTime;
 
-//    protected: gazebo::common::Time timeToDetect;
-//    protected: std::string buildingName;
-//    protected: double falseDetectionPenalty;
-//    protected: double baseScore;
-
     protected: std::string terroristPrefix;
     protected: std::map<std::string, gazebo::physics::ModelPtr> terrorists;
 
     protected: std::map<std::string, std::vector<std::vector<double> > > terroristTrajectories;
     protected: std::map<std::string, std::vector<std::vector<double> > > trackingTrajectories;
-
-    protected: double maxDistError;
+    protected: std::map<std::string, double> trackingStartTimes;
+    protected: std::map<std::string, double> trackingEndTimes;
 
     protected: std::map<std::string, unsigned int> soFarCalculatedIndex;
     protected: std::map<std::string, double> soFarCalculatedValue;
