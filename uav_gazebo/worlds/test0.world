@@ -84,30 +84,34 @@
     </model>
     
     <model name="building_0">
+      <static>true</static>
+      <pose>-300 300 0 0 0 0</pose>
       <include>
         <uri>model://osrf_first_office</uri>
-        <pose>-300 300 0 0 0 0</pose>
       </include>
     </model>
     
     <model name="building_1">
+      <static>true</static>
+      <pose>300 300 0 0 0 0</pose>
       <include>
         <uri>model://osrf_first_office</uri>
-        <pose>300 300 0 0 0 0</pose>
       </include>
     </model>
     
     <model name="building_2">
+      <static>true</static>
+      <pose>-300 -300 0 0 0 0</pose>
       <include>
         <uri>model://osrf_first_office</uri>
-        <pose>-300 -300 0 0 0 0</pose>
       </include>
     </model>
     
     <model name="building_3">
+      <static>true</static>
+      <pose>300 -300 0 0 0 0</pose>
       <include>
         <uri>model://osrf_first_office</uri>
-        <pose>300 -300 0 0 0 0</pose>
       </include>
     </model>
     

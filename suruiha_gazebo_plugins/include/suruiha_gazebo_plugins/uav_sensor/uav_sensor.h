@@ -8,6 +8,7 @@
 #include <gazebo/physics/World.hh>
 #include <gazebo/physics/Model.hh>
 #include <ignition/math/Pose3.hh>
+#include <set>
 
 namespace gazebo {
     class UAVSensor {
@@ -30,6 +31,8 @@ namespace gazebo {
         protected: float maxHeight;
         protected: float minHeight;
         protected: std::vector<physics::ModelPtr> models;
+
+        protected: std::set<std::string> doNotSenseModelNames;
 
 //        protected: int senseCount;
     };

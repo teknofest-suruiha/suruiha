@@ -35,7 +35,7 @@ namespace gazebo {
 		return false;
 	}
 
-    geometry_msgs::Pose Util::FromIgnitionPose(ignition::math::Pose3d &pose) {
+    geometry_msgs::Pose Util::FromIgnitionPose(ignition::math::Pose3d pose) {
         geometry_msgs::Pose geomPose;
         geomPose.position.x = pose.Pos().X();
         geomPose.position.y = pose.Pos().Y();

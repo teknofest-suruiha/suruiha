@@ -11,7 +11,21 @@
 namespace gazebo {
     UAVSensor::UAVSensor() {
 //        senseCount = 0;
+        doNotSenseModelNames.insert("ground_plane");
+        doNotSenseModelNames.insert("zephyr0");
+        doNotSenseModelNames.insert("zephyr1");
+        doNotSenseModelNames.insert("zephyr2");
+        doNotSenseModelNames.insert("zephyr3");
+        doNotSenseModelNames.insert("zephyr4");
+        doNotSenseModelNames.insert("zephyr5");
+        doNotSenseModelNames.insert("iris0");
+        doNotSenseModelNames.insert("iris1");
+        doNotSenseModelNames.insert("iris2");
+        doNotSenseModelNames.insert("iris3");
+        doNotSenseModelNames.insert("iris4");
+        doNotSenseModelNames.insert("iris5");
     }
+
     UAVSensor::~UAVSensor() {
 //        gzdbg << "uavsensor sense_count=" << senseCount << std::endl;
     }
@@ -36,11 +50,12 @@ namespace gazebo {
     void UAVSensor::setModels(physics::WorldPtr world) {
         for (unsigned int i = 0; i < world->Models().size(); i++) {
             physics::ModelPtr model = world->Models()[i];
-            // every model name starting with human will be added to the sensor
-//            if (model->GetName().find("human") == 0) {
+            if (doNotSenseModelNames.find(model->GetName()) == doNotSenseModelNames.end()) {
                 models.push_back(model);
-            gzdbg << "model:" << model->GetName() << " is added." << std::endl;
-//            }
+                gzdbg << "model:" << model->GetName() << " is added." << std::endl;
+                gzdbg << "gazebo model.x:" << models[models.size()-1]->WorldPose().Pos().X() << " y:" << models[models.size()-1]->WorldPose().Pos().Y() <<
+                      " .z:" << models[models.size()-1]->WorldPose().Pos().Z() << std::endl;
+            }
         }
     }
 //
@@ -65,17 +80,30 @@ namespace gazebo {
             frustumPose.Rot().Euler(rot);
             // set frustum pose
             frustum.SetPose(frustumPose);
-
             suruiha_gazebo_plugins::UAVSensorMessage msg;
             for (unsigned int i = 0; i < models.size(); i++) {
-                ignition::math::Pose3d pose = models[i]->WorldPose();
-                if (frustum.Contains(pose.Pos())) {
-                    //TODO: use enumeration for percepted object types
+                bool modelInFrustum = false;
+                // check position of terorists
+                // other models will be checked by bounding box
+                if (models[i]->GetName().find("terrorist") != std::string::npos) {
+                    ignition::math::Pose3d pose = models[i]->WorldPose();
+                    if (frustum.Contains(pose.Pos())) {
+                        modelInFrustum = true;
+                    }
+                } else {
+                    ignition::math::Box box = models[i]->BoundingBox();
+                    if (frustum.Contains(box)) {
+                        modelInFrustum = true;
+                    }
+                }
+                if (modelInFrustum) {
                     msg.types.push_back(0); // for now we have only human type
-                    geometry_msgs::Pose rosPose = Util::FromIgnitionPose(pose);
+                    geometry_msgs::Pose rosPose = Util::FromIgnitionPose(models[i]->WorldPose());
                     msg.poses.push_back(rosPose);
                     msg.names.push_back(models[i]->GetName());
                     gzdbg << "sensed model:" << models[i]->GetName() << std::endl;
+                    gzdbg << "model.x:" << rosPose.position.x << " .y:" << rosPose.position.y <<
+                          " .z:" << rosPose.position.z << std::endl;
                 }
             }
             // send message if there is at least one sensed object

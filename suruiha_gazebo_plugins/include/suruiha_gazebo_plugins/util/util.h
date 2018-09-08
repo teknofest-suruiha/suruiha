@@ -24,7 +24,7 @@ class Util {
 
 	public: static void Rotate(ignition::math::Vector2d& myVec, float radian);
 //	public: static ignition::math::Vector3d toEuler(ignition::math::Quaterniond& quad);
-    public: static geometry_msgs::Pose FromIgnitionPose(ignition::math::Pose3d &pose);
+    public: static geometry_msgs::Pose FromIgnitionPose(ignition::math::Pose3d pose);
     public: static void GetModels(std::map<std::string, physics::ModelPtr>& models, int maxCount,
                              const std::string baseModelName, physics::WorldPtr worldPtr);
 		
