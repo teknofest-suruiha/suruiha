@@ -101,9 +101,9 @@ namespace gazebo {
                     geometry_msgs::Pose rosPose = Util::FromIgnitionPose(models[i]->WorldPose());
                     msg.poses.push_back(rosPose);
                     msg.names.push_back(models[i]->GetName());
-                    gzdbg << "sensed model:" << models[i]->GetName() << std::endl;
-                    gzdbg << "model.x:" << rosPose.position.x << " .y:" << rosPose.position.y <<
-                          " .z:" << rosPose.position.z << std::endl;
+//                    gzdbg << "sensed model:" << models[i]->GetName() << std::endl;
+//                    gzdbg << "model.x:" << rosPose.position.x << " .y:" << rosPose.position.y <<
+//                          " .z:" << rosPose.position.z << std::endl;
                 }
             }
             // send message if there is at least one sensed object
