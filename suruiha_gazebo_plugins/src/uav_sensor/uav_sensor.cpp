@@ -78,7 +78,10 @@ namespace gazebo {
                     gzdbg << "sensed model:" << models[i]->GetName() << std::endl;
                 }
             }
-            sensorPublisher.publish(msg);
+            // send message if there is at least one sensed object
+            if (msg.types.size() > 0) {
+                sensorPublisher.publish(msg);
+            }
         }
     }
 
