@@ -68,8 +68,10 @@ namespace gazebo
 
 		// communcation between air traffic controller and fligh controller
 		private: transport::NodePtr node;
-		private: transport::SubscriberPtr subPtr;
+		private: transport::SubscriberPtr airControlSubPtr;
 		protected: void OnAirControlMsg(ConstAnyPtr& airControlMsg);
+		private: transport::SubscriberPtr batteryReplaceSubPtr;
+		protected: void OnBatteryReplaceMsg(ConstAnyPtr& batteryReplaceMsg);
         protected: bool isActive;
 
 		// battery manager

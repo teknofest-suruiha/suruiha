@@ -228,9 +228,7 @@ namespace gazebo {
         node = transport::NodePtr(new transport::Node());
         node->Init(world_->Name());
         // topic name
-        std::string topicName = "/air_control";
-        this->subPtr = this->node->Subscribe(topicName,
-                                             &IrisController::OnAirControlMsg, this);
+        airControlSubPtr = this->node->Subscribe("/air_control", &IrisController::OnAirControlMsg, this);
 
         //        gzdbg << "just before battery stuff" << std::endl;
         battery.SetWorld(world_);
@@ -239,6 +237,7 @@ namespace gazebo {
 //        gzdbg << "battery get params" << std::endl;
         battery.SetJoints(this->model_->GetJoints());
 //        gzdbg << "battery set joints" << std::endl;
+        this->batteryReplaceSubPtr = node->Subscribe("/battery_replace", &IrisController::OnBatteryReplaceMsg, this);
 
         // New Mechanism for Updating every World Cycle
         // Listen to the update event. This event is broadcast every
@@ -414,6 +413,13 @@ namespace gazebo {
             } else {
                 gzdbg << "unknown command:" << cmd << " for:" << param << std::endl;
             }
+        }
+    }
+
+    void IrisController::OnBatteryReplaceMsg(ConstAnyPtr& batteryReplaceMsg) {
+        if (modelName == batteryReplaceMsg->string_value()) {
+            gzdbg << "model:" << modelName << " replace battery" << std::endl;
+            battery.ReplaceBattery();
         }
     }
 

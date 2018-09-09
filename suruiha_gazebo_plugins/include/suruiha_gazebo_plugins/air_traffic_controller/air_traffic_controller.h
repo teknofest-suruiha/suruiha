@@ -54,6 +54,7 @@ namespace gazebo {
 
     private: transport::NodePtr node;
     private: transport::PublisherPtr uavStatusPub;
+    private: transport::PublisherPtr batteryReplacePub;
     private: std::map<std::string, bool> isUAVActive;
     protected: void SetUAVStatus(std::string uavName, bool isActive);
 

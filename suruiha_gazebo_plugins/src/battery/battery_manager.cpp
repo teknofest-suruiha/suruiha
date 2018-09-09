@@ -48,11 +48,9 @@ namespace gazebo {
         publishRate = sdf->Get<double>("publish_rate");
         ReplaceBattery();
 
-        gzdbg << "just before creating ros node" << std::endl;
         // create ros node and battery state publisher
         rosNode = Util::CreateROSNodeHandle("");
-        uavName = uavName + "_battery";
-        pub = rosNode->advertise<suruiha_gazebo_plugins::UAVBattery>(uavName, 1);
+        pub = rosNode->advertise<suruiha_gazebo_plugins::UAVBattery>(uavName + "_battery", 1);
     }
 
     void BatteryManager::SetJoints(const std::vector<physics::JointPtr>& joints_) {

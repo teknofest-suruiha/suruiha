@@ -36,8 +36,9 @@ namespace gazebo {
 
         // create inner communication node
         node = transport::NodePtr(new transport::Node());
-        node->Init(_parent->Name());
+        node->Init("");
         uavStatusPub = node->Advertise<msgs::Any>("/air_control");
+        batteryReplacePub = node->Advertise<msgs::Any>("/battery_replace");
 
         updateConnection = event::Events::ConnectWorldUpdateBegin(
                 boost::bind(&AirTrafficController::UpdateStates, this));
@@ -220,6 +221,11 @@ namespace gazebo {
 
                 ignition::math::Pose3d initialModelPose = initialPoses[*landedIterator];
                 modelPtr->SetWorldPose(initialModelPose);
+
+                msgs::Any batteryReplaceMsg;
+                batteryReplaceMsg.set_type(msgs::Any::STRING);
+                batteryReplaceMsg.set_string_value(*landedIterator);
+                batteryReplacePub->Publish(batteryReplaceMsg);
             }
         }
     }

@@ -9,9 +9,6 @@
 #include <std_msgs/String.h>
 #include <suruiha_gazebo_plugins/controllers/zephyr_controller.h>
 #include <gazebo/gazebo.hh>
-#include <gazebo/common/Plugin.hh>
-#include <ignition/math.hh>
-#include <sdf/sdf.hh>
 #include <suruiha_gazebo_plugins/UAVSensorMessage.h>
 #include <suruiha_gazebo_plugins/util/util.h>
 
@@ -121,11 +118,9 @@ namespace gazebo {
 
         // create transport node
         node = transport::NodePtr(new transport::Node());
-        node->Init(world_->Name());
-        // topic name
-        std::string topicName = "/air_control";
-        this->subPtr = this->node->Subscribe(topicName,
-                                          &ZephyrController::OnAirControlMsg, this);
+        node->Init("");
+        this->airControlSubPtr = this->node->Subscribe("/air_control", &ZephyrController::OnAirControlMsg, this);
+
 
 //        gzdbg << "just before battery stuff" << std::endl;
         battery.SetWorld(world_);
@@ -134,6 +129,8 @@ namespace gazebo {
 //        gzdbg << "battery get params" << std::endl;
         battery.SetJoints(this->model_->GetJoints());
 //        gzdbg << "battery set joints" << std::endl;
+
+        this->batteryReplaceSubPtr = node->Subscribe("/battery_replace", &ZephyrController::OnBatteryReplaceMsg, this);
 
         // New Mechanism for Updating every World Cycle
         // Listen to the update event. This event is broadcast every
@@ -262,6 +259,13 @@ namespace gazebo {
             } else {
                 gzdbg << "unknown command:" << cmd << " for:" << param << std::endl;
             }
+        }
+    }
+
+    void ZephyrController::OnBatteryReplaceMsg(ConstAnyPtr& batteryReplaceMsg) {
+        if (modelName == batteryReplaceMsg->string_value()) {
+            gzdbg << "model:" << modelName << " replace battery" << std::endl;
+            battery.ReplaceBattery();
         }
     }
 
