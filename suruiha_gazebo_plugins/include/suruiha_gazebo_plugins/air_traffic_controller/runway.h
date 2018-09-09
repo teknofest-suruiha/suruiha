@@ -21,7 +21,7 @@ public: std::string ProcessCommand(std::string& cmd, std::string& sender);
 public: std::string GetAllocatedUAV();
 
 public: void SetStatus(air_traffic_constants::Status _status);
-public: void SetLandingPose(ignition::math::Pose3d& startPose, ignition::math::Pose3d& endPose);
+public: void SetLandingPose(ignition::math::Pose3d startPose, ignition::math::Pose3d endPose);
 public: air_traffic_constants::Status GetStatus();
 //public: bool GetIsLanding();
 //public: bool GetIsTaken();
