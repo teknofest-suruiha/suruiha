@@ -91,6 +91,16 @@ namespace gazebo {
 		return dist;
 	}
 
+	double Util::CalDist(const ignition::math::Pose3d& pose1, const ignition::math::Pose3d& pose2) {
+		double dist = pow(pose1.Pos().X() - pose2.Pos().X(), 2) +
+					  pow(pose1.Pos().Y() - pose2.Pos().Y(), 2) +
+		              pow(pose1.Pos().Z() - pose2.Pos().Z(), 2);
+		dist = sqrt(dist);
+		return dist;
+	}
+
+
+
 //
 //	ignition::math::Vector3d Util::toEuler(ignition::math::Quaterniond& quad) {
 //		quad.Euler().Z()

@@ -43,8 +43,11 @@ namespace gazebo {
         frustum.SetAspectRatio(_sdf->Get<double>("aspect_ratio"));
         frustum.SetFar(_sdf->Get<double>("far"));
         frustum.SetNear(_sdf->Get<double>("near"));
-        minHeight = _sdf->Get<float>("min_height");
-        maxHeight = _sdf->Get<float>("max_height");
+
+        // add small margin to make sure that when the uav see the part of the object
+        // the distance of the object is in view
+        minHeight = _sdf->Get<float>("min_height") * 0.8;
+        maxHeight = _sdf->Get<float>("max_height") * 1.2f;
     }
 
     void UAVSensor::setModels(physics::WorldPtr world) {
@@ -70,7 +73,7 @@ namespace gazebo {
 //    }
 
     void UAVSensor::sense(const ignition::math::Pose3d& uavPose) {
-        if (uavPose.Pos().Z() > minHeight && uavPose.Pos().Z() < maxHeight) {
+//        if (uavPose.Pos().Z() > minHeight && uavPose.Pos().Z() < maxHeight) {
             // correct the frustum orientation and set facing the downward
             ignition::math::Pose3d frustumPose(uavPose);
             ignition::math::Vector3d rot = frustumPose.Rot().Euler();
@@ -91,19 +94,22 @@ namespace gazebo {
                         modelInFrustum = true;
                     }
                 } else {
-                    ignition::math::Box box = models[i]->BoundingBox();
+                    ignition::math::Box box = models[i]->CollisionBoundingBox();
                     if (frustum.Contains(box)) {
                         modelInFrustum = true;
                     }
                 }
                 if (modelInFrustum) {
-                    msg.types.push_back(0); // for now we have only human type
-                    geometry_msgs::Pose rosPose = Util::FromIgnitionPose(models[i]->WorldPose());
-                    msg.poses.push_back(rosPose);
-                    msg.names.push_back(models[i]->GetName());
-//                    gzdbg << "sensed model:" << models[i]->GetName() << std::endl;
-//                    gzdbg << "model.x:" << rosPose.position.x << " .y:" << rosPose.position.y <<
-//                          " .z:" << rosPose.position.z << std::endl;
+
+                    // mesaure the distance of the object to UAV
+                    double dist = Util::CalDist(models[i]->WorldPose(), uavPose);
+                    if (dist >= minHeight && dist <= maxHeight) {
+                        msg.types.push_back(0); // for now we have only human type
+                        geometry_msgs::Pose rosPose = Util::FromIgnitionPose(models[i]->WorldPose());
+                        msg.poses.push_back(rosPose);
+                        msg.names.push_back(models[i]->GetName());
+                        gzdbg << "sensed model:" << models[i]->GetName() << std::endl;
+                    }
                 }
             }
             // send message if there is at least one sensed object
@@ -111,6 +117,5 @@ namespace gazebo {
                 sensorPublisher.publish(msg);
             }
         }
-    }
 
 }

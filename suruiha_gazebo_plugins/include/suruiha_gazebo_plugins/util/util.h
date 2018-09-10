@@ -30,6 +30,7 @@ class Util {
 		
 	public: static ros::NodeHandle* CreateROSNodeHandle(std::string namespace_);
 	public: static double CalDist(const ignition::math::Pose3d& modelPose, const geometry_msgs::Pose& trackingPose);
+	public: static double CalDist(const ignition::math::Pose3d& pose1, const ignition::math::Pose3d& pose2);
 };
 }
 
