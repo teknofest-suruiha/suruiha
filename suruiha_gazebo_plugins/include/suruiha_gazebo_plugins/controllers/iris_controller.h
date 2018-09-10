@@ -14,6 +14,7 @@
 #include <vector>
 #include <suruiha_gazebo_plugins/uav_sensor/uav_sensor.h>
 #include <suruiha_gazebo_plugins/battery/battery_manager.h>
+#include <gazebo/sensors/Sensor.hh>
 
 namespace gazebo
 {
@@ -74,6 +75,9 @@ namespace gazebo
 
         // battery manager
         protected: BatteryManager battery;
+
+		protected: sensors::SensorPtr logicalCameraSensorPtr;
+		protected: sensors::SensorPtr cameraSensorPtr;
 
 	};
 }

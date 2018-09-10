@@ -13,6 +13,7 @@
 #include <suruiha_gazebo_plugins/controllers/joint_control.h>
 #include <suruiha_gazebo_plugins/uav_sensor/uav_sensor.h>
 #include <suruiha_gazebo_plugins/battery/battery_manager.h>
+#include <gazebo/sensors/Sensor.hh>
 
 namespace gazebo
 {
@@ -73,6 +74,10 @@ namespace gazebo
 		private: transport::SubscriberPtr batteryReplaceSubPtr;
 		protected: void OnBatteryReplaceMsg(ConstAnyPtr& batteryReplaceMsg);
         protected: bool isActive;
+
+        protected: sensors::SensorPtr logicalCameraSensorPtr;
+        protected: sensors::SensorPtr cameraSensorPtr;
+
 
 		// battery manager
 		protected: BatteryManager battery;

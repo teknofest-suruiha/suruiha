@@ -8,6 +8,7 @@
 #include <suruiha_gazebo_plugins/util/util.h>
 #include <geometry_msgs/Pose.h>
 #include <gazebo/common/common.hh>
+#include <iostream>
 
 namespace gazebo {
 
@@ -99,7 +100,50 @@ namespace gazebo {
 		return dist;
 	}
 
+	std::pair<double, double> Util::GetStartEndTimeOfActor(sdf::ElementPtr actorSDF) {
+		sdf::ElementPtr scriptElement = actorSDF->GetElement("script");
+		double startTime = 0;
+		scriptElement->GetElement("delay_start")->GetValue()->Get(startTime);
 
+		sdf::ElementPtr child = scriptElement->GetElement("trajectory")->GetFirstElement();
+		double maxEndTime = 0;
+		for (; child; child = child->GetNextElement()) {
+			if (child->GetName() == "waypoint") {
+				double time = 0.0;
+				child->GetElement("time")->GetValue()->Get(time);
+				if (time > maxEndTime) {
+					maxEndTime = time;
+				}
+			}
+		}
+		return std::pair<double, double>(startTime, startTime+maxEndTime);
+	}
+
+	/**
+	 * Custom string split function to get model and sensor name from scoped name
+	 * @param scopedName
+	 * @return
+	 */
+	std::pair<std::string, std::string> Util::GetModelAndSensorName(const std::string scopedName) {
+		std::vector<std::string> tokens;
+		unsigned int tokenStart = 0;
+		for (unsigned int i = 0; i < scopedName.size()-1; i++) {
+			if (scopedName[i] == ':' && scopedName[i+1] == ':') {
+				tokens.push_back(scopedName.substr(tokenStart, i-tokenStart));
+				tokenStart = i+2;
+			}
+		}
+		tokens.push_back(scopedName.substr(tokenStart, scopedName.size()-tokenStart));
+
+		// testing begin
+//		std::cout << "--- print tokens" << std::endl;
+//		for (unsigned int i = 0; i < tokens.size(); i++) {
+//			std::cout << i << ":" << tokens[i] << std::endl;
+//		}
+		// testing end
+
+		return std::pair<std::string, std::string>(tokens[1], tokens[tokens.size()-1]);
+	}
 
 //
 //	ignition::math::Vector3d Util::toEuler(ignition::math::Quaterniond& quad) {

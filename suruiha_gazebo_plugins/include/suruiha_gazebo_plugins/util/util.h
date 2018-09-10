@@ -31,6 +31,9 @@ class Util {
 	public: static ros::NodeHandle* CreateROSNodeHandle(std::string namespace_);
 	public: static double CalDist(const ignition::math::Pose3d& modelPose, const geometry_msgs::Pose& trackingPose);
 	public: static double CalDist(const ignition::math::Pose3d& pose1, const ignition::math::Pose3d& pose2);
+
+	public: static std::pair<double, double> GetStartEndTimeOfActor(sdf::ElementPtr actorSDF);
+	public: static std::pair<std::string, std::string> GetModelAndSensorName(std::string scopedName);
 };
 }
 

@@ -9,11 +9,9 @@
 #include <std_msgs/String.h>
 #include <suruiha_gazebo_plugins/controllers/iris_controller.h>
 #include <gazebo/gazebo.hh>
-#include <gazebo/common/Plugin.hh>
-#include <ignition/math.hh>
-#include <sdf/sdf.hh>
 #include <suruiha_gazebo_plugins/util/util.h>
 #include <suruiha_gazebo_plugins/UAVSensorMessage.h>
+#include <gazebo/sensors/SensorManager.hh>
 
 namespace gazebo {
 
@@ -239,6 +237,20 @@ namespace gazebo {
 //        gzdbg << "battery set joints" << std::endl;
         this->batteryReplaceSubPtr = node->Subscribe("/battery_replace", &IrisController::OnBatteryReplaceMsg, this);
 
+        sensors::SensorManager* sensorManager = sensors::SensorManager::Instance();
+        std::vector<sensors::SensorPtr> simSensors = sensorManager->GetSensors();
+        for (unsigned int i = 0; i < simSensors.size(); i++) {
+            gzdbg << "sensor name: " << simSensors[i]->ScopedName() << std::endl;
+            std::pair<std::string, std::string> names = Util::GetModelAndSensorName(simSensors[i]->ScopedName());
+            gzdbg << "model name:" << names.first << " sensor name:" << names.second << std::endl;
+            if (names.first == model_->GetName() && names.second == "bottom_cam_logical") {
+                logicalCameraSensorPtr = sensorManager->GetSensor(simSensors[i]->ScopedName());
+            }
+            if (names.first == model_->GetName() && names.second == "bottom_cam") {
+                cameraSensorPtr = sensorManager->GetSensor(simSensors[i]->ScopedName());
+            }
+        }
+
         // New Mechanism for Updating every World Cycle
         // Listen to the update event. This event is broadcast every
         // simulation iteration.
@@ -249,6 +261,55 @@ namespace gazebo {
     void IrisController::UpdateStates() {
     	boost::mutex::scoped_lock lock(this->update_mutex_);
     	common::Time currTime = this->world_->SimTime();
+
+        // set the pose of the logical camera
+        if (logicalCameraSensorPtr->Visualize()) {
+            logicalCameraSensorPtr->SetActive(false);
+            if (currTime.Double() > 1.0) {
+                ignition::math::Pose3d camPose = logicalCameraSensorPtr->Pose();
+                ignition::math::Pose3d expectedPose;
+                ignition::math::Vector3d rot = expectedPose.Rot().Euler();
+                ignition::math::Pose3d uavPose = model_->WorldPose();
+                rot.X(0.0);
+                rot.Y(1.5707);
+                rot.Z(uavPose.Rot().Euler().Z() - 1.5707);
+                expectedPose.Rot().Euler(rot);
+
+                expectedPose = uavPose.CoordPoseSolve(expectedPose);
+
+                //            gzdbg << "rotation .x:" << camPose.Rot().Euler().X() << " .y:" << camPose.Rot().Euler().Y() << " .z:"
+                //                  << camPose.Rot().Euler().Z() << std::endl;
+                //            gzdbg << "model rot x:" << model_->WorldPose().Rot().Euler().X() << " .y:"
+                //                  << model_->WorldPose().Rot().Euler().Y() <<
+                //                  " .z:" << model_->WorldPose().Rot().Euler().Z() << std::endl;
+                ignition::math::Vector3d camRot = camPose.Rot().Euler();
+                camPose.Rot().Euler(expectedPose.Rot().Euler());
+                logicalCameraSensorPtr->SetPose(camPose);
+            }
+        }
+        if (cameraSensorPtr->IsActive()) {
+            if (currTime.Double() > 1.0) {
+                ignition::math::Pose3d camPose = cameraSensorPtr->Pose();
+                ignition::math::Pose3d expectedPose;
+                ignition::math::Vector3d rot = expectedPose.Rot().Euler();
+                ignition::math::Pose3d uavPose = model_->WorldPose();
+                rot.X(0.0);
+                rot.Y(1.5707);
+                rot.Z(uavPose.Rot().Euler().Z() - 1.5707);
+                expectedPose.Rot().Euler(rot);
+
+                expectedPose = uavPose.CoordPoseSolve(expectedPose);
+
+                //            gzdbg << "rotation .x:" << camPose.Rot().Euler().X() << " .y:" << camPose.Rot().Euler().Y() << " .z:"
+                //                  << camPose.Rot().Euler().Z() << std::endl;
+                //            gzdbg << "model rot x:" << model_->WorldPose().Rot().Euler().X() << " .y:"
+                //                  << model_->WorldPose().Rot().Euler().Y() <<
+                //                  " .z:" << model_->WorldPose().Rot().Euler().Z() << std::endl;
+                ignition::math::Vector3d camRot = camPose.Rot().Euler();
+                camPose.Rot().Euler(expectedPose.Rot().Euler());
+                cameraSensorPtr->SetPose(camPose);
+            }
+        }
 
         battery.UpdateStates(isActive);
         if (battery.GetRemaining() == 0) {

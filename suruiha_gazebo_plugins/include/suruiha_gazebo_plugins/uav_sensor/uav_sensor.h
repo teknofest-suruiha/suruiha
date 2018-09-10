@@ -22,7 +22,7 @@ namespace gazebo {
         public: void loadParams(sdf::ElementPtr _sdf);
         public: void setModels(physics::WorldPtr worldPtr);
 
-        public: void sense(const ignition::math::Pose3d& uavPose);
+        public: void sense(const ignition::math::Pose3d uavPose);
 
         protected: ros::Publisher sensorPublisher;
 //        protected: physics::WorldPtr worldPtr;
@@ -33,6 +33,11 @@ namespace gazebo {
         protected: std::vector<physics::ModelPtr> models;
 
         protected: std::set<std::string> doNotSenseModelNames;
+
+        protected: std::map<std::string, double> actorStartTimes;
+        protected: std::map<std::string, double> actorEndTimes;
+
+        protected: physics::WorldPtr worldPtr;
 
 //        protected: int senseCount;
     };

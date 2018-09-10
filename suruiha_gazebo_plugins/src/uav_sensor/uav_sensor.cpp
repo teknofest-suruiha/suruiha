@@ -46,18 +46,24 @@ namespace gazebo {
 
         // add small margin to make sure that when the uav see the part of the object
         // the distance of the object is in view
-        minHeight = _sdf->Get<float>("min_height") * 0.8;
-        maxHeight = _sdf->Get<float>("max_height") * 1.2f;
+        minHeight = _sdf->Get<float>("min_height");
+        maxHeight = _sdf->Get<float>("max_height");
     }
 
     void UAVSensor::setModels(physics::WorldPtr world) {
-        for (unsigned int i = 0; i < world->Models().size(); i++) {
-            physics::ModelPtr model = world->Models()[i];
+        worldPtr = world;
+        for (unsigned int i = 0; i < worldPtr->Models().size(); i++) {
+            physics::ModelPtr model = worldPtr->Models()[i];
             if (doNotSenseModelNames.find(model->GetName()) == doNotSenseModelNames.end()) {
                 models.push_back(model);
-                gzdbg << "model:" << model->GetName() << " is added." << std::endl;
-                gzdbg << "gazebo model.x:" << models[models.size()-1]->WorldPose().Pos().X() << " y:" << models[models.size()-1]->WorldPose().Pos().Y() <<
-                      " .z:" << models[models.size()-1]->WorldPose().Pos().Z() << std::endl;
+//                gzdbg << "model:" << model->GetName() << " is added." << std::endl;
+//                gzdbg << "gazebo model.x:" << models[models.size()-1]->WorldPose().Pos().X() << " y:" << models[models.size()-1]->WorldPose().Pos().Y() <<
+//                      " .z:" << models[models.size()-1]->WorldPose().Pos().Z() << std::endl;
+                if (model->GetName().find("terrorist") != std::string::npos) {
+                    std::pair<double, double> timing = Util::GetStartEndTimeOfActor(model->GetSDF());
+                    actorStartTimes.insert(std::pair<std::string, double>(model->GetName(), timing.first));
+                    actorEndTimes.insert(std::pair<std::string, double>(model->GetName(), timing.second));
+                }
             }
         }
     }
@@ -72,19 +78,28 @@ namespace gazebo {
 //        maxHeight = max;
 //    }
 
-    void UAVSensor::sense(const ignition::math::Pose3d& uavPose) {
-//        if (uavPose.Pos().Z() > minHeight && uavPose.Pos().Z() < maxHeight) {
-            // correct the frustum orientation and set facing the downward
-            ignition::math::Pose3d frustumPose(uavPose);
-            ignition::math::Vector3d rot = frustumPose.Rot().Euler();
-            // rot.X(rot.X() + 1.57079);
-            rot.Y(rot.Y() + 1.57079);
-            rot.Z(rot.Z() - 1.57079);
-            frustumPose.Rot().Euler(rot);
+    void UAVSensor::sense(const ignition::math::Pose3d uavPose) {
+        if (uavPose.Pos().Z() > minHeight && uavPose.Pos().Z() < maxHeight) {
+            ignition::math::Pose3d expectedPose(uavPose);
+            ignition::math::Vector3d rot = expectedPose.Rot().Euler();
+            rot.X(0.0);
+            rot.Y(1.5707);
+            rot.Z(uavPose.Rot().Euler().Z() - 1.5707);
+            expectedPose.Rot().Euler(rot);
             // set frustum pose
-            frustum.SetPose(frustumPose);
+            frustum.SetPose(expectedPose);
             suruiha_gazebo_plugins::UAVSensorMessage msg;
+            double currTime = worldPtr->SimTime().Double();
             for (unsigned int i = 0; i < models.size(); i++) {
+                // check the timing for the actor
+                if (actorStartTimes.find(models[i]->GetName()) != actorStartTimes.end()) {
+                    if (currTime < actorStartTimes[models[i]->GetName()] ||
+                        currTime > actorEndTimes[models[i]->GetName()]) {
+                        // actor is not active do not sense the actor
+                        continue;
+                    }
+                }
+
                 bool modelInFrustum = false;
                 // check position of terorists
                 // other models will be checked by bounding box
@@ -100,16 +115,11 @@ namespace gazebo {
                     }
                 }
                 if (modelInFrustum) {
-
-                    // mesaure the distance of the object to UAV
-                    double dist = Util::CalDist(models[i]->WorldPose(), uavPose);
-                    if (dist >= minHeight && dist <= maxHeight) {
-                        msg.types.push_back(0); // for now we have only human type
-                        geometry_msgs::Pose rosPose = Util::FromIgnitionPose(models[i]->WorldPose());
-                        msg.poses.push_back(rosPose);
-                        msg.names.push_back(models[i]->GetName());
-                        gzdbg << "sensed model:" << models[i]->GetName() << std::endl;
-                    }
+                    msg.types.push_back(0); // for now we do not use sensed object type index
+                    geometry_msgs::Pose rosPose = Util::FromIgnitionPose(models[i]->WorldPose());
+                    msg.poses.push_back(rosPose);
+                    msg.names.push_back(models[i]->GetName());
+//                    gzdbg << "sensed model:" << models[i]->GetName() << std::endl;
                 }
             }
             // send message if there is at least one sensed object
@@ -117,5 +127,6 @@ namespace gazebo {
                 sensorPublisher.publish(msg);
             }
         }
+    }
 
 }

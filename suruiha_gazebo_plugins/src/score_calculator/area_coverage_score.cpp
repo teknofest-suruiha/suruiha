@@ -120,9 +120,6 @@ void AreaCoverageScore::UpdateStates() {
 
                 // correct the pose of the frustum and set it towards the bottom of the uav
                 ignition::math::Vector3d rot = frustumPose.Rot().Euler();
-                // rot.X(rot.X() + 1.57079);
-                rot.Y(rot.Y() + 1.57079);
-                rot.Z(rot.Z() - 1.57079);
 
                 frustumPose.Rot().Euler(rot);
                 frustum->SetPose(frustumPose);
@@ -174,6 +171,7 @@ void AreaCoverageScore::UpdateStates() {
 }
 
 void AreaCoverageScore::AddOccupancy(geometry_msgs::Polygon& polygon) {
+
 //    gzdbg << "started to check cells in convex polygon:" << polygon << std::endl;
     std::set<occupancy_grid_utils::Cell> cells = occupancy_grid_utils::cellsInConvexPolygon(occupancyGridMap.info, polygon);
 //    gzdbg << "cellsInConvexPolygon.size:" << cells.size() << std::endl;

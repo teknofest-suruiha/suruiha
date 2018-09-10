@@ -46,23 +46,9 @@ void TrackingScore::GetParameters(sdf::ElementPtr worldSdf, sdf::ElementPtr ownS
             soFarCalculatedIndex.insert(std::pair<std::string, unsigned int>(modelPtr->GetName(), 0));
             soFarCalculatedValue.insert(std::pair<std::string, unsigned int>(modelPtr->GetName(), 0.0));
 
-            sdf::ElementPtr scriptElement = modelPtr->GetSDF()->GetElement("script");
-            double startTime = 0;
-            scriptElement->GetElement("delay_start")->GetValue()->Get(startTime);
-            trackingStartTimes.insert(std::pair<std::string, double>(modelPtr->GetName(), startTime));
-
-            sdf::ElementPtr child = scriptElement->GetElement("trajectory")->GetFirstElement();
-            double maxEndTime = 0;
-            for (; child; child = child->GetNextElement()) {
-                if (child->GetName() == "waypoint") {
-                    double time = 0.0;
-                    child->GetElement("time")->GetValue()->Get(time);
-                    if (time > maxEndTime) {
-                        maxEndTime = time;
-                    }
-                }
-            }
-            trackingEndTimes.insert(std::pair<std::string, double>(modelPtr->GetName(), maxEndTime+startTime));
+            std::pair<double, double> timing = Util::GetStartEndTimeOfActor(modelPtr->GetSDF());
+            trackingStartTimes.insert(std::pair<std::string, double>(modelPtr->GetName(), timing.first));
+            trackingEndTimes.insert(std::pair<std::string, double>(modelPtr->GetName(), timing.second));
         }
     }
 }

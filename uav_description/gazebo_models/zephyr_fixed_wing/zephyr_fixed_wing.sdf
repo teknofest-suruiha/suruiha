@@ -175,6 +175,35 @@
           <update_rate>0</update_rate>
         </sensor>
         -->
+       <sensor name="bottom_cam" type="camera">
+        <pose>0 0 0 0 1.5707 -1.5707</pose>
+        <camera>
+          <horizontal_fov>0.5</horizontal_fov>
+          <image>
+            <width>800</width>
+            <height>600</height>
+          </image>
+          <clip>
+            <near>0.1</near>
+            <far>100</far>
+          </clip>
+        </camera>
+        <always_on>false</always_on>
+        <update_rate>10</update_rate>
+        <visualize>false</visualize>
+      </sensor>
+      <sensor name="bottom_cam_logical" type="logical_camera">
+        <pose>0 0 0 0 1.5707 -1.5707</pose>
+        <logical_camera>
+          <near>0.1</near>
+          <far>100</far>
+          <horizontal_fov>0.5</horizontal_fov>
+          <aspect_ratio>1.3333</aspect_ratio>
+        </logical_camera>
+        <visualize>false</visualize>
+        <always_on>false</always_on>
+        <update_rate>10</update_rate>
+      </sensor>
     </link>
 
     <link name="propeller">
