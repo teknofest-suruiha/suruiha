@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <sdf version="1.6">
-  <world name="zephyr">
+  <world name="test0">
     <gui>
       <camera name="user_camera">
         <pose>489 -525 20 0 0.33 1.5707</pose>
@@ -114,7 +114,6 @@
         <uri>model://osrf_first_office</uri>
       </include>
     </model>
-    
     <actor name="terrorist_0">
       <pose>300 300 1.07 0 0 -1.5708</pose>
       <skin>
@@ -547,7 +546,6 @@
         </trajectory>
       </script>
     </actor>
-    
    <actor name="terrorist_16">
       <pose>300 300 1.07 0 0 -1.5708</pose>
       <skin>
@@ -641,7 +639,7 @@
       </animation>
       <script>
         <loop>false</loop>
-        <delay_start>100.0</delay_start>
+        <delay_start>240.0</delay_start>
         <auto_start>true</auto_start>
         <trajectory id="0" type="walking">
           <waypoint>
@@ -649,7 +647,7 @@
             <pose>300 300 0 0 0 -1.5708</pose>
           </waypoint>
           <waypoint>
-            <time>180.00</time>
+            <time>60.00</time>
             <pose>300 -300 0 0 0 -1.5708</pose>
           </waypoint>
         </trajectory>
@@ -693,7 +691,7 @@
       <landing>
         <area_bottom_left>480 -500 0</area_bottom_left>
         <area_upper_right>500 -400 0</area_upper_right>
-        <start_pose>490 -400 50 0 0 3.1415</start_pose>
+        <start_pose>490 -400 30 0 0 3.1415</start_pose>
         <end_pose>490 -490 0 0 0 3.1415</end_pose>
         <height_treshold>0.1</height_treshold>
         <velocity_threshold>3</velocity_threshold>
@@ -724,16 +722,13 @@
         <factor>0.3</factor>
       </area_coverage_score>
       <detection_score>
-        <!-- this shows the millisecond when the terrorists start to go away from their house -->
-        <start_time>50000</start_time>
-        <building_name>building_1</building_name>
         <!-- when false building is detected or detection occurs before the movement of terrorists, false detection penalty is going to be applied -->
         <!-- for details please refer the technical documentation -->
         <false_detection_penalty>0.1</false_detection_penalty>
         <detection_topic>terrorist_detection</detection_topic>
         <factor>0.4</factor>
         <base_score>10</base_score>
-        <time_to_detect>200000</time_to_detect>
+        <!-- <time_to_detect>200000</time_to_detect> -->
       </detection_score>
       <tracking_score>
         <factor>0.4</factor>

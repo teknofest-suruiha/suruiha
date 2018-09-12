@@ -24,54 +24,28 @@ class DetectionScore {
     public: ~DetectionScore();
 
     public: void GetParameters(sdf::ElementPtr ownSDF);
-//    public: void SetRosNodeHandle(ros::NodeHandle* nodeHandle);
-//    public: void SetModels(std::map<std::string, gazebo::physics::ModelPtr> _models);
     public: void UpdateStates();
     public: void SetWorld(gazebo::physics::WorldPtr _worldPtr);
 
-//    protected: std::map<std::string, gazebo::physics::ModelPtr> models;
-//
-//    protected: std::map<std::string, std::pair<float, float> > modelPerceptionHeights;
-//    protected: std::map<std::string, ignition::math::Frustum*> modelFrustums;
-
-//    protected: int updateRate;
     protected: gazebo::physics::WorldPtr worldPtr;
-//    protected: gazebo::common::Time lastUpdateTime;
-
-//    protected: void AddOccupancy(geometry_msgs::Polygon& polygon);
-//    protected: geometry_msgs::Point32 ToPoint32(ignition::math::Vector2d& vec);
 
     protected: ros::NodeHandle* rosNode;
     protected: ros::Subscriber detectionSub;
-
-//    protected: std::string visTopicName;
-//    protected: bool isVisualization;
-//    protected: int visualizationUpdateRate;
-//    protected: gazebo::common::Time lastVisUpdateTime;
-
-//    protected: void MyJoin(Polygon_2 p1, Polygon_2 p2);
-//    protected: void MyJoin2(Polygon_2 p1, Polygon_2 p2);
-//
-//    protected: bool IsInside(Polygon_2& polygon, const Point_2& point);
-//    protected: bool IsIntersection(const Segment_2& seg1, const Segment_2& seg2, Point_2& intersection);
-//    protected: bool IsIntersection(const Segment_2& seg, const Polygon_2& polygon, Point_2& intersection, EdgeIterator& polygonEi);
     public: double GetFactor();
 
-//    public: nav_msgs::OccupancyGrid::ConstPtr GetOccupancyMap();
     protected: void OnDetection(std_msgs::String::ConstPtr msg);
 
     public: double CalculateScore();
 
-    protected: gazebo::common::Time detectionTime;
     protected: double penalty;
-    protected: bool isDetected;
     protected: double scoreFactor;
-
-    protected: gazebo::common::Time detectionStartTime;
-    protected: gazebo::common::Time timeToDetect;
-    protected: std::string buildingName;
     protected: double falseDetectionPenalty;
     protected: double baseScore;
+
+    protected: std::map<std::string, double> detectionStartTimes;
+    protected: std::map<std::string, double> detectionEndTimes;
+    protected: std::map<std::string, double> uavDetectionTimes;
+
 
 };
 
