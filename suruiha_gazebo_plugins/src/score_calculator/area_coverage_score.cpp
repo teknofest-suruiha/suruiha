@@ -152,7 +152,7 @@ void AreaCoverageScore::UpdateStates() {
                 point3 += uavPoint;
                 polygon.points.push_back(ToPoint32(point3));
 
-                perceptedPolygons.push_back(polygon);
+//                perceptedPolygons.push_back(polygon);
                 AddOccupancy(polygon);
             }
         }
@@ -179,6 +179,10 @@ void AreaCoverageScore::AddOccupancy(geometry_msgs::Polygon& polygon) {
     for (it = cells.begin(); it != cells.end(); it++) {
         // convert to linear index to mark as occupied
         uint32_t index = occupancy_grid_utils::cellIndex(occupancyGridMap.info, *it);
+        // validate the index
+        if (index < 0 || index > occupancyGridMap.info.width*occupancyGridMap.info.height) {
+            continue;
+        }
         // set as occupied
         // for rviz visualization purposes we set data as 100.
         if (occupancyGridMap.data[index] != 100) {
