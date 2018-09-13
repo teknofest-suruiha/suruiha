@@ -95,7 +95,8 @@ double DetectionScore::CalculateScore() {
     for (detectionIterator = uavDetectionTimes.begin(); detectionIterator != uavDetectionTimes.end(); detectionIterator++) {
         double detectionPerformance = detectionIterator->second - detectionStartTimes[detectionIterator->first];
         double timeToDetect = detectionEndTimes[detectionIterator->first] - detectionStartTimes[detectionIterator->first];
-        score += (detectionPerformance / timeToDetect) * (100 - baseScore); // score is given out of 100 (baseScore 10 + 90)
+        detectionPerformance = timeToDetect - detectionPerformance;
+        score += (detectionPerformance / timeToDetect) * (100 - baseScore); // score is given out of 100
     }
     score = score / detectionStartTimes.size();
     score += baseScore;
@@ -107,6 +108,7 @@ double DetectionScore::CalculateScore() {
 }
 
 void DetectionScore::OnDetection(std_msgs::String::ConstPtr msg) {
+//    gzdbg << "onDetection:" << msg->data << std::endl;
     if (uavDetectionTimes.find(msg->data) != uavDetectionTimes.end()) {
         // already detected do nothing
         return;
@@ -127,8 +129,10 @@ void DetectionScore::OnDetection(std_msgs::String::ConstPtr msg) {
         }
     }
     if (buildingMatched) {
+//        gzdbg << "uavDetectionTime " << buildingName << " time:" << currTime.Double() << std::endl;
         uavDetectionTimes.insert(std::pair<std::string, double>(buildingName, currTime.Double()));
     } else {
+//        gzdbg << "false detection" << std::endl;
         penalty += falseDetectionPenalty;
     }
 }
