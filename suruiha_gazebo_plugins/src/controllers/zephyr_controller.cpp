@@ -12,6 +12,7 @@
 #include <suruiha_gazebo_plugins/UAVSensorMessage.h>
 #include <suruiha_gazebo_plugins/util/util.h>
 #include <gazebo/sensors/SensorManager.hh>
+//#include <gazebo/rendering/RenderEngine.hh>
 
 namespace gazebo {
 
@@ -83,26 +84,6 @@ namespace gazebo {
         this->rosnode_ = Util::CreateROSNodeHandle("");
         control_twist_sub_ = this->rosnode_->subscribe(control_topic_name.c_str(), 100,
                                                        &ZephyrController::SetControl, this);
-//        if (this->control_topic_name_ != "") {
-//            ros::SubscribeOptions joints_so =
-//                    ros::SubscribeOptions::create<geometry_msgs::Twist>(
-//                            control_topic_name, 100, boost::bind(
-//                                    , this, _1),
-//                            ros::VoidPtr(), &this->queue_);
-//            this->control_twist_sub_ = this->rosnode_->subscribe(joints_so);
-//        }
-
-        // subscribe for user commands
-//        ros::SubscribeOptions user_command_so =
-//                            ros::SubscribeOptions::create<std_msgs::String>(
-//                                    this->user_command_topic_name_, 100, boost::bind(
-//                                            &ZephyrController::ProcessUserCommand, this, _1),
-//                                    ros::VoidPtr(), &this->queue_);
-//        this->user_command_sub_ = this->rosnode_->subscribe(user_command_so);
-
-        // start custom queue for controller plugin ros topics
-//        this->callback_queue_thread_ =
-//                boost::thread(boost::bind(&ZephyrController::QueueThread, this));
 
         // create the publisher
         this->pose_pub_ = this->rosnode_->advertise<geometry_msgs::Pose>(pose_topic_name, 1);
@@ -111,6 +92,7 @@ namespace gazebo {
         uavSensor.loadParams(_sdf->GetElement("uav_sensor"));
         uavSensor.setModels(world_);
         sensorUpdateReate = _sdf->GetElement("uav_sensor")->Get<int>("update_rate");
+        uavSensor.getParams(rosnode_, model_->GetName());
 
 //        uavSensor.setFOV(hfov, vfov);
         this->sensor_pub_ = this->rosnode_->advertise<suruiha_gazebo_plugins::UAVSensorMessage>(sensor_topic_name, 1);
@@ -165,51 +147,46 @@ namespace gazebo {
 
         // set the pose of the logical camera
         if (logicalCameraSensorPtr->Visualize()) {
-            logicalCameraSensorPtr->SetActive(false);
-            if (currTime.Double() > 1.0) {
-                ignition::math::Pose3d camPose = logicalCameraSensorPtr->Pose();
-                ignition::math::Pose3d expectedPose;
-                ignition::math::Vector3d rot = expectedPose.Rot().Euler();
-                ignition::math::Pose3d uavPose = model_->WorldPose();
-                rot.X(0.0);
-                rot.Y(1.5707);
-                rot.Z(uavPose.Rot().Euler().Z() - 1.5707);
-                expectedPose.Rot().Euler(rot);
+            ignition::math::Pose3d camPose = logicalCameraSensorPtr->Pose();
+            ignition::math::Pose3d expectedPose;
+            ignition::math::Vector3d rot = expectedPose.Rot().Euler();
+            ignition::math::Pose3d uavPose = model_->WorldPose();
+            rot.X(0.0);
+            rot.Y(1.5707);
+            rot.Z(uavPose.Rot().Euler().Z() - 1.5707);
+            expectedPose.Rot().Euler(rot);
 
-                expectedPose = uavPose.CoordPoseSolve(expectedPose);
+            expectedPose = uavPose.CoordPoseSolve(expectedPose);
 
-    //            gzdbg << "rotation .x:" << camPose.Rot().Euler().X() << " .y:" << camPose.Rot().Euler().Y() << " .z:"
-    //                  << camPose.Rot().Euler().Z() << std::endl;
-    //            gzdbg << "model rot x:" << model_->WorldPose().Rot().Euler().X() << " .y:"
-    //                  << model_->WorldPose().Rot().Euler().Y() <<
-    //                  " .z:" << model_->WorldPose().Rot().Euler().Z() << std::endl;
-                ignition::math::Vector3d camRot = camPose.Rot().Euler();
-                camPose.Rot().Euler(expectedPose.Rot().Euler());
-                logicalCameraSensorPtr->SetPose(camPose);
-            }
+            //            gzdbg << "rotation .x:" << camPose.Rot().Euler().X() << " .y:" << camPose.Rot().Euler().Y() << " .z:"
+            //                  << camPose.Rot().Euler().Z() << std::endl;
+            //            gzdbg << "model rot x:" << model_->WorldPose().Rot().Euler().X() << " .y:"
+            //                  << model_->WorldPose().Rot().Euler().Y() <<
+            //                  " .z:" << model_->WorldPose().Rot().Euler().Z() << std::endl;
+            ignition::math::Vector3d camRot = camPose.Rot().Euler();
+            camPose.Rot().Euler(expectedPose.Rot().Euler());
+            logicalCameraSensorPtr->SetPose(camPose);
         }
         if (cameraSensorPtr->IsActive()) {
-            if (currTime.Double() > 1.0) {
-                ignition::math::Pose3d camPose = cameraSensorPtr->Pose();
-                ignition::math::Pose3d expectedPose;
-                ignition::math::Vector3d rot = expectedPose.Rot().Euler();
-                ignition::math::Pose3d uavPose = model_->WorldPose();
-                rot.X(0.0);
-                rot.Y(1.5707);
-                rot.Z(uavPose.Rot().Euler().Z() - 1.5707);
-                expectedPose.Rot().Euler(rot);
+            ignition::math::Pose3d camPose = cameraSensorPtr->Pose();
+            ignition::math::Pose3d expectedPose;
+            ignition::math::Vector3d rot = expectedPose.Rot().Euler();
+            ignition::math::Pose3d uavPose = model_->WorldPose();
+            rot.X(0.0);
+            rot.Y(1.5707);
+            rot.Z(uavPose.Rot().Euler().Z() - 1.5707);
+            expectedPose.Rot().Euler(rot);
 
-                expectedPose = uavPose.CoordPoseSolve(expectedPose);
+            expectedPose = uavPose.CoordPoseSolve(expectedPose);
 
-                //            gzdbg << "rotation .x:" << camPose.Rot().Euler().X() << " .y:" << camPose.Rot().Euler().Y() << " .z:"
-                //                  << camPose.Rot().Euler().Z() << std::endl;
-                //            gzdbg << "model rot x:" << model_->WorldPose().Rot().Euler().X() << " .y:"
-                //                  << model_->WorldPose().Rot().Euler().Y() <<
-                //                  " .z:" << model_->WorldPose().Rot().Euler().Z() << std::endl;
-                ignition::math::Vector3d camRot = camPose.Rot().Euler();
-                camPose.Rot().Euler(expectedPose.Rot().Euler());
-                cameraSensorPtr->SetPose(camPose);
-            }
+            //            gzdbg << "rotation .x:" << camPose.Rot().Euler().X() << " .y:" << camPose.Rot().Euler().Y() << " .z:"
+            //                  << camPose.Rot().Euler().Z() << std::endl;
+            //            gzdbg << "model rot x:" << model_->WorldPose().Rot().Euler().X() << " .y:"
+            //                  << model_->WorldPose().Rot().Euler().Y() <<
+            //                  " .z:" << model_->WorldPose().Rot().Euler().Z() << std::endl;
+            ignition::math::Vector3d camRot = camPose.Rot().Euler();
+            camPose.Rot().Euler(expectedPose.Rot().Euler());
+            cameraSensorPtr->SetPose(camPose);
         }
 
         battery.UpdateStates(isActive);
@@ -282,18 +259,6 @@ namespace gazebo {
         targetPitch = _twist->angular.y;
         targetRoll = _twist->angular.x;
     }
-
-//    void ZephyrController::ProcessUserCommand(const std_msgs::String::ConstPtr& user_command) {
-//    	gzdbg << "processing user command:" << user_command->data << "\n";
-////    	planner.ProcessUserCommand(user_command->data);
-//    }
-
-//    void ZephyrController::QueueThread() {
-//        static const double timeout = 0.01;
-//        while (this->rosnode_->ok()) {
-//            this->queue_.callAvailable(ros::WallDuration(timeout));
-//        }
-//    }
 
     void ZephyrController::SetPIDParams(JointControl* jointControl, sdf::ElementPtr _sdf) {
         if (_sdf->HasElement("p")) {

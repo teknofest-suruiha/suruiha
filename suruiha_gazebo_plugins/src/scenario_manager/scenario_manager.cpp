@@ -24,7 +24,7 @@ namespace gazebo{
         gzdbg << "duration of the sim:" << simDuration.Double() << std::endl;
 
         gazeboNode = transport::NodePtr(new transport::Node());
-        gazeboNode->Init(_parent->Name());
+        gazeboNode->Init("");
         serverControlPub = gazeboNode->Advertise<msgs::ServerControl>("/gazebo/server/control");
 
         // New Mechanism for Updating every World Cycle

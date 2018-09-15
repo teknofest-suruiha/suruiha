@@ -46,11 +46,32 @@ namespace gazebo {
         capacity = sdf->Get<double>("capacity");
         forceFactor = sdf->Get<double>("force_factor");
         publishRate = sdf->Get<double>("publish_rate");
-        ReplaceBattery();
 
         // create ros node and battery state publisher
         rosNode = Util::CreateROSNodeHandle("");
         pub = rosNode->advertise<suruiha_gazebo_plugins::UAVBattery>(uavName + "_battery", 1);
+
+        // get the battery capacity from parameter server
+        XmlRpc::XmlRpcValue scenarioParam;
+        rosNode->getParam("scenario", scenarioParam);
+        XmlRpc::XmlRpcValue uavs = scenarioParam["uavs"];
+        bool isParamSet = false;
+        for (unsigned int i = 0; i < uavs.size(); i++) {
+            int uav_index = static_cast<int>(uavs[i]["index"]);
+            std::string type = static_cast<std::string>(uavs[i]["type"]);
+            std::stringstream ss;
+            ss << type << uav_index;
+            if (uavName == ss.str()) {
+                capacity = static_cast<int>(uavs[i]["battery_capacity"]);
+                gzdbg << "battery_capacity:" << capacity << std::endl;
+                isParamSet = true;
+                break;
+            }
+        }
+        if (!isParamSet) {
+            gzdbg << "ERROR cannot set battery capacity" << std::endl;
+        }
+        ReplaceBattery();
     }
 
     void BatteryManager::SetJoints(const std::vector<physics::JointPtr>& joints_) {

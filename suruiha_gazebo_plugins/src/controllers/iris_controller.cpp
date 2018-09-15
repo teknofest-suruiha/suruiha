@@ -18,15 +18,6 @@ namespace gazebo {
     // Register this plugin with the simulator
     GZ_REGISTER_MODEL_PLUGIN(IrisController);
 
-    // define class static const variables
-//    const unsigned int ZephyrController::PROPELLER_JOINT = 0;
-//    const unsigned int ZephyrController::FLAP_LEFT_JOINT = 1;
-//    const unsigned int ZephyrController::FLAP_RIGHT_JOINT = 2;
-//
-//    std::string ZephyrController::PROPELLER_JOINT_STR = "propeller_joint";
-//    std::string ZephyrController::FLAP_LEFT_JOINT_STR = "flap_left_joint";
-//    std::string ZephyrController::FLAP_RIGHT_JOINT_STR = "flap_right_joint";
-
     IrisController::IrisController() {
         lastUpdateTime = 0;
         targetThrottle = 0.0;
@@ -197,14 +188,6 @@ namespace gazebo {
                             ros::VoidPtr(), &this->queue_);
             this->control_twist_sub_ = this->rosnode_->subscribe(joints_so);
 
-        // subscribe for user commands
-//        ros::SubscribeOptions user_command_so =
-//                            ros::SubscribeOptions::create<std_msgs::String>(
-//                                    this->user_command_topic_name_, 100, boost::bind(
-//                                            &ZephyrController::ProcessUserCommand, this, _1),
-//                                    ros::VoidPtr(), &this->queue_);
-//        this->user_command_sub_ = this->rosnode_->subscribe(user_command_so);
-
         // start custom queue for controller plugin ros topics
         this->callback_queue_thread_ =
                 boost::thread(boost::bind(&IrisController::QueueThread, this));
@@ -216,6 +199,7 @@ namespace gazebo {
         uavSensor.loadParams(_sdf->GetElement("uav_sensor"));
         uavSensor.setModels(world_);
         sensorUpdateReate = _sdf->GetElement("uav_sensor")->Get<int>("update_rate");
+        uavSensor.getParams(rosnode_, model_->GetName());
 
 //        uavSensor.setFOV(hfov, vfov);
         this->sensor_pub_ = this->rosnode_->advertise<suruiha_gazebo_plugins::UAVSensorMessage>(sensor_topic, 1);
@@ -265,50 +249,46 @@ namespace gazebo {
         // set the pose of the logical camera
         if (logicalCameraSensorPtr->Visualize()) {
             logicalCameraSensorPtr->SetActive(false);
-            if (currTime.Double() > 1.0) {
-                ignition::math::Pose3d camPose = logicalCameraSensorPtr->Pose();
-                ignition::math::Pose3d expectedPose;
-                ignition::math::Vector3d rot = expectedPose.Rot().Euler();
-                ignition::math::Pose3d uavPose = model_->WorldPose();
-                rot.X(0.0);
-                rot.Y(1.5707);
-                rot.Z(uavPose.Rot().Euler().Z() - 1.5707);
-                expectedPose.Rot().Euler(rot);
+            ignition::math::Pose3d camPose = logicalCameraSensorPtr->Pose();
+            ignition::math::Pose3d expectedPose;
+            ignition::math::Vector3d rot = expectedPose.Rot().Euler();
+            ignition::math::Pose3d uavPose = model_->WorldPose();
+            rot.X(0.0);
+            rot.Y(1.5707);
+            rot.Z(uavPose.Rot().Euler().Z() - 1.5707);
+            expectedPose.Rot().Euler(rot);
 
-                expectedPose = uavPose.CoordPoseSolve(expectedPose);
+            expectedPose = uavPose.CoordPoseSolve(expectedPose);
 
-                //            gzdbg << "rotation .x:" << camPose.Rot().Euler().X() << " .y:" << camPose.Rot().Euler().Y() << " .z:"
-                //                  << camPose.Rot().Euler().Z() << std::endl;
-                //            gzdbg << "model rot x:" << model_->WorldPose().Rot().Euler().X() << " .y:"
-                //                  << model_->WorldPose().Rot().Euler().Y() <<
-                //                  " .z:" << model_->WorldPose().Rot().Euler().Z() << std::endl;
-                ignition::math::Vector3d camRot = camPose.Rot().Euler();
-                camPose.Rot().Euler(expectedPose.Rot().Euler());
-                logicalCameraSensorPtr->SetPose(camPose);
-            }
+            //            gzdbg << "rotation .x:" << camPose.Rot().Euler().X() << " .y:" << camPose.Rot().Euler().Y() << " .z:"
+            //                  << camPose.Rot().Euler().Z() << std::endl;
+            //            gzdbg << "model rot x:" << model_->WorldPose().Rot().Euler().X() << " .y:"
+            //                  << model_->WorldPose().Rot().Euler().Y() <<
+            //                  " .z:" << model_->WorldPose().Rot().Euler().Z() << std::endl;
+            ignition::math::Vector3d camRot = camPose.Rot().Euler();
+            camPose.Rot().Euler(expectedPose.Rot().Euler());
+            logicalCameraSensorPtr->SetPose(camPose);
         }
         if (cameraSensorPtr->IsActive()) {
-            if (currTime.Double() > 1.0) {
-                ignition::math::Pose3d camPose = cameraSensorPtr->Pose();
-                ignition::math::Pose3d expectedPose;
-                ignition::math::Vector3d rot = expectedPose.Rot().Euler();
-                ignition::math::Pose3d uavPose = model_->WorldPose();
-                rot.X(0.0);
-                rot.Y(1.5707);
-                rot.Z(uavPose.Rot().Euler().Z() - 1.5707);
-                expectedPose.Rot().Euler(rot);
+            ignition::math::Pose3d camPose = cameraSensorPtr->Pose();
+            ignition::math::Pose3d expectedPose;
+            ignition::math::Vector3d rot = expectedPose.Rot().Euler();
+            ignition::math::Pose3d uavPose = model_->WorldPose();
+            rot.X(0.0);
+            rot.Y(1.5707);
+            rot.Z(uavPose.Rot().Euler().Z() - 1.5707);
+            expectedPose.Rot().Euler(rot);
 
-                expectedPose = uavPose.CoordPoseSolve(expectedPose);
+            expectedPose = uavPose.CoordPoseSolve(expectedPose);
 
-                //            gzdbg << "rotation .x:" << camPose.Rot().Euler().X() << " .y:" << camPose.Rot().Euler().Y() << " .z:"
-                //                  << camPose.Rot().Euler().Z() << std::endl;
-                //            gzdbg << "model rot x:" << model_->WorldPose().Rot().Euler().X() << " .y:"
-                //                  << model_->WorldPose().Rot().Euler().Y() <<
-                //                  " .z:" << model_->WorldPose().Rot().Euler().Z() << std::endl;
-                ignition::math::Vector3d camRot = camPose.Rot().Euler();
-                camPose.Rot().Euler(expectedPose.Rot().Euler());
-                cameraSensorPtr->SetPose(camPose);
-            }
+            //            gzdbg << "rotation .x:" << camPose.Rot().Euler().X() << " .y:" << camPose.Rot().Euler().Y() << " .z:"
+            //                  << camPose.Rot().Euler().Z() << std::endl;
+            //            gzdbg << "model rot x:" << model_->WorldPose().Rot().Euler().X() << " .y:"
+            //                  << model_->WorldPose().Rot().Euler().Y() <<
+            //                  " .z:" << model_->WorldPose().Rot().Euler().Z() << std::endl;
+            ignition::math::Vector3d camRot = camPose.Rot().Euler();
+            camPose.Rot().Euler(expectedPose.Rot().Euler());
+            cameraSensorPtr->SetPose(camPose);
         }
 
         battery.UpdateStates(isActive);

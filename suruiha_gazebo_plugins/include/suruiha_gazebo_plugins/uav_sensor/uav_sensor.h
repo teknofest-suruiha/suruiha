@@ -23,6 +23,7 @@ namespace gazebo {
         public: void setModels(physics::WorldPtr worldPtr);
 
         public: void sense(const ignition::math::Pose3d uavPose);
+        public: void getParams(ros::NodeHandle* node, std::string modelName);
 
         protected: ros::Publisher sensorPublisher;
 //        protected: physics::WorldPtr worldPtr;

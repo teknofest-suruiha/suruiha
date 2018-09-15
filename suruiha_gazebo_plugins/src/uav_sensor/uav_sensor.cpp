@@ -50,6 +50,32 @@ namespace gazebo {
         maxHeight = _sdf->Get<float>("max_height");
     }
 
+    void UAVSensor::getParams(ros::NodeHandle* node, std::string modelName){
+        XmlRpc::XmlRpcValue scenarioParam;
+        node->getParam("scenario", scenarioParam);
+        XmlRpc::XmlRpcValue uavs = scenarioParam["uavs"];
+        bool isParamSet = false;
+        for (unsigned int i = 0; i < uavs.size(); i++) {
+            int uav_index = static_cast<int>(uavs[i]["index"]);
+            std::string type = static_cast<std::string>(uavs[i]["type"]);
+            std::stringstream ss;
+            ss << type << uav_index;
+            if (modelName == ss.str()) {
+                minHeight = static_cast<int>(uavs[i]["sensor"]["min_height"]);
+                maxHeight = static_cast<int>(uavs[i]["sensor"]["max_height"]);
+                frustum.SetFar(maxHeight);
+                int battery = static_cast<int>(uavs[i]["battery_capacity"]);
+                gzdbg << "getParams min_height:" << minHeight << " max_height:" <<
+                      maxHeight << std::endl;
+                isParamSet = true;
+                break;
+            }
+        }
+        if (!isParamSet) {
+            gzdbg << "ERROR cannot set minHeight and maxHeight" << std::endl;
+        }
+    }
+
     void UAVSensor::setModels(physics::WorldPtr world) {
         worldPtr = world;
         for (unsigned int i = 0; i < worldPtr->Models().size(); i++) {
