@@ -1,9 +1,9 @@
 <?xml version="1.0" ?>
 <sdf version="1.6">
-  <world name="test0">
+  <world name="scn3">
     <gui>
       <camera name="user_camera">
-        <pose>-240 -250 20 0 0.33 1.5707</pose>
+        <pose>490 -480 20 0 0.33 1.5707</pose>
       </camera>
     </gui>
     <physics type="ode">
@@ -35,7 +35,7 @@
           <geometry>
             <plane>
               <normal>0 0 1</normal>
-              <size>500 500</size>
+              <size>1000 1000</size>
             </plane>
           </geometry>
           <surface>
@@ -48,7 +48,7 @@
           </surface>
         </collision>
         <visual name="runway">
-          <pose>-240 -200 0.005 0 0 -1.5707</pose>
+          <pose>490 -450 0.005 0 0 -1.5707</pose>
           <cast_shadows>false</cast_shadows>
           <geometry>
             <plane>
@@ -70,7 +70,7 @@
           <geometry>
             <plane>
               <normal>0 0 1</normal>
-              <size>500 500</size>
+              <size>1000 1000</size>
             </plane>
           </geometry>
           <material>
@@ -435,84 +435,84 @@
 </model>
 
     <model name="zephyr0">
-      <pose>-245 -237 0 0 0 3.1415</pose>
+      <pose>485 -487 0 0 0 3.1415</pose>
       <include>
         <uri>model://zephyr_with_skid_pad</uri>
       </include>
     </model>
     
     <model name="zephyr1">
-      <pose>-245 -239 0 0 0 3.1415</pose>
+      <pose>485 -489 0 0 0 3.1415</pose>
       <include>
         <uri>model://zephyr_with_skid_pad</uri>
       </include>
     </model>
     
     <model name="zephyr2">
-      <pose>-245 -241 0 0 0 3.1415</pose>
+      <pose>485 -491 0 0 0 3.1415</pose>
       <include>
         <uri>model://zephyr_with_skid_pad</uri>
       </include>
     </model>
     
     <model name="zephyr3">
-      <pose>-245 -243 0 0 0 3.1415</pose>
+      <pose>485 -493 0 0 0 3.1415</pose>
       <include>
         <uri>model://zephyr_with_skid_pad</uri>
       </include>
     </model>
     
     <model name="zephyr4">
-      <pose>-245 -245 0 0 0 3.1415</pose>
+      <pose>485 -495 0 0 0 3.1415</pose>
       <include>
         <uri>model://zephyr_with_skid_pad</uri>
       </include>
     </model>
     
     <model name="zephyr5">
-      <pose>-245 -247 0 0 0 3.1415</pose>
+      <pose>485 -497 0 0 0 3.1415</pose>
       <include>
         <uri>model://zephyr_with_skid_pad</uri>
       </include>
     </model>
     
     <model name="iris0">
-      <pose>-235 -237 0 0 0 3.1415</pose>
+      <pose>495 -487 0 0 0 3.1415</pose>
       <include>
         <uri>model://iris_quadrotor_with_plugin</uri>
       </include>
     </model>
     
     <model name="iris1">
-      <pose>-235 -239 0 0 0 3.1415</pose>
+      <pose>495 -489 0 0 0 3.1415</pose>
       <include>
         <uri>model://iris_quadrotor_with_plugin</uri>
       </include>
     </model>
     
     <model name="iris2">
-      <pose>-235 -241 0 0 0 3.1415</pose>
+      <pose>495 -491 0 0 0 3.1415</pose>
       <include>
         <uri>model://iris_quadrotor_with_plugin</uri>
       </include>
     </model>
     
     <model name="iris3">
-      <pose>-235 -243 0 0 0 3.1415</pose>
+      <pose>495 -493 0 0 0 3.1415</pose>
       <include>
         <uri>model://iris_quadrotor_with_plugin</uri>
       </include>
     </model>
     
     <model name="iris4">
-      <pose>-235 -245 0 0 0 3.1415</pose>
+      <pose>495 -495 0 0 0 3.1415</pose>
       <include>
         <uri>model://iris_quadrotor_with_plugin</uri>
       </include>
     </model>
     
     <model name="iris5">
-      <pose>-235 -247 0 0 0 3.1415</pose>
+      <pose>495 -497 0 0 0 3.1415</pose>
       <include>
         <uri>model://iris_quadrotor_with_plugin</uri>
       </include>

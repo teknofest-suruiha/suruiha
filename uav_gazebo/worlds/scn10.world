@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <sdf version="1.6">
-  <world name="test0">
+  <world name="scn10">
     <gui>
       <camera name="user_camera">
         <pose>-240 -250 20 0 0.33 1.5707</pose>
