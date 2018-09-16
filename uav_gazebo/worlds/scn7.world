@@ -1,0 +1,585 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <world name="test0">
+    <gui>
+      <camera name="user_camera">
+        <pose>-240 -250 20 0 0.33 1.5707</pose>
+      </camera>
+    </gui>
+    <physics type="ode">
+      <ode>
+        <solver>
+          <type>quick</type>
+          <iters>100</iters>
+          <sor>1.0</sor>
+        </solver>
+        <constraints>
+          <cfm>0.0</cfm>
+          <erp>0.2</erp>
+          <contact_max_correcting_vel>0.1</contact_max_correcting_vel>
+          <contact_surface_layer>0.0</contact_surface_layer>
+        </constraints>
+      </ode>
+      <real_time_update_rate>400</real_time_update_rate>
+      <max_step_size>0.0025</max_step_size>
+    </physics>
+
+    <include>
+      <uri>model://sun</uri>
+    </include>
+
+    <model name="ground_plane">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>500 500</size>
+            </plane>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1</mu>
+                <mu2>1</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="runway">
+          <pose>-240 -200 0.005 0 0 -1.5707</pose>
+          <cast_shadows>false</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Runway</name>
+            </script>
+          </material>
+        </visual>
+
+        <visual name="grass">
+          <pose>0 0 0 0 0 0</pose>
+          <cast_shadows>false</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>500 500</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grass</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+    
+<model name="building_0">
+  <static>true</static>
+  <pose>42 -223 0 0 0 5.96902604182</pose>
+  <include>
+    <uri>model://apartment</uri>
+  </include>
+</model>
+<model name="building_1">
+  <static>true</static>
+  <pose>-190 81 0 0 0 6.14355896702</pose>
+  <include>
+    <uri>model://house_3</uri>
+  </include>
+</model>
+<model name="building_2">
+  <static>true</static>
+  <pose>-111 91 0 0 0 4.52040276267</pose>
+  <include>
+    <uri>model://house_2</uri>
+  </include>
+</model>
+<model name="building_3">
+  <static>true</static>
+  <pose>115 -75 0 0 0 0.663225115758</pose>
+  <include>
+    <uri>model://grocery_store</uri>
+  </include>
+</model>
+<model name="building_4">
+  <static>true</static>
+  <pose>185 -170 0 0 0 4.32841654495</pose>
+  <include>
+    <uri>model://grocery_store</uri>
+  </include>
+</model>
+<model name="building_5">
+  <static>true</static>
+  <pose>-104 196 0 0 0 3.68264472171</pose>
+  <include>
+    <uri>model://house_2</uri>
+  </include>
+</model>
+<model name="building_6">
+  <static>true</static>
+  <pose>-179 27 0 0 0 2.54818070791</pose>
+  <include>
+    <uri>model://apartment</uri>
+  </include>
+</model>
+<model name="building_7">
+  <static>true</static>
+  <pose>-181 -100 0 0 0 2.65290046303</pose>
+  <include>
+    <uri>model://apartment</uri>
+  </include>
+</model>
+<model name="building_8">
+  <static>true</static>
+  <pose>204 153 0 0 0 3.05432619099</pose>
+  <include>
+    <uri>model://school</uri>
+  </include>
+</model>
+<model name="building_9">
+  <static>true</static>
+  <pose>-6 19 0 0 0 3.99680398707</pose>
+  <include>
+    <uri>model://grocery_store</uri>
+  </include>
+</model>
+<model name="building_10">
+  <static>true</static>
+  <pose>-61 -160 0 0 0 0.226892802759</pose>
+  <include>
+    <uri>model://school</uri>
+  </include>
+</model>
+<model name="building_11">
+  <static>true</static>
+  <pose>150 -121 0 0 0 5.91666616426</pose>
+  <include>
+    <uri>model://house_1</uri>
+  </include>
+</model>
+<model name="building_12">
+  <static>true</static>
+  <pose>143 215 0 0 0 3.85717764691</pose>
+  <include>
+    <uri>model://post_office</uri>
+  </include>
+</model>
+<model name="building_13">
+  <static>true</static>
+  <pose>-101 40 0 0 0 2.68780704807</pose>
+  <include>
+    <uri>model://osrf_first_office</uri>
+  </include>
+</model>
+<model name="building_14">
+  <static>true</static>
+  <pose>133 80 0 0 0 6.28318530718</pose>
+  <include>
+    <uri>model://house_3</uri>
+  </include>
+</model>
+<model name="building_15">
+  <static>true</static>
+  <pose>-206 -193 0 0 0 5.1661745859</pose>
+  <include>
+    <uri>model://house_1</uri>
+  </include>
+</model>
+<model name="building_16">
+  <static>true</static>
+  <pose>94 121 0 0 0 4.13643032723</pose>
+  <include>
+    <uri>model://school</uri>
+  </include>
+</model>
+<model name="building_17">
+  <static>true</static>
+  <pose>-177 144 0 0 0 0.733038285838</pose>
+  <include>
+    <uri>model://house_3</uri>
+  </include>
+</model>
+<model name="building_18">
+  <static>true</static>
+  <pose>132 17 0 0 0 2.86233997327</pose>
+  <include>
+    <uri>model://house_1</uri>
+  </include>
+</model>
+<model name="building_19">
+  <static>true</static>
+  <pose>172 -66 0 0 0 1.95476876223</pose>
+  <include>
+    <uri>model://house_2</uri>
+  </include>
+</model>
+<model name="building_20">
+  <static>true</static>
+  <pose>52 -35 0 0 0 2.35619449019</pose>
+  <include>
+    <uri>model://school</uri>
+  </include>
+</model>
+<model name="building_21">
+  <static>true</static>
+  <pose>-40 -87 0 0 0 4.85201532054</pose>
+  <include>
+    <uri>model://office_building</uri>
+  </include>
+</model>
+<model name="building_22">
+  <static>true</static>
+  <pose>-62 107 0 0 0 0.680678408278</pose>
+  <include>
+    <uri>model://house_2</uri>
+  </include>
+</model>
+<model name="building_23">
+  <static>true</static>
+  <pose>93 219 0 0 0 5.48033385126</pose>
+  <include>
+    <uri>model://grocery_store</uri>
+  </include>
+</model>
+<model name="building_24">
+  <static>true</static>
+  <pose>40 201 0 0 0 5.21853446346</pose>
+  <include>
+    <uri>model://apartment</uri>
+  </include>
+</model>
+<model name="building_25">
+  <static>true</static>
+  <pose>139 -219 0 0 0 1.69296937443</pose>
+  <include>
+    <uri>model://house_3</uri>
+  </include>
+</model>
+<model name="building_26">
+  <static>true</static>
+  <pose>-90 -72 0 0 0 2.40855436775</pose>
+  <include>
+    <uri>model://grocery_store</uri>
+  </include>
+</model>
+<model name="building_27">
+  <static>true</static>
+  <pose>18 103 0 0 0 1.69296937443</pose>
+  <include>
+    <uri>model://apartment</uri>
+  </include>
+</model>
+<model name="building_28">
+  <static>true</static>
+  <pose>76 26 0 0 0 0.261799387799</pose>
+  <include>
+    <uri>model://house_3</uri>
+  </include>
+</model>
+<model name="building_29">
+  <static>true</static>
+  <pose>-216 200 0 0 0 3.97935069455</pose>
+  <include>
+    <uri>model://grocery_store</uri>
+  </include>
+</model>
+<model name="building_30">
+  <static>true</static>
+  <pose>193 10 0 0 0 6.17846555206</pose>
+  <include>
+    <uri>model://law_office</uri>
+  </include>
+</model>
+<model name="building_31">
+  <static>true</static>
+  <pose>-29 169 0 0 0 2.21656815003</pose>
+  <include>
+    <uri>model://school</uri>
+  </include>
+</model>
+<model name="building_32">
+  <static>true</static>
+  <pose>63 -141 0 0 0 2.80998009571</pose>
+  <include>
+    <uri>model://grocery_store</uri>
+  </include>
+</model>
+<model name="building_33">
+  <static>true</static>
+  <pose>150 141 0 0 0 0.802851455917</pose>
+  <include>
+    <uri>model://office_building</uri>
+  </include>
+</model>
+<model name="building_34">
+  <static>true</static>
+  <pose>-98 -218 0 0 0 3.76991118431</pose>
+  <include>
+    <uri>model://grocery_store</uri>
+  </include>
+</model>
+<model name="building_35">
+  <static>true</static>
+  <pose>-47 -25 0 0 0 4.52040276267</pose>
+  <include>
+    <uri>model://osrf_first_office</uri>
+  </include>
+</model>
+<model name="building_36">
+  <static>true</static>
+  <pose>-224 -70 0 0 0 3.12413936107</pose>
+  <include>
+    <uri>model://office_building</uri>
+  </include>
+</model>
+<model name="building_37">
+  <static>true</static>
+  <pose>220 -134 0 0 0 0.453785605519</pose>
+  <include>
+    <uri>model://apartment</uri>
+  </include>
+</model>
+<model name="building_38">
+  <static>true</static>
+  <pose>102 -177 0 0 0 1.93731546971</pose>
+  <include>
+    <uri>model://grocery_store</uri>
+  </include>
+</model>
+<model name="building_39">
+  <static>true</static>
+  <pose>-123 -23 0 0 0 2.94960643587</pose>
+  <include>
+    <uri>model://house_2</uri>
+  </include>
+</model>
+<model name="building_40">
+  <static>true</static>
+  <pose>-147 -181 0 0 0 5.6897733615</pose>
+  <include>
+    <uri>model://office_building</uri>
+  </include>
+</model>
+<model name="building_41">
+  <static>true</static>
+  <pose>-2 -165 0 0 0 0.959931088597</pose>
+  <include>
+    <uri>model://grocery_store</uri>
+  </include>
+</model>
+<model name="building_42">
+  <static>true</static>
+  <pose>-111 -133 0 0 0 5.98647933434</pose>
+  <include>
+    <uri>model://house_1</uri>
+  </include>
+</model>
+<model name="building_43">
+  <static>true</static>
+  <pose>46 -91 0 0 0 6.07374579694</pose>
+  <include>
+    <uri>model://house_1</uri>
+  </include>
+</model>
+<model name="building_44">
+  <static>true</static>
+  <pose>-215 -137 0 0 0 0.610865238198</pose>
+  <include>
+    <uri>model://fire_station</uri>
+  </include>
+</model>
+<model name="building_45">
+  <static>true</static>
+  <pose>193 100 0 0 0 1.29154364648</pose>
+  <include>
+    <uri>model://house_2</uri>
+  </include>
+</model>
+<model name="building_46">
+  <static>true</static>
+  <pose>-163 204 0 0 0 0.820304748437</pose>
+  <include>
+    <uri>model://house_1</uri>
+  </include>
+</model>
+<model name="building_47">
+  <static>true</static>
+  <pose>-30 -214 0 0 0 1.29154364648</pose>
+  <include>
+    <uri>model://house_3</uri>
+  </include>
+</model>
+<model name="building_48">
+  <static>true</static>
+  <pose>205 220 0 0 0 2.56563400043</pose>
+  <include>
+    <uri>model://house_2</uri>
+  </include>
+</model>
+<model name="building_49">
+  <static>true</static>
+  <pose>-182 -33 0 0 0 0.645771823238</pose>
+  <include>
+    <uri>model://house_2</uri>
+  </include>
+</model>
+
+    <model name="zephyr0">
+      <pose>-245 -237 0 0 0 3.1415</pose>
+      <include>
+        <uri>model://zephyr_with_skid_pad</uri>
+      </include>
+    </model>
+    
+    <model name="zephyr1">
+      <pose>-245 -239 0 0 0 3.1415</pose>
+      <include>
+        <uri>model://zephyr_with_skid_pad</uri>
+      </include>
+    </model>
+    
+    <model name="zephyr2">
+      <pose>-245 -241 0 0 0 3.1415</pose>
+      <include>
+        <uri>model://zephyr_with_skid_pad</uri>
+      </include>
+    </model>
+    
+    <model name="zephyr3">
+      <pose>-245 -243 0 0 0 3.1415</pose>
+      <include>
+        <uri>model://zephyr_with_skid_pad</uri>
+      </include>
+    </model>
+    
+    <model name="zephyr4">
+      <pose>-245 -245 0 0 0 3.1415</pose>
+      <include>
+        <uri>model://zephyr_with_skid_pad</uri>
+      </include>
+    </model>
+    
+    <model name="zephyr5">
+      <pose>-245 -247 0 0 0 3.1415</pose>
+      <include>
+        <uri>model://zephyr_with_skid_pad</uri>
+      </include>
+    </model>
+    
+    <model name="iris0">
+      <pose>-235 -237 0 0 0 3.1415</pose>
+      <include>
+        <uri>model://iris_quadrotor_with_plugin</uri>
+      </include>
+    </model>
+    
+    <model name="iris1">
+      <pose>-235 -239 0 0 0 3.1415</pose>
+      <include>
+        <uri>model://iris_quadrotor_with_plugin</uri>
+      </include>
+    </model>
+    
+    <model name="iris2">
+      <pose>-235 -241 0 0 0 3.1415</pose>
+      <include>
+        <uri>model://iris_quadrotor_with_plugin</uri>
+      </include>
+    </model>
+    
+    <model name="iris3">
+      <pose>-235 -243 0 0 0 3.1415</pose>
+      <include>
+        <uri>model://iris_quadrotor_with_plugin</uri>
+      </include>
+    </model>
+    
+    <model name="iris4">
+      <pose>-235 -245 0 0 0 3.1415</pose>
+      <include>
+        <uri>model://iris_quadrotor_with_plugin</uri>
+      </include>
+    </model>
+    
+    <model name="iris5">
+      <pose>-235 -247 0 0 0 3.1415</pose>
+      <include>
+        <uri>model://iris_quadrotor_with_plugin</uri>
+      </include>
+    </model>
+
+    <plugin name="air_traffic_controller" filename="libair_traffic_controller.so">
+      <takeoff>
+        <pose>-240 -240 0 0 0 3.1415</pose>
+        <height_threshold>10</height_threshold>
+        <distance_threshold>50</distance_threshold>
+      </takeoff>
+      <landing>
+        <area_bottom_left>480 -500 0</area_bottom_left>
+        <area_upper_right>500 -400 0</area_upper_right>
+        <start_pose>-240 -150 30 0 0 3.1415</start_pose>
+        <end_pose>-240 -240 0 0 0 3.1415</end_pose>
+        <height_treshold>0.1</height_treshold>
+        <velocity_threshold>3</velocity_threshold>
+      </landing>
+    </plugin>
+    <plugin name="comm_manager" filename="libcomm_manager.so">
+      <comm_request_topic>comm_request</comm_request_topic>
+      <comm_broadcast_topic>comm</comm_broadcast_topic>
+      <!-- girilen deger metre biriminde olmali -->
+      <!-- comm_distance 100 km secildi ki herkes tum mesajlari alabilsin -->
+      <comm_distance>10000</comm_distance>
+    </plugin>
+    <plugin name="score_calculator" filename="libscore_calculator.so">
+      <area_coverage_score>
+        <visualization>
+          <active>true</active>
+          <topic_name>score_area_visual</topic_name>
+          <!-- runs the visualization at every given milliseconds -->
+          <update_rate>1000</update_rate>
+        </visualization>
+        <!-- runs score calculation at every update_rate milliseconds -->
+        <update_rate>100</update_rate>
+        <!-- widgh and height of total area in meters -->
+        <width>500</width>
+        <height>500</height>
+        <!-- the size of a single cell in meters -->
+        <resolution>0.5</resolution>
+        <factor>0.3</factor>
+      </area_coverage_score>
+      <detection_score>
+        <!-- when false building is detected or detection occurs before the movement of terrorists, false detection penalty is going to be applied -->
+        <!-- for details please refer the technical documentation -->
+        <false_detection_penalty>0.1</false_detection_penalty>
+        <detection_topic>terrorist_detection</detection_topic>
+        <factor>0.4</factor>
+        <base_score>10</base_score>
+        <!-- <time_to_detect>200000</time_to_detect> -->
+      </detection_score>
+      <tracking_score>
+        <factor>0.4</factor>
+        <terrorist_prefix>terrorist</terrorist_prefix>
+        <tracking_topic>terrorist_tracking</tracking_topic>
+        <!-- birimi milliseconds. -->
+        <message_rate>100</message_rate>
+        <update_rate>100</update_rate>
+      </tracking_score>
+      <!-- calculates the score value and publishes at every publish rate milliseconds -->
+      <publish_rate>1000</publish_rate>
+    </plugin>
+    <plugin name="scenario_manager" filename="libscenario_manager.so">
+      <!-- how long the scenario is going to run unit is milliseconds-->
+      <sim_duration>300000</sim_duration>
+    </plugin>
+  </world>
+</sdf>
