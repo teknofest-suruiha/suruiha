@@ -22,12 +22,16 @@ namespace gazebo {
         protected: virtual void UpdateStates();
         private: event::ConnectionPtr updateConnection;
         private: boost::mutex updateMutex;
+        protected: physics::ModelPtr actor;
+        protected: physics::ModelPtr gun;
 
         protected: physics::WorldPtr world;
         protected: common::Time simDuration;
         protected: transport::NodePtr gazeboNode;
         protected: transport::PublisherPtr serverControlPub;
         protected: void KillAll();
+
+        protected: bool printed;
 
     };
 }
