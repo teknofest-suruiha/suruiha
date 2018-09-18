@@ -22,8 +22,10 @@ namespace gazebo {
         protected: virtual void UpdateStates();
         private: event::ConnectionPtr updateConnection;
         private: boost::mutex updateMutex;
-        protected: physics::ModelPtr actor;
-        protected: physics::ModelPtr gun;
+        protected: std::vector<physics::ModelPtr> terrorists;
+        protected: std::vector<physics::ModelPtr> guns;
+        protected: std::map<std::string, double> teroristStartTimes;
+        protected: std::map<std::string, double> teroristEndTimes;
 
         protected: physics::WorldPtr world;
         protected: common::Time simDuration;
@@ -31,7 +33,7 @@ namespace gazebo {
         protected: transport::PublisherPtr serverControlPub;
         protected: void KillAll();
 
-        protected: bool printed;
+        protected: void GetStreetModel();
 
     };
 }

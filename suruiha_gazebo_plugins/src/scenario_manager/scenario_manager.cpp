@@ -14,7 +14,6 @@ namespace gazebo{
     GZ_REGISTER_WORLD_PLUGIN(ScenarioManager);
 
     ScenarioManager::ScenarioManager() {
-        printed = false;
     }
 
     ScenarioManager::~ScenarioManager() {
@@ -29,9 +28,6 @@ namespace gazebo{
         gazeboNode = transport::NodePtr(new transport::Node());
         gazeboNode->Init("");
         serverControlPub = gazeboNode->Advertise<msgs::ServerControl>("/gazebo/server/control");
-
-        actor = world->ModelByName("terrorist_0");
-        gun = world->ModelByName("gun_0");
 
         // New Mechanism for Updating every World Cycle
         // Listen to the update event. This event is broadcast every
@@ -67,11 +63,25 @@ namespace gazebo{
 
         // For Testing
 //        if (!printed) {
-        
-        std::ofstream fileStream;
-        fileStream.open("/tmp/models.xml");
-        std::locale loc;
-        int modelIndex = 0;
+        GetStreetModel();
+
+//        gzdbg << "simtime:" << world->SimTime().Double() << std::endl;
+        if (world->SimTime().Double() >= simDuration.Double()) {
+            gzdbg << "Stop and Finish scenario manager" << std::endl;
+            msgs::ServerControl controlMsg;
+            controlMsg.set_stop(true);
+            serverControlPub->Publish(controlMsg);
+            KillAll();
+        }
+    }
+
+    void ScenarioManager::GetStreetModel() {
+        static bool isProcessed = false;
+        if (!isProcessed) {
+            std::ofstream fileStream;
+            fileStream.open("/tmp/models.xml");
+            std::locale loc;
+            int modelIndex = 0;
             std::vector<physics::ModelPtr> models = world->Models();
             fileStream << "<models>" << std::endl;
             for (unsigned int i = 0; i < models.size(); i++) {
@@ -80,7 +90,8 @@ namespace gazebo{
                     fileStream << "<model name=\"asphalt_plane_" << modelIndex << "\">" << std::endl;
                     fileStream << "  <static>true</static>" << std::endl;
                     fileStream << "  <pose>" << pose.Pos().X() << " " << pose.Pos().Y() <<
-                              " " << pose.Pos().Z() << "</pose>" << std::endl;
+                               " " << pose.Pos().Z() << " " << pose.Rot().Euler().X() <<
+                               " " << pose.Rot().Euler().Y() << " " << pose.Rot().Euler().Z() << "</pose>" << std::endl;
                     fileStream << "  <include><uri>model://asphalt_plane</uri></include>" << std::endl;
                     fileStream << "</model>" << std::endl;
 
@@ -112,7 +123,9 @@ namespace gazebo{
                         fileStream << "<model name=\"building_" << modelIndex << "\">" << std::endl;
                         fileStream << "  <static>true</static>" << std::endl;
                         fileStream << "  <pose>" << pose.Pos().X() << " " << pose.Pos().Y()
-                                   << " " << pose.Pos().Z() << "</pose>" << std::endl;
+                                   << " " << pose.Pos().Z() << " " << pose.Rot().Euler().X() <<
+                                   " " << pose.Rot().Euler().Y() << " " << pose.Rot().Euler().Z() << "</pose>"
+                                   << std::endl;
                         fileStream << "  <include><uri>model://" << ss.str() << "</uri></include>" << std::endl;
                         fileStream << "</model>" << std::endl;
 
@@ -135,16 +148,11 @@ namespace gazebo{
 //            printed = true;
 //        }
 
-        fileStream.flush();
-        fileStream.close();
+            fileStream.flush();
+            fileStream.close();
 
-//        gzdbg << "simtime:" << world->SimTime().Double() << std::endl;
-        if (world->SimTime().Double() >= simDuration.Double()) {
-            gzdbg << "Stop and Finish scenario manager" << std::endl;
-            msgs::ServerControl controlMsg;
-            controlMsg.set_stop(true);
-            serverControlPub->Publish(controlMsg);
-            KillAll();
+            isProcessed = true;
         }
+
     }
 }

@@ -23,7 +23,8 @@ if __name__ == "__main__":
             vec_idx += 1
         vec_values[0] += xOffset
         vec_values[1] += yOffset
-        vec_str = str(vec_values[0]) + ' ' + str(vec_values[1]) + ' ' + str(vec_values[2])
+        vec_str = str(vec_values[0]) + ' ' + str(vec_values[1]) + ' ' + str(vec_values[2]) \
+        + ' ' + str(vec_values[3]) + ' ' + str(vec_values[4]) + ' ' + str(vec_values[5])
         poses[0].childNodes[0].data = vec_str
     
     print(mydoc.toprettyxml(indent='  '))
