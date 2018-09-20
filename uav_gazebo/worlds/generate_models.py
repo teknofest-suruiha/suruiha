@@ -3,8 +3,7 @@ import sys, random
 common_model_types = ["apartment",
 	"house_1",
 	"house_2",
-	"house_3",
-	"playground"
+	"house_3"
 	]
 rare_model_types = ["fire_station",
 	"grocery_store",
@@ -18,7 +17,7 @@ rare_model_types = ["fire_station",
 	"gas_station"]
 rare_model_distances_h = [80, 80, 20, 50, 50, 20, 30, 60, 30, 100] 
 rare_model_distances_v = [30, 30, 20, 30, 30, 20, 30, 30, 30, 40] 
-common_model_distances = [30, 25, 25, 25,  25]
+common_model_distances = [30, 25, 25, 25]
 
 model_string = '''
 <model name="building_{}">
@@ -89,17 +88,51 @@ def square(startX, startY, length):
 	street(length, startX+length, startY, "V", "N")
 
 index = 0
-output = open("buildings.txt", "w")
-
-square(-100,100, 200)
-
-square(-160,160, 320)
+output = open("buildings2.txt", "w")
 	
-square(-230,230, 460)
+# square(-100,100, 200)
 
-square(-330, 330, 660)
-
-square(-450, 450, 900)
+# square(-160,160, 320)
 	
+# square(-230,230, 460)
+
+# square(-330, 330, 660)
+
+# square(-450, 450, 900)
+
+
+street(400, -50, 50, "V", "P")	
+
+street(400, -50, 50, "H", "N")
+
+street(300, -150, 150, "V", "P")	
+
+street(300, -150, 150, "H", "N")
+
+street(200, -250, 250, "V", "P")	
+
+street(200, -250, 250, "H", "N")
+
+
+
+street(400, 50, -50, "V", "N")	
+
+street(400, 50, -50, "H", "P")
+
+street(300, 150, -150, "V", "N")	
+
+street(300, 150, -150, "H", "P")
+
+street(200, 250, -250, "V", "N")	
+
+street(200, 250, -250, "H", "P")
+
+street(400, 50, 50 , "H", "P")
+street(400, 50, 200 , "H", "P")
+street(400, 50, 350 , "H", "P")
+
+street(400, -50, -50 , "V", "N")
+street(400, -200, -50 , "V", "N")
+street(400, -350, -50 , "V", "N")
 
 output.close()	
