@@ -1,5 +1,5 @@
 num_uavs: 6
-comm_distance: 10000
+comm_distance: 100
 area_size: {
   width: 1000,
   height: 1000
@@ -19,8 +19,8 @@ uavs: [
   index: 0,
   type: 'zephyr',
   sensor: {
-    min_height: 50,
-    max_height: 150
+    min_height: 30,
+    max_height: 60
   },
   battery_capacity: 1000
   },
@@ -28,8 +28,8 @@ uavs: [
   index: 0,
   type: 'iris',
   sensor: {
-    min_height: 50,
-    max_height: 150
+    min_height: 30,
+    max_height: 60
   },
   battery_capacity: 1000
   },
@@ -37,8 +37,8 @@ uavs: [
   index: 1,
   type: 'zephyr',
   sensor: {
-    min_height: 50,
-    max_height: 150
+    min_height: 30,
+    max_height: 60
   },
   battery_capacity: 1000
   },
@@ -46,8 +46,8 @@ uavs: [
   index: 1,
   type: 'iris',
   sensor: {
-    min_height: 50,
-    max_height: 150
+    min_height: 30,
+    max_height: 60
   },
   battery_capacity: 1000
   },
@@ -55,8 +55,8 @@ uavs: [
   index: 2,
   type: 'zephyr',
   sensor: {
-    min_height: 50,
-    max_height: 150
+    min_height: 30,
+    max_height: 60
   },
   battery_capacity: 1000
   },
@@ -64,8 +64,8 @@ uavs: [
   index: 2,
   type: 'iris',
   sensor: {
-    min_height: 50,
-    max_height: 150
+    min_height: 30,
+    max_height: 60
   },
   battery_capacity: 1000
   },
@@ -73,8 +73,8 @@ uavs: [
   index: 3,
   type: 'zephyr',
   sensor: {
-    min_height: 50,
-    max_height: 150
+    min_height: 30,
+    max_height: 60
   },
   battery_capacity: 1000
   },
@@ -82,8 +82,8 @@ uavs: [
   index: 3,
   type: 'iris',
   sensor: {
-    min_height: 50,
-    max_height: 150
+    min_height: 30,
+    max_height: 60
   },
   battery_capacity: 1000
   },
@@ -91,8 +91,8 @@ uavs: [
   index: 4,
   type: 'zephyr',
   sensor: {
-    min_height: 50,
-    max_height: 150
+    min_height: 30,
+    max_height: 60
   },
   battery_capacity: 1000
   },
@@ -100,8 +100,8 @@ uavs: [
   index: 4,
   type: 'iris',
   sensor: {
-    min_height: 50,
-    max_height: 150
+    min_height: 30,
+    max_height: 60
   },
   battery_capacity: 1000
   },
@@ -109,8 +109,8 @@ uavs: [
   index: 5,
   type: 'zephyr',
   sensor: {
-    min_height: 50,
-    max_height: 150
+    min_height: 30,
+    max_height: 60
   },
   battery_capacity: 1000
   },
@@ -118,8 +118,8 @@ uavs: [
   index: 5,
   type: 'iris',
   sensor: {
-    min_height: 50,
-    max_height: 150
+    min_height: 30,
+    max_height: 60
   },
   battery_capacity: 1000
   }
