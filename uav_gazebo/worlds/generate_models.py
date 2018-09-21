@@ -1,4 +1,4 @@
-import sys, random
+import sys, random, math
 
 common_model_types = ["apartment",
 	"house_1",
@@ -29,6 +29,21 @@ model_string = '''
 </model>
 '''	
 
+def angle_street(max_length, startX, startY, angle):
+
+	global index
+	global output
+	length = 0
+	posX = startX
+	posY = startY
+	while length < max_length:
+		model_no = random.randrange(len(common_model_types))
+		length = length + common_model_distances[model_no]
+		print(model_string.format(index, posX, posY, 0, common_model_types[model_no]))
+		output.write(model_string.format(index, posX, posY, 0, common_model_types[model_no]))
+		posX = posX + common_model_distances[model_no] * math.cos(math.radians(angle))
+		posY = posY + common_model_distances[model_no] * math.sin(math.radians(angle))
+		index = index + 1
 
 def street(max_length, startX, startY, h_or_v, u_or_d):
 	# max_length = int(sys.argv[1])
@@ -170,25 +185,61 @@ output = open("buildings2.txt", "w")
 
 
 
-street(420, 170, 195, "H", "N")
-street(80, 170, 195, "V", "P")
+# street(420, 170, 195, "H", "N")
+# street(80, 170, 195, "V", "P")
 
 
-street(420, 170, -195, "H", "N")
-street(80, 170, -195, "V", "N")
+# street(420, 170, -195, "H", "N")
+# street(80, 170, -195, "V", "N")
 
-street(420, 170, 25, "H", "N")
-street(420, 170, -25, "H", "N")
-output.write(model_string.format(index, 170, 0, 0, "house_1"))
-index = index + 1 
+# street(420, 170, 25, "H", "N")
+# street(420, 170, -25, "H", "N")
+# output.write(model_string.format(index, 170, 0, 0, "house_1"))
+# index = index + 1 
 
-street(420, -170, 85, "H", "P")
-street(420, -170, 135, "H", "P")
-output.write(model_string.format(index, -170, 110, 0, "house_2"))
-index = index + 1 
+# street(420, -170, 85, "H", "P")
+# street(420, -170, 135, "H", "P")
+# output.write(model_string.format(index, -170, 110, 0, "house_2"))
+# index = index + 1 
 
-street(420, -170, -85, "H", "P")
-street(420, -170, -135, "H", "P")
-output.write(model_string.format(index, -170, -100, 0, "house_3"))
-index = index + 1 
+# street(420, -170, -85, "H", "P")
+# street(420, -170, -135, "H", "P")
+# output.write(model_string.format(index, -170, -100, 0, "house_3"))
+# index = index + 1 
+
+
+
+angle_street(80, -220, 210, 0)
+angle_street(85, -220, 210, -90)
+angle_street(80, -220, 120, 0)
+angle_street(85, -140, 120, -90)
+angle_street(80, -140, 30, 180)
+
+
+angle_street(180, -100, 30, 90)
+angle_street(80, -100, 30, 0)
+angle_street(180, -20, 30, 90)
+
+angle_street(180, 20, 30, 90)
+angle_street(80, 20, 210, 0)
+angle_street(90, 100, 210, -90)
+angle_street(80, 100, 120, 180)
+angle_street(120, 20, 120, -45)
+
+angle_street(180, 140, 30, 90)
+angle_street(80, 140, 30, 0)
+angle_street(180, 220, 30, 90)
+
+
+angle_street(180, -130, -30, -90)
+
+
+angle_street(180, 0, -30, -90)
+angle_street(80, 0, -120, 180)
+angle_street(180, -80, -30, -90)
+
+angle_street(190, 100, -30, 240)
+angle_street(190, 100, -30, -60)
+angle_street(50, 75, -120, 0)
+
 output.close()	
