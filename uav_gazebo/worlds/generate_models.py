@@ -101,38 +101,94 @@ output = open("buildings2.txt", "w")
 # square(-450, 450, 900)
 
 
-street(400, -50, 50, "V", "P")	
+# street(400, -50, 50, "V", "P")	
 
-street(400, -50, 50, "H", "N")
+# street(400, -50, 50, "H", "N")
 
-street(300, -150, 150, "V", "P")	
+# street(300, -150, 150, "V", "P")	
 
-street(300, -150, 150, "H", "N")
+# street(300, -150, 150, "H", "N")
 
-street(200, -250, 250, "V", "P")	
+# street(200, -250, 250, "V", "P")	
 
-street(200, -250, 250, "H", "N")
+# street(200, -250, 250, "H", "N")
 
 
 
-street(400, 50, -50, "V", "N")	
+# street(400, 50, -50, "V", "N")	
 
-street(400, 50, -50, "H", "P")
+# street(400, 50, -50, "H", "P")
 
-street(300, 150, -150, "V", "N")	
+# street(300, 150, -150, "V", "N")	
 
-street(300, 150, -150, "H", "P")
+# street(300, 150, -150, "H", "P")
 
-street(200, 250, -250, "V", "N")	
+# street(200, 250, -250, "V", "N")	
 
-street(200, 250, -250, "H", "P")
+# street(200, 250, -250, "H", "P")
 
-street(400, 50, 50 , "H", "P")
-street(400, 50, 200 , "H", "P")
-street(400, 50, 350 , "H", "P")
+# street(400, 50, 50 , "H", "P")
+# street(400, 50, 200 , "H", "P")
+# street(400, 50, 350 , "H", "P")
 
-street(400, -50, -50 , "V", "N")
-street(400, -200, -50 , "V", "N")
-street(400, -350, -50 , "V", "N")
+# street(400, -50, -50 , "V", "N")
+# street(400, -200, -50 , "V", "N")
+# street(400, -350, -50 , "V", "N")
 
+
+
+
+# square(-100, 100, 200)
+
+# street(70, -170, 170, "H", "N")
+# street(70, -170, 170, "V", "P")
+
+# street(70, 170, 170, "H", "P")
+# street(70, 170, 170, "V", "P")
+
+# street(70, 170, -170, "H", "P")
+# street(70, 170, -170, "V", "N")
+
+# street(70, -170, -170, "H", "N")
+# street(70, -170, -170, "V", "N")
+
+# street(70, -170, 100, "H", "N")
+# street(70, -170, -100, "H", "N")
+# street(190, -170, 100, "V", "N")
+
+# street(70, 170, 100, "H", "P")
+# street(70, 170, -100, "H", "P")
+# street(190, 170, 100, "V", "N")
+
+# street(70, -100, 170, "V", "P")
+# street(70, 100, 170, "V", "P")
+# street(190, -100, 170, "H", "P")
+
+# street(70, -100, -170, "V", "N")
+# street(70, 100, -170, "V", "N")
+# street(190, -100, 170, "H", "P")
+
+
+
+street(420, 170, 195, "H", "N")
+street(80, 170, 195, "V", "P")
+
+
+street(420, 170, -195, "H", "N")
+street(80, 170, -195, "V", "N")
+
+street(420, 170, 25, "H", "N")
+street(420, 170, -25, "H", "N")
+output.write(model_string.format(index, 170, 0, 0, "house_1"))
+index = index + 1 
+
+street(420, -170, 85, "H", "P")
+street(420, -170, 135, "H", "P")
+output.write(model_string.format(index, -170, 110, 0, "house_2"))
+index = index + 1 
+
+street(420, -170, -85, "H", "P")
+street(420, -170, -135, "H", "P")
+output.write(model_string.format(index, -170, -100, 0, "house_3"))
+index = index + 1 
 output.close()	

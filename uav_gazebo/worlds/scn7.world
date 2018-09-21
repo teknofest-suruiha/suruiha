@@ -1,37 +1,49 @@
 <?xml version="1.0" ?>
-<sdf version="1.6">
-  <world name="scn7">
-    <gui>
-      <camera name="user_camera">
-        <pose>-240 -250 20 0 0.33 1.5707</pose>
+<sdf version='1.6'>
+  <world name='pre_small'>
+    <gui fullscreen='0'>
+      <camera name='user_camera'>
+        <pose frame=''>-80.4194 -422.505 407.776 0 1.054 1.5707</pose>
+        <view_controller>orbit</view_controller>
+        <projection_type>perspective</projection_type>
       </camera>
     </gui>
-    <physics type="ode">
+    <physics name='default_physics' default='0' type='ode'>
       <ode>
         <solver>
           <type>quick</type>
           <iters>100</iters>
-          <sor>1.0</sor>
+          <sor>1</sor>
+          <use_dynamic_moi_rescaling>0</use_dynamic_moi_rescaling>
         </solver>
         <constraints>
-          <cfm>0.0</cfm>
+          <cfm>0</cfm>
           <erp>0.2</erp>
           <contact_max_correcting_vel>0.1</contact_max_correcting_vel>
-          <contact_surface_layer>0.0</contact_surface_layer>
+          <contact_surface_layer>0</contact_surface_layer>
         </constraints>
       </ode>
       <real_time_update_rate>400</real_time_update_rate>
       <max_step_size>0.0025</max_step_size>
+      <real_time_factor>1</real_time_factor>
     </physics>
-
-    <include>
-      <uri>model://sun</uri>
-    </include>
-
-    <model name="ground_plane">
-      <static>true</static>
-      <link name="link">
-        <collision name="collision">
+    <light name='sun' type='directional'>
+      <cast_shadows>1</cast_shadows>
+      <pose frame=''>0 0 10 0 -0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.1 0.1 0.1 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <direction>-0.5 0.5 -1</direction>
+    </light>
+    <model name='ground_plane'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
           <geometry>
             <plane>
               <normal>0 0 1</normal>
@@ -44,12 +56,20 @@
                 <mu>1</mu>
                 <mu2>1</mu2>
               </ode>
+              <torsional>
+                <ode/>
+              </torsional>
             </friction>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
           </surface>
+          <max_contacts>10</max_contacts>
         </collision>
-        <visual name="runway">
-          <pose>-240 -200 0.005 0 0 -1.5707</pose>
-          <cast_shadows>false</cast_shadows>
+        <visual name='runway'>
+          <pose frame=''>-240 -200 0.005 0 0 -1.5707</pose>
+          <cast_shadows>0</cast_shadows>
           <geometry>
             <plane>
               <normal>0 0 1</normal>
@@ -63,10 +83,9 @@
             </script>
           </material>
         </visual>
-
-        <visual name="grass">
-          <pose>0 0 0 0 0 0</pose>
-          <cast_shadows>false</cast_shadows>
+        <visual name='grass'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
           <geometry>
             <plane>
               <normal>0 0 1</normal>
@@ -80,359 +99,1022 @@
             </script>
           </material>
         </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
       </link>
     </model>
-    
+
+
+
 <model name="building_0">
   <static>true</static>
-  <pose>42 -223 0 0 0 5.96902604182</pose>
+  <pose>170 195 0 0 0 0</pose>
   <include>
-    <uri>model://apartment</uri>
+  <uri>model://osrf_first_office</uri>
   </include>
 </model>
+
 <model name="building_1">
   <static>true</static>
-  <pose>-190 81 0 0 0 6.14355896702</pose>
+  <pose>120 195 0 0 0 0</pose>
   <include>
-    <uri>model://house_3</uri>
+  <uri>model://apartment</uri>
   </include>
 </model>
+
 <model name="building_2">
   <static>true</static>
-  <pose>-111 91 0 0 0 4.52040276267</pose>
+  <pose>90 195 0 0 0 0</pose>
   <include>
-    <uri>model://house_2</uri>
+  <uri>model://house_2</uri>
   </include>
 </model>
+
 <model name="building_3">
   <static>true</static>
-  <pose>115 -75 0 0 0 0.663225115758</pose>
+  <pose>65 195 0 0 0 0</pose>
   <include>
-    <uri>model://grocery_store</uri>
+  <uri>model://osrf_first_office</uri>
   </include>
 </model>
+
 <model name="building_4">
   <static>true</static>
-  <pose>185 -170 0 0 0 4.32841654495</pose>
+  <pose>15 195 0 0 0 0</pose>
   <include>
-    <uri>model://grocery_store</uri>
+  <uri>model://house_2</uri>
   </include>
 </model>
+
 <model name="building_5">
   <static>true</static>
-  <pose>-104 196 0 0 0 3.68264472171</pose>
+  <pose>-10 195 0 0 0 0</pose>
   <include>
-    <uri>model://house_2</uri>
+  <uri>model://law_office</uri>
   </include>
 </model>
+
 <model name="building_6">
   <static>true</static>
-  <pose>-179 27 0 0 0 2.54818070791</pose>
+  <pose>-30 195 0 0 0 0</pose>
   <include>
-    <uri>model://apartment</uri>
+  <uri>model://house_3</uri>
   </include>
 </model>
+
 <model name="building_7">
   <static>true</static>
-  <pose>-181 -100 0 0 0 2.65290046303</pose>
+  <pose>-55 195 0 0 0 0</pose>
   <include>
-    <uri>model://apartment</uri>
+  <uri>model://house_2</uri>
   </include>
 </model>
+
 <model name="building_8">
   <static>true</static>
-  <pose>204 153 0 0 0 3.05432619099</pose>
+  <pose>-80 195 0 0 0 0</pose>
   <include>
-    <uri>model://school</uri>
+  <uri>model://gas_station</uri>
   </include>
 </model>
+
 <model name="building_9">
   <static>true</static>
-  <pose>-6 19 0 0 0 3.99680398707</pose>
+  <pose>-180 195 0 0 0 0</pose>
   <include>
-    <uri>model://grocery_store</uri>
+  <uri>model://house_1</uri>
   </include>
 </model>
+
 <model name="building_10">
   <static>true</static>
-  <pose>-61 -160 0 0 0 0.226892802759</pose>
+  <pose>-205 195 0 0 0 0</pose>
   <include>
-    <uri>model://school</uri>
+  <uri>model://house_2</uri>
   </include>
 </model>
+
 <model name="building_11">
   <static>true</static>
-  <pose>150 -121 0 0 0 5.91666616426</pose>
+  <pose>-230 195 0 0 0 0</pose>
   <include>
-    <uri>model://house_1</uri>
+  <uri>model://apartment</uri>
   </include>
 </model>
+
 <model name="building_12">
   <static>true</static>
-  <pose>143 215 0 0 0 3.85717764691</pose>
+  <pose>170 195 0 0 0 1.57</pose>
   <include>
-    <uri>model://post_office</uri>
+  <uri>model://house_1</uri>
   </include>
 </model>
+
 <model name="building_13">
   <static>true</static>
-  <pose>-101 40 0 0 0 2.68780704807</pose>
+  <pose>170 220 0 0 0 1.57</pose>
   <include>
-    <uri>model://osrf_first_office</uri>
+  <uri>model://house_1</uri>
   </include>
 </model>
+
 <model name="building_14">
   <static>true</static>
-  <pose>133 80 0 0 0 6.28318530718</pose>
+  <pose>170 245 0 0 0 1.57</pose>
   <include>
-    <uri>model://house_3</uri>
+  <uri>model://house_2</uri>
   </include>
 </model>
+
 <model name="building_15">
   <static>true</static>
-  <pose>-206 -193 0 0 0 5.1661745859</pose>
+  <pose>-130 195 0 0 0 1.57</pose>
   <include>
-    <uri>model://house_1</uri>
+  <uri>model://grocery_store</uri>
   </include>
 </model>
+
 <model name="building_16">
   <static>true</static>
-  <pose>94 121 0 0 0 4.13643032723</pose>
+  <pose>170 -195 0 0 0 0</pose>
   <include>
-    <uri>model://school</uri>
+  <uri>model://house_2</uri>
   </include>
 </model>
+
 <model name="building_17">
   <static>true</static>
-  <pose>-177 144 0 0 0 0.733038285838</pose>
+  <pose>145 -195 0 0 0 0</pose>
   <include>
-    <uri>model://house_3</uri>
+  <uri>model://house_3</uri>
   </include>
 </model>
+
 <model name="building_18">
   <static>true</static>
-  <pose>132 17 0 0 0 2.86233997327</pose>
+  <pose>120 -195 0 0 0 0</pose>
   <include>
-    <uri>model://house_1</uri>
+  <uri>model://house_3</uri>
   </include>
 </model>
+
 <model name="building_19">
   <static>true</static>
-  <pose>172 -66 0 0 0 1.95476876223</pose>
+  <pose>95 -195 0 0 0 0</pose>
   <include>
-    <uri>model://house_2</uri>
+  <uri>model://house_1</uri>
   </include>
 </model>
+
 <model name="building_20">
   <static>true</static>
-  <pose>52 -35 0 0 0 2.35619449019</pose>
+  <pose>70 -195 0 0 0 0</pose>
   <include>
-    <uri>model://school</uri>
+  <uri>model://apartment</uri>
   </include>
 </model>
+
 <model name="building_21">
   <static>true</static>
-  <pose>-40 -87 0 0 0 4.85201532054</pose>
+  <pose>40 -195 0 0 0 0</pose>
   <include>
-    <uri>model://office_building</uri>
+  <uri>model://apartment</uri>
   </include>
 </model>
+
 <model name="building_22">
   <static>true</static>
-  <pose>-62 107 0 0 0 0.680678408278</pose>
+  <pose>10 -195 0 0 0 0</pose>
   <include>
-    <uri>model://house_2</uri>
+  <uri>model://apartment</uri>
   </include>
 </model>
+
 <model name="building_23">
   <static>true</static>
-  <pose>93 219 0 0 0 5.48033385126</pose>
+  <pose>-20 -195 0 0 0 0</pose>
   <include>
-    <uri>model://grocery_store</uri>
+  <uri>model://house_3</uri>
   </include>
 </model>
+
 <model name="building_24">
   <static>true</static>
-  <pose>40 201 0 0 0 5.21853446346</pose>
+  <pose>-45 -195 0 0 0 0</pose>
   <include>
-    <uri>model://apartment</uri>
+  <uri>model://house_3</uri>
   </include>
 </model>
+
 <model name="building_25">
   <static>true</static>
-  <pose>139 -219 0 0 0 1.69296937443</pose>
+  <pose>-70 -195 0 0 0 0</pose>
   <include>
-    <uri>model://house_3</uri>
+  <uri>model://apartment</uri>
   </include>
 </model>
+
 <model name="building_26">
   <static>true</static>
-  <pose>-90 -72 0 0 0 2.40855436775</pose>
+  <pose>-100 -195 0 0 0 0</pose>
   <include>
-    <uri>model://grocery_store</uri>
+  <uri>model://apartment</uri>
   </include>
 </model>
+
 <model name="building_27">
   <static>true</static>
-  <pose>18 103 0 0 0 1.69296937443</pose>
+  <pose>-130 -195 0 0 0 0</pose>
   <include>
-    <uri>model://apartment</uri>
+  <uri>model://apartment</uri>
   </include>
 </model>
+
 <model name="building_28">
   <static>true</static>
-  <pose>76 26 0 0 0 0.261799387799</pose>
+  <pose>-160 -195 0 0 0 0</pose>
   <include>
-    <uri>model://house_3</uri>
+  <uri>model://house_2</uri>
   </include>
 </model>
+
 <model name="building_29">
   <static>true</static>
-  <pose>-216 200 0 0 0 3.97935069455</pose>
+  <pose>-185 -195 0 0 0 0</pose>
   <include>
-    <uri>model://grocery_store</uri>
+  <uri>model://house_2</uri>
   </include>
 </model>
+
 <model name="building_30">
   <static>true</static>
-  <pose>193 10 0 0 0 6.17846555206</pose>
+  <pose>-210 -195 0 0 0 0</pose>
   <include>
-    <uri>model://law_office</uri>
+  <uri>model://house_1</uri>
   </include>
 </model>
+
 <model name="building_31">
   <static>true</static>
-  <pose>-29 169 0 0 0 2.21656815003</pose>
+  <pose>-235 -195 0 0 0 0</pose>
   <include>
-    <uri>model://school</uri>
+  <uri>model://apartment</uri>
   </include>
 </model>
+
 <model name="building_32">
   <static>true</static>
-  <pose>63 -141 0 0 0 2.80998009571</pose>
+  <pose>170 -240 0 0 0 1.57</pose>
   <include>
-    <uri>model://grocery_store</uri>
+  <uri>model://house_3</uri>
   </include>
 </model>
+
 <model name="building_33">
   <static>true</static>
-  <pose>150 141 0 0 0 0.802851455917</pose>
+  <pose>170 -220 0 0 0 1.57</pose>
   <include>
-    <uri>model://office_building</uri>
+  <uri>model://apartment</uri>
   </include>
 </model>
+
 <model name="building_34">
   <static>true</static>
-  <pose>-98 -218 0 0 0 3.76991118431</pose>
+  <pose>-40 -25 0 0 0 1.57</pose>
   <include>
-    <uri>model://grocery_store</uri>
+  <uri>model://house_2</uri>
   </include>
 </model>
+
 <model name="building_35">
   <static>true</static>
-  <pose>-47 -25 0 0 0 4.52040276267</pose>
+  <pose>170 25 0 0 0 0</pose>
   <include>
-    <uri>model://osrf_first_office</uri>
+  <uri>model://school</uri>
   </include>
 </model>
+
 <model name="building_36">
   <static>true</static>
-  <pose>-224 -70 0 0 0 3.12413936107</pose>
+  <pose>140 25 0 0 0 0</pose>
   <include>
-    <uri>model://office_building</uri>
+  <uri>model://house_1</uri>
   </include>
 </model>
+
 <model name="building_37">
   <static>true</static>
-  <pose>220 -134 0 0 0 0.453785605519</pose>
+  <pose>115 25 0 0 0 0</pose>
   <include>
-    <uri>model://apartment</uri>
+  <uri>model://house_1</uri>
   </include>
 </model>
+
 <model name="building_38">
   <static>true</static>
-  <pose>102 -177 0 0 0 1.93731546971</pose>
+  <pose>90 25 0 0 0 0</pose>
   <include>
-    <uri>model://grocery_store</uri>
+  <uri>model://gas_station</uri>
   </include>
 </model>
+
 <model name="building_39">
   <static>true</static>
-  <pose>-123 -23 0 0 0 2.94960643587</pose>
+  <pose>-10 25 0 0 0 0</pose>
   <include>
-    <uri>model://house_2</uri>
+  <uri>model://apartment</uri>
   </include>
 </model>
+
 <model name="building_40">
   <static>true</static>
-  <pose>-147 -181 0 0 0 5.6897733615</pose>
+  <pose>-40 25 0 0 0 0</pose>
   <include>
-    <uri>model://office_building</uri>
+  <uri>model://house_1</uri>
   </include>
 </model>
+
 <model name="building_41">
   <static>true</static>
-  <pose>-2 -165 0 0 0 0.959931088597</pose>
+  <pose>-65 25 0 0 0 0</pose>
   <include>
-    <uri>model://grocery_store</uri>
+  <uri>model://house_2</uri>
   </include>
 </model>
+
 <model name="building_42">
   <static>true</static>
-  <pose>-111 -133 0 0 0 5.98647933434</pose>
+  <pose>-90 25 0 0 0 0</pose>
   <include>
-    <uri>model://house_1</uri>
+  <uri>model://house_1</uri>
   </include>
 </model>
+
 <model name="building_43">
   <static>true</static>
-  <pose>46 -91 0 0 0 6.07374579694</pose>
+  <pose>-115 25 0 0 0 0</pose>
   <include>
-    <uri>model://house_1</uri>
+  <uri>model://house_1</uri>
   </include>
 </model>
+
 <model name="building_44">
   <static>true</static>
-  <pose>-215 -137 0 0 0 0.610865238198</pose>
+  <pose>-140 25 0 0 0 0</pose>
   <include>
-    <uri>model://fire_station</uri>
+  <uri>model://house_3</uri>
   </include>
 </model>
+
 <model name="building_45">
   <static>true</static>
-  <pose>193 100 0 0 0 1.29154364648</pose>
+  <pose>-165 25 0 0 0 0</pose>
   <include>
-    <uri>model://house_2</uri>
+  <uri>model://police_station</uri>
   </include>
 </model>
+
 <model name="building_46">
   <static>true</static>
-  <pose>-163 204 0 0 0 0.820304748437</pose>
+  <pose>-195 25 0 0 0 0</pose>
   <include>
-    <uri>model://house_1</uri>
+  <uri>model://house_3</uri>
   </include>
 </model>
+
 <model name="building_47">
   <static>true</static>
-  <pose>-30 -214 0 0 0 1.29154364648</pose>
+  <pose>-220 25 0 0 0 0</pose>
   <include>
-    <uri>model://house_3</uri>
+  <uri>model://apartment</uri>
   </include>
 </model>
+
 <model name="building_48">
   <static>true</static>
-  <pose>205 220 0 0 0 2.56563400043</pose>
+  <pose>170 -25 0 0 0 0</pose>
   <include>
-    <uri>model://house_2</uri>
+  <uri>model://house_1</uri>
   </include>
 </model>
+
 <model name="building_49">
   <static>true</static>
-  <pose>-182 -33 0 0 0 0.645771823238</pose>
+  <pose>145 -25 0 0 0 0</pose>
   <include>
-    <uri>model://house_2</uri>
+  <uri>model://house_3</uri>
   </include>
 </model>
+
+<model name="building_50">
+  <static>true</static>
+  <pose>120 -25 0 0 0 0</pose>
+  <include>
+  <uri>model://house_2</uri>
+  </include>
+</model>
+
+<model name="building_51">
+  <static>true</static>
+  <pose>95 -25 0 0 0 0</pose>
+  <include>
+  <uri>model://house_3</uri>
+  </include>
+</model>
+
+<model name="building_52">
+  <static>true</static>
+  <pose>70 -25 0 0 0 0</pose>
+  <include>
+  <uri>model://apartment</uri>
+  </include>
+</model>
+
+<model name="building_53">
+  <static>true</static>
+  <pose>40 -25 0 0 0 0</pose>
+  <include>
+  <uri>model://house_2</uri>
+  </include>
+</model>
+
+<model name="building_54">
+  <static>true</static>
+  <pose>15 -25 0 0 0 0</pose>
+  <include>
+  <uri>model://house_1</uri>
+  </include>
+</model>
+
+<model name="building_55">
+  <static>true</static>
+  <pose>-10 -25 0 0 0 0</pose>
+  <include>
+  <uri>model://cafe</uri>
+  </include>
+</model>
+
+<model name="building_56">
+  <static>true</static>
+  <pose>-70 -25 0 0 0 0</pose>
+  <include>
+  <uri>model://house_3</uri>
+  </include>
+</model>
+
+<model name="building_57">
+  <static>true</static>
+  <pose>-95 -25 0 0 0 0</pose>
+  <include>
+  <uri>model://law_office</uri>
+  </include>
+</model>
+
+<model name="building_58">
+  <static>true</static>
+  <pose>-115 -25 0 0 0 0</pose>
+  <include>
+  <uri>model://apartment</uri>
+  </include>
+</model>
+
+<model name="building_59">
+  <static>true</static>
+  <pose>-145 -25 0 0 0 0</pose>
+  <include>
+  <uri>model://cafe</uri>
+  </include>
+</model>
+
+<model name="building_60">
+  <static>true</static>
+  <pose>-205 -25 0 0 0 0</pose>
+  <include>
+  <uri>model://apartment</uri>
+  </include>
+</model>
+
+<model name="building_61">
+  <static>true</static>
+  <pose>-235 -25 0 0 0 0</pose>
+  <include>
+  <uri>model://house_1</uri>
+  </include>
+</model>
+
+<model name="building_62">
+  <static>true</static>
+  <pose>170 0 0 0 0 0</pose>
+  <include>
+  <uri>model://house_1</uri>
+  </include>
+</model>
+
+<model name="building_63">
+  <static>true</static>
+  <pose>-170 85 0 0 0 0</pose>
+  <include>
+  <uri>model://house_1</uri>
+  </include>
+</model>
+
+<model name="building_64">
+  <static>true</static>
+  <pose>-145 85 0 0 0 0</pose>
+  <include>
+  <uri>model://house_2</uri>
+  </include>
+</model>
+
+<model name="building_65">
+  <static>true</static>
+  <pose>-120 85 0 0 0 0</pose>
+  <include>
+  <uri>model://house_1</uri>
+  </include>
+</model>
+
+<model name="building_66">
+  <static>true</static>
+  <pose>-95 85 0 0 0 0</pose>
+  <include>
+  <uri>model://house_3</uri>
+  </include>
+</model>
+
+<model name="building_67">
+  <static>true</static>
+  <pose>-70 85 0 0 0 0</pose>
+  <include>
+  <uri>model://house_2</uri>
+  </include>
+</model>
+
+<model name="building_68">
+  <static>true</static>
+  <pose>-45 85 0 0 0 0</pose>
+  <include>
+  <uri>model://fire_station</uri>
+  </include>
+</model>
+
+<model name="building_69">
+  <static>true</static>
+  <pose>35 85 0 0 0 0</pose>
+  <include>
+  <uri>model://house_3</uri>
+  </include>
+</model>
+
+<model name="building_70">
+  <static>true</static>
+  <pose>60 85 0 0 0 0</pose>
+  <include>
+  <uri>model://house_3</uri>
+  </include>
+</model>
+
+<model name="building_71">
+  <static>true</static>
+  <pose>85 85 0 0 0 0</pose>
+  <include>
+  <uri>model://house_1</uri>
+  </include>
+</model>
+
+<model name="building_72">
+  <static>true</static>
+  <pose>110 85 0 0 0 0</pose>
+  <include>
+  <uri>model://house_1</uri>
+  </include>
+</model>
+
+<model name="building_73">
+  <static>true</static>
+  <pose>135 85 0 0 0 0</pose>
+  <include>
+  <uri>model://house_1</uri>
+  </include>
+</model>
+
+<model name="building_74">
+  <static>true</static>
+  <pose>160 85 0 0 0 0</pose>
+  <include>
+  <uri>model://apartment</uri>
+  </include>
+</model>
+
+<model name="building_75">
+  <static>true</static>
+  <pose>190 85 0 0 0 0</pose>
+  <include>
+  <uri>model://house_3</uri>
+  </include>
+</model>
+
+<model name="building_76">
+  <static>true</static>
+  <pose>215 85 0 0 0 0</pose>
+  <include>
+  <uri>model://house_2</uri>
+  </include>
+</model>
+
+<model name="building_77">
+  <static>true</static>
+  <pose>240 85 0 0 0 0</pose>
+  <include>
+  <uri>model://house_3</uri>
+  </include>
+</model>
+
+<model name="building_78">
+  <static>true</static>
+  <pose>-170 135 0 0 0 0</pose>
+  <include>
+  <uri>model://osrf_first_office</uri>
+  </include>
+</model>
+
+<model name="building_79">
+  <static>true</static>
+  <pose>-120 135 0 0 0 0</pose>
+  <include>
+  <uri>model://house_3</uri>
+  </include>
+</model>
+
+<model name="building_80">
+  <static>true</static>
+  <pose>-95 135 0 0 0 0</pose>
+  <include>
+  <uri>model://house_2</uri>
+  </include>
+</model>
+
+<model name="building_81">
+  <static>true</static>
+  <pose>-70 135 0 0 0 0</pose>
+  <include>
+  <uri>model://apartment</uri>
+  </include>
+</model>
+
+<model name="building_82">
+  <static>true</static>
+  <pose>-40 135 0 0 0 0</pose>
+  <include>
+  <uri>model://apartment</uri>
+  </include>
+</model>
+
+<model name="building_83">
+  <static>true</static>
+  <pose>-10 135 0 0 0 0</pose>
+  <include>
+  <uri>model://house_1</uri>
+  </include>
+</model>
+
+<model name="building_84">
+  <static>true</static>
+  <pose>15 135 0 0 0 0</pose>
+  <include>
+  <uri>model://apartment</uri>
+  </include>
+</model>
+
+<model name="building_85">
+  <static>true</static>
+  <pose>45 135 0 0 0 0</pose>
+  <include>
+  <uri>model://house_3</uri>
+  </include>
+</model>
+
+<model name="building_86">
+  <static>true</static>
+  <pose>70 135 0 0 0 0</pose>
+  <include>
+  <uri>model://house_3</uri>
+  </include>
+</model>
+
+<model name="building_87">
+  <static>true</static>
+  <pose>95 135 0 0 0 0</pose>
+  <include>
+  <uri>model://apartment</uri>
+  </include>
+</model>
+
+<model name="building_88">
+  <static>true</static>
+  <pose>125 135 0 0 0 0</pose>
+  <include>
+  <uri>model://house_3</uri>
+  </include>
+</model>
+
+<model name="building_89">
+  <static>true</static>
+  <pose>150 135 0 0 0 0</pose>
+  <include>
+  <uri>model://house_2</uri>
+  </include>
+</model>
+
+<model name="building_90">
+  <static>true</static>
+  <pose>175 135 0 0 0 0</pose>
+  <include>
+  <uri>model://house_2</uri>
+  </include>
+</model>
+
+<model name="building_91">
+  <static>true</static>
+  <pose>200 135 0 0 0 0</pose>
+  <include>
+  <uri>model://apartment</uri>
+  </include>
+</model>
+
+<model name="building_92">
+  <static>true</static>
+  <pose>230 135 0 0 0 0</pose>
+  <include>
+  <uri>model://house_3</uri>
+  </include>
+</model>
+
+<model name="building_93">
+  <static>true</static>
+  <pose>-170 110 0 0 0 0</pose>
+  <include>
+  <uri>model://house_2</uri>
+  </include>
+</model>
+
+<model name="building_94">
+  <static>true</static>
+  <pose>-170 -85 0 0 0 0</pose>
+  <include>
+  <uri>model://house_3</uri>
+  </include>
+</model>
+
+<model name="building_95">
+  <static>true</static>
+  <pose>-145 -85 0 0 0 0</pose>
+  <include>
+  <uri>model://house_1</uri>
+  </include>
+</model>
+
+<model name="building_96">
+  <static>true</static>
+  <pose>-120 -85 0 0 0 0</pose>
+  <include>
+  <uri>model://office_building</uri>
+  </include>
+</model>
+
+<model name="building_97">
+  <static>true</static>
+  <pose>-70 -85 0 0 0 0</pose>
+  <include>
+  <uri>model://house_2</uri>
+  </include>
+</model>
+
+<model name="building_98">
+  <static>true</static>
+  <pose>-45 -85 0 0 0 0</pose>
+  <include>
+  <uri>model://house_2</uri>
+  </include>
+</model>
+
+<model name="building_99">
+  <static>true</static>
+  <pose>-20 -85 0 0 0 0</pose>
+  <include>
+  <uri>model://house_1</uri>
+  </include>
+</model>
+
+<model name="building_100">
+  <static>true</static>
+  <pose>5 -85 0 0 0 0</pose>
+  <include>
+  <uri>model://house_1</uri>
+  </include>
+</model>
+
+<model name="building_101">
+  <static>true</static>
+  <pose>30 -85 0 0 0 0</pose>
+  <include>
+  <uri>model://house_2</uri>
+  </include>
+</model>
+
+<model name="building_102">
+  <static>true</static>
+  <pose>55 -85 0 0 0 0</pose>
+  <include>
+  <uri>model://school</uri>
+  </include>
+</model>
+
+<model name="building_103">
+  <static>true</static>
+  <pose>85 -85 0 0 0 0</pose>
+  <include>
+  <uri>model://house_1</uri>
+  </include>
+</model>
+
+<model name="building_104">
+  <static>true</static>
+  <pose>110 -85 0 0 0 0</pose>
+  <include>
+  <uri>model://house_2</uri>
+  </include>
+</model>
+
+<model name="building_105">
+  <static>true</static>
+  <pose>135 -85 0 0 0 0</pose>
+  <include>
+  <uri>model://law_office</uri>
+  </include>
+</model>
+
+<model name="building_106">
+  <static>true</static>
+  <pose>155 -85 0 0 0 0</pose>
+  <include>
+  <uri>model://house_2</uri>
+  </include>
+</model>
+
+<model name="building_107">
+  <static>true</static>
+  <pose>180 -85 0 0 0 0</pose>
+  <include>
+  <uri>model://apartment</uri>
+  </include>
+</model>
+
+<model name="building_108">
+  <static>true</static>
+  <pose>210 -85 0 0 0 0</pose>
+  <include>
+  <uri>model://grocery_store</uri>
+  </include>
+</model>
+
+<model name="building_109">
+  <static>true</static>
+  <pose>-170 -135 0 0 0 0</pose>
+  <include>
+  <uri>model://house_1</uri>
+  </include>
+</model>
+
+<model name="building_110">
+  <static>true</static>
+  <pose>-145 -135 0 0 0 0</pose>
+  <include>
+  <uri>model://gas_station</uri>
+  </include>
+</model>
+
+<model name="building_111">
+  <static>true</static>
+  <pose>-45 -135 0 0 0 0</pose>
+  <include>
+  <uri>model://apartment</uri>
+  </include>
+</model>
+
+<model name="building_112">
+  <static>true</static>
+  <pose>-15 -135 0 0 0 0</pose>
+  <include>
+  <uri>model://house_3</uri>
+  </include>
+</model>
+
+<model name="building_113">
+  <static>true</static>
+  <pose>10 -135 0 0 0 0</pose>
+  <include>
+  <uri>model://house_1</uri>
+  </include>
+</model>
+
+<model name="building_114">
+  <static>true</static>
+  <pose>35 -135 0 0 0 0</pose>
+  <include>
+  <uri>model://apartment</uri>
+  </include>
+</model>
+
+<model name="building_115">
+  <static>true</static>
+  <pose>65 -135 0 0 0 0</pose>
+  <include>
+  <uri>model://house_2</uri>
+  </include>
+</model>
+
+<model name="building_116">
+  <static>true</static>
+  <pose>90 -135 0 0 0 0</pose>
+  <include>
+  <uri>model://house_3</uri>
+  </include>
+</model>
+
+<model name="building_117">
+  <static>true</static>
+  <pose>115 -135 0 0 0 0</pose>
+  <include>
+  <uri>model://school</uri>
+  </include>
+</model>
+
+<model name="building_118">
+  <static>true</static>
+  <pose>145 -135 0 0 0 0</pose>
+  <include>
+  <uri>model://house_2</uri>
+  </include>
+</model>
+
+<model name="building_119">
+  <static>true</static>
+  <pose>170 -135 0 0 0 0</pose>
+  <include>
+  <uri>model://house_3</uri>
+  </include>
+</model>
+
+<model name="building_120">
+  <static>true</static>
+  <pose>195 -135 0 0 0 0</pose>
+  <include>
+  <uri>model://house_2</uri>
+  </include>
+</model>
+
+<model name="building_121">
+  <static>true</static>
+  <pose>220 -135 0 0 0 0</pose>
+  <include>
+  <uri>model://house_3</uri>
+  </include>
+</model>
+
+<model name="building_122">
+  <static>true</static>
+  <pose>245 -135 0 0 0 0</pose>
+  <include>
+  <uri>model://apartment</uri>
+  </include>
+</model>
+
+<model name="building_123">
+  <static>true</static>
+  <pose>-170 -100 0 0 0 0</pose>
+  <include>
+  <uri>model://house_3</uri>
+  </include>
+</model>
+
+<model name="building_124">
+  <static>true</static>
+  <pose>40 25 0 0 0 0</pose>
+  <include>
+  <uri>model://apartment</uri>
+  </include>
+</model>
+
+<model name="building_125">
+  <static>true</static>
+  <pose>-95 -135 0 0 0 0</pose>
+  <include>
+  <uri>model://school</uri>
+  </include>
+</model>
+
 
     <model name="zephyr0">
       <pose>-245 -237 0 0 0 3.1415</pose>
@@ -525,8 +1207,8 @@
         <distance_threshold>50</distance_threshold>
       </takeoff>
       <landing>
-        <area_bottom_left>480 -500 0</area_bottom_left>
-        <area_upper_right>500 -400 0</area_upper_right>
+        <area_bottom_left>-250 -250 0</area_bottom_left>
+        <area_upper_right>-230 -150 0</area_upper_right>
         <start_pose>-240 -150 30 0 0 3.1415</start_pose>
         <end_pose>-240 -240 0 0 0 3.1415</end_pose>
         <height_treshold>0.1</height_treshold>
@@ -579,7 +1261,8 @@
     </plugin>
     <plugin name="scenario_manager" filename="libscenario_manager.so">
       <!-- how long the scenario is going to run unit is milliseconds-->
-      <sim_duration>300000</sim_duration>
+      <sim_duration>450.0</sim_duration>
     </plugin>
+
   </world>
 </sdf>
