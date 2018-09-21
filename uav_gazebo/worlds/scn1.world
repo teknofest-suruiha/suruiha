@@ -3147,6 +3147,10 @@
         <time>175.085569134</time>
         <pose>-130.0 -160.0 0.0 0.0 0.0 -2.15879893034</pose>
       </waypoint>
+      <waypoint>
+        <time>250.085569134</time>
+        <pose>-160.0 35.0 0.0 0.0 0.0 -2.15879893034</pose>
+      </waypoint>
     </trajectory>
   </script>
 </actor>
@@ -3184,6 +3188,10 @@
         <time>158.846044477</time>
         <pose>-130.0 -160.0 0.0 0.0 0.0 -2.15879893034</pose>
       </waypoint>
+      <waypoint>
+        <time>240.085569134</time>
+        <pose>-160.0 35.0 0.0 0.0 0.0 -2.15879893034</pose>
+      </waypoint>
     </trajectory>
   </script>
 </actor>
@@ -3220,6 +3228,10 @@
       <waypoint>
         <time>168.981147874</time>
         <pose>-130.0 -160.0 0.0 0.0 0.0 -2.15879893034</pose>
+      </waypoint>
+      <waypoint>
+        <time>230.085569134</time>
+        <pose>-160.0 35.0 0.0 0.0 0.0 -2.15879893034</pose>
       </waypoint>
     </trajectory>
   </script>
