@@ -105,1015 +105,617 @@
       </link>
     </model>
 
-
-
 <model name="building_0">
   <static>true</static>
-  <pose>170 195 0 0 0 0</pose>
-  <include>
-  <uri>model://osrf_first_office</uri>
-  </include>
+  <pose>170 195 0 0 -0 0</pose>
+  <include><uri>model://osrf_first_office</uri></include>
 </model>
-
 <model name="building_1">
   <static>true</static>
-  <pose>120 195 0 0 0 0</pose>
-  <include>
-  <uri>model://apartment</uri>
-  </include>
+  <pose>120 195 0 0 -0 0</pose>
+  <include><uri>model://apartment</uri></include>
 </model>
-
 <model name="building_2">
   <static>true</static>
-  <pose>90 195 0 0 0 0</pose>
-  <include>
-  <uri>model://house_2</uri>
-  </include>
+  <pose>90 195 0 0 -0 0</pose>
+  <include><uri>model://house_2</uri></include>
 </model>
-
 <model name="building_3">
   <static>true</static>
-  <pose>65 195 0 0 0 0</pose>
-  <include>
-  <uri>model://osrf_first_office</uri>
-  </include>
+  <pose>65 195 0 0 -0 0</pose>
+  <include><uri>model://osrf_first_office</uri></include>
 </model>
-
 <model name="building_4">
   <static>true</static>
-  <pose>15 195 0 0 0 0</pose>
-  <include>
-  <uri>model://house_2</uri>
-  </include>
+  <pose>15 195 0 0 -0 0</pose>
+  <include><uri>model://house_2</uri></include>
 </model>
-
 <model name="building_5">
   <static>true</static>
-  <pose>-10 195 0 0 0 0</pose>
-  <include>
-  <uri>model://law_office</uri>
-  </include>
+  <pose>-10 195 0 0 -0 0</pose>
+  <include><uri>model://law_office</uri></include>
 </model>
-
 <model name="building_6">
   <static>true</static>
-  <pose>-30 195 0 0 0 0</pose>
-  <include>
-  <uri>model://house_3</uri>
-  </include>
+  <pose>-30 195 0 0 -0 0</pose>
+  <include><uri>model://house_3</uri></include>
 </model>
-
 <model name="building_7">
   <static>true</static>
-  <pose>-55 195 0 0 0 0</pose>
-  <include>
-  <uri>model://house_2</uri>
-  </include>
+  <pose>-55 195 0 0 -0 0</pose>
+  <include><uri>model://house_2</uri></include>
 </model>
-
 <model name="building_8">
   <static>true</static>
-  <pose>-80 195 0 0 0 0</pose>
-  <include>
-  <uri>model://gas_station</uri>
-  </include>
+  <pose>-80 195 0 0 -0 0</pose>
+  <include><uri>model://gas_station</uri></include>
 </model>
-
 <model name="building_9">
   <static>true</static>
-  <pose>-180 195 0 0 0 0</pose>
-  <include>
-  <uri>model://house_1</uri>
-  </include>
+  <pose>-180 195 0 0 -0 0</pose>
+  <include><uri>model://house_1</uri></include>
 </model>
-
 <model name="building_10">
   <static>true</static>
-  <pose>-205 195 0 0 0 0</pose>
-  <include>
-  <uri>model://house_2</uri>
-  </include>
+  <pose>-205 195 0 0 -0 0</pose>
+  <include><uri>model://house_2</uri></include>
 </model>
-
 <model name="building_11">
   <static>true</static>
-  <pose>-230 195 0 0 0 0</pose>
-  <include>
-  <uri>model://apartment</uri>
-  </include>
+  <pose>-230 195 0 0 -0 0</pose>
+  <include><uri>model://apartment</uri></include>
 </model>
-
 <model name="building_12">
   <static>true</static>
-  <pose>170 195 0 0 0 1.57</pose>
-  <include>
-  <uri>model://house_1</uri>
-  </include>
+  <pose>170 220 0 0 -0 1.57</pose>
+  <include><uri>model://house_1</uri></include>
 </model>
-
 <model name="building_13">
   <static>true</static>
-  <pose>170 220 0 0 0 1.57</pose>
-  <include>
-  <uri>model://house_1</uri>
-  </include>
+  <pose>-130 195 0 0 -0 1.57</pose>
+  <include><uri>model://grocery_store</uri></include>
 </model>
-
 <model name="building_14">
   <static>true</static>
-  <pose>170 245 0 0 0 1.57</pose>
-  <include>
-  <uri>model://house_2</uri>
-  </include>
+  <pose>170 -195 0 0 -0 0</pose>
+  <include><uri>model://house_2</uri></include>
 </model>
-
 <model name="building_15">
   <static>true</static>
-  <pose>-130 195 0 0 0 1.57</pose>
-  <include>
-  <uri>model://grocery_store</uri>
-  </include>
+  <pose>145 -195 0 0 -0 0</pose>
+  <include><uri>model://house_3</uri></include>
 </model>
-
 <model name="building_16">
   <static>true</static>
-  <pose>170 -195 0 0 0 0</pose>
-  <include>
-  <uri>model://house_2</uri>
-  </include>
+  <pose>120 -195 0 0 -0 0</pose>
+  <include><uri>model://house_3</uri></include>
 </model>
-
 <model name="building_17">
   <static>true</static>
-  <pose>145 -195 0 0 0 0</pose>
-  <include>
-  <uri>model://house_3</uri>
-  </include>
+  <pose>95 -195 0 0 -0 0</pose>
+  <include><uri>model://house_1</uri></include>
 </model>
-
 <model name="building_18">
   <static>true</static>
-  <pose>120 -195 0 0 0 0</pose>
-  <include>
-  <uri>model://house_3</uri>
-  </include>
+  <pose>70 -195 0 0 -0 0</pose>
+  <include><uri>model://apartment</uri></include>
 </model>
-
 <model name="building_19">
   <static>true</static>
-  <pose>95 -195 0 0 0 0</pose>
-  <include>
-  <uri>model://house_1</uri>
-  </include>
+  <pose>40 -195 0 0 -0 0</pose>
+  <include><uri>model://apartment</uri></include>
 </model>
-
 <model name="building_20">
   <static>true</static>
-  <pose>70 -195 0 0 0 0</pose>
-  <include>
-  <uri>model://apartment</uri>
-  </include>
+  <pose>10 -195 0 0 -0 0</pose>
+  <include><uri>model://apartment</uri></include>
 </model>
-
 <model name="building_21">
   <static>true</static>
-  <pose>40 -195 0 0 0 0</pose>
-  <include>
-  <uri>model://apartment</uri>
-  </include>
+  <pose>-20 -195 0 0 -0 0</pose>
+  <include><uri>model://house_3</uri></include>
 </model>
-
 <model name="building_22">
   <static>true</static>
-  <pose>10 -195 0 0 0 0</pose>
-  <include>
-  <uri>model://apartment</uri>
-  </include>
+  <pose>-45 -195 0 0 -0 0</pose>
+  <include><uri>model://house_3</uri></include>
 </model>
-
 <model name="building_23">
   <static>true</static>
-  <pose>-20 -195 0 0 0 0</pose>
-  <include>
-  <uri>model://house_3</uri>
-  </include>
+  <pose>-70 -195 0 0 -0 0</pose>
+  <include><uri>model://apartment</uri></include>
 </model>
-
 <model name="building_24">
   <static>true</static>
-  <pose>-45 -195 0 0 0 0</pose>
-  <include>
-  <uri>model://house_3</uri>
-  </include>
+  <pose>-100 -195 0 0 -0 0</pose>
+  <include><uri>model://apartment</uri></include>
 </model>
-
 <model name="building_25">
   <static>true</static>
-  <pose>-70 -195 0 0 0 0</pose>
-  <include>
-  <uri>model://apartment</uri>
-  </include>
+  <pose>-130 -195 0 0 -0 0</pose>
+  <include><uri>model://apartment</uri></include>
 </model>
-
 <model name="building_26">
   <static>true</static>
-  <pose>-100 -195 0 0 0 0</pose>
-  <include>
-  <uri>model://apartment</uri>
-  </include>
+  <pose>-160 -195 0 0 -0 0</pose>
+  <include><uri>model://house_2</uri></include>
 </model>
-
 <model name="building_27">
   <static>true</static>
-  <pose>-130 -195 0 0 0 0</pose>
-  <include>
-  <uri>model://apartment</uri>
-  </include>
+  <pose>-185 -195 0 0 -0 0</pose>
+  <include><uri>model://house_2</uri></include>
 </model>
-
 <model name="building_28">
   <static>true</static>
-  <pose>-160 -195 0 0 0 0</pose>
-  <include>
-  <uri>model://house_2</uri>
-  </include>
+  <pose>-210 -195 0 0 -0 0</pose>
+  <include><uri>model://house_1</uri></include>
 </model>
-
 <model name="building_29">
   <static>true</static>
-  <pose>-185 -195 0 0 0 0</pose>
-  <include>
-  <uri>model://house_2</uri>
-  </include>
+  <pose>170 -240 0 0 -0 1.57</pose>
+  <include><uri>model://house_3</uri></include>
 </model>
-
 <model name="building_30">
   <static>true</static>
-  <pose>-210 -195 0 0 0 0</pose>
-  <include>
-  <uri>model://house_1</uri>
-  </include>
+  <pose>170 -220 0 0 -0 1.57</pose>
+  <include><uri>model://apartment</uri></include>
 </model>
-
 <model name="building_31">
   <static>true</static>
-  <pose>-235 -195 0 0 0 0</pose>
-  <include>
-  <uri>model://apartment</uri>
-  </include>
+  <pose>-40 -25 0 0 -0 1.57</pose>
+  <include><uri>model://house_2</uri></include>
 </model>
-
 <model name="building_32">
   <static>true</static>
-  <pose>170 -240 0 0 0 1.57</pose>
-  <include>
-  <uri>model://house_3</uri>
-  </include>
+  <pose>170 25 0 0 -0 0</pose>
+  <include><uri>model://school</uri></include>
 </model>
-
 <model name="building_33">
   <static>true</static>
-  <pose>170 -220 0 0 0 1.57</pose>
-  <include>
-  <uri>model://apartment</uri>
-  </include>
+  <pose>140 25 0 0 -0 0</pose>
+  <include><uri>model://house_1</uri></include>
 </model>
-
 <model name="building_34">
   <static>true</static>
-  <pose>-40 -25 0 0 0 1.57</pose>
-  <include>
-  <uri>model://house_2</uri>
-  </include>
+  <pose>115 25 0 0 -0 0</pose>
+  <include><uri>model://house_1</uri></include>
 </model>
-
 <model name="building_35">
   <static>true</static>
-  <pose>170 25 0 0 0 0</pose>
-  <include>
-  <uri>model://school</uri>
-  </include>
+  <pose>90 25 0 0 -0 0</pose>
+  <include><uri>model://gas_station</uri></include>
 </model>
-
 <model name="building_36">
   <static>true</static>
-  <pose>140 25 0 0 0 0</pose>
-  <include>
-  <uri>model://house_1</uri>
-  </include>
+  <pose>-10 25 0 0 -0 0</pose>
+  <include><uri>model://apartment</uri></include>
 </model>
-
 <model name="building_37">
   <static>true</static>
-  <pose>115 25 0 0 0 0</pose>
-  <include>
-  <uri>model://house_1</uri>
-  </include>
+  <pose>-40 25 0 0 -0 0</pose>
+  <include><uri>model://house_1</uri></include>
 </model>
-
 <model name="building_38">
   <static>true</static>
-  <pose>90 25 0 0 0 0</pose>
-  <include>
-  <uri>model://gas_station</uri>
-  </include>
+  <pose>-65 25 0 0 -0 0</pose>
+  <include><uri>model://house_2</uri></include>
 </model>
-
 <model name="building_39">
   <static>true</static>
-  <pose>-10 25 0 0 0 0</pose>
-  <include>
-  <uri>model://apartment</uri>
-  </include>
+  <pose>-90 25 0 0 -0 0</pose>
+  <include><uri>model://house_1</uri></include>
 </model>
-
 <model name="building_40">
   <static>true</static>
-  <pose>-40 25 0 0 0 0</pose>
-  <include>
-  <uri>model://house_1</uri>
-  </include>
+  <pose>-115 25 0 0 -0 0</pose>
+  <include><uri>model://house_1</uri></include>
 </model>
-
 <model name="building_41">
   <static>true</static>
-  <pose>-65 25 0 0 0 0</pose>
-  <include>
-  <uri>model://house_2</uri>
-  </include>
+  <pose>-140 25 0 0 -0 0</pose>
+  <include><uri>model://house_3</uri></include>
 </model>
-
 <model name="building_42">
   <static>true</static>
-  <pose>-90 25 0 0 0 0</pose>
-  <include>
-  <uri>model://house_1</uri>
-  </include>
+  <pose>-165 25 0 0 -0 0</pose>
+  <include><uri>model://police_station</uri></include>
 </model>
-
 <model name="building_43">
   <static>true</static>
-  <pose>-115 25 0 0 0 0</pose>
-  <include>
-  <uri>model://house_1</uri>
-  </include>
+  <pose>-195 25 0 0 -0 0</pose>
+  <include><uri>model://house_3</uri></include>
 </model>
-
 <model name="building_44">
   <static>true</static>
-  <pose>-140 25 0 0 0 0</pose>
-  <include>
-  <uri>model://house_3</uri>
-  </include>
+  <pose>-220 25 0 0 -0 0</pose>
+  <include><uri>model://apartment</uri></include>
 </model>
-
 <model name="building_45">
   <static>true</static>
-  <pose>-165 25 0 0 0 0</pose>
-  <include>
-  <uri>model://police_station</uri>
-  </include>
+  <pose>170 -25 0 0 -0 0</pose>
+  <include><uri>model://house_1</uri></include>
 </model>
-
 <model name="building_46">
   <static>true</static>
-  <pose>-195 25 0 0 0 0</pose>
-  <include>
-  <uri>model://house_3</uri>
-  </include>
+  <pose>145 -25 0 0 -0 0</pose>
+  <include><uri>model://house_3</uri></include>
 </model>
-
 <model name="building_47">
   <static>true</static>
-  <pose>-220 25 0 0 0 0</pose>
-  <include>
-  <uri>model://apartment</uri>
-  </include>
+  <pose>120 -25 0 0 -0 0</pose>
+  <include><uri>model://house_2</uri></include>
 </model>
-
 <model name="building_48">
   <static>true</static>
-  <pose>170 -25 0 0 0 0</pose>
-  <include>
-  <uri>model://house_1</uri>
-  </include>
+  <pose>95 -25 0 0 -0 0</pose>
+  <include><uri>model://house_3</uri></include>
 </model>
-
 <model name="building_49">
   <static>true</static>
-  <pose>145 -25 0 0 0 0</pose>
-  <include>
-  <uri>model://house_3</uri>
-  </include>
+  <pose>70 -25 0 0 -0 0</pose>
+  <include><uri>model://apartment</uri></include>
 </model>
-
 <model name="building_50">
   <static>true</static>
-  <pose>120 -25 0 0 0 0</pose>
-  <include>
-  <uri>model://house_2</uri>
-  </include>
+  <pose>40 -25 0 0 -0 0</pose>
+  <include><uri>model://house_2</uri></include>
 </model>
-
 <model name="building_51">
   <static>true</static>
-  <pose>95 -25 0 0 0 0</pose>
-  <include>
-  <uri>model://house_3</uri>
-  </include>
+  <pose>15 -25 0 0 -0 0</pose>
+  <include><uri>model://house_1</uri></include>
 </model>
-
 <model name="building_52">
   <static>true</static>
-  <pose>70 -25 0 0 0 0</pose>
-  <include>
-  <uri>model://apartment</uri>
-  </include>
+  <pose>-10 -25 0 0 -0 0</pose>
+  <include><uri>model://cafe</uri></include>
 </model>
-
 <model name="building_53">
   <static>true</static>
-  <pose>40 -25 0 0 0 0</pose>
-  <include>
-  <uri>model://house_2</uri>
-  </include>
+  <pose>-70 -25 0 0 -0 0</pose>
+  <include><uri>model://house_3</uri></include>
 </model>
-
 <model name="building_54">
   <static>true</static>
-  <pose>15 -25 0 0 0 0</pose>
-  <include>
-  <uri>model://house_1</uri>
-  </include>
+  <pose>-95 -25 0 0 -0 0</pose>
+  <include><uri>model://law_office</uri></include>
 </model>
-
 <model name="building_55">
   <static>true</static>
-  <pose>-10 -25 0 0 0 0</pose>
-  <include>
-  <uri>model://cafe</uri>
-  </include>
+  <pose>-115 -25 0 0 -0 0</pose>
+  <include><uri>model://apartment</uri></include>
 </model>
-
 <model name="building_56">
   <static>true</static>
-  <pose>-70 -25 0 0 0 0</pose>
-  <include>
-  <uri>model://house_3</uri>
-  </include>
+  <pose>-145 -25 0 0 -0 0</pose>
+  <include><uri>model://cafe</uri></include>
 </model>
-
 <model name="building_57">
   <static>true</static>
-  <pose>-95 -25 0 0 0 0</pose>
-  <include>
-  <uri>model://law_office</uri>
-  </include>
+  <pose>-205 -25 0 0 -0 0</pose>
+  <include><uri>model://apartment</uri></include>
 </model>
-
 <model name="building_58">
   <static>true</static>
-  <pose>-115 -25 0 0 0 0</pose>
-  <include>
-  <uri>model://apartment</uri>
-  </include>
+  <pose>-235 -25 0 0 -0 0</pose>
+  <include><uri>model://house_1</uri></include>
 </model>
-
 <model name="building_59">
   <static>true</static>
-  <pose>-145 -25 0 0 0 0</pose>
-  <include>
-  <uri>model://cafe</uri>
-  </include>
+  <pose>170 0 0 0 -0 0</pose>
+  <include><uri>model://house_1</uri></include>
 </model>
-
 <model name="building_60">
   <static>true</static>
-  <pose>-205 -25 0 0 0 0</pose>
-  <include>
-  <uri>model://apartment</uri>
-  </include>
+  <pose>-170 85 0 0 -0 0</pose>
+  <include><uri>model://house_1</uri></include>
 </model>
-
 <model name="building_61">
   <static>true</static>
-  <pose>-235 -25 0 0 0 0</pose>
-  <include>
-  <uri>model://house_1</uri>
-  </include>
+  <pose>-145 85 0 0 -0 0</pose>
+  <include><uri>model://house_2</uri></include>
 </model>
-
 <model name="building_62">
   <static>true</static>
-  <pose>170 0 0 0 0 0</pose>
-  <include>
-  <uri>model://house_1</uri>
-  </include>
+  <pose>-120 85 0 0 -0 0</pose>
+  <include><uri>model://house_1</uri></include>
 </model>
-
 <model name="building_63">
   <static>true</static>
-  <pose>-170 85 0 0 0 0</pose>
-  <include>
-  <uri>model://house_1</uri>
-  </include>
+  <pose>-95 85 0 0 -0 0</pose>
+  <include><uri>model://house_3</uri></include>
 </model>
-
 <model name="building_64">
   <static>true</static>
-  <pose>-145 85 0 0 0 0</pose>
-  <include>
-  <uri>model://house_2</uri>
-  </include>
+  <pose>-70 85 0 0 -0 0</pose>
+  <include><uri>model://house_2</uri></include>
 </model>
-
 <model name="building_65">
   <static>true</static>
-  <pose>-120 85 0 0 0 0</pose>
-  <include>
-  <uri>model://house_1</uri>
-  </include>
+  <pose>-45 85 0 0 -0 0</pose>
+  <include><uri>model://fire_station</uri></include>
 </model>
-
 <model name="building_66">
   <static>true</static>
-  <pose>-95 85 0 0 0 0</pose>
-  <include>
-  <uri>model://house_3</uri>
-  </include>
+  <pose>35 85 0 0 -0 0</pose>
+  <include><uri>model://house_3</uri></include>
 </model>
-
 <model name="building_67">
   <static>true</static>
-  <pose>-70 85 0 0 0 0</pose>
-  <include>
-  <uri>model://house_2</uri>
-  </include>
+  <pose>60 85 0 0 -0 0</pose>
+  <include><uri>model://house_3</uri></include>
 </model>
-
 <model name="building_68">
   <static>true</static>
-  <pose>-45 85 0 0 0 0</pose>
-  <include>
-  <uri>model://fire_station</uri>
-  </include>
+  <pose>85 85 0 0 -0 0</pose>
+  <include><uri>model://house_1</uri></include>
 </model>
-
 <model name="building_69">
   <static>true</static>
-  <pose>35 85 0 0 0 0</pose>
-  <include>
-  <uri>model://house_3</uri>
-  </include>
+  <pose>110 85 0 0 -0 0</pose>
+  <include><uri>model://house_1</uri></include>
 </model>
-
 <model name="building_70">
   <static>true</static>
-  <pose>60 85 0 0 0 0</pose>
-  <include>
-  <uri>model://house_3</uri>
-  </include>
+  <pose>135 85 0 0 -0 0</pose>
+  <include><uri>model://house_1</uri></include>
 </model>
-
 <model name="building_71">
   <static>true</static>
-  <pose>85 85 0 0 0 0</pose>
-  <include>
-  <uri>model://house_1</uri>
-  </include>
+  <pose>160 85 0 0 -0 0</pose>
+  <include><uri>model://apartment</uri></include>
 </model>
-
 <model name="building_72">
   <static>true</static>
-  <pose>110 85 0 0 0 0</pose>
-  <include>
-  <uri>model://house_1</uri>
-  </include>
+  <pose>190 85 0 0 -0 0</pose>
+  <include><uri>model://house_3</uri></include>
 </model>
-
 <model name="building_73">
   <static>true</static>
-  <pose>135 85 0 0 0 0</pose>
-  <include>
-  <uri>model://house_1</uri>
-  </include>
+  <pose>215 85 0 0 -0 0</pose>
+  <include><uri>model://house_2</uri></include>
 </model>
-
 <model name="building_74">
   <static>true</static>
-  <pose>160 85 0 0 0 0</pose>
-  <include>
-  <uri>model://apartment</uri>
-  </include>
+  <pose>240 85 0 0 -0 0</pose>
+  <include><uri>model://house_3</uri></include>
 </model>
-
 <model name="building_75">
   <static>true</static>
-  <pose>190 85 0 0 0 0</pose>
-  <include>
-  <uri>model://house_3</uri>
-  </include>
+  <pose>-170 135 0 0 -0 0</pose>
+  <include><uri>model://osrf_first_office</uri></include>
 </model>
-
 <model name="building_76">
   <static>true</static>
-  <pose>215 85 0 0 0 0</pose>
-  <include>
-  <uri>model://house_2</uri>
-  </include>
+  <pose>-120 135 0 0 -0 0</pose>
+  <include><uri>model://house_3</uri></include>
 </model>
-
 <model name="building_77">
   <static>true</static>
-  <pose>240 85 0 0 0 0</pose>
-  <include>
-  <uri>model://house_3</uri>
-  </include>
+  <pose>-95 135 0 0 -0 0</pose>
+  <include><uri>model://house_2</uri></include>
 </model>
-
 <model name="building_78">
   <static>true</static>
-  <pose>-170 135 0 0 0 0</pose>
-  <include>
-  <uri>model://osrf_first_office</uri>
-  </include>
+  <pose>-70 135 0 0 -0 0</pose>
+  <include><uri>model://apartment</uri></include>
 </model>
-
 <model name="building_79">
   <static>true</static>
-  <pose>-120 135 0 0 0 0</pose>
-  <include>
-  <uri>model://house_3</uri>
-  </include>
+  <pose>-40 135 0 0 -0 0</pose>
+  <include><uri>model://apartment</uri></include>
 </model>
-
 <model name="building_80">
   <static>true</static>
-  <pose>-95 135 0 0 0 0</pose>
-  <include>
-  <uri>model://house_2</uri>
-  </include>
+  <pose>-10 135 0 0 -0 0</pose>
+  <include><uri>model://house_1</uri></include>
 </model>
-
 <model name="building_81">
   <static>true</static>
-  <pose>-70 135 0 0 0 0</pose>
-  <include>
-  <uri>model://apartment</uri>
-  </include>
+  <pose>15 135 0 0 -0 0</pose>
+  <include><uri>model://apartment</uri></include>
 </model>
-
 <model name="building_82">
   <static>true</static>
-  <pose>-40 135 0 0 0 0</pose>
-  <include>
-  <uri>model://apartment</uri>
-  </include>
+  <pose>45 135 0 0 -0 0</pose>
+  <include><uri>model://house_3</uri></include>
 </model>
-
 <model name="building_83">
   <static>true</static>
-  <pose>-10 135 0 0 0 0</pose>
-  <include>
-  <uri>model://house_1</uri>
-  </include>
+  <pose>70 135 0 0 -0 0</pose>
+  <include><uri>model://house_3</uri></include>
 </model>
-
 <model name="building_84">
   <static>true</static>
-  <pose>15 135 0 0 0 0</pose>
-  <include>
-  <uri>model://apartment</uri>
-  </include>
+  <pose>95 135 0 0 -0 0</pose>
+  <include><uri>model://apartment</uri></include>
 </model>
-
 <model name="building_85">
   <static>true</static>
-  <pose>45 135 0 0 0 0</pose>
-  <include>
-  <uri>model://house_3</uri>
-  </include>
+  <pose>125 135 0 0 -0 0</pose>
+  <include><uri>model://house_3</uri></include>
 </model>
-
 <model name="building_86">
   <static>true</static>
-  <pose>70 135 0 0 0 0</pose>
-  <include>
-  <uri>model://house_3</uri>
-  </include>
+  <pose>150 135 0 0 -0 0</pose>
+  <include><uri>model://house_2</uri></include>
 </model>
-
 <model name="building_87">
   <static>true</static>
-  <pose>95 135 0 0 0 0</pose>
-  <include>
-  <uri>model://apartment</uri>
-  </include>
+  <pose>175 135 0 0 -0 0</pose>
+  <include><uri>model://house_2</uri></include>
 </model>
-
 <model name="building_88">
   <static>true</static>
-  <pose>125 135 0 0 0 0</pose>
-  <include>
-  <uri>model://house_3</uri>
-  </include>
+  <pose>200 135 0 0 -0 0</pose>
+  <include><uri>model://apartment</uri></include>
 </model>
-
 <model name="building_89">
   <static>true</static>
-  <pose>150 135 0 0 0 0</pose>
-  <include>
-  <uri>model://house_2</uri>
-  </include>
+  <pose>230 135 0 0 -0 0</pose>
+  <include><uri>model://house_3</uri></include>
 </model>
-
 <model name="building_90">
   <static>true</static>
-  <pose>175 135 0 0 0 0</pose>
-  <include>
-  <uri>model://house_2</uri>
-  </include>
+  <pose>-170 110 0 0 -0 0</pose>
+  <include><uri>model://house_2</uri></include>
 </model>
-
 <model name="building_91">
   <static>true</static>
-  <pose>200 135 0 0 0 0</pose>
-  <include>
-  <uri>model://apartment</uri>
-  </include>
+  <pose>-170 -85 0 0 -0 0</pose>
+  <include><uri>model://house_3</uri></include>
 </model>
-
 <model name="building_92">
   <static>true</static>
-  <pose>230 135 0 0 0 0</pose>
-  <include>
-  <uri>model://house_3</uri>
-  </include>
+  <pose>-145 -85 0 0 -0 0</pose>
+  <include><uri>model://house_1</uri></include>
 </model>
-
 <model name="building_93">
   <static>true</static>
-  <pose>-170 110 0 0 0 0</pose>
-  <include>
-  <uri>model://house_2</uri>
-  </include>
+  <pose>-120 -85 0 0 -0 0</pose>
+  <include><uri>model://office_building</uri></include>
 </model>
-
 <model name="building_94">
   <static>true</static>
-  <pose>-170 -85 0 0 0 0</pose>
-  <include>
-  <uri>model://house_3</uri>
-  </include>
+  <pose>-70 -85 0 0 -0 0</pose>
+  <include><uri>model://house_2</uri></include>
 </model>
-
 <model name="building_95">
   <static>true</static>
-  <pose>-145 -85 0 0 0 0</pose>
-  <include>
-  <uri>model://house_1</uri>
-  </include>
+  <pose>-45 -85 0 0 -0 0</pose>
+  <include><uri>model://house_2</uri></include>
 </model>
-
 <model name="building_96">
   <static>true</static>
-  <pose>-120 -85 0 0 0 0</pose>
-  <include>
-  <uri>model://office_building</uri>
-  </include>
+  <pose>-20 -85 0 0 -0 0</pose>
+  <include><uri>model://house_1</uri></include>
 </model>
-
 <model name="building_97">
   <static>true</static>
-  <pose>-70 -85 0 0 0 0</pose>
-  <include>
-  <uri>model://house_2</uri>
-  </include>
+  <pose>5 -85 0 0 -0 0</pose>
+  <include><uri>model://house_1</uri></include>
 </model>
-
 <model name="building_98">
   <static>true</static>
-  <pose>-45 -85 0 0 0 0</pose>
-  <include>
-  <uri>model://house_2</uri>
-  </include>
+  <pose>30 -85 0 0 -0 0</pose>
+  <include><uri>model://house_2</uri></include>
 </model>
-
 <model name="building_99">
   <static>true</static>
-  <pose>-20 -85 0 0 0 0</pose>
-  <include>
-  <uri>model://house_1</uri>
-  </include>
+  <pose>55 -85 0 0 -0 0</pose>
+  <include><uri>model://school</uri></include>
 </model>
-
 <model name="building_100">
   <static>true</static>
-  <pose>5 -85 0 0 0 0</pose>
-  <include>
-  <uri>model://house_1</uri>
-  </include>
+  <pose>85 -85 0 0 -0 0</pose>
+  <include><uri>model://house_1</uri></include>
 </model>
-
 <model name="building_101">
   <static>true</static>
-  <pose>30 -85 0 0 0 0</pose>
-  <include>
-  <uri>model://house_2</uri>
-  </include>
+  <pose>110 -85 0 0 -0 0</pose>
+  <include><uri>model://house_2</uri></include>
 </model>
-
 <model name="building_102">
   <static>true</static>
-  <pose>55 -85 0 0 0 0</pose>
-  <include>
-  <uri>model://school</uri>
-  </include>
+  <pose>135 -85 0 0 -0 0</pose>
+  <include><uri>model://law_office</uri></include>
 </model>
-
 <model name="building_103">
   <static>true</static>
-  <pose>85 -85 0 0 0 0</pose>
-  <include>
-  <uri>model://house_1</uri>
-  </include>
+  <pose>155 -85 0 0 -0 0</pose>
+  <include><uri>model://house_2</uri></include>
 </model>
-
 <model name="building_104">
   <static>true</static>
-  <pose>110 -85 0 0 0 0</pose>
-  <include>
-  <uri>model://house_2</uri>
-  </include>
+  <pose>180 -85 0 0 -0 0</pose>
+  <include><uri>model://apartment</uri></include>
 </model>
-
 <model name="building_105">
   <static>true</static>
-  <pose>135 -85 0 0 0 0</pose>
-  <include>
-  <uri>model://law_office</uri>
-  </include>
+  <pose>210 -85 0 0 -0 0</pose>
+  <include><uri>model://grocery_store</uri></include>
 </model>
-
 <model name="building_106">
   <static>true</static>
-  <pose>155 -85 0 0 0 0</pose>
-  <include>
-  <uri>model://house_2</uri>
-  </include>
+  <pose>-170 -135 0 0 -0 0</pose>
+  <include><uri>model://house_1</uri></include>
 </model>
-
 <model name="building_107">
   <static>true</static>
-  <pose>180 -85 0 0 0 0</pose>
-  <include>
-  <uri>model://apartment</uri>
-  </include>
+  <pose>-145 -135 0 0 -0 0</pose>
+  <include><uri>model://gas_station</uri></include>
 </model>
-
 <model name="building_108">
   <static>true</static>
-  <pose>210 -85 0 0 0 0</pose>
-  <include>
-  <uri>model://grocery_store</uri>
-  </include>
+  <pose>-45 -135 0 0 -0 0</pose>
+  <include><uri>model://apartment</uri></include>
 </model>
-
 <model name="building_109">
   <static>true</static>
-  <pose>-170 -135 0 0 0 0</pose>
-  <include>
-  <uri>model://house_1</uri>
-  </include>
+  <pose>-15 -135 0 0 -0 0</pose>
+  <include><uri>model://house_3</uri></include>
 </model>
-
 <model name="building_110">
   <static>true</static>
-  <pose>-145 -135 0 0 0 0</pose>
-  <include>
-  <uri>model://gas_station</uri>
-  </include>
+  <pose>10 -135 0 0 -0 0</pose>
+  <include><uri>model://house_1</uri></include>
 </model>
-
 <model name="building_111">
   <static>true</static>
-  <pose>-45 -135 0 0 0 0</pose>
-  <include>
-  <uri>model://apartment</uri>
-  </include>
+  <pose>35 -135 0 0 -0 0</pose>
+  <include><uri>model://apartment</uri></include>
 </model>
-
 <model name="building_112">
   <static>true</static>
-  <pose>-15 -135 0 0 0 0</pose>
-  <include>
-  <uri>model://house_3</uri>
-  </include>
+  <pose>65 -135 0 0 -0 0</pose>
+  <include><uri>model://house_2</uri></include>
 </model>
-
 <model name="building_113">
   <static>true</static>
-  <pose>10 -135 0 0 0 0</pose>
-  <include>
-  <uri>model://house_1</uri>
-  </include>
+  <pose>90 -135 0 0 -0 0</pose>
+  <include><uri>model://house_3</uri></include>
 </model>
-
 <model name="building_114">
   <static>true</static>
-  <pose>35 -135 0 0 0 0</pose>
-  <include>
-  <uri>model://apartment</uri>
-  </include>
+  <pose>115 -135 0 0 -0 0</pose>
+  <include><uri>model://school</uri></include>
 </model>
-
 <model name="building_115">
   <static>true</static>
-  <pose>65 -135 0 0 0 0</pose>
-  <include>
-  <uri>model://house_2</uri>
-  </include>
+  <pose>145 -135 0 0 -0 0</pose>
+  <include><uri>model://house_2</uri></include>
 </model>
-
 <model name="building_116">
   <static>true</static>
-  <pose>90 -135 0 0 0 0</pose>
-  <include>
-  <uri>model://house_3</uri>
-  </include>
+  <pose>170 -135 0 0 -0 0</pose>
+  <include><uri>model://house_3</uri></include>
 </model>
-
 <model name="building_117">
   <static>true</static>
-  <pose>115 -135 0 0 0 0</pose>
-  <include>
-  <uri>model://school</uri>
-  </include>
+  <pose>195 -135 0 0 -0 0</pose>
+  <include><uri>model://house_2</uri></include>
 </model>
-
 <model name="building_118">
   <static>true</static>
-  <pose>145 -135 0 0 0 0</pose>
-  <include>
-  <uri>model://house_2</uri>
-  </include>
+  <pose>220 -135 0 0 -0 0</pose>
+  <include><uri>model://house_3</uri></include>
 </model>
-
 <model name="building_119">
   <static>true</static>
-  <pose>170 -135 0 0 0 0</pose>
-  <include>
-  <uri>model://house_3</uri>
-  </include>
+  <pose>-170 -100 0 0 -0 0</pose>
+  <include><uri>model://house_3</uri></include>
 </model>
-
 <model name="building_120">
   <static>true</static>
-  <pose>195 -135 0 0 0 0</pose>
-  <include>
-  <uri>model://house_2</uri>
-  </include>
+  <pose>40 25 0 0 -0 0</pose>
+  <include><uri>model://apartment</uri></include>
 </model>
-
 <model name="building_121">
   <static>true</static>
-  <pose>220 -135 0 0 0 0</pose>
-  <include>
-  <uri>model://house_3</uri>
-  </include>
+  <pose>-95 -135 0 0 -0 0</pose>
+  <include><uri>model://school</uri></include>
 </model>
 
-<model name="building_122">
-  <static>true</static>
-  <pose>245 -135 0 0 0 0</pose>
-  <include>
-  <uri>model://apartment</uri>
-  </include>
-</model>
-
-<model name="building_123">
-  <static>true</static>
-  <pose>-170 -100 0 0 0 0</pose>
-  <include>
-  <uri>model://house_3</uri>
-  </include>
-</model>
-
-<model name="building_124">
-  <static>true</static>
-  <pose>40 25 0 0 0 0</pose>
-  <include>
-  <uri>model://apartment</uri>
-  </include>
-</model>
-
-<model name="building_125">
-  <static>true</static>
-  <pose>-95 -135 0 0 0 0</pose>
-  <include>
-  <uri>model://school</uri>
-  </include>
-</model>
 
 
     <model name="zephyr0">
@@ -1199,6 +801,883 @@
         <uri>model://iris_quadrotor_with_plugin</uri>
       </include>
     </model>
+    
+    <actor name="terrorist_0">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>false</interpolate_x>
+  </animation>  <pose>-160.0 -195.0 1.07 0.0 0.0 1.73594500421</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>100.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>-160.0 -195.0 0.0 0.0 0.0 1.73594500421</pose>
+      </waypoint>
+      <waypoint>
+        <time>50.3600917739</time>
+        <pose>-170.0 -135.0 0.0 0.0 0.0 1.73594500421</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_1">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>false</interpolate_x>
+  </animation>  <pose>-70.0 -195.0 1.07 0.0 0.0 1.96558744649</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>158.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>-70.0 -195.0 0.0 0.0 0.0 1.96558744649</pose>
+      </waypoint>
+      <waypoint>
+        <time>26.3641102205</time>
+        <pose>-95.0 -135.0 0.0 0.0 0.0 1.96558744649</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_2">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>false</interpolate_x>
+  </animation>  <pose>10.0 -195.0 1.07 0.0 0.0 1.57079632679</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>155.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>10.0 -195.0 0.0 0.0 0.0 1.57079632679</pose>
+      </waypoint>
+      <waypoint>
+        <time>29.0223358283</time>
+        <pose>10.0 -135.0 0.0 0.0 0.0 1.57079632679</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_3">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>false</interpolate_x>
+  </animation>  <pose>70.0 -195.0 1.07 0.0 0.0 1.73594500421</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>145.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>70.0 -195.0 0.0 0.0 0.0 1.73594500421</pose>
+      </waypoint>
+      <waypoint>
+        <time>30.1308666422</time>
+        <pose>60.0 -135.0 0.0 0.0 0.0 1.73594500421</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_4">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>false</interpolate_x>
+  </animation>  <pose>145.0 -135.0 1.07 0.0 0.0 -1.57079632679</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>150.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>145.0 -135.0 0.0 0.0 0.0 -1.57079632679</pose>
+      </waypoint>
+      <waypoint>
+        <time>52.5062085883</time>
+        <pose>145.0 -195.0 0.0 0.0 0.0 -1.57079632679</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_5">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>false</interpolate_x>
+  </animation>  <pose>-145.0 -85.0 1.07 0.0 0.0 -1.57079632679</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>180.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>-145.0 -85.0 0.0 0.0 0.0 -1.57079632679</pose>
+      </waypoint>
+      <waypoint>
+        <time>40.8734771499</time>
+        <pose>-145.0 -135.0 0.0 0.0 0.0 -1.57079632679</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_6">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>false</interpolate_x>
+  </animation>  <pose>-45.0 -85.0 1.07 0.0 0.0 -1.57079632679</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>150.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>-45.0 -85.0 0.0 0.0 0.0 -1.57079632679</pose>
+      </waypoint>
+      <waypoint>
+        <time>28.0431829803</time>
+        <pose>-45.0 -135.0 0.0 0.0 0.0 -1.57079632679</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_7">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>false</interpolate_x>
+  </animation>  <pose>35.0 -135.0 1.07 0.0 0.0 1.67046497929</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>130.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>35.0 -135.0 0.0 0.0 0.0 1.67046497929</pose>
+      </waypoint>
+      <waypoint>
+        <time>29.4142424821</time>
+        <pose>30.0 -85.0 0.0 0.0 0.0 1.67046497929</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_8">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>false</interpolate_x>
+  </animation>  <pose>135.0 -85.0 1.07 0.0 0.0 -1.37340076695</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>115.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>135.0 -85.0 0.0 0.0 0.0 -1.37340076695</pose>
+      </waypoint>
+      <waypoint>
+        <time>31.0819700459</time>
+        <pose>145.0 -135.0 0.0 0.0 0.0 -1.37340076695</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_9">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>false</interpolate_x>
+  </animation>  <pose>170.0 -195.0 1.07 0.0 0.0 1.57079632679</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>85.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>170.0 -195.0 0.0 0.0 0.0 1.57079632679</pose>
+      </waypoint>
+      <waypoint>
+        <time>31.7502795784</time>
+        <pose>170.0 -135.0 0.0 0.0 0.0 1.57079632679</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_10">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>false</interpolate_x>
+  </animation>  <pose>-145.0 -85.0 1.07 0.0 0.0 1.57079632679</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>110.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>-145.0 -85.0 0.0 0.0 0.0 1.57079632679</pose>
+      </waypoint>
+      <waypoint>
+        <time>42.1472894546</time>
+        <pose>-145.0 -25.0 0.0 0.0 0.0 1.57079632679</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_11">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>false</interpolate_x>
+  </animation>  <pose>-65.0 25.0 1.07 0.0 0.0 -1.67046497929</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>190.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>-65.0 25.0 0.0 0.0 0.0 -1.67046497929</pose>
+      </waypoint>
+      <waypoint>
+        <time>22.494205728</time>
+        <pose>-70.0 -25.0 0.0 0.0 0.0 -1.67046497929</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_12">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>false</interpolate_x>
+  </animation>  <pose>-10.0 25.0 1.07 0.0 0.0 -1.57079632679</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>150.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>-10.0 25.0 0.0 0.0 0.0 -1.57079632679</pose>
+      </waypoint>
+      <waypoint>
+        <time>35.4078354322</time>
+        <pose>-10.0 -25.0 0.0 0.0 0.0 -1.57079632679</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_13">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>false</interpolate_x>
+  </animation>  <pose>90.0 25.0 1.07 0.0 0.0 -1.95130270391</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>90.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>90.0 25.0 0.0 0.0 0.0 -1.95130270391</pose>
+      </waypoint>
+      <waypoint>
+        <time>35.3416903846</time>
+        <pose>70.0 -25.0 0.0 0.0 0.0 -1.95130270391</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_14">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>false</interpolate_x>
+  </animation>  <pose>145.0 -25.0 1.07 0.0 0.0 1.67046497929</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>110.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>145.0 -25.0 0.0 0.0 0.0 1.67046497929</pose>
+      </waypoint>
+      <waypoint>
+        <time>34.8934860783</time>
+        <pose>140.0 25.0 0.0 0.0 0.0 1.67046497929</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_15">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>false</interpolate_x>
+  </animation>  <pose>-165.0 25.0 1.07 0.0 0.0 1.65393755868</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>180.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>-165.0 25.0 0.0 0.0 0.0 1.65393755868</pose>
+      </waypoint>
+      <waypoint>
+        <time>29.6215685959</time>
+        <pose>-170.0 85.0 0.0 0.0 0.0 1.65393755868</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_16">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>false</interpolate_x>
+  </animation>  <pose>-115.0 25.0 1.07 0.0 0.0 1.65393755868</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>170.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>-115.0 25.0 0.0 0.0 0.0 1.65393755868</pose>
+      </waypoint>
+      <waypoint>
+        <time>51.5816324451</time>
+        <pose>-120.0 85.0 0.0 0.0 0.0 1.65393755868</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_17">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>false</interpolate_x>
+  </animation>  <pose>-45.0 85.0 1.07 0.0 0.0 -1.48765509491</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>54.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>-45.0 85.0 0.0 0.0 0.0 -1.48765509491</pose>
+      </waypoint>
+      <waypoint>
+        <time>29.4070276352</time>
+        <pose>-40.0 25.0 0.0 0.0 0.0 -1.48765509491</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_18">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>false</interpolate_x>
+  </animation>  <pose>40.0 25.0 1.07 0.0 0.0 1.65393755868</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>180.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>40.0 25.0 0.0 0.0 0.0 1.65393755868</pose>
+      </waypoint>
+      <waypoint>
+        <time>27.9445203752</time>
+        <pose>35.0 85.0 0.0 0.0 0.0 1.65393755868</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_19">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>false</interpolate_x>
+  </animation>  <pose>115.0 25.0 1.07 0.0 0.0 1.65393755868</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>170.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>115.0 25.0 0.0 0.0 0.0 1.65393755868</pose>
+      </waypoint>
+      <waypoint>
+        <time>48.1495106541</time>
+        <pose>110.0 85.0 0.0 0.0 0.0 1.65393755868</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_20">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>false</interpolate_x>
+  </animation>  <pose>-170.0 85.0 1.07 0.0 0.0 -1.48765509491</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>165.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>-170.0 85.0 0.0 0.0 0.0 -1.48765509491</pose>
+      </waypoint>
+      <waypoint>
+        <time>24.1109791756</time>
+        <pose>-165.0 25.0 0.0 0.0 0.0 -1.48765509491</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_21">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>false</interpolate_x>
+  </animation>  <pose>-115.0 25.0 1.07 0.0 0.0 1.65393755868</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>160.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>-115.0 25.0 0.0 0.0 0.0 1.65393755868</pose>
+      </waypoint>
+      <waypoint>
+        <time>29.7560247165</time>
+        <pose>-120.0 85.0 0.0 0.0 0.0 1.65393755868</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_22">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>false</interpolate_x>
+  </animation>  <pose>-40.0 25.0 1.07 0.0 0.0 1.65393755868</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>140.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>-40.0 25.0 0.0 0.0 0.0 1.65393755868</pose>
+      </waypoint>
+      <waypoint>
+        <time>28.1495145277</time>
+        <pose>-45.0 85.0 0.0 0.0 0.0 1.65393755868</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_23">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>false</interpolate_x>
+  </animation>  <pose>110.0 85.0 1.07 0.0 0.0 -1.48765509491</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>70.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>110.0 85.0 0.0 0.0 0.0 -1.48765509491</pose>
+      </waypoint>
+      <waypoint>
+        <time>53.1972914862</time>
+        <pose>115.0 25.0 0.0 0.0 0.0 -1.48765509491</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_24">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>false</interpolate_x>
+  </animation>  <pose>140.0 25.0 1.07 0.0 0.0 1.65393755868</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>60.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>140.0 25.0 0.0 0.0 0.0 1.65393755868</pose>
+      </waypoint>
+      <waypoint>
+        <time>33.1679942772</time>
+        <pose>135.0 85.0 0.0 0.0 0.0 1.65393755868</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_25">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>false</interpolate_x>
+  </animation>  <pose>-120.0 135.0 1.07 0.0 0.0 -1.57079632679</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>120.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>-120.0 135.0 0.0 0.0 0.0 -1.57079632679</pose>
+      </waypoint>
+      <waypoint>
+        <time>29.3930965315</time>
+        <pose>-120.0 85.0 0.0 0.0 0.0 -1.57079632679</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_26">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>false</interpolate_x>
+  </animation>  <pose>-40.0 135.0 1.07 0.0 0.0 -1.67046497929</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>35.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>-40.0 135.0 0.0 0.0 0.0 -1.67046497929</pose>
+      </waypoint>
+      <waypoint>
+        <time>31.6848096642</time>
+        <pose>-45.0 85.0 0.0 0.0 0.0 -1.67046497929</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_27">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>false</interpolate_x>
+  </animation>  <pose>35.0 85.0 1.07 0.0 0.0 1.37340076695</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>40.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>35.0 85.0 0.0 0.0 0.0 1.37340076695</pose>
+      </waypoint>
+      <waypoint>
+        <time>29.4348913685</time>
+        <pose>45.0 135.0 0.0 0.0 0.0 1.37340076695</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_28">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>false</interpolate_x>
+  </animation>  <pose>135.0 85.0 1.07 0.0 0.0 1.27933953232</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>50.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>135.0 85.0 0.0 0.0 0.0 1.27933953232</pose>
+      </waypoint>
+      <waypoint>
+        <time>24.0725541381</time>
+        <pose>150.0 135.0 0.0 0.0 0.0 1.27933953232</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_29">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>false</interpolate_x>
+  </animation>  <pose>215.0 85.0 1.07 0.0 0.0 1.86225312127</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>100.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>215.0 85.0 0.0 0.0 0.0 1.86225312127</pose>
+      </waypoint>
+      <waypoint>
+        <time>51.3144354223</time>
+        <pose>200.0 135.0 0.0 0.0 0.0 1.86225312127</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_30">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>false</interpolate_x>
+  </animation>  <pose>-80.0 195.0 1.07 0.0 0.0 -1.40564764938</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>120.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>-80.0 195.0 0.0 0.0 0.0 -1.40564764938</pose>
+      </waypoint>
+      <waypoint>
+        <time>27.7276116779</time>
+        <pose>-70.0 135.0 0.0 0.0 0.0 -1.40564764938</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_31">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>false</interpolate_x>
+  </animation>  <pose>-10.0 135.0 1.07 0.0 0.0 1.57079632679</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>100.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>-10.0 135.0 0.0 0.0 0.0 1.57079632679</pose>
+      </waypoint>
+      <waypoint>
+        <time>26.4258412819</time>
+        <pose>-10.0 195.0 0.0 0.0 0.0 1.57079632679</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_32">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>false</interpolate_x>
+  </animation>  <pose>15.0 135.0 1.07 0.0 0.0 1.57079632679</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>40.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>15.0 135.0 0.0 0.0 0.0 1.57079632679</pose>
+      </waypoint>
+      <waypoint>
+        <time>29.4390171381</time>
+        <pose>15.0 195.0 0.0 0.0 0.0 1.57079632679</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_33">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>false</interpolate_x>
+  </animation>  <pose>95.0 135.0 1.07 0.0 0.0 1.1760052071</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>10.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>95.0 135.0 0.0 0.0 0.0 1.1760052071</pose>
+      </waypoint>
+      <waypoint>
+        <time>29.5798058153</time>
+        <pose>120.0 195.0 0.0 0.0 0.0 1.1760052071</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_34">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>false</interpolate_x>
+  </animation>  <pose>200.0 135.0 1.07 0.0 0.0 2.70918487802</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>0.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>200.0 135.0 0.0 0.0 0.0 2.70918487802</pose>
+      </waypoint>
+      <waypoint>
+        <time>71.8064501564</time>
+        <pose>70.0 195.0 0.0 0.0 0.0 2.70918487802</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+
 
     <plugin name="air_traffic_controller" filename="libair_traffic_controller.so">
       <takeoff>
@@ -1236,7 +1715,7 @@
         <width>500</width>
         <height>500</height>
         <!-- the size of a single cell in meters -->
-        <resolution>0.5</resolution>
+        <resolution>1.0</resolution>
         <factor>0.3</factor>
       </area_coverage_score>
       <detection_score>
@@ -1261,7 +1740,7 @@
     </plugin>
     <plugin name="scenario_manager" filename="libscenario_manager.so">
       <!-- how long the scenario is going to run unit is milliseconds-->
-      <sim_duration>450.0</sim_duration>
+      <sim_duration>240.0</sim_duration>
     </plugin>
 
   </world>
