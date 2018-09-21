@@ -136,34 +136,59 @@ output = open("buildings2.txt", "w")
 # street(400, -350, -50 , "V", "N")
 
 
-square(-100, 100, 200)
 
-street(70, -170, 170, "H", "N")
-street(70, -170, 170, "V", "P")
 
-street(70, 170, 170, "H", "P")
-street(70, 170, 170, "V", "P")
+# square(-100, 100, 200)
 
-street(70, 170, -170, "H", "P")
-street(70, 170, -170, "V", "N")
+# street(70, -170, 170, "H", "N")
+# street(70, -170, 170, "V", "P")
 
-street(70, -170, -170, "H", "N")
-street(70, -170, -170, "V", "N")
+# street(70, 170, 170, "H", "P")
+# street(70, 170, 170, "V", "P")
 
-street(70, -170, 100, "H", "N")
-street(70, -170, -100, "H", "N")
-street(190, -170, 100, "V", "N")
+# street(70, 170, -170, "H", "P")
+# street(70, 170, -170, "V", "N")
 
-street(70, 170, 100, "H", "P")
-street(70, 170, -100, "H", "P")
-street(190, 170, 100, "V", "N")
+# street(70, -170, -170, "H", "N")
+# street(70, -170, -170, "V", "N")
 
-street(70, -100, 170, "V", "P")
-street(70, 100, 170, "V", "P")
-street(190, -100, 170, "H", "P")
+# street(70, -170, 100, "H", "N")
+# street(70, -170, -100, "H", "N")
+# street(190, -170, 100, "V", "N")
 
-street(70, -100, -170, "V", "N")
-street(70, 100, -170, "V", "N")
-street(190, -100, 170, "H", "P")
+# street(70, 170, 100, "H", "P")
+# street(70, 170, -100, "H", "P")
+# street(190, 170, 100, "V", "N")
 
+# street(70, -100, 170, "V", "P")
+# street(70, 100, 170, "V", "P")
+# street(190, -100, 170, "H", "P")
+
+# street(70, -100, -170, "V", "N")
+# street(70, 100, -170, "V", "N")
+# street(190, -100, 170, "H", "P")
+
+
+
+street(420, 170, 195, "H", "N")
+street(80, 170, 195, "V", "P")
+
+
+street(420, 170, -195, "H", "N")
+street(80, 170, -195, "V", "N")
+
+street(420, 170, 25, "H", "N")
+street(420, 170, -25, "H", "N")
+output.write(model_string.format(index, 170, 0, 0, "house_1"))
+index = index + 1 
+
+street(420, -170, 85, "H", "P")
+street(420, -170, 135, "H", "P")
+output.write(model_string.format(index, -170, 110, 0, "house_2"))
+index = index + 1 
+
+street(420, -170, -85, "H", "P")
+street(420, -170, -135, "H", "P")
+output.write(model_string.format(index, -170, -100, 0, "house_3"))
+index = index + 1 
 output.close()	
