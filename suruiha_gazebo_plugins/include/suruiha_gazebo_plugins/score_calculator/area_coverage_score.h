@@ -45,6 +45,7 @@ class AreaCoverageScore {
     protected: bool isVisualization;
     protected: int visualizationUpdateRate;
     protected: gazebo::common::Time lastVisUpdateTime;
+    protected: std::pair<float, float> GetRosParams(ros::NodeHandle* node, std::string modelName);
 
     protected: double sumOccupancy;
 

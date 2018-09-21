@@ -20,14 +20,41 @@ AreaCoverageScore::AreaCoverageScore() {
 AreaCoverageScore::~AreaCoverageScore() {
 }
 
+std::pair<float, float> AreaCoverageScore::GetRosParams(ros::NodeHandle* node, std::string modelName) {
+    std::pair<float, float> heights;
+    XmlRpc::XmlRpcValue scenarioParam;
+    node->getParam("scenario", scenarioParam);
+    XmlRpc::XmlRpcValue uavs = scenarioParam["uavs"];
+    bool isParamSet = false;
+    for (unsigned int i = 0; i < uavs.size(); i++) {
+        int uav_index = static_cast<int>(uavs[i]["index"]);
+        std::string type = static_cast<std::string>(uavs[i]["type"]);
+        std::stringstream ss;
+        ss << type << uav_index;
+        if (modelName == ss.str()) {
+            float minHeight = static_cast<int>(uavs[i]["sensor"]["min_height"]);
+            float maxHeight = static_cast<int>(uavs[i]["sensor"]["max_height"]);
+            heights.first = minHeight;
+            heights.second = maxHeight;
+            isParamSet = true;
+            break;
+        }
+    }
+    if (!isParamSet) {
+        gzdbg << "ERROR cannot set minHeight and maxHeight" << std::endl;
+    }
+    return heights;
+}
+
 void AreaCoverageScore::GetParameters(sdf::ElementPtr worldSdf, sdf::ElementPtr ownSDF) {
 // we assume that every uav can have different maximum height for perception
+    rosNode = Util::CreateROSNodeHandle("");
 
     // iterate over all models and if we have model with name iris or zephyr get its max_height uav_sensor
     sdf::ElementPtr modelSdf = worldSdf->GetElement("model");
     while (modelSdf != NULL) {
         std::string modelName = modelSdf->GetAttribute("name")->GetAsString();
-        gzdbg << "checking model:" << modelName << std::endl;
+//        gzdbg << "checking model:" << modelName << std::endl;
         // we would like to find models having name zephyr or iris
         if (modelName.find("zephyr") != std::string::npos || modelName.find("iris") != std::string::npos) {
             sdf::ElementPtr pluginSdf = modelSdf->GetElement("plugin");
@@ -35,22 +62,26 @@ void AreaCoverageScore::GetParameters(sdf::ElementPtr worldSdf, sdf::ElementPtr 
                 std::string pluginName = pluginSdf->GetAttribute("name")->GetAsString();
                 // we would like to find zephyr_controller or iris_controller plugins
                 if (pluginName.find("zephyr") != std::string::npos || pluginName.find("iris") != std::string::npos) {
-                    gzdbg << "checking plugin:" << pluginName << std::endl;
-                    float maxHeight = pluginSdf->GetElement("uav_sensor")->Get<float>("max_height");
-                    float minHeight = pluginSdf->GetElement("uav_sensor")->Get<float>("min_height");
+//                    gzdbg << "checking plugin:" << pluginName << std::endl;
+//                    float maxHeight = pluginSdf->GetElement("uav_sensor")->Get<float>("max_height");
+//                    float minHeight = pluginSdf->GetElement("uav_sensor")->Get<float>("min_height");
 
-                    modelPerceptionHeights.insert(std::pair<std::string, std::pair<float, float> >
-                                                          (modelName, std::pair<float, float>(minHeight, maxHeight)));
+//                    modelPerceptionHeights.insert(std::pair<std::string, std::pair<float, float> >
+//                                                          (modelName, std::pair<float, float>(minHeight, maxHeight)));
+                    std::pair<double, double> heights = GetRosParams(rosNode, modelName);
+//                    std::pair<double, double> heights(50, 200);
+                    gzdbg << "area heights min:" << heights.first << " max:" << heights.second << std::endl;
+                    modelPerceptionHeights.insert(std::pair<std::string, std::pair<float, float> >(modelName, heights));
 
                     // create model frustum
                     ignition::math::Frustum* frustum = new ignition::math::Frustum();
                     frustum->SetFOV(pluginSdf->GetElement("uav_sensor")->Get<double>("hfov"));
                     frustum->SetAspectRatio(pluginSdf->GetElement("uav_sensor")->Get<double>("aspect_ratio"));
                     frustum->SetNear(pluginSdf->GetElement("uav_sensor")->Get<double>("near"));
-                    frustum->SetFar(pluginSdf->GetElement("uav_sensor")->Get<double>("far"));
+                    frustum->SetFar(heights.second);
 
                     modelFrustums.insert(std::pair<std::string, ignition::math::Frustum*>(modelName, frustum));
-                    gzdbg << "model:" << modelName << " min_height:" << minHeight << " max_height:" << maxHeight << std::endl;
+                    gzdbg << "model:" << modelName << " min_height:" << heights.first << " max_height:" << heights.second << std::endl;
                     break;
                 }
                 pluginSdf = pluginSdf->GetNextElement("plugin");
@@ -89,7 +120,6 @@ void AreaCoverageScore::GetParameters(sdf::ElementPtr worldSdf, sdf::ElementPtr 
     if (isVisualization) {
         std::string visTopicName = ownSDF->GetElement("visualization")->Get<std::string>("topic_name");
         gzdbg << "visualization topicname:" << visTopicName << std::endl;
-        rosNode = new ros::NodeHandle("");
         visPub = rosNode->advertise<nav_msgs::OccupancyGrid>(visTopicName.c_str(), 1);
         visualizationUpdateRate = ownSDF->GetElement("visualization")->Get<int>("update_rate");
     }

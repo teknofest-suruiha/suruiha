@@ -549,9 +549,9 @@
         <update_rate>10</update_rate>
         <hfov>0.5</hfov>
         <aspect_ratio>1.3333</aspect_ratio>
-        <max_height>100</max_height>
-        <min_height>30</min_height>
-        <far>10000</far>
+        <max_height>1000</max_height>
+        <min_height>10</min_height>
+        <far>1000</far>
         <near>0.1</near>
       </uav_sensor>
       <battery>
