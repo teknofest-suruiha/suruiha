@@ -3353,8 +3353,8 @@
         <!-- runs score calculation at every update_rate milliseconds -->
         <update_rate>100</update_rate>
         <!-- widgh and height of total area in meters -->
-        <width>500</width>
-        <height>500</height>
+        <width>1000</width>
+        <height>1000</height>
         <!-- the size of a single cell in meters -->
         <resolution>0.5</resolution>
         <factor>0.3</factor>
