@@ -2907,6 +2907,14 @@
   </include>
 </model>
 
+<model name="building_353">
+  <static>true</static>
+  <pose>0 0 0 0 0 1.57</pose>
+  <include>
+  <uri>model://osrf_first_office</uri>
+  </include>
+</model>
+
 
 
     <model name="zephyr0">
@@ -2993,6 +3001,7 @@
       </include>
     </model>
     
+
 <actor name="terrorist_0">
   <skin>
     <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
@@ -3000,11 +3009,11 @@
   </skin>
   <animation name="walking">
     <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
-    <interpolate_x>true</interpolate_x>
+    <interpolate_x>false</interpolate_x>
   </animation>  <pose>0.0 0.0 1.07 0.0 0.0 -1.81577498992</pose>
   <script>
     <loop>false</loop>
-    <delay_start>0.0</delay_start>
+    <delay_start>30.0</delay_start>
     <auto_start>true</auto_start>
     <trajectory id="0" type="walking">
       <waypoint>
@@ -3012,32 +3021,20 @@
         <pose>0.0 0.0 0.0 0.0 0.0 -1.81577498992</pose>
       </waypoint>
       <waypoint>
-        <time>68.4225904136</time>
+        <time>55.8096287338</time>
         <pose>-25.0 -100.0 0.0 0.0 0.0 -1.81577498992</pose>
       </waypoint>
       <waypoint>
-        <time>83.0361700695</time>
-        <pose>-25.0 -120.0 0.0 0.0 0.0 -1.57079632679</pose>
+        <time>79.7246532356</time>
+        <pose>-25.0 -130.0 0.0 0.0 0.0 -1.57079632679</pose>
       </waypoint>
       <waypoint>
-        <time>132.522944294</time>
-        <pose>-100.0 -120.0 0.0 0.0 0.0 3.14159265359</pose>
+        <time>160.813731153</time>
+        <pose>-110.0 -130.0 0.0 0.0 0.0 3.14159265359</pose>
       </waypoint>
       <waypoint>
-        <time>296.376991005</time>
-        <pose>-125.0 -300.0 0.0 0.0 0.0 -1.70880235045</pose>
-      </waypoint>
-      <waypoint>
-        <time>507.343470733</time>
-        <pose>115.0 -300.0 0.0 0.0 0.0 0.0</pose>
-      </waypoint>
-      <waypoint>
-        <time>547.776536768</time>
-        <pose>115.0 -390.0 0.0 0.0 0.0 -1.57079632679</pose>
-      </waypoint>
-      <waypoint>
-        <time>833.334704305</time>
-        <pose>-450.0 -385.0 0.0 0.0 0.0 3.13274332707</pose>
+        <time>248.445279754</time>
+        <pose>-150.0 -330.0 0.0 0.0 0.0 -1.76819188664</pose>
       </waypoint>
     </trajectory>
   </script>
@@ -3049,11 +3046,11 @@
   </skin>
   <animation name="walking">
     <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
-    <interpolate_x>true</interpolate_x>
+    <interpolate_x>false</interpolate_x>
   </animation>  <pose>0.0 0.0 1.07 0.0 0.0 -1.81577498992</pose>
   <script>
     <loop>false</loop>
-    <delay_start>0.0</delay_start>
+    <delay_start>35.0</delay_start>
     <auto_start>true</auto_start>
     <trajectory id="0" type="walking">
       <waypoint>
@@ -3061,52 +3058,20 @@
         <pose>0.0 0.0 0.0 0.0 0.0 -1.81577498992</pose>
       </waypoint>
       <waypoint>
-        <time>63.388172452</time>
+        <time>61.8355288784</time>
         <pose>-25.0 -100.0 0.0 0.0 0.0 -1.81577498992</pose>
       </waypoint>
       <waypoint>
-        <time>82.307741738</time>
-        <pose>-25.0 -120.0 0.0 0.0 0.0 -1.57079632679</pose>
+        <time>87.6042915507</time>
+        <pose>-25.0 -130.0 0.0 0.0 0.0 -1.57079632679</pose>
       </waypoint>
       <waypoint>
-        <time>141.040217068</time>
-        <pose>-100.0 -120.0 0.0 0.0 0.0 3.14159265359</pose>
+        <time>135.310091134</time>
+        <pose>-110.0 -130.0 0.0 0.0 0.0 3.14159265359</pose>
       </waypoint>
       <waypoint>
-        <time>153.838050656</time>
-        <pose>-125.0 -125.0 0.0 0.0 0.0 -2.94419709374</pose>
-      </waypoint>
-      <waypoint>
-        <time>350.109751975</time>
-        <pose>-125.0 140.0 0.0 0.0 0.0 1.57079632679</pose>
-      </waypoint>
-      <waypoint>
-        <time>369.152895797</time>
-        <pose>-100.0 140.0 0.0 0.0 0.0 0.0</pose>
-      </waypoint>
-      <waypoint>
-        <time>399.807420788</time>
-        <pose>-100.0 200.0 0.0 0.0 0.0 1.57079632679</pose>
-      </waypoint>
-      <waypoint>
-        <time>525.581541617</time>
-        <pose>40.0 200.0 0.0 0.0 0.0 0.0</pose>
-      </waypoint>
-      <waypoint>
-        <time>624.2154512</time>
-        <pose>40.0 300.0 0.0 0.0 0.0 1.57079632679</pose>
-      </waypoint>
-      <waypoint>
-        <time>770.614764051</time>
-        <pose>260.0 300.0 0.0 0.0 0.0 0.0</pose>
-      </waypoint>
-      <waypoint>
-        <time>817.318180586</time>
-        <pose>260.0 400.0 0.0 0.0 0.0 1.57079632679</pose>
-      </waypoint>
-      <waypoint>
-        <time>977.367669052</time>
-        <pose>15.0 450.0 0.0 0.0 0.0 2.94027554522</pose>
+        <time>200.988878533</time>
+        <pose>-150.0 -330.0 0.0 0.0 0.0 -1.76819188664</pose>
       </waypoint>
     </trajectory>
   </script>
@@ -3118,11 +3083,11 @@
   </skin>
   <animation name="walking">
     <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
-    <interpolate_x>true</interpolate_x>
+    <interpolate_x>false</interpolate_x>
   </animation>  <pose>0.0 0.0 1.07 0.0 0.0 -1.81577498992</pose>
   <script>
     <loop>false</loop>
-    <delay_start>0.0</delay_start>
+    <delay_start>40.0</delay_start>
     <auto_start>true</auto_start>
     <trajectory id="0" type="walking">
       <waypoint>
@@ -3130,56 +3095,230 @@
         <pose>0.0 0.0 0.0 0.0 0.0 -1.81577498992</pose>
       </waypoint>
       <waypoint>
-        <time>43.3213482557</time>
+        <time>56.7625569737</time>
         <pose>-25.0 -100.0 0.0 0.0 0.0 -1.81577498992</pose>
       </waypoint>
       <waypoint>
-        <time>52.9660983666</time>
-        <pose>-25.0 -120.0 0.0 0.0 0.0 -1.57079632679</pose>
+        <time>83.9607892139</time>
+        <pose>-25.0 -130.0 0.0 0.0 0.0 -1.57079632679</pose>
       </waypoint>
       <waypoint>
-        <time>84.2354219398</time>
-        <pose>-100.0 -120.0 0.0 0.0 0.0 3.14159265359</pose>
+        <time>151.756972159</time>
+        <pose>-110.0 -130.0 0.0 0.0 0.0 3.14159265359</pose>
       </waypoint>
       <waypoint>
-        <time>157.000704337</time>
-        <pose>-125.0 -290.0 0.0 0.0 0.0 -1.71680858451</pose>
+        <time>258.015869577</time>
+        <pose>-150.0 -330.0 0.0 0.0 0.0 -1.76819188664</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_3">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>false</interpolate_x>
+  </animation>  <pose>0.0 0.0 1.07 0.0 0.0 -1.81577498992</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>45.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>0.0 0.0 0.0 0.0 0.0 -1.81577498992</pose>
       </waypoint>
       <waypoint>
-        <time>329.697962468</time>
-        <pose>280.0 -290.0 0.0 0.0 0.0 0.0</pose>
+        <time>83.8456590327</time>
+        <pose>-25.0 -100.0 0.0 0.0 0.0 -1.81577498992</pose>
       </waypoint>
       <waypoint>
-        <time>605.037884951</time>
-        <pose>280.0 275.0 0.0 0.0 0.0 1.57079632679</pose>
+        <time>98.5561200411</time>
+        <pose>-25.0 -130.0 0.0 0.0 0.0 -1.57079632679</pose>
       </waypoint>
       <waypoint>
-        <time>644.896843321</time>
-        <pose>240.0 275.0 0.0 0.0 0.0 3.14159265359</pose>
+        <time>157.903731133</time>
+        <pose>-110.0 -130.0 0.0 0.0 0.0 3.14159265359</pose>
       </waypoint>
       <waypoint>
-        <time>697.525805592</time>
-        <pose>240.0 400.0 0.0 0.0 0.0 1.57079632679</pose>
+        <time>175.085569134</time>
+        <pose>-130.0 -160.0 0.0 0.0 0.0 -2.15879893034</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_4">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>false</interpolate_x>
+  </animation>  <pose>0.0 0.0 1.07 0.0 0.0 -1.81577498992</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>50.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>0.0 0.0 0.0 0.0 0.0 -1.81577498992</pose>
       </waypoint>
       <waypoint>
-        <time>844.016330192</time>
-        <pose>450.0 350.0 0.0 0.0 0.0 -0.233743180869</pose>
+        <time>60.9625089391</time>
+        <pose>-25.0 -100.0 0.0 0.0 0.0 -1.81577498992</pose>
+      </waypoint>
+      <waypoint>
+        <time>84.0967273957</time>
+        <pose>-25.0 -130.0 0.0 0.0 0.0 -1.57079632679</pose>
+      </waypoint>
+      <waypoint>
+        <time>130.061170091</time>
+        <pose>-110.0 -130.0 0.0 0.0 0.0 3.14159265359</pose>
+      </waypoint>
+      <waypoint>
+        <time>158.846044477</time>
+        <pose>-130.0 -160.0 0.0 0.0 0.0 -2.15879893034</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_5">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>false</interpolate_x>
+  </animation>  <pose>0.0 0.0 1.07 0.0 0.0 -1.81577498992</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>55.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>0.0 0.0 0.0 0.0 0.0 -1.81577498992</pose>
+      </waypoint>
+      <waypoint>
+        <time>54.7742168386</time>
+        <pose>-25.0 -100.0 0.0 0.0 0.0 -1.81577498992</pose>
+      </waypoint>
+      <waypoint>
+        <time>74.5245488981</time>
+        <pose>-25.0 -130.0 0.0 0.0 0.0 -1.57079632679</pose>
+      </waypoint>
+      <waypoint>
+        <time>153.440866287</time>
+        <pose>-110.0 -130.0 0.0 0.0 0.0 3.14159265359</pose>
+      </waypoint>
+      <waypoint>
+        <time>168.981147874</time>
+        <pose>-130.0 -160.0 0.0 0.0 0.0 -2.15879893034</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_6">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>false</interpolate_x>
+  </animation>  <pose>0.0 0.0 1.07 0.0 0.0 -1.81577498992</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>60.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>0.0 0.0 0.0 0.0 0.0 -1.81577498992</pose>
+      </waypoint>
+      <waypoint>
+        <time>101.152470952</time>
+        <pose>-25.0 -100.0 0.0 0.0 0.0 -1.81577498992</pose>
+      </waypoint>
+      <waypoint>
+        <time>129.362539453</time>
+        <pose>-25.0 -130.0 0.0 0.0 0.0 -1.57079632679</pose>
+      </waypoint>
+      <waypoint>
+        <time>180.729271022</time>
+        <pose>-110.0 -130.0 0.0 0.0 0.0 3.14159265359</pose>
+      </waypoint>
+      <waypoint>
+        <time>200.019686517</time>
+        <pose>-160.0 -120.0 0.0 0.0 0.0 2.94419709374</pose>
+      </waypoint>
+      <waypoint>
+        <time>230.339542254</time>
+        <pose>-230.0 -135.0 0.0 0.0 0.0 -2.93049932037</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_7">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>false</interpolate_x>
+  </animation>  <pose>0.0 0.0 1.07 0.0 0.0 -1.81577498992</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>65.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>0.0 0.0 0.0 0.0 0.0 -1.81577498992</pose>
+      </waypoint>
+      <waypoint>
+        <time>80.7963557791</time>
+        <pose>-25.0 -100.0 0.0 0.0 0.0 -1.81577498992</pose>
+      </waypoint>
+      <waypoint>
+        <time>101.216361993</time>
+        <pose>-25.0 -130.0 0.0 0.0 0.0 -1.57079632679</pose>
+      </waypoint>
+      <waypoint>
+        <time>138.970320806</time>
+        <pose>-110.0 -130.0 0.0 0.0 0.0 3.14159265359</pose>
+      </waypoint>
+      <waypoint>
+        <time>159.454077661</time>
+        <pose>-160.0 -120.0 0.0 0.0 0.0 2.94419709374</pose>
+      </waypoint>
+      <waypoint>
+        <time>196.87132938</time>
+        <pose>-230.0 -135.0 0.0 0.0 0.0 -2.93049932037</pose>
       </waypoint>
     </trajectory>
   </script>
 </actor>
 
+
     <plugin name="air_traffic_controller" filename="libair_traffic_controller.so">
       <takeoff>
-        <pose>-240 -240 0 0 0 3.1415</pose>
+        <pose>490 -490 0 0 0 3.1415</pose>
         <height_threshold>10</height_threshold>
         <distance_threshold>50</distance_threshold>
       </takeoff>
       <landing>
         <area_bottom_left>480 -500 0</area_bottom_left>
         <area_upper_right>500 -400 0</area_upper_right>
-        <start_pose>-240 -150 30 0 0 3.1415</start_pose>
-        <end_pose>-240 -240 0 0 0 3.1415</end_pose>
+        <start_pose>490 -400 30 0 0 3.1415</start_pose>
+        <end_pose>490 -490 0 0 0 3.1415</end_pose>
         <height_treshold>0.1</height_treshold>
         <velocity_threshold>3</velocity_threshold>
       </landing>
@@ -3188,7 +3327,7 @@
       <comm_request_topic>comm_request</comm_request_topic>
       <comm_broadcast_topic>comm</comm_broadcast_topic>
       <!-- girilen deger metre biriminde olmali -->
-      <!-- comm_distance 100 km secildi ki herkes tum mesajlari alabilsin -->
+      <!-- comm_distance 10 km secildi ki herkes tum mesajlari alabilsin -->
       <comm_distance>10000</comm_distance>
     </plugin>
     <plugin name="score_calculator" filename="libscore_calculator.so">
@@ -3230,7 +3369,7 @@
     </plugin>
     <plugin name="scenario_manager" filename="libscenario_manager.so">
       <!-- how long the scenario is going to run unit is milliseconds-->
-      <sim_duration>300000</sim_duration>
+      <sim_duration>300</sim_duration>
     </plugin>
   </world>
 </sdf>
