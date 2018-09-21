@@ -1,0 +1,1080 @@
+<?xml version="1.0" ?>
+<sdf version='1.6'>
+  <world name='scn4'>
+    <gui fullscreen='0'>
+      <camera name='user_camera'>
+        <pose frame=''>-80.4194 -422.505 407.776 0 1.054 1.5707</pose>
+        <view_controller>orbit</view_controller>
+        <projection_type>perspective</projection_type>
+      </camera>
+    </gui>
+    <physics name='default_physics' default='0' type='ode'>
+      <ode>
+        <solver>
+          <type>quick</type>
+          <iters>100</iters>
+          <sor>1</sor>
+          <use_dynamic_moi_rescaling>0</use_dynamic_moi_rescaling>
+        </solver>
+        <constraints>
+          <cfm>0</cfm>
+          <erp>0.2</erp>
+          <contact_max_correcting_vel>0.1</contact_max_correcting_vel>
+          <contact_surface_layer>0</contact_surface_layer>
+        </constraints>
+      </ode>
+      <real_time_update_rate>400</real_time_update_rate>
+      <max_step_size>0.0025</max_step_size>
+      <real_time_factor>1</real_time_factor>
+    </physics>
+    <light name='sun' type='directional'>
+      <cast_shadows>1</cast_shadows>
+      <pose frame=''>0 0 10 0 -0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.1 0.1 0.1 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <direction>-0.5 0.5 -1</direction>
+    </light>
+    <model name='ground_plane'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>500 500</size>
+            </plane>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1</mu>
+                <mu2>1</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='runway'>
+          <pose frame=''>240 -200 0.005 0 0 -1.5707</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Runway</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='grass'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>500 500</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grass</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+
+<model name="building_0">
+  <static>true</static>
+  <pose>-38.7472 1.8415 0 0 -0 0</pose>
+  <include><uri>model://grocery_store</uri></include>
+</model>
+<model name="building_1">
+  <static>true</static>
+  <pose>61.0096 128.938 0 0 -0 3.14</pose>
+  <include><uri>model://osrf_first_office</uri></include>
+</model>
+<model name="building_2">
+  <static>true</static>
+  <pose>-72.3702 3.13589 0 0 -0 1.57</pose>
+  <include><uri>model://apartment</uri></include>
+</model>
+<model name="building_3">
+  <static>true</static>
+  <pose>-185.275 1.06989 0 0 -0 0</pose>
+  <include><uri>model://grocery_store</uri></include>
+</model>
+<model name="building_4">
+  <static>true</static>
+  <pose>-151.482 -2.29691 0 0 -0 3.14</pose>
+  <include><uri>model://school</uri></include>
+</model>
+<model name="building_5">
+  <static>true</static>
+  <pose>77.9427 -89.7419 0 0 -0 0</pose>
+  <include><uri>model://office_building</uri></include>
+</model>
+<model name="building_6">
+  <static>true</static>
+  <pose>-95.4773 2.85583 0 0 -0 1.57</pose>
+  <include><uri>model://apartment</uri></include>
+</model>
+<model name="building_7">
+  <static>true</static>
+  <pose>89.6777 -69.489 0 0 -0 0</pose>
+  <include><uri>model://office_building</uri></include>
+</model>
+<model name="building_8">
+  <static>true</static>
+  <pose>148.067 125.718 0 0 -0 0</pose>
+  <include><uri>model://apartment</uri></include>
+</model>
+<model name="building_9">
+  <static>true</static>
+  <pose>-53.7836 121.116 0 0 -0 0</pose>
+  <include><uri>model://grocery_store</uri></include>
+</model>
+<model name="building_10">
+  <static>true</static>
+  <pose>-147.278 160.439 0 0 -0 1.57</pose>
+  <include><uri>model://apartment</uri></include>
+</model>
+<model name="building_11">
+  <static>true</static>
+  <pose>-78.2489 89.1125 0 0 -0 0</pose>
+  <include><uri>model://office_building</uri></include>
+</model>
+<model name="building_12">
+  <static>true</static>
+  <pose>-129.706 -146.267 0 0 -0 1.57</pose>
+  <include><uri>model://school</uri></include>
+</model>
+<model name="building_13">
+  <static>true</static>
+  <pose>173.544 -125.218 0 0 -0 3.14</pose>
+  <include><uri>model://osrf_first_office</uri></include>
+</model>
+<model name="building_14">
+  <static>true</static>
+  <pose>107.645 -49.2101 0 0 -0 0</pose>
+  <include><uri>model://office_building</uri></include>
+</model>
+<model name="asphalt_plane_15">
+  <static>true</static>
+  <pose>78.5172 -89.1249 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="building_16">
+  <static>true</static>
+  <pose>125.383 107.084 0 0 -0 1.57</pose>
+  <include><uri>model://apartment</uri></include>
+</model>
+<model name="building_17">
+  <static>true</static>
+  <pose>174.7 108.954 0 0 -0 1.57</pose>
+  <include><uri>model://apartment</uri></include>
+</model>
+<model name="building_18">
+  <static>true</static>
+  <pose>101.564 168.232 0 0 -0 3.14</pose>
+  <include><uri>model://osrf_first_office</uri></include>
+</model>
+<model name="building_19">
+  <static>true</static>
+  <pose>-124.332 179.556 0 0 -0 1.57</pose>
+  <include><uri>model://apartment</uri></include>
+</model>
+<model name="building_20">
+  <static>true</static>
+  <pose>-105.897 109.489 0 0 -0 3.14</pose>
+  <include><uri>model://osrf_first_office</uri></include>
+</model>
+<model name="building_21">
+  <static>true</static>
+  <pose>-168.21 107.762 0 0 -0 1.57</pose>
+  <include><uri>model://school</uri></include>
+</model>
+<model name="building_22">
+  <static>true</static>
+  <pose>-59.4566 -162.297 0 0 -0 0</pose>
+  <include><uri>model://office_building</uri></include>
+</model>
+<model name="building_23">
+  <static>true</static>
+  <pose>-166.177 138.885 0 0 -0 1.57</pose>
+  <include><uri>model://apartment</uri></include>
+</model>
+<model name="building_24">
+  <static>true</static>
+  <pose>-94.2207 141.08 0 0 -0 3.14</pose>
+  <include><uri>model://osrf_first_office</uri></include>
+</model>
+<model name="building_25">
+  <static>true</static>
+  <pose>-59.8332 -130.236 0 0 -0 0</pose>
+  <include><uri>model://office_building</uri></include>
+</model>
+<model name="building_26">
+  <static>true</static>
+  <pose>150.27 88.1647 0 0 -0 1.57</pose>
+  <include><uri>model://apartment</uri></include>
+</model>
+<model name="building_27">
+  <static>true</static>
+  <pose>80.7594 149.274 0 0 -0 3.14</pose>
+  <include><uri>model://osrf_first_office</uri></include>
+</model>
+<model name="building_28">
+  <static>true</static>
+  <pose>-105.706 -100.572 0 0 -0 1.57</pose>
+  <include><uri>model://apartment</uri></include>
+</model>
+<model name="building_29">
+  <static>true</static>
+  <pose>-88.7748 -82.1759 0 0 -0 3.14</pose>
+  <include><uri>model://osrf_first_office</uri></include>
+</model>
+<model name="building_30">
+  <static>true</static>
+  <pose>-35.0284 -147.901 0 0 -0 0</pose>
+  <include><uri>model://office_building</uri></include>
+</model>
+<model name="building_31">
+  <static>true</static>
+  <pose>-95.4773 -197.144 0 0 -0 1.57</pose>
+  <include><uri>model://apartment</uri></include>
+</model>
+<model name="building_32">
+  <static>true</static>
+  <pose>-118.12 -177.025 0 0 -0 0</pose>
+  <include><uri>model://osrf_first_office</uri></include>
+</model>
+<model name="building_33">
+  <static>true</static>
+  <pose>-77.9839 -151.116 0 0 -0 0</pose>
+  <include><uri>model://office_building</uri></include>
+</model>
+<model name="building_34">
+  <static>true</static>
+  <pose>143.953 -155.656 0 0 -0 0</pose>
+  <include><uri>model://grocery_store</uri></include>
+</model>
+<model name="building_35">
+  <static>true</static>
+  <pose>70.4037 -117.208 0 0 -0 1.57</pose>
+  <include><uri>model://school</uri></include>
+</model>
+<model name="building_36">
+  <static>true</static>
+  <pose>117.275 -129.131 0 0 -0 3.14</pose>
+  <include><uri>model://osrf_first_office</uri></include>
+</model>
+<model name="building_37">
+  <static>true</static>
+  <pose>46.2239 100.404 0 0 -0 1.57</pose>
+  <include><uri>model://school</uri></include>
+</model>
+<model name="building_38">
+  <static>true</static>
+  <pose>-215.004 1.08233 0 0 -0 1.57</pose>
+  <include><uri>model://apartment</uri></include>
+</model>
+<model name="building_39">
+  <static>true</static>
+  <pose>142.602 -103.365 0 0 -0 0</pose>
+  <include><uri>model://grocery_store</uri></include>
+</model>
+<model name="building_40">
+  <static>true</static>
+  <pose>-124.894 -121.606 0 0 -0 3.14</pose>
+  <include><uri>model://osrf_first_office</uri></include>
+</model>
+<model name="building_41">
+  <static>true</static>
+  <pose>-164.642 78.7619 0 0 -0 1.57</pose>
+  <include><uri>model://apartment</uri></include>
+</model>
+<model name="building_42">
+  <static>true</static>
+  <pose>-145.616 60.4621 0 0 -0 1.57</pose>
+  <include><uri>model://apartment</uri></include>
+</model>
+<model name="building_43">
+  <static>true</static>
+  <pose>-125.538 41.0639 0 0 -0 1.57</pose>
+  <include><uri>model://apartment</uri></include>
+</model>
+<model name="building_44">
+  <static>true</static>
+  <pose>56.0125 68.1902 0 0 -0 0</pose>
+  <include><uri>model://osrf_first_office</uri></include>
+</model>
+<model name="building_45">
+  <static>true</static>
+  <pose>76.4618 49.2496 0 0 -0 0</pose>
+  <include><uri>model://osrf_first_office</uri></include>
+</model>
+<model name="building_46">
+  <static>true</static>
+  <pose>96.3533 27.9614 0 0 -0 0</pose>
+  <include><uri>model://osrf_first_office</uri></include>
+</model>
+<model name="building_47">
+  <static>true</static>
+  <pose>82.0697 -142.807 0 0 -0 0</pose>
+  <include><uri>model://office_building</uri></include>
+</model>
+<model name="building_48">
+  <static>true</static>
+  <pose>89.8964 -162.537 0 0 -0 0</pose>
+  <include><uri>model://office_building</uri></include>
+</model>
+<model name="building_49">
+  <static>true</static>
+  <pose>101.607 -181.967 0 0 -0 0</pose>
+  <include><uri>model://office_building</uri></include>
+</model>
+<model name="building_50">
+  <static>true</static>
+  <pose>-87.1856 -220.268 0 0 -0 3.14</pose>
+  <include><uri>model://osrf_first_office</uri></include>
+</model>
+<model name="building_51">
+  <static>true</static>
+  <pose>-121.827 2.96922 0 0 -0 0</pose>
+  <include><uri>model://office_building</uri></include>
+</model>
+<model name="building_52">
+  <static>true</static>
+  <pose>-1.89615 32.2406 0 0 -0 0</pose>
+  <include><uri>model://grocery_store</uri></include>
+</model>
+<model name="building_53">
+  <static>true</static>
+  <pose>1.78347 -23.3781 0 0 -0 0</pose>
+  <include><uri>model://grocery_store</uri></include>
+</model>
+<model name="building_54">
+  <static>true</static>
+  <pose>39.199 0.055813 0 0 -0 0</pose>
+  <include><uri>model://grocery_store</uri></include>
+</model>
+<model name="building_55">
+  <static>true</static>
+  <pose>68.7722 2.07589 0 0 -0 0</pose>
+  <include><uri>model://office_building</uri></include>
+</model>
+<model name="building_56">
+  <static>true</static>
+  <pose>94.9033 4.76343 0 0 -0 0</pose>
+  <include><uri>model://osrf_first_office</uri></include>
+</model>
+<model name="building_57">
+  <static>true</static>
+  <pose>120.987 2.55735 0 0 -0 1.57</pose>
+  <include><uri>model://apartment</uri></include>
+</model>
+<model name="building_58">
+  <static>true</static>
+  <pose>154.37 3.02731 0 0 -0 0</pose>
+  <include><uri>model://grocery_store</uri></include>
+</model>
+<model name="building_59">
+  <static>true</static>
+  <pose>188.773 5.93544 0 0 -0 1.57</pose>
+  <include><uri>model://apartment</uri></include>
+</model>
+
+
+ <model name="zephyr0">
+      <pose>245 -237 0 0 0 3.1415</pose>
+      <include>
+        <uri>model://zephyr_with_skid_pad</uri>
+      </include>
+    </model>
+    
+    <model name="zephyr1">
+      <pose>245 -239 0 0 0 3.1415</pose>
+      <include>
+        <uri>model://zephyr_with_skid_pad</uri>
+      </include>
+    </model>
+    
+    <model name="zephyr2">
+      <pose>245 -241 0 0 0 3.1415</pose>
+      <include>
+        <uri>model://zephyr_with_skid_pad</uri>
+      </include>
+    </model>
+    
+    <model name="zephyr3">
+      <pose>245 -243 0 0 0 3.1415</pose>
+      <include>
+        <uri>model://zephyr_with_skid_pad</uri>
+      </include>
+    </model>
+    
+    <model name="zephyr4">
+      <pose>245 -245 0 0 0 3.1415</pose>
+      <include>
+        <uri>model://zephyr_with_skid_pad</uri>
+      </include>
+    </model>
+    
+    <model name="zephyr5">
+      <pose>245 -247 0 0 0 3.1415</pose>
+      <include>
+        <uri>model://zephyr_with_skid_pad</uri>
+      </include>
+    </model>
+    
+    <model name="iris0">
+      <pose>235 -237 0 0 0 3.1415</pose>
+      <include>
+        <uri>model://iris_quadrotor_with_plugin</uri>
+      </include>
+    </model>
+    
+    <model name="iris1">
+      <pose>235 -239 0 0 0 3.1415</pose>
+      <include>
+        <uri>model://iris_quadrotor_with_plugin</uri>
+      </include>
+    </model>
+    
+    <model name="iris2">
+      <pose>235 -241 0 0 0 3.1415</pose>
+      <include>
+        <uri>model://iris_quadrotor_with_plugin</uri>
+      </include>
+    </model>
+    
+    <model name="iris3">
+      <pose>235 -243 0 0 0 3.1415</pose>
+      <include>
+        <uri>model://iris_quadrotor_with_plugin</uri>
+      </include>
+    </model>
+    
+    <model name="iris4">
+      <pose>235 -245 0 0 0 3.1415</pose>
+      <include>
+        <uri>model://iris_quadrotor_with_plugin</uri>
+      </include>
+    </model>
+    
+    <model name="iris5">
+      <pose>235 -247 0 0 0 3.1415</pose>
+      <include>
+        <uri>model://iris_quadrotor_with_plugin</uri>
+      </include>
+    </model>
+    
+<actor name="terrorist_0">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>true</interpolate_x>
+  </animation>  <pose>1.0 -23.37 1.07 0.0 0.0 -0.935704016918</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>100.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>1.0 -23.37 0.0 0.0 0.0 -0.935704016918</pose>
+      </waypoint>
+      <waypoint>
+        <time>59.798658221</time>
+        <pose>70.0 -117.0 0.0 0.0 0.0 -0.935704016918</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_1">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>true</interpolate_x>
+  </animation>  <pose>1.0 -23.37 1.07 0.0 0.0 -0.935704016918</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>102.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>1.0 -23.37 0.0 0.0 0.0 -0.935704016918</pose>
+      </waypoint>
+      <waypoint>
+        <time>72.7021461921</time>
+        <pose>70.0 -117.0 0.0 0.0 0.0 -0.935704016918</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_2">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>true</interpolate_x>
+  </animation>  <pose>1.0 -23.37 1.07 0.0 0.0 -0.935704016918</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>104.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>1.0 -23.37 0.0 0.0 0.0 -0.935704016918</pose>
+      </waypoint>
+      <waypoint>
+        <time>100.665385365</time>
+        <pose>70.0 -117.0 0.0 0.0 0.0 -0.935704016918</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_3">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>true</interpolate_x>
+  </animation>  <pose>1.0 -23.37 1.07 0.0 0.0 -0.935704016918</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>105.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>1.0 -23.37 0.0 0.0 0.0 -0.935704016918</pose>
+      </waypoint>
+      <waypoint>
+        <time>78.7047879181</time>
+        <pose>70.0 -117.0 0.0 0.0 0.0 -0.935704016918</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_4">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>true</interpolate_x>
+  </animation>  <pose>1.0 -23.37 1.07 0.0 0.0 -0.935704016918</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>107.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>1.0 -23.37 0.0 0.0 0.0 -0.935704016918</pose>
+      </waypoint>
+      <waypoint>
+        <time>72.3894200823</time>
+        <pose>70.0 -117.0 0.0 0.0 0.0 -0.935704016918</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_5">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>true</interpolate_x>
+  </animation>  <pose>-38.0 1.84 1.07 0.0 0.0 -1.73466554031</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>101.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>-38.0 1.84 0.0 0.0 0.0 -1.73466554031</pose>
+      </waypoint>
+      <waypoint>
+        <time>99.4002633326</time>
+        <pose>-59.8 -130.0 0.0 0.0 0.0 -1.73466554031</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_6">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>true</interpolate_x>
+  </animation>  <pose>-38.0 1.84 1.07 0.0 0.0 -1.73466554031</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>100.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>-38.0 1.84 0.0 0.0 0.0 -1.73466554031</pose>
+      </waypoint>
+      <waypoint>
+        <time>54.106290541</time>
+        <pose>-59.8 -130.0 0.0 0.0 0.0 -1.73466554031</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_7">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>true</interpolate_x>
+  </animation>  <pose>-38.0 1.84 1.07 0.0 0.0 -1.73466554031</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>103.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>-38.0 1.84 0.0 0.0 0.0 -1.73466554031</pose>
+      </waypoint>
+      <waypoint>
+        <time>63.6962735935</time>
+        <pose>-59.8 -130.0 0.0 0.0 0.0 -1.73466554031</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_8">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>true</interpolate_x>
+  </animation>  <pose>-38.0 1.84 1.07 0.0 0.0 -1.73466554031</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>106.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>-38.0 1.84 0.0 0.0 0.0 -1.73466554031</pose>
+      </waypoint>
+      <waypoint>
+        <time>55.6140285207</time>
+        <pose>-59.8 -130.0 0.0 0.0 0.0 -1.73466554031</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_9">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>true</interpolate_x>
+  </animation>  <pose>-38.0 1.84 1.07 0.0 0.0 -1.73466554031</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>109.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>-38.0 1.84 0.0 0.0 0.0 -1.73466554031</pose>
+      </waypoint>
+      <waypoint>
+        <time>86.3098930075</time>
+        <pose>-59.8 -130.0 0.0 0.0 0.0 -1.73466554031</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_10">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>true</interpolate_x>
+  </animation>  <pose>39.0 0.0 1.07 0.0 0.0 1.66055450098</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>100.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>39.0 0.0 0.0 0.0 0.0 1.66055450098</pose>
+      </waypoint>
+      <waypoint>
+        <time>90.1771160429</time>
+        <pose>30.0 100.0 0.0 0.0 0.0 1.66055450098</pose>
+      </waypoint>
+      <waypoint>
+        <time>98.1034092564</time>
+        <pose>46.0 100.0 0.0 0.0 0.0 0.0</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_11">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>true</interpolate_x>
+  </animation>  <pose>39.0 0.0 1.07 0.0 0.0 1.66055450098</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>101.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>39.0 0.0 0.0 0.0 0.0 1.66055450098</pose>
+      </waypoint>
+      <waypoint>
+        <time>55.1952860641</time>
+        <pose>30.0 100.0 0.0 0.0 0.0 1.66055450098</pose>
+      </waypoint>
+      <waypoint>
+        <time>63.8587906525</time>
+        <pose>46.0 100.0 0.0 0.0 0.0 0.0</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_12">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>true</interpolate_x>
+  </animation>  <pose>39.0 0.0 1.07 0.0 0.0 1.66055450098</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>102.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>39.0 0.0 0.0 0.0 0.0 1.66055450098</pose>
+      </waypoint>
+      <waypoint>
+        <time>97.8726189888</time>
+        <pose>30.0 100.0 0.0 0.0 0.0 1.66055450098</pose>
+      </waypoint>
+      <waypoint>
+        <time>110.509885971</time>
+        <pose>46.0 100.0 0.0 0.0 0.0 0.0</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_13">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>true</interpolate_x>
+  </animation>  <pose>39.0 0.0 1.07 0.0 0.0 1.66055450098</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>103.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>39.0 0.0 0.0 0.0 0.0 1.66055450098</pose>
+      </waypoint>
+      <waypoint>
+        <time>61.5294896965</time>
+        <pose>30.0 100.0 0.0 0.0 0.0 1.66055450098</pose>
+      </waypoint>
+      <waypoint>
+        <time>69.2119771668</time>
+        <pose>46.0 100.0 0.0 0.0 0.0 0.0</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_14">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>true</interpolate_x>
+  </animation>  <pose>39.0 0.0 1.07 0.0 0.0 1.66055450098</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>104.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>39.0 0.0 0.0 0.0 0.0 1.66055450098</pose>
+      </waypoint>
+      <waypoint>
+        <time>72.7609797774</time>
+        <pose>30.0 100.0 0.0 0.0 0.0 1.66055450098</pose>
+      </waypoint>
+      <waypoint>
+        <time>83.3327853091</time>
+        <pose>46.0 100.0 0.0 0.0 0.0 0.0</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_15">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>true</interpolate_x>
+  </animation>  <pose>-1.89 32.2 1.07 0.0 0.0 2.0990875357</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>100.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>-1.89 32.2 0.0 0.0 0.0 2.0990875357</pose>
+      </waypoint>
+      <waypoint>
+        <time>79.1720511605</time>
+        <pose>-53.78 121.11 0.0 0.0 0.0 2.0990875357</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_16">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>true</interpolate_x>
+  </animation>  <pose>-1.89 32.2 1.07 0.0 0.0 2.0990875357</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>102.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>-1.89 32.2 0.0 0.0 0.0 2.0990875357</pose>
+      </waypoint>
+      <waypoint>
+        <time>92.4881752252</time>
+        <pose>-53.78 121.11 0.0 0.0 0.0 2.0990875357</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_17">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>true</interpolate_x>
+  </animation>  <pose>-1.89 32.2 1.07 0.0 0.0 2.0990875357</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>104.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>-1.89 32.2 0.0 0.0 0.0 2.0990875357</pose>
+      </waypoint>
+      <waypoint>
+        <time>48.2911643973</time>
+        <pose>-53.78 121.11 0.0 0.0 0.0 2.0990875357</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_18">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>true</interpolate_x>
+  </animation>  <pose>-1.89 32.2 1.07 0.0 0.0 2.0990875357</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>106.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>-1.89 32.2 0.0 0.0 0.0 2.0990875357</pose>
+      </waypoint>
+      <waypoint>
+        <time>41.6702529932</time>
+        <pose>-53.78 121.11 0.0 0.0 0.0 2.0990875357</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_19">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>true</interpolate_x>
+  </animation>  <pose>-1.89 32.2 1.07 0.0 0.0 2.0990875357</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>108.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>-1.89 32.2 0.0 0.0 0.0 2.0990875357</pose>
+      </waypoint>
+      <waypoint>
+        <time>77.7000969227</time>
+        <pose>-53.78 121.11 0.0 0.0 0.0 2.0990875357</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+
+    <plugin name="air_traffic_controller" filename="libair_traffic_controller.so">
+      <takeoff>
+        <pose>240 -240 0 0 0 3.1415</pose>
+        <height_threshold>10</height_threshold>
+        <distance_threshold>50</distance_threshold>
+      </takeoff>
+      <landing>
+        <area_bottom_left>230 -250 0</area_bottom_left>
+        <area_upper_right>250 -150 0</area_upper_right>
+        <start_pose>240 -150 30 0 0 3.1415</start_pose>
+        <end_pose>240 -240 0 0 0 3.1415</end_pose>
+        <height_treshold>0.1</height_treshold>
+        <velocity_threshold>3</velocity_threshold>
+      </landing>
+    </plugin>
+    <plugin name="comm_manager" filename="libcomm_manager.so">
+      <comm_request_topic>comm_request</comm_request_topic>
+      <comm_broadcast_topic>comm</comm_broadcast_topic>
+      <!-- girilen deger metre biriminde olmali -->
+      <!-- comm_distance 100 km secildi ki herkes tum mesajlari alabilsin -->
+      <comm_distance>100</comm_distance>
+    </plugin>
+    <plugin name="score_calculator" filename="libscore_calculator.so">
+      <area_coverage_score>
+        <visualization>
+          <active>true</active>
+          <topic_name>score_area_visual</topic_name>
+          <!-- runs the visualization at every given milliseconds -->
+          <update_rate>1000</update_rate>
+        </visualization>
+        <!-- runs score calculation at every update_rate milliseconds -->
+        <update_rate>100</update_rate>
+        <!-- widgh and height of total area in meters -->
+        <width>500</width>
+        <height>500</height>
+        <!-- the size of a single cell in meters -->
+        <resolution>0.5</resolution>
+        <factor>0.3</factor>
+      </area_coverage_score>
+      <detection_score>
+        <!-- when false building is detected or detection occurs before the movement of terrorists, false detection penalty is going to be applied -->
+        <!-- for details please refer the technical documentation -->
+        <false_detection_penalty>0.1</false_detection_penalty>
+        <detection_topic>terrorist_detection</detection_topic>
+        <factor>0.4</factor>
+        <base_score>10</base_score>
+        <!-- <time_to_detect>200000</time_to_detect> -->
+      </detection_score>
+      <tracking_score>
+        <factor>0.4</factor>
+        <terrorist_prefix>terrorist</terrorist_prefix>
+        <tracking_topic>terrorist_tracking</tracking_topic>
+        <!-- birimi milliseconds. -->
+        <message_rate>100</message_rate>
+        <update_rate>100</update_rate>
+      </tracking_score>
+      <!-- calculates the score value and publishes at every publish rate milliseconds -->
+      <publish_rate>1000</publish_rate>
+    </plugin>
+    <plugin name="scenario_manager" filename="libscenario_manager.so">
+      <!-- how long the scenario is going to run unit is milliseconds-->
+      <sim_duration>240</sim_duration>
+    </plugin>
+
+  </world>
+</sdf>

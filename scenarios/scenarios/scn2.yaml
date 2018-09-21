@@ -1,0 +1,126 @@
+num_uavs: 6
+comm_distance: 10000
+area_size: {
+  width: 500,
+  height: 500
+}
+runway: {
+  left_bottom: {
+    x: -250,
+    y: -250
+  },
+  right_top: {
+    x: -230,
+    y: -150
+  }
+}
+uavs: [
+  {
+  index: 0,
+  type: 'zephyr',
+  sensor: {
+    min_height: 30,
+    max_height: 200
+  },
+  battery_capacity: 1000
+  },
+  {
+  index: 0,
+  type: 'iris',
+  sensor: {
+    min_height: 30,
+    max_height: 200
+  },
+  battery_capacity: 1000
+  },
+  {
+  index: 1,
+  type: 'zephyr',
+  sensor: {
+    min_height: 30,
+    max_height: 200
+  },
+  battery_capacity: 1000
+  },
+  {
+  index: 1,
+  type: 'iris',
+  sensor: {
+    min_height: 30,
+    max_height: 200
+  },
+  battery_capacity: 1000
+  },
+  {
+  index: 2,
+  type: 'zephyr',
+  sensor: {
+    min_height: 30,
+    max_height: 200
+  },
+  battery_capacity: 1000
+  },
+  {
+  index: 2,
+  type: 'iris',
+  sensor: {
+    min_height: 30,
+    max_height: 200
+  },
+  battery_capacity: 1000
+  },
+  {
+  index: 3,
+  type: 'zephyr',
+  sensor: {
+    min_height: 30,
+    max_height: 200
+  },
+  battery_capacity: 1000
+  },
+  {
+  index: 3,
+  type: 'iris',
+  sensor: {
+    min_height: 30,
+    max_height: 200
+  },
+  battery_capacity: 1000
+  },
+  {
+  index: 4,
+  type: 'zephyr',
+  sensor: {
+    min_height: 30,
+    max_height: 200
+  },
+  battery_capacity: 1000
+  },
+  {
+  index: 4,
+  type: 'iris',
+  sensor: {
+    min_height: 30,
+    max_height: 200
+  },
+  battery_capacity: 1000
+  },
+  {
+  index: 5,
+  type: 'zephyr',
+  sensor: {
+    min_height: 30,
+    max_height: 200
+  },
+  battery_capacity: 1000
+  },
+  {
+  index: 5,
+  type: 'iris',
+  sensor: {
+    min_height: 30,
+    max_height: 200
+  },
+  battery_capacity: 1000
+  }
+]

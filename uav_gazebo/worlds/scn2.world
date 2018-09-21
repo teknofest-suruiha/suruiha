@@ -1,0 +1,2089 @@
+<?xml version="1.0" ?>
+<sdf version='1.6'>
+  <world name='pre_small'>
+    <gui fullscreen='0'>
+      <camera name='user_camera'>
+        <pose frame=''>-80.4194 -422.505 407.776 0 1.054 1.5707</pose>
+        <view_controller>orbit</view_controller>
+        <projection_type>perspective</projection_type>
+      </camera>
+    </gui>
+    <physics name='default_physics' default='0' type='ode'>
+      <ode>
+        <solver>
+          <type>quick</type>
+          <iters>100</iters>
+          <sor>1</sor>
+          <use_dynamic_moi_rescaling>0</use_dynamic_moi_rescaling>
+        </solver>
+        <constraints>
+          <cfm>0</cfm>
+          <erp>0.2</erp>
+          <contact_max_correcting_vel>0.1</contact_max_correcting_vel>
+          <contact_surface_layer>0</contact_surface_layer>
+        </constraints>
+      </ode>
+      <real_time_update_rate>400</real_time_update_rate>
+      <max_step_size>0.0025</max_step_size>
+      <real_time_factor>1</real_time_factor>
+    </physics>
+    <light name='sun' type='directional'>
+      <cast_shadows>1</cast_shadows>
+      <pose frame=''>0 0 10 0 -0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.1 0.1 0.1 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <direction>-0.5 0.5 -1</direction>
+    </light>
+    <model name='ground_plane'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>500 500</size>
+            </plane>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1</mu>
+                <mu2>1</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='runway'>
+          <pose frame=''>-240 -200 0.005 0 0 -1.5707</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Runway</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='grass'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>500 500</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grass</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    
+    <model name="building_0">
+  <static>true</static>
+  <pose>-38.7472 1.8415 0 0 -0 0</pose>
+  <include><uri>model://grocery_store</uri></include>
+</model>
+<model name="building_1">
+  <static>true</static>
+  <pose>-1.48207 -2.29691 0 0 -0 3.14</pose>
+  <include><uri>model://school</uri></include>
+</model>
+<model name="building_2">
+  <static>true</static>
+  <pose>116.78 28.0438 0 0 -0 1.57</pose>
+  <include><uri>model://apartment</uri></include>
+</model>
+<model name="building_3">
+  <static>true</static>
+  <pose>28.5146 -1.43991 0 0 -0 3.14</pose>
+  <include><uri>model://osrf_first_office</uri></include>
+</model>
+<model name="asphalt_plane_4">
+  <static>true</static>
+  <pose>38.6633 10.823 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_5">
+  <static>true</static>
+  <pose>18.766 10.8588 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_6">
+  <static>true</static>
+  <pose>-1.01176 10.8416 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_7">
+  <static>true</static>
+  <pose>-20.8489 10.873 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_8">
+  <static>true</static>
+  <pose>-40.7293 10.936 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_9">
+  <static>true</static>
+  <pose>-60.435 10.8955 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_10">
+  <static>true</static>
+  <pose>-80.3855 10.8995 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="building_11">
+  <static>true</static>
+  <pose>227.63 3.13589 0 0 -0 1.57</pose>
+  <include><uri>model://apartment</uri></include>
+</model>
+<model name="building_12">
+  <static>true</static>
+  <pose>114.725 1.06989 0 0 -0 0</pose>
+  <include><uri>model://grocery_store</uri></include>
+</model>
+<model name="building_13">
+  <static>true</static>
+  <pose>148.518 -2.29691 0 0 -0 3.14</pose>
+  <include><uri>model://school</uri></include>
+</model>
+<model name="building_14">
+  <static>true</static>
+  <pose>204.523 2.85583 0 0 -0 1.57</pose>
+  <include><uri>model://apartment</uri></include>
+</model>
+<model name="building_15">
+  <static>true</static>
+  <pose>178.515 -1.43991 0 0 -0 3.14</pose>
+  <include><uri>model://osrf_first_office</uri></include>
+</model>
+<model name="asphalt_plane_16">
+  <static>true</static>
+  <pose>228.517 10.8751 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_17">
+  <static>true</static>
+  <pose>208.565 10.8313 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_18">
+  <static>true</static>
+  <pose>188.663 10.823 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_19">
+  <static>true</static>
+  <pose>168.766 10.8588 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_20">
+  <static>true</static>
+  <pose>148.988 10.8416 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_21">
+  <static>true</static>
+  <pose>129.151 10.873 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_22">
+  <static>true</static>
+  <pose>109.271 10.936 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="building_23">
+  <static>true</static>
+  <pose>-72.3702 3.13589 0 0 -0 1.57</pose>
+  <include><uri>model://apartment</uri></include>
+</model>
+<model name="building_24">
+  <static>true</static>
+  <pose>-185.275 1.06989 0 0 -0 0</pose>
+  <include><uri>model://grocery_store</uri></include>
+</model>
+<model name="building_25">
+  <static>true</static>
+  <pose>-151.482 -2.29691 0 0 -0 3.14</pose>
+  <include><uri>model://school</uri></include>
+</model>
+<model name="building_26">
+  <static>true</static>
+  <pose>-46.5742 -53.7389 0 0 -0 0</pose>
+  <include><uri>model://office_building</uri></include>
+</model>
+<model name="building_27">
+  <static>true</static>
+  <pose>-95.4773 2.85583 0 0 -0 1.57</pose>
+  <include><uri>model://apartment</uri></include>
+</model>
+<model name="building_28">
+  <static>true</static>
+  <pose>-47.0336 -35.5813 0 0 -0 0</pose>
+  <include><uri>model://office_building</uri></include>
+</model>
+<model name="asphalt_plane_29">
+  <static>true</static>
+  <pose>-71.4828 10.8751 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_30">
+  <static>true</static>
+  <pose>-91.4348 10.8313 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_31">
+  <static>true</static>
+  <pose>-111.337 10.823 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_32">
+  <static>true</static>
+  <pose>-131.234 10.8588 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_33">
+  <static>true</static>
+  <pose>-151.012 10.8416 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_34">
+  <static>true</static>
+  <pose>-170.849 10.873 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_35">
+  <static>true</static>
+  <pose>-190.729 10.936 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_36">
+  <static>true</static>
+  <pose>-210.435 10.8955 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_37">
+  <static>true</static>
+  <pose>-230.386 10.8995 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="building_38">
+  <static>true</static>
+  <pose>120.228 168.137 0 0 -0 0</pose>
+  <include><uri>model://apartment</uri></include>
+</model>
+<model name="building_39">
+  <static>true</static>
+  <pose>-64.3066 102.631 0 0 -0 0</pose>
+  <include><uri>model://grocery_store</uri></include>
+</model>
+<model name="building_40">
+  <static>true</static>
+  <pose>0.00471249 201.307 0 0 -0 0</pose>
+  <include><uri>model://school</uri></include>
+</model>
+<model name="building_41">
+  <static>true</static>
+  <pose>-95.9902 126.766 0 0 -0 1.57</pose>
+  <include><uri>model://apartment</uri></include>
+</model>
+<model name="building_42">
+  <static>true</static>
+  <pose>-186.404 100.747 0 0 -0 3.14</pose>
+  <include><uri>model://osrf_first_office</uri></include>
+</model>
+<model name="building_43">
+  <static>true</static>
+  <pose>-37.219 103.098 0 0 -0 0</pose>
+  <include><uri>model://office_building</uri></include>
+</model>
+<model name="asphalt_plane_44">
+  <static>true</static>
+  <pose>38.6633 110.823 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_45">
+  <static>true</static>
+  <pose>18.766 110.859 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_46">
+  <static>true</static>
+  <pose>-1.01176 110.842 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_47">
+  <static>true</static>
+  <pose>-20.8489 110.873 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_48">
+  <static>true</static>
+  <pose>-40.7293 110.936 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_49">
+  <static>true</static>
+  <pose>-60.435 110.895 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_50">
+  <static>true</static>
+  <pose>-80.3855 110.9 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="building_51">
+  <static>true</static>
+  <pose>77.6298 -96.8641 0 0 -0 1.57</pose>
+  <include><uri>model://apartment</uri></include>
+</model>
+<model name="building_52">
+  <static>true</static>
+  <pose>-35.2755 -98.9301 0 0 -0 0</pose>
+  <include><uri>model://grocery_store</uri></include>
+</model>
+<model name="building_53">
+  <static>true</static>
+  <pose>-1.48207 -102.297 0 0 -0 3.14</pose>
+  <include><uri>model://school</uri></include>
+</model>
+<model name="building_54">
+  <static>true</static>
+  <pose>28.5146 -101.44 0 0 -0 3.14</pose>
+  <include><uri>model://osrf_first_office</uri></include>
+</model>
+<model name="building_55">
+  <static>true</static>
+  <pose>-47.1102 -17.6455 0 0 -0 0</pose>
+  <include><uri>model://office_building</uri></include>
+</model>
+<model name="asphalt_plane_56">
+  <static>true</static>
+  <pose>78.5172 -89.1249 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_57">
+  <static>true</static>
+  <pose>58.5652 -89.1687 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_58">
+  <static>true</static>
+  <pose>38.6633 -89.177 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_59">
+  <static>true</static>
+  <pose>18.766 -89.1412 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_60">
+  <static>true</static>
+  <pose>-1.01176 -89.1584 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_61">
+  <static>true</static>
+  <pose>-20.8489 -89.127 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_62">
+  <static>true</static>
+  <pose>-40.7293 -89.064 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_63">
+  <static>true</static>
+  <pose>-60.435 -89.1045 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_64">
+  <static>true</static>
+  <pose>-80.3855 -89.1005 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="building_65">
+  <static>true</static>
+  <pose>227.63 203.136 0 0 -0 1.57</pose>
+  <include><uri>model://apartment</uri></include>
+</model>
+<model name="building_66">
+  <static>true</static>
+  <pose>120.608 201.859 0 0 -0 1.57</pose>
+  <include><uri>model://grocery_store</uri></include>
+</model>
+<model name="building_67">
+  <static>true</static>
+  <pose>148.518 197.703 0 0 -0 3.14</pose>
+  <include><uri>model://school</uri></include>
+</model>
+<model name="building_68">
+  <static>true</static>
+  <pose>204.523 202.856 0 0 -0 1.57</pose>
+  <include><uri>model://apartment</uri></include>
+</model>
+<model name="asphalt_plane_69">
+  <static>true</static>
+  <pose>228.517 210.875 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_70">
+  <static>true</static>
+  <pose>208.565 210.831 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_71">
+  <static>true</static>
+  <pose>188.663 210.823 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_72">
+  <static>true</static>
+  <pose>168.766 210.859 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_73">
+  <static>true</static>
+  <pose>148.988 210.842 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_74">
+  <static>true</static>
+  <pose>129.151 210.873 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_75">
+  <static>true</static>
+  <pose>109.271 210.936 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_76">
+  <static>true</static>
+  <pose>89.565 210.895 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_77">
+  <static>true</static>
+  <pose>69.6145 210.899 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="building_78">
+  <static>true</static>
+  <pose>77.6298 203.136 0 0 -0 1.57</pose>
+  <include><uri>model://apartment</uri></include>
+</model>
+<model name="building_79">
+  <static>true</static>
+  <pose>-35.2755 201.07 0 0 -0 0</pose>
+  <include><uri>model://grocery_store</uri></include>
+</model>
+<model name="building_80">
+  <static>true</static>
+  <pose>-69.9912 200.95 0 0 -0 0</pose>
+  <include><uri>model://office_building</uri></include>
+</model>
+<model name="building_81">
+  <static>true</static>
+  <pose>54.5227 202.856 0 0 -0 1.57</pose>
+  <include><uri>model://apartment</uri></include>
+</model>
+<model name="building_82">
+  <static>true</static>
+  <pose>28.5146 198.56 0 0 -0 3.14</pose>
+  <include><uri>model://osrf_first_office</uri></include>
+</model>
+<model name="asphalt_plane_83">
+  <static>true</static>
+  <pose>78.5172 210.875 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_84">
+  <static>true</static>
+  <pose>58.5652 210.831 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_85">
+  <static>true</static>
+  <pose>38.6633 210.823 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_86">
+  <static>true</static>
+  <pose>18.766 210.859 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_87">
+  <static>true</static>
+  <pose>-1.01176 210.842 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_88">
+  <static>true</static>
+  <pose>-20.8489 210.873 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_89">
+  <static>true</static>
+  <pose>-40.7293 210.936 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_90">
+  <static>true</static>
+  <pose>-60.435 210.895 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_91">
+  <static>true</static>
+  <pose>-80.3855 210.899 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="building_92">
+  <static>true</static>
+  <pose>-185.275 201.07 0 0 -0 0</pose>
+  <include><uri>model://grocery_store</uri></include>
+</model>
+<model name="building_93">
+  <static>true</static>
+  <pose>-151.482 197.703 0 0 -0 3.14</pose>
+  <include><uri>model://school</uri></include>
+</model>
+<model name="building_94">
+  <static>true</static>
+  <pose>-230.357 202.03 0 0 -0 0</pose>
+  <include><uri>model://office_building</uri></include>
+</model>
+<model name="building_95">
+  <static>true</static>
+  <pose>-95.8991 151.304 0 0 -0 1.57</pose>
+  <include><uri>model://apartment</uri></include>
+</model>
+<model name="building_96">
+  <static>true</static>
+  <pose>-14.6255 102.478 0 0 -0 3.14</pose>
+  <include><uri>model://osrf_first_office</uri></include>
+</model>
+<model name="building_97">
+  <static>true</static>
+  <pose>-211.999 201.954 0 0 -0 0</pose>
+  <include><uri>model://office_building</uri></include>
+</model>
+<model name="asphalt_plane_98">
+  <static>true</static>
+  <pose>-71.4828 210.875 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_99">
+  <static>true</static>
+  <pose>-151.012 210.842 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_100">
+  <static>true</static>
+  <pose>-170.849 210.873 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_101">
+  <static>true</static>
+  <pose>-190.729 210.936 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_102">
+  <static>true</static>
+  <pose>-210.435 210.895 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_103">
+  <static>true</static>
+  <pose>-230.386 210.899 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="building_104">
+  <static>true</static>
+  <pose>-151.482 97.7031 0 0 -0 3.14</pose>
+  <include><uri>model://school</uri></include>
+</model>
+<model name="building_105">
+  <static>true</static>
+  <pose>-230.357 102.03 0 0 -0 0</pose>
+  <include><uri>model://office_building</uri></include>
+</model>
+<model name="building_106">
+  <static>true</static>
+  <pose>-95.4773 102.856 0 0 -0 1.57</pose>
+  <include><uri>model://apartment</uri></include>
+</model>
+<model name="building_107">
+  <static>true</static>
+  <pose>-121.485 98.5601 0 0 -0 3.14</pose>
+  <include><uri>model://osrf_first_office</uri></include>
+</model>
+<model name="building_108">
+  <static>true</static>
+  <pose>-211.999 101.954 0 0 -0 0</pose>
+  <include><uri>model://office_building</uri></include>
+</model>
+<model name="asphalt_plane_109">
+  <static>true</static>
+  <pose>-71.4828 110.875 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_110">
+  <static>true</static>
+  <pose>-91.4348 110.831 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_111">
+  <static>true</static>
+  <pose>-111.337 110.823 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_112">
+  <static>true</static>
+  <pose>-131.234 110.859 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_113">
+  <static>true</static>
+  <pose>-151.012 110.842 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_114">
+  <static>true</static>
+  <pose>-170.849 110.873 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_115">
+  <static>true</static>
+  <pose>-190.729 110.936 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_116">
+  <static>true</static>
+  <pose>-210.435 110.895 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_117">
+  <static>true</static>
+  <pose>-230.386 110.9 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="building_118">
+  <static>true</static>
+  <pose>227.63 103.136 0 0 -0 1.57</pose>
+  <include><uri>model://apartment</uri></include>
+</model>
+<model name="building_119">
+  <static>true</static>
+  <pose>121.607 136.577 0 0 -0 1.57</pose>
+  <include><uri>model://grocery_store</uri></include>
+</model>
+<model name="building_120">
+  <static>true</static>
+  <pose>119.455 101.315 0 0 -0 1.57</pose>
+  <include><uri>model://school</uri></include>
+</model>
+<model name="building_121">
+  <static>true</static>
+  <pose>198.883 100.851 0 0 -0 3.14</pose>
+  <include><uri>model://osrf_first_office</uri></include>
+</model>
+<model name="asphalt_plane_122">
+  <static>true</static>
+  <pose>228.517 110.875 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_123">
+  <static>true</static>
+  <pose>208.565 110.831 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_124">
+  <static>true</static>
+  <pose>188.663 110.823 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="building_125">
+  <static>true</static>
+  <pose>-185.275 -98.9301 0 0 -0 0</pose>
+  <include><uri>model://grocery_store</uri></include>
+</model>
+<model name="building_126">
+  <static>true</static>
+  <pose>78.2064 -118.505 0 0 -0 0</pose>
+  <include><uri>model://office_building</uri></include>
+</model>
+<model name="building_127">
+  <static>true</static>
+  <pose>-95.4773 -97.1442 0 0 -0 1.57</pose>
+  <include><uri>model://apartment</uri></include>
+</model>
+<model name="building_128">
+  <static>true</static>
+  <pose>-121.485 -101.44 0 0 -0 3.14</pose>
+  <include><uri>model://osrf_first_office</uri></include>
+</model>
+<model name="building_129">
+  <static>true</static>
+  <pose>-211.999 -98.046 0 0 -0 0</pose>
+  <include><uri>model://office_building</uri></include>
+</model>
+<model name="asphalt_plane_130">
+  <static>true</static>
+  <pose>-71.4828 -89.1249 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_131">
+  <static>true</static>
+  <pose>-91.4348 -89.1687 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_132">
+  <static>true</static>
+  <pose>-111.337 -89.177 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_133">
+  <static>true</static>
+  <pose>-131.234 -89.1412 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_134">
+  <static>true</static>
+  <pose>-151.012 -89.1584 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_135">
+  <static>true</static>
+  <pose>-170.849 -89.127 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_136">
+  <static>true</static>
+  <pose>-190.729 -89.064 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_137">
+  <static>true</static>
+  <pose>-210.435 -89.1045 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_138">
+  <static>true</static>
+  <pose>-230.386 -89.1005 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="building_139">
+  <static>true</static>
+  <pose>227.63 -96.8641 0 0 -0 1.57</pose>
+  <include><uri>model://apartment</uri></include>
+</model>
+<model name="building_140">
+  <static>true</static>
+  <pose>114.725 -98.9301 0 0 -0 0</pose>
+  <include><uri>model://grocery_store</uri></include>
+</model>
+<model name="building_141">
+  <static>true</static>
+  <pose>148.518 -102.297 0 0 -0 3.14</pose>
+  <include><uri>model://school</uri></include>
+</model>
+<model name="building_142">
+  <static>true</static>
+  <pose>204.523 -97.1442 0 0 -0 1.57</pose>
+  <include><uri>model://apartment</uri></include>
+</model>
+<model name="building_143">
+  <static>true</static>
+  <pose>178.515 -101.44 0 0 -0 3.14</pose>
+  <include><uri>model://osrf_first_office</uri></include>
+</model>
+<model name="asphalt_plane_144">
+  <static>true</static>
+  <pose>228.517 -89.1249 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_145">
+  <static>true</static>
+  <pose>208.565 -89.1687 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_146">
+  <static>true</static>
+  <pose>188.663 -89.177 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_147">
+  <static>true</static>
+  <pose>168.766 -89.1412 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_148">
+  <static>true</static>
+  <pose>148.988 -89.1584 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_149">
+  <static>true</static>
+  <pose>129.151 -89.127 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_150">
+  <static>true</static>
+  <pose>109.271 -89.064 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_151">
+  <static>true</static>
+  <pose>89.565 -89.1045 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_152">
+  <static>true</static>
+  <pose>69.6145 -89.1005 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="building_153">
+  <static>true</static>
+  <pose>-72.3702 -196.864 0 0 -0 1.57</pose>
+  <include><uri>model://apartment</uri></include>
+</model>
+<model name="building_154">
+  <static>true</static>
+  <pose>-185.275 -198.93 0 0 -0 0</pose>
+  <include><uri>model://grocery_store</uri></include>
+</model>
+<model name="building_155">
+  <static>true</static>
+  <pose>-151.482 -202.297 0 0 -0 3.14</pose>
+  <include><uri>model://school</uri></include>
+</model>
+<model name="building_156">
+  <static>true</static>
+  <pose>-95.4773 -197.144 0 0 -0 1.57</pose>
+  <include><uri>model://apartment</uri></include>
+</model>
+<model name="building_157">
+  <static>true</static>
+  <pose>-121.485 -201.44 0 0 -0 3.14</pose>
+  <include><uri>model://osrf_first_office</uri></include>
+</model>
+<model name="building_158">
+  <static>true</static>
+  <pose>-211.999 -198.046 0 0 -0 0</pose>
+  <include><uri>model://office_building</uri></include>
+</model>
+<model name="asphalt_plane_159">
+  <static>true</static>
+  <pose>-71.4828 -189.125 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_160">
+  <static>true</static>
+  <pose>-91.4348 -189.169 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_161">
+  <static>true</static>
+  <pose>-111.337 -189.177 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_162">
+  <static>true</static>
+  <pose>-131.234 -189.141 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_163">
+  <static>true</static>
+  <pose>-151.012 -189.158 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_164">
+  <static>true</static>
+  <pose>-170.849 -189.127 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_165">
+  <static>true</static>
+  <pose>-190.729 -189.064 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_166">
+  <static>true</static>
+  <pose>-210.435 -189.105 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="building_167">
+  <static>true</static>
+  <pose>79.2491 -207.156 0 0 -0 1.57</pose>
+  <include><uri>model://apartment</uri></include>
+</model>
+<model name="building_168">
+  <static>true</static>
+  <pose>-35.2755 -198.93 0 0 -0 0</pose>
+  <include><uri>model://grocery_store</uri></include>
+</model>
+<model name="building_169">
+  <static>true</static>
+  <pose>-1.48207 -202.297 0 0 -0 3.14</pose>
+  <include><uri>model://school</uri></include>
+</model>
+<model name="building_170">
+  <static>true</static>
+  <pose>42.6773 -193.006 0 0 -0 3.14</pose>
+  <include><uri>model://osrf_first_office</uri></include>
+</model>
+<model name="asphalt_plane_171">
+  <static>true</static>
+  <pose>78.5172 -189.125 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_172">
+  <static>true</static>
+  <pose>58.5652 -189.169 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_173">
+  <static>true</static>
+  <pose>38.6633 -189.177 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_174">
+  <static>true</static>
+  <pose>122.363 -181.42 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_175">
+  <static>true</static>
+  <pose>-1.01176 -189.158 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_176">
+  <static>true</static>
+  <pose>-20.8489 -189.127 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_177">
+  <static>true</static>
+  <pose>-40.7293 -189.064 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_178">
+  <static>true</static>
+  <pose>-60.435 -189.105 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_179">
+  <static>true</static>
+  <pose>-80.3855 -189.101 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="building_180">
+  <static>true</static>
+  <pose>227.63 -196.864 0 0 -0 1.57</pose>
+  <include><uri>model://apartment</uri></include>
+</model>
+<model name="building_181">
+  <static>true</static>
+  <pose>114.725 -198.93 0 0 -0 0</pose>
+  <include><uri>model://grocery_store</uri></include>
+</model>
+<model name="building_182">
+  <static>true</static>
+  <pose>148.518 -202.297 0 0 -0 3.14</pose>
+  <include><uri>model://school</uri></include>
+</model>
+<model name="building_183">
+  <static>true</static>
+  <pose>204.523 -197.144 0 0 -0 1.57</pose>
+  <include><uri>model://apartment</uri></include>
+</model>
+<model name="building_184">
+  <static>true</static>
+  <pose>178.515 -201.44 0 0 -0 3.14</pose>
+  <include><uri>model://osrf_first_office</uri></include>
+</model>
+<model name="asphalt_plane_185">
+  <static>true</static>
+  <pose>228.517 -189.125 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_186">
+  <static>true</static>
+  <pose>208.565 -189.169 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_187">
+  <static>true</static>
+  <pose>188.663 -189.177 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_188">
+  <static>true</static>
+  <pose>168.766 -189.141 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_189">
+  <static>true</static>
+  <pose>148.988 -189.158 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_190">
+  <static>true</static>
+  <pose>129.151 -189.127 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_191">
+  <static>true</static>
+  <pose>109.271 -189.064 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_192">
+  <static>true</static>
+  <pose>89.565 -189.105 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_193">
+  <static>true</static>
+  <pose>69.6145 -189.101 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_194">
+  <static>true</static>
+  <pose>-134.115 -136.746 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_195">
+  <static>true</static>
+  <pose>-115.926 -154.212 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_196">
+  <static>true</static>
+  <pose>-134.178 -156.305 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_197">
+  <static>true</static>
+  <pose>-115.846 -173.913 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_198">
+  <static>true</static>
+  <pose>-134.272 -173.11 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_199">
+  <static>true</static>
+  <pose>69.6637 -170.537 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_200">
+  <static>true</static>
+  <pose>69.7404 -152.153 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_201">
+  <static>true</static>
+  <pose>69.6828 -132.382 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_202">
+  <static>true</static>
+  <pose>69.6163 -113.083 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_203">
+  <static>true</static>
+  <pose>69.7734 -100.848 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_204">
+  <static>true</static>
+  <pose>116.738 51.3999 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="building_205">
+  <static>true</static>
+  <pose>19.3167 103.158 0 0 -0 3.14</pose>
+  <include><uri>model://school</uri></include>
+</model>
+<model name="building_206">
+  <static>true</static>
+  <pose>116.96 51.8245 0 0 -0 1.57</pose>
+  <include><uri>model://apartment</uri></include>
+</model>
+<model name="building_207">
+  <static>true</static>
+  <pose>117.651 74.1793 0 0 -0 1.57</pose>
+  <include><uri>model://apartment</uri></include>
+</model>
+<model name="building_208">
+  <static>true</static>
+  <pose>-215.004 1.08233 0 0 -0 1.57</pose>
+  <include><uri>model://apartment</uri></include>
+</model>
+<model name="building_209">
+  <static>true</static>
+  <pose>-125.614 -173.871 0 0 -0 0</pose>
+  <include><uri>model://grocery_store</uri></include>
+</model>
+<model name="building_210">
+  <static>true</static>
+  <pose>-126.375 -146.683 0 0 -0 0</pose>
+  <include><uri>model://grocery_store</uri></include>
+</model>
+<model name="building_211">
+  <static>true</static>
+  <pose>-124.894 -121.606 0 0 -0 3.14</pose>
+  <include><uri>model://osrf_first_office</uri></include>
+</model>
+<model name="building_212">
+  <static>true</static>
+  <pose>79.7981 -139.107 0 0 -0 1.57</pose>
+  <include><uri>model://apartment</uri></include>
+</model>
+<model name="building_213">
+  <static>true</static>
+  <pose>79.2479 -160.654 0 0 -0 1.57</pose>
+  <include><uri>model://apartment</uri></include>
+</model>
+<model name="building_214">
+  <static>true</static>
+  <pose>78.5562 -183.893 0 0 -0 1.57</pose>
+  <include><uri>model://apartment</uri></include>
+</model>
+<model name="asphalt_plane_215">
+  <static>true</static>
+  <pose>84.3719 -169.992 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_216">
+  <static>true</static>
+  <pose>84.3978 -150.033 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_217">
+  <static>true</static>
+  <pose>84.5299 -130.216 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_218">
+  <static>true</static>
+  <pose>84.5735 -110.84 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_219">
+  <static>true</static>
+  <pose>84.5096 -100.365 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_220">
+  <static>true</static>
+  <pose>142.162 -70.0531 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_221">
+  <static>true</static>
+  <pose>142.204 -50.6232 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_222">
+  <static>true</static>
+  <pose>142.292 -30.8206 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_223">
+  <static>true</static>
+  <pose>142.341 -12.6716 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_224">
+  <static>true</static>
+  <pose>169.023 -1.05379 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_225">
+  <static>true</static>
+  <pose>188.743 -1.00073 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_226">
+  <static>true</static>
+  <pose>-108.136 129.481 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_227">
+  <static>true</static>
+  <pose>-88.4793 130.097 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_228">
+  <static>true</static>
+  <pose>-108.084 149.026 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_229">
+  <static>true</static>
+  <pose>-88.462 149.821 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_230">
+  <static>true</static>
+  <pose>-108.24 159.829 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_231">
+  <static>true</static>
+  <pose>-88.306 159.865 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_232">
+  <static>true</static>
+  <pose>-230.236 91.636 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_233">
+  <static>true</static>
+  <pose>-210.346 91.5444 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_234">
+  <static>true</static>
+  <pose>-191.021 91.7649 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_235">
+  <static>true</static>
+  <pose>-171.421 91.6889 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_236">
+  <static>true</static>
+  <pose>-151.712 91.7673 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_237">
+  <static>true</static>
+  <pose>-132.195 91.7924 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_238">
+  <static>true</static>
+  <pose>-112.61 91.7654 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_239">
+  <static>true</static>
+  <pose>-92.9913 91.765 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_240">
+  <static>true</static>
+  <pose>-73.9134 91.6807 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_241">
+  <static>true</static>
+  <pose>-54.264 91.5816 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_242">
+  <static>true</static>
+  <pose>-34.6325 91.6886 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_243">
+  <static>true</static>
+  <pose>-14.8428 91.7582 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_244">
+  <static>true</static>
+  <pose>4.89869 91.7058 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_245">
+  <static>true</static>
+  <pose>24.6537 91.5483 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_246">
+  <static>true</static>
+  <pose>38.6206 91.4353 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_247">
+  <static>true</static>
+  <pose>-131.36 210.804 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_248">
+  <static>true</static>
+  <pose>-80.4902 199.629 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_249">
+  <static>true</static>
+  <pose>-60.583 199.679 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_250">
+  <static>true</static>
+  <pose>-40.7854 199.592 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_251">
+  <static>true</static>
+  <pose>-20.824 199.561 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_252">
+  <static>true</static>
+  <pose>-0.880382 199.48 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_253">
+  <static>true</static>
+  <pose>18.8889 199.398 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_254">
+  <static>true</static>
+  <pose>38.1266 199.456 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_255">
+  <static>true</static>
+  <pose>58.0662 199.519 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_256">
+  <static>true</static>
+  <pose>78.0469 199.476 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_257">
+  <static>true</static>
+  <pose>97.5512 199.596 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_258">
+  <static>true</static>
+  <pose>112.811 192.231 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_259">
+  <static>true</static>
+  <pose>122.441 192.353 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_260">
+  <static>true</static>
+  <pose>142.08 196.78 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_261">
+  <static>true</static>
+  <pose>161.524 196.723 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_262">
+  <static>true</static>
+  <pose>198.493 198.772 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_263">
+  <static>true</static>
+  <pose>218.478 198.872 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_264">
+  <static>true</static>
+  <pose>235.395 198.845 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_265">
+  <static>true</static>
+  <pose>235.595 210.981 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_266">
+  <static>true</static>
+  <pose>112.82 174.398 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_267">
+  <static>true</static>
+  <pose>122.47 173.811 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_268">
+  <static>true</static>
+  <pose>112.926 154.964 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_269">
+  <static>true</static>
+  <pose>122.481 154.344 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_270">
+  <static>true</static>
+  <pose>113.03 136.194 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_271">
+  <static>true</static>
+  <pose>122.574 134.658 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_272">
+  <static>true</static>
+  <pose>113.076 116.59 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_273">
+  <static>true</static>
+  <pose>122.603 115.01 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_274">
+  <static>true</static>
+  <pose>113.232 97.1486 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_275">
+  <static>true</static>
+  <pose>122.712 95.0786 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_276">
+  <static>true</static>
+  <pose>113.336 77.7467 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_277">
+  <static>true</static>
+  <pose>122.691 76.5724 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_278">
+  <static>true</static>
+  <pose>113.41 57.9398 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_279">
+  <static>true</static>
+  <pose>122.79 56.8114 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_280">
+  <static>true</static>
+  <pose>113.394 37.9165 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_281">
+  <static>true</static>
+  <pose>122.674 36.8453 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_282">
+  <static>true</static>
+  <pose>109.197 25.8041 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_283">
+  <static>true</static>
+  <pose>122.702 21.7989 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_284">
+  <static>true</static>
+  <pose>-115.928 -136.284 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_285">
+  <static>true</static>
+  <pose>-134.354 -117.356 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_286">
+  <static>true</static>
+  <pose>-115.955 -116.996 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_287">
+  <static>true</static>
+  <pose>-115.828 -98.1966 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+<model name="asphalt_plane_288">
+  <static>true</static>
+  <pose>-134.245 -101.867 0 0 -0 0</pose>
+  <include><uri>model://asphalt_plane</uri></include>
+</model>
+
+
+<actor name="terrorist_0">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>true</interpolate_x>
+  </animation>  <pose>-230.0 202.0 1.07 0.0 0.0 -1.4711276743</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>50.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>-230.0 202.0 0.0 0.0 0.0 -1.4711276743</pose>
+      </waypoint>
+      <waypoint>
+        <time>10.1452442672</time>
+        <pose>-228.0 182.0 0.0 0.0 0.0 -1.4711276743</pose>
+      </waypoint>
+      <waypoint>
+        <time>136.35099372</time>
+        <pose>-71.0 178.0 0.0 0.0 0.0 -0.0254721965107</pose>
+      </waypoint>
+      <waypoint>
+        <time>227.965115077</time>
+        <pose>88.0 107.0 0.0 0.0 0.0 -0.419973598932</pose>
+      </waypoint>
+      <waypoint>
+        <time>306.846063198</time>
+        <pose>65.0 -35.0 0.0 0.0 0.0 -1.73137360748</pose>
+      </waypoint>
+      <waypoint>
+        <time>388.368957074</time>
+        <pose>-48.0 -54.0 0.0 0.0 0.0 -2.97500925693</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_1">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>true</interpolate_x>
+  </animation>  <pose>-230.0 202.0 1.07 0.0 0.0 -1.4711276743</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>55.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>-230.0 202.0 0.0 0.0 0.0 -1.4711276743</pose>
+      </waypoint>
+      <waypoint>
+        <time>11.3036880138</time>
+        <pose>-228.0 182.0 0.0 0.0 0.0 -1.4711276743</pose>
+      </waypoint>
+      <waypoint>
+        <time>80.6005528518</time>
+        <pose>-71.0 178.0 0.0 0.0 0.0 -0.0254721965107</pose>
+      </waypoint>
+      <waypoint>
+        <time>157.678417557</time>
+        <pose>88.0 107.0 0.0 0.0 0.0 -0.419973598932</pose>
+      </waypoint>
+      <waypoint>
+        <time>218.109829499</time>
+        <pose>65.0 -35.0 0.0 0.0 0.0 -1.73137360748</pose>
+      </waypoint>
+      <waypoint>
+        <time>278.003717131</time>
+        <pose>-48.0 -54.0 0.0 0.0 0.0 -2.97500925693</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_2">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>true</interpolate_x>
+  </animation>  <pose>-230.0 202.0 1.07 0.0 0.0 -1.4711276743</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>58.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>-230.0 202.0 0.0 0.0 0.0 -1.4711276743</pose>
+      </waypoint>
+      <waypoint>
+        <time>10.8314813113</time>
+        <pose>-228.0 182.0 0.0 0.0 0.0 -1.4711276743</pose>
+      </waypoint>
+      <waypoint>
+        <time>85.7522351623</time>
+        <pose>-71.0 178.0 0.0 0.0 0.0 -0.0254721965107</pose>
+      </waypoint>
+      <waypoint>
+        <time>188.539111591</time>
+        <pose>88.0 107.0 0.0 0.0 0.0 -0.419973598932</pose>
+      </waypoint>
+      <waypoint>
+        <time>252.54189699</time>
+        <pose>65.0 -35.0 0.0 0.0 0.0 -1.73137360748</pose>
+      </waypoint>
+      <waypoint>
+        <time>322.35797928</time>
+        <pose>-48.0 -54.0 0.0 0.0 0.0 -2.97500925693</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_3">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>true</interpolate_x>
+  </animation>  <pose>227.0 -196.0 1.07 0.0 0.0 2.42716514125</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>60</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>227.0 -196.0 0.0 0.0 0.0 2.42716514125</pose>
+      </waypoint>
+      <waypoint>
+        <time>143.298536163</time>
+        <pose>114.0 -98.0 0.0 0.0 0.0 2.42716514125</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_4">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>true</interpolate_x>
+  </animation>  <pose>227.0 -196.0 1.07 0.0 0.0 2.42716514125</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>63.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>227.0 -196.0 0.0 0.0 0.0 2.42716514125</pose>
+      </waypoint>
+      <waypoint>
+        <time>148.188333664</time>
+        <pose>114.0 -98.0 0.0 0.0 0.0 2.42716514125</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_5">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>true</interpolate_x>
+  </animation>  <pose>227.0 -196.0 1.07 0.0 0.0 2.42716514125</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>66.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>227.0 -196.0 0.0 0.0 0.0 2.42716514125</pose>
+      </waypoint>
+      <waypoint>
+        <time>69.8279101976</time>
+        <pose>114.0 -98.0 0.0 0.0 0.0 2.42716514125</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_6">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>true</interpolate_x>
+  </animation>  <pose>-211.0 -198.0 1.07 0.0 0.0 -1.60781644267</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>200.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>-211.0 -198.0 0.0 0.0 0.0 -1.60781644267</pose>
+      </waypoint>
+      <waypoint>
+        <time>18.6320663529</time>
+        <pose>-212.0 -225.0 0.0 0.0 0.0 -1.60781644267</pose>
+      </waypoint>
+      <waypoint>
+        <time>153.586433202</time>
+        <pose>0.0 -225.0 0.0 0.0 0.0 0.0</pose>
+      </waypoint>
+      <waypoint>
+        <time>163.662698697</time>
+        <pose>-1.0 -202.0 0.0 0.0 0.0 1.61424722219</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_7">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>true</interpolate_x>
+  </animation>  <pose>-211.0 -198.0 1.07 0.0 0.0 -1.60781644267</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>202.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>-211.0 -198.0 0.0 0.0 0.0 -1.60781644267</pose>
+      </waypoint>
+      <waypoint>
+        <time>15.0339584544</time>
+        <pose>-212.0 -225.0 0.0 0.0 0.0 -1.60781644267</pose>
+      </waypoint>
+      <waypoint>
+        <time>128.489356865</time>
+        <pose>0.0 -225.0 0.0 0.0 0.0 0.0</pose>
+      </waypoint>
+      <waypoint>
+        <time>141.572825602</time>
+        <pose>-1.0 -202.0 0.0 0.0 0.0 1.61424722219</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_8">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>true</interpolate_x>
+  </animation>  <pose>-211.0 -198.0 1.07 0.0 0.0 -1.60781644267</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>210.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>-211.0 -198.0 0.0 0.0 0.0 -1.60781644267</pose>
+      </waypoint>
+      <waypoint>
+        <time>13.1171401763</time>
+        <pose>-212.0 -225.0 0.0 0.0 0.0 -1.60781644267</pose>
+      </waypoint>
+      <waypoint>
+        <time>99.5873261378</time>
+        <pose>0.0 -225.0 0.0 0.0 0.0 0.0</pose>
+      </waypoint>
+      <waypoint>
+        <time>110.118506541</time>
+        <pose>-1.0 -202.0 0.0 0.0 0.0 1.61424722219</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_9">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>true</interpolate_x>
+  </animation>  <pose>227.0 203.0 1.07 0.0 0.0 -2.15198085417</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>210.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>227.0 203.0 0.0 0.0 0.0 -2.15198085417</pose>
+      </waypoint>
+      <waypoint>
+        <time>63.1869309289</time>
+        <pose>160.0 101.0 0.0 0.0 0.0 -2.15198085417</pose>
+      </waypoint>
+      <waypoint>
+        <time>169.450360119</time>
+        <pose>227.0 3.0 0.0 0.0 0.0 -0.971112011657</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_10">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>true</interpolate_x>
+  </animation>  <pose>227.0 203.0 1.07 0.0 0.0 -2.15198085417</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>212.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>227.0 203.0 0.0 0.0 0.0 -2.15198085417</pose>
+      </waypoint>
+      <waypoint>
+        <time>53.0799991686</time>
+        <pose>160.0 101.0 0.0 0.0 0.0 -2.15198085417</pose>
+      </waypoint>
+      <waypoint>
+        <time>125.753694558</time>
+        <pose>227.0 3.0 0.0 0.0 0.0 -0.971112011657</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_11">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>true</interpolate_x>
+  </animation>  <pose>227.0 203.0 1.07 0.0 0.0 -2.15198085417</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>213.0</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>227.0 203.0 0.0 0.0 0.0 -2.15198085417</pose>
+      </waypoint>
+      <waypoint>
+        <time>100.659324374</time>
+        <pose>160.0 101.0 0.0 0.0 0.0 -2.15198085417</pose>
+      </waypoint>
+      <waypoint>
+        <time>205.464952559</time>
+        <pose>227.0 3.0 0.0 0.0 0.0 -0.971112011657</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+
+ <model name="zephyr0">
+      <pose>-245 -237 0 0 0 3.1415</pose>
+      <include>
+        <uri>model://zephyr_with_skid_pad</uri>
+      </include>
+    </model>
+    
+    <model name="zephyr1">
+      <pose>-245 -239 0 0 0 3.1415</pose>
+      <include>
+        <uri>model://zephyr_with_skid_pad</uri>
+      </include>
+    </model>
+    
+    <model name="zephyr2">
+      <pose>-245 -241 0 0 0 3.1415</pose>
+      <include>
+        <uri>model://zephyr_with_skid_pad</uri>
+      </include>
+    </model>
+    
+    <model name="zephyr3">
+      <pose>-245 -243 0 0 0 3.1415</pose>
+      <include>
+        <uri>model://zephyr_with_skid_pad</uri>
+      </include>
+    </model>
+    
+    <model name="zephyr4">
+      <pose>-245 -245 0 0 0 3.1415</pose>
+      <include>
+        <uri>model://zephyr_with_skid_pad</uri>
+      </include>
+    </model>
+    
+    <model name="zephyr5">
+      <pose>-245 -247 0 0 0 3.1415</pose>
+      <include>
+        <uri>model://zephyr_with_skid_pad</uri>
+      </include>
+    </model>
+    
+    <model name="iris0">
+      <pose>-235 -237 0 0 0 3.1415</pose>
+      <include>
+        <uri>model://iris_quadrotor_with_plugin</uri>
+      </include>
+    </model>
+    
+    <model name="iris1">
+      <pose>-235 -239 0 0 0 3.1415</pose>
+      <include>
+        <uri>model://iris_quadrotor_with_plugin</uri>
+      </include>
+    </model>
+    
+    <model name="iris2">
+      <pose>-235 -241 0 0 0 3.1415</pose>
+      <include>
+        <uri>model://iris_quadrotor_with_plugin</uri>
+      </include>
+    </model>
+    
+    <model name="iris3">
+      <pose>-235 -243 0 0 0 3.1415</pose>
+      <include>
+        <uri>model://iris_quadrotor_with_plugin</uri>
+      </include>
+    </model>
+    
+    <model name="iris4">
+      <pose>-235 -245 0 0 0 3.1415</pose>
+      <include>
+        <uri>model://iris_quadrotor_with_plugin</uri>
+      </include>
+    </model>
+    
+    <model name="iris5">
+      <pose>-235 -247 0 0 0 3.1415</pose>
+      <include>
+        <uri>model://iris_quadrotor_with_plugin</uri>
+      </include>
+    </model>
+
+    <plugin name="air_traffic_controller" filename="libair_traffic_controller.so">
+      <takeoff>
+        <pose>-240 -240 0 0 0 3.1415</pose>
+        <height_threshold>10</height_threshold>
+        <distance_threshold>50</distance_threshold>
+      </takeoff>
+      <landing>
+        <area_bottom_left>-250 -250 0</area_bottom_left>
+        <area_upper_right>-230 -150 0</area_upper_right>
+        <start_pose>-240 -150 30 0 0 3.1415</start_pose>
+        <end_pose>-240 -240 0 0 0 3.1415</end_pose>
+        <height_treshold>0.1</height_treshold>
+        <velocity_threshold>3</velocity_threshold>
+      </landing>
+    </plugin>
+    <plugin name="comm_manager" filename="libcomm_manager.so">
+      <comm_request_topic>comm_request</comm_request_topic>
+      <comm_broadcast_topic>comm</comm_broadcast_topic>
+      <!-- girilen deger metre biriminde olmali -->
+      <!-- comm_distance 100 km secildi ki herkes tum mesajlari alabilsin -->
+      <comm_distance>10000</comm_distance>
+    </plugin>
+    <plugin name="score_calculator" filename="libscore_calculator.so">
+      <area_coverage_score>
+        <visualization>
+          <active>true</active>
+          <topic_name>score_area_visual</topic_name>
+          <!-- runs the visualization at every given milliseconds -->
+          <update_rate>1000</update_rate>
+        </visualization>
+        <!-- runs score calculation at every update_rate milliseconds -->
+        <update_rate>100</update_rate>
+        <!-- widgh and height of total area in meters -->
+        <width>500</width>
+        <height>500</height>
+        <!-- the size of a single cell in meters -->
+        <resolution>0.5</resolution>
+        <factor>0.3</factor>
+      </area_coverage_score>
+      <detection_score>
+        <!-- when false building is detected or detection occurs before the movement of terrorists, false detection penalty is going to be applied -->
+        <!-- for details please refer the technical documentation -->
+        <false_detection_penalty>0.1</false_detection_penalty>
+        <detection_topic>terrorist_detection</detection_topic>
+        <factor>0.4</factor>
+        <base_score>10</base_score>
+        <!-- <time_to_detect>200000</time_to_detect> -->
+      </detection_score>
+      <tracking_score>
+        <factor>0.4</factor>
+        <terrorist_prefix>terrorist</terrorist_prefix>
+        <tracking_topic>terrorist_tracking</tracking_topic>
+        <!-- birimi milliseconds. -->
+        <message_rate>100</message_rate>
+        <update_rate>100</update_rate>
+      </tracking_score>
+      <!-- calculates the score value and publishes at every publish rate milliseconds -->
+      <publish_rate>1000</publish_rate>
+    </plugin>
+    <plugin name="scenario_manager" filename="libscenario_manager.so">
+      <!-- how long the scenario is going to run unit is milliseconds-->
+      <sim_duration>450.0</sim_duration>
+    </plugin>
+
+  </world>
+</sdf>
