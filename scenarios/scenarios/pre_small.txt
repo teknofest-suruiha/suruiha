@@ -1,0 +1,28 @@
+terrorists group 1:
+from building_4h to building_2n
+-95 202
+-190 110
+-122 -5
+53 -104
+-1 -202
+
+terrorists group 2:
+from building_1l to building 1o
+114 -98
+114 -198
+
+terrorists group 3:
+from building_1f to building_5b
+114 201
+208 110
+178 -1
+
+terrorists group 4:
+from building_2a to building_2e
+-1 -2
+-35 -98
+
+terrorists group 5:
+from building_3c to building_0l
+-230 2
+227 -96

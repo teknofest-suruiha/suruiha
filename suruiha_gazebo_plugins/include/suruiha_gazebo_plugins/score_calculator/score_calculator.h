@@ -48,6 +48,8 @@ namespace gazebo {
     protected: TrackingScore trackingScore;
 
     protected: boost::thread* scoreCalculationThread;
+    protected: double simDuration;
+    protected: bool finalScore;
 
     };
 }

@@ -11,6 +11,9 @@
 #include <gazebo/common/Time.hh>
 #include <gazebo/transport/TransportTypes.hh>
 #include <sdf/sdf.hh>
+#include <geometry_msgs/Point32.h>
+#include <geometry_msgs/Polygon.h>
+#include <nav_msgs/OccupancyGrid.h>
 
 namespace gazebo {
     class ScenarioManager : public WorldPlugin {
@@ -33,8 +36,11 @@ namespace gazebo {
         protected: transport::PublisherPtr serverControlPub;
         protected: void KillAll();
 
+//        protected: void IndexBuildings();
         protected: void GetStreetModel();
-
+        protected: void CalculateTerroristPath();
+        protected: geometry_msgs::Point32 ToPoint32(double x, double y);
+        protected: void AddOccupancy(geometry_msgs::Polygon& polygon, nav_msgs::OccupancyGrid& map);
     };
 }
 

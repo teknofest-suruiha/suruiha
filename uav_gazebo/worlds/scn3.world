@@ -1891,15 +1891,15 @@
 
     <plugin name="air_traffic_controller" filename="libair_traffic_controller.so">
       <takeoff>
-        <pose>-240 -240 0 0 0 3.1415</pose>
+        <pose>490 -490 0 0 0 3.1415</pose>
         <height_threshold>10</height_threshold>
         <distance_threshold>50</distance_threshold>
       </takeoff>
       <landing>
         <area_bottom_left>480 -500 0</area_bottom_left>
         <area_upper_right>500 -400 0</area_upper_right>
-        <start_pose>-240 -150 30 0 0 3.1415</start_pose>
-        <end_pose>-240 -240 0 0 0 3.1415</end_pose>
+        <start_pose>480 -400 30 0 0 3.1415</start_pose>
+        <end_pose>480 -490 0 0 0 3.1415</end_pose>
         <height_treshold>0.1</height_treshold>
         <velocity_threshold>3</velocity_threshold>
       </landing>
@@ -1922,8 +1922,8 @@
         <!-- runs score calculation at every update_rate milliseconds -->
         <update_rate>100</update_rate>
         <!-- widgh and height of total area in meters -->
-        <width>500</width>
-        <height>500</height>
+        <width>1000</width>
+        <height>1000</height>
         <!-- the size of a single cell in meters -->
         <resolution>0.5</resolution>
         <factor>0.3</factor>
@@ -1950,7 +1950,7 @@
     </plugin>
     <plugin name="scenario_manager" filename="libscenario_manager.so">
       <!-- how long the scenario is going to run unit is milliseconds-->
-      <sim_duration>300000</sim_duration>
+      <sim_duration>500</sim_duration>
     </plugin>
   </world>
 </sdf>
