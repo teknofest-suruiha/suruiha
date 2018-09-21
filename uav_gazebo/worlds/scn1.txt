@@ -1,0 +1,66 @@
+#terrorist group 1:
+#from building 0 to building 166
+0 0
+-25 -100
+-25 -130
+-110 -130
+-150 -330
+
+#terrorist group 1:
+#from building 0 to building 166
+0 0
+-25 -100
+-25 -130
+-110 -130
+-150 -330
+
+#terrorist group 1:
+#from building 0 to building 166
+0 0
+-25 -100
+-25 -130
+-110 -130
+-150 -330
+
+#terrorist group 2:
+#from building 0 to building 244
+0 0
+-25 -100
+-25 -130 
+-110 -130
+-130 -160
+
+#terrorist group 2:
+#from building 0 to building 244
+0 0
+-25 -100
+-25 -130 
+-110 -130
+-130 -160
+
+#terrorist group 2:
+#from building 0 to building 244
+0 0
+-25 -100
+-25 -130 
+-110 -130
+-130 -160
+
+#terrorist group 3:
+#from building 0 to building 322
+0 0
+-25 -100
+-25 -130
+-110 -130
+-160 -120
+-230 -135
+
+#terrorist group 3:
+#from building 0 to building 322
+0 0
+-25 -100
+-25 -130
+-110 -130
+-160 -120
+-230 -135
+
