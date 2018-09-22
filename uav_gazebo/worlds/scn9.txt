@@ -1,0 +1,390 @@
+#terrorists group 1:
+#from building_4h to building_2n
+177.5 -164.23
+100 120
+
+#terrorists group 2:
+#from building_4h to building_2n
+20 135
+100 120
+
+#terrorists group 3:
+#from building_4h to building_2n
+100 -30
+100 120
+
+#terrorists group 4:
+#from building_4h to building_2n
+127.5 -77.63
+62.5 -94.95
+
+#terrorists group 5:
+#from building_4h to building_2n
+0 -130
+62.5 -94.95
+
+#terrorists group 6:
+#from building_4h to building_2n
+0 -120
+62.5 -94.95
+
+#terrorists group 7:
+#from building_4h to building_2n
+0 -105
+62.5 -94.95
+
+#terrorists group 8:
+#from building_4h to building_2n
+0 -80
+62.5 -94.95
+
+#terrorists group 9:
+#from building_4h to building_2n
+0 -55
+62.5 -94.95
+
+#terrorists group 10:
+#from building_4h to building_2n
+0 -30
+62.5 -94.95
+
+#terrorists group 11:
+#from building_4h to building_2n
+-80 -185
+-25 -120
+
+#terrorists group 12:
+#from building_4h to building_2n
+100 -120
+165 -142.58
+
+#terrorists group 13:
+#from building_4h to building_2n
+100 -120
+100 -30
+
+#terrorists group 14:
+#from building_4h to building_2n
+140 30
+100 -30
+
+#terrorists group 15:
+#from building_4h to building_2n
+-80 -80
+0 -80
+
+#terrorists group 16:
+#from building_4h to building_2n
+-80 -55
+0 -80
+
+#terrorists group 17:
+#from building_4h to building_2n
+-80 -30
+0 -80
+
+#terrorists group 18:
+#from building_4h to building_2n
+-80 -30
+-130 -30
+
+#terrorists group 19:
+#from building_4h to building_2n
+-80 -30
+-130 -55
+
+#terrorists group 20:
+#from building_4h to building_2n
+-80 -30
+-130 -80
+
+#terrorists group 21:
+#from building_4h to building_2n
+-80 -185
+-130 -185
+
+#terrorists group 22:
+#from building_4h to building_2n
+-80 -185
+-130 -160
+
+#terrorists group 23:
+#from building_4h to building_2n
+-80 -185
+-130 -135
+
+#terrorists group 24:
+#from building_4h to building_2n
+-80 -105
+-130 -105
+
+#terrorists group 25:
+#from building_4h to building_2n
+-80 -105
+-130 -105
+
+#terrorists group 26:
+#from building_4h to building_2n
+-80 -105
+-130 -105
+
+#terrorists group 27:
+#from building_4h to building_2n
+-80 -105
+-130 -105
+
+#terrorists group 28:
+#from building_4h to building_2n
+-80 -105
+-130 -105
+
+#terrorists group 29:
+#from building_4h to building_2n
+-80 -105
+-130 -105
+
+#terrorists group 30:
+#from building_4h to building_2n
+-80 -105
+-130 -105
+
+#terrorists group 31:
+#from building_4h to building_2n
+-100 105
+-20 110
+
+#terrorists group 32:
+#from building_4h to building_2n
+-100 105
+-20 110
+
+#terrorists group 33:
+#from building_4h to building_2n
+-100 105
+-20 110
+
+#terrorists group 34:
+#from building_4h to building_2n
+-100 135
+-20 190
+
+#terrorists group 35:
+#from building_4h to building_2n
+-100 160
+-20 190
+
+#terrorists group 36:
+#from building_4h to building_2n
+-100 185
+-20 190
+
+#terrorists group 37:
+#from building_4h to building_2n
+-165 210
+-140 120
+
+#terrorists group 38:
+#from building_4h to building_2n
+-190 210
+-140 120
+
+#terrorists group 39:
+#from building_4h to building_2n
+-220 180
+-140 120
+
+#terrorists group 40:
+#from building_4h to building_2n
+-195 120
+-215 30
+
+#terrorists group 41:
+#from building_4h to building_2n
+-195 120
+-190 30
+
+#terrorists group 42:
+#from building_4h to building_2n
+-195 120
+-165 30
+
+#terrorists group 43:
+#from building_4h to building_2n
+100 160
+20 135
+
+#terrorists group 44:
+#from building_4h to building_2n
+100 160
+20 165
+
+#terrorists group 45:
+#from building_4h to building_2n
+100 160
+20 190
+
+#terrorists group 46:
+#from building_4h to building_2n
+73 66.9
+140 55
+
+#terrorists group 47:
+#from building_4h to building_2n
+73 66.9
+140 85
+
+#terrorists group 48:
+#from building_4h to building_2n
+73 66.9
+140 110
+
+#terrorists group 49:
+#from building_4h to building_2n
+100 160
+140 85
+
+#terrorists group 50:
+#from building_4h to building_2n
+100 160
+140 110
+
+#terrorists group 51:
+#from building_4h to building_2n
+100 160
+140 135
+
+#terrorists group 52:
+#from building_4h to building_2n
+100 160
+140 160
+
+#terrorists group 53:
+#from building_4h to building_2n
+100 160
+140 185
+
+#terrorists group 54:
+#from building_4h to building_2n
+220 110
+140 55
+
+#terrorists group 55:
+#from building_4h to building_2n
+220 110
+140 85
+
+#terrorists group 56:
+#from building_4h to building_2n
+220 110
+140 110
+
+#terrorists group 57:
+#from building_4h to building_2n
+220 110
+140 135
+
+#terrorists group 58:
+#from building_4h to building_2n
+220 110
+140 160
+
+#terrorists group 59:
+#from building_4h to building_2n
+220 110
+140 185
+
+#terrorists group 60:
+#from building_4h to building_2n
+140 110
+220 55
+
+#terrorists group 61:
+#from building_4h to building_2n
+140 110
+220 85
+
+#terrorists group 62:
+#from building_4h to building_2n
+140 110
+220 110
+
+#terrorists group 63:
+#from building_4h to building_2n
+140 110
+220 140
+
+#terrorists group 64:
+#from building_4h to building_2n
+140 110
+220 165
+
+#terrorists group 65:
+#from building_4h to building_2n
+140 110
+220 190
+
+#terrorists group 66:
+#from building_4h to building_2n
+190 30
+165 -142.58
+
+#terrorists group 67:
+#from building_4h to building_2n
+190 30
+152.5 -120.9
+
+#terrorists group 68:
+#from building_4h to building_2n
+190 30
+140 -99.2
+
+#terrorists group 69:
+#from building_4h to building_2n
+190 30
+127.5 -77.63
+
+#terrorists group 70:
+#from building_4h to building_2n
+190 30
+115 -55.98
+
+#terrorists group 71:
+#from building_4h to building_2n
+190 30
+100 -30
+
+#terrorists group 72:
+#from building_4h to building_2n
+100 -30
+140 30
+
+#terrorists group 73:
+#from building_4h to building_2n
+100 -30
+94.24 45.73
+
+#terrorists group 74:
+#from building_4h to building_2n
+100 -30
+73 66.96
+
+#terrorists group 75:
+#from building_4h to building_2n
+100 -30
+20 30
+
+#terrorists group 76:
+#from building_4h to building_2n
+0 -30
+-50 30
+
+#terrorists group 77:
+#from building_4h to building_2n
+0 -30
+-25 30
+
+#terrorists group 78:
+#from building_4h to building_2n
+0 -30
+20 30
+

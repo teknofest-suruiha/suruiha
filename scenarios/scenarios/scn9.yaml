@@ -7,7 +7,7 @@ area_size: {
 runway: {
   left_bottom: {
     x: -250,
-    y: --250
+    y: -250
   },
   right_top: {
     x: -230,
@@ -20,107 +20,107 @@ uavs: [
   type: 'zephyr',
   sensor: {
     min_height: 30,
-    max_height: 70
+    max_height: 60
   },
-  battery_capacity: 100
+  battery_capacity: 1000
   },
   {
   index: 0,
   type: 'iris',
   sensor: {
     min_height: 30,
-    max_height: 70
+    max_height: 60
   },
-  battery_capacity: 100
+  battery_capacity: 1000
   },
   {
   index: 1,
   type: 'zephyr',
   sensor: {
     min_height: 30,
-    max_height: 70
+    max_height: 60
   },
-  battery_capacity: 100
+  battery_capacity: 1000
   },
   {
   index: 1,
   type: 'iris',
   sensor: {
     min_height: 30,
-    max_height: 70
+    max_height: 60
   },
-  battery_capacity: 100
+  battery_capacity: 1000
   },
   {
   index: 2,
   type: 'zephyr',
   sensor: {
     min_height: 30,
-    max_height: 70
+    max_height: 60
   },
-  battery_capacity: 100
+  battery_capacity: 1000
   },
   {
   index: 2,
   type: 'iris',
   sensor: {
     min_height: 30,
-    max_height: 70
+    max_height: 60
   },
-  battery_capacity: 100
+  battery_capacity: 1000
   },
   {
   index: 3,
   type: 'zephyr',
   sensor: {
     min_height: 30,
-    max_height: 70
+    max_height: 60
   },
-  battery_capacity: 100
+  battery_capacity: 1000
   },
   {
   index: 3,
   type: 'iris',
   sensor: {
     min_height: 30,
-    max_height: 70
+    max_height: 60
   },
-  battery_capacity: 100
+  battery_capacity: 1000
   },
   {
   index: 4,
   type: 'zephyr',
   sensor: {
     min_height: 30,
-    max_height: 70
+    max_height: 60
   },
-  battery_capacity: 100
+  battery_capacity: 1000
   },
   {
   index: 4,
   type: 'iris',
   sensor: {
     min_height: 30,
-    max_height: 70
+    max_height: 60
   },
-  battery_capacity: 100
+  battery_capacity: 1000
   },
   {
   index: 5,
   type: 'zephyr',
   sensor: {
     min_height: 30,
-    max_height: 70
+    max_height: 60
   },
-  battery_capacity: 100
+  battery_capacity: 1000
   },
   {
   index: 5,
   type: 'iris',
   sensor: {
     min_height: 30,
-    max_height: 70
+    max_height: 60
   },
-  battery_capacity: 100
+  battery_capacity: 1000
   }
 ]
