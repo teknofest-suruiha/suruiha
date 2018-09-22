@@ -3,7 +3,7 @@
   <world name="scn10">
     <gui>
       <camera name="user_camera">
-        <pose>-240 -250 20 0 0.33 1.5707</pose>
+        <pose>-490 -490 20 0 0.33 1.5707</pose>
       </camera>
     </gui>
     <physics type="ode">
@@ -35,7 +35,7 @@
           <geometry>
             <plane>
               <normal>0 0 1</normal>
-              <size>500 500</size>
+              <size>1000 1000</size>
             </plane>
           </geometry>
           <surface>
@@ -48,7 +48,7 @@
           </surface>
         </collision>
         <visual name="runway">
-          <pose>-240 -200 0.005 0 0 -1.5707</pose>
+          <pose>-490 -450 0.005 0 0 -1.5707</pose>
           <cast_shadows>false</cast_shadows>
           <geometry>
             <plane>
@@ -70,7 +70,7 @@
           <geometry>
             <plane>
               <normal>0 0 1</normal>
-              <size>500 500</size>
+              <size>1000 1000</size>
             </plane>
           </geometry>
           <material>
@@ -435,100 +435,234 @@
 </model>
 
     <model name="zephyr0">
-      <pose>-245 -237 0 0 0 3.1415</pose>
+      <pose>-495 -487 0 0 0 3.1415</pose>
       <include>
         <uri>model://zephyr_with_skid_pad</uri>
       </include>
     </model>
     
     <model name="zephyr1">
-      <pose>-245 -239 0 0 0 3.1415</pose>
+      <pose>-495 -489 0 0 0 3.1415</pose>
       <include>
         <uri>model://zephyr_with_skid_pad</uri>
       </include>
     </model>
     
     <model name="zephyr2">
-      <pose>-245 -241 0 0 0 3.1415</pose>
+      <pose>-495 -491 0 0 0 3.1415</pose>
       <include>
         <uri>model://zephyr_with_skid_pad</uri>
       </include>
     </model>
     
     <model name="zephyr3">
-      <pose>-245 -243 0 0 0 3.1415</pose>
+      <pose>-495 -493 0 0 0 3.1415</pose>
       <include>
         <uri>model://zephyr_with_skid_pad</uri>
       </include>
     </model>
     
     <model name="zephyr4">
-      <pose>-245 -245 0 0 0 3.1415</pose>
+      <pose>-495 -495 0 0 0 3.1415</pose>
       <include>
         <uri>model://zephyr_with_skid_pad</uri>
       </include>
     </model>
     
     <model name="zephyr5">
-      <pose>-245 -247 0 0 0 3.1415</pose>
+      <pose>-495 -497 0 0 0 3.1415</pose>
       <include>
         <uri>model://zephyr_with_skid_pad</uri>
       </include>
     </model>
     
     <model name="iris0">
-      <pose>-235 -237 0 0 0 3.1415</pose>
+      <pose>-485 -487 0 0 0 3.1415</pose>
       <include>
         <uri>model://iris_quadrotor_with_plugin</uri>
       </include>
     </model>
     
     <model name="iris1">
-      <pose>-235 -239 0 0 0 3.1415</pose>
+      <pose>-485 -489 0 0 0 3.1415</pose>
       <include>
         <uri>model://iris_quadrotor_with_plugin</uri>
       </include>
     </model>
     
     <model name="iris2">
-      <pose>-235 -241 0 0 0 3.1415</pose>
+      <pose>-485 -491 0 0 0 3.1415</pose>
       <include>
         <uri>model://iris_quadrotor_with_plugin</uri>
       </include>
     </model>
     
     <model name="iris3">
-      <pose>-235 -243 0 0 0 3.1415</pose>
+      <pose>-485 -493 0 0 0 3.1415</pose>
       <include>
         <uri>model://iris_quadrotor_with_plugin</uri>
       </include>
     </model>
     
     <model name="iris4">
-      <pose>-235 -245 0 0 0 3.1415</pose>
+      <pose>-485 -495 0 0 0 3.1415</pose>
       <include>
         <uri>model://iris_quadrotor_with_plugin</uri>
       </include>
     </model>
     
     <model name="iris5">
-      <pose>-235 -247 0 0 0 3.1415</pose>
+      <pose>-485 -497 0 0 0 3.1415</pose>
       <include>
         <uri>model://iris_quadrotor_with_plugin</uri>
       </include>
     </model>
+    
+    <actor name="terrorist_0">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>false</interpolate_x>
+  </animation>  <pose>-206.0 -193.0 1.07 0.0 0.0 -1.57079632679</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>30</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>-206.0 -193.0 0.0 0.0 0.0 -1.57079632679</pose>
+      </waypoint>
+      <waypoint>
+        <time>40.197850004</time>
+        <pose>-206.0 -243.0 0.0 0.0 0.0 -1.57079632679</pose>
+      </waypoint>
+      <waypoint>
+        <time>435.32216369</time>
+        <pose>185.0 -220.0 0.0 0.0 0.0 0.0587558227157</pose>
+      </waypoint>
+      <waypoint>
+        <time>560.619278884</time>
+        <pose>185.0 -170.0 0.0 0.0 0.0 1.57079632679</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_1">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>false</interpolate_x>
+  </animation>  <pose>185.0 -170.0 1.07 0.0 0.0 0.0</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>34</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>185.0 -170.0 0.0 0.0 0.0 0.0</pose>
+      </waypoint>
+      <waypoint>
+        <time>47.4050892425</time>
+        <pose>235.0 -170.0 0.0 0.0 0.0 0.0</pose>
+      </waypoint>
+      <waypoint>
+        <time>504.051855537</time>
+        <pose>235.0 220.0 0.0 0.0 0.0 1.57079632679</pose>
+      </waypoint>
+      <waypoint>
+        <time>526.726105615</time>
+        <pose>205.0 220.0 0.0 0.0 0.0 3.14159265359</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_2">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>false</interpolate_x>
+  </animation>  <pose>205.0 220.0 1.07 0.0 0.0 1.57079632679</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>38</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>205.0 220.0 0.0 0.0 0.0 1.57079632679</pose>
+      </waypoint>
+      <waypoint>
+        <time>24.1080431563</time>
+        <pose>205.0 270.0 0.0 0.0 0.0 1.57079632679</pose>
+      </waypoint>
+      <waypoint>
+        <time>395.05608235</time>
+        <pose>-216.0 270.0 0.0 0.0 0.0 3.14159265359</pose>
+      </waypoint>
+      <waypoint>
+        <time>540.49090078</time>
+        <pose>-216.0 200.0 0.0 0.0 0.0 -1.57079632679</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+<actor name="terrorist_3">
+  <skin>
+    <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
+    <scale>1.0</scale>
+  </skin>
+  <animation name="walking">
+    <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    <interpolate_x>false</interpolate_x>
+  </animation>  <pose>-216.0 200.0 1.07 0.0 0.0 3.14159265359</pose>
+  <script>
+    <loop>false</loop>
+    <delay_start>42</delay_start>
+    <auto_start>true</auto_start>
+    <trajectory id="0" type="walking">
+      <waypoint>
+        <time>0</time>
+        <pose>-216.0 200.0 0.0 0.0 0.0 3.14159265359</pose>
+      </waypoint>
+      <waypoint>
+        <time>21.8044025463</time>
+        <pose>-266.0 200.0 0.0 0.0 0.0 3.14159265359</pose>
+      </waypoint>
+      <waypoint>
+        <time>415.853404446</time>
+        <pose>-266.0 -193.0 0.0 0.0 0.0 -1.57079632679</pose>
+      </waypoint>
+      <waypoint>
+        <time>557.021901193</time>
+        <pose>-206.0 -193.0 0.0 0.0 0.0 0.0</pose>
+      </waypoint>
+    </trajectory>
+  </script>
+</actor>
+
 
     <plugin name="air_traffic_controller" filename="libair_traffic_controller.so">
       <takeoff>
-        <pose>-240 -240 0 0 0 3.1415</pose>
+        <pose>-490 -490 0 0 0 3.1415</pose>
         <height_threshold>10</height_threshold>
         <distance_threshold>50</distance_threshold>
       </takeoff>
       <landing>
-        <area_bottom_left>480 -500 0</area_bottom_left>
-        <area_upper_right>500 -400 0</area_upper_right>
-        <start_pose>-240 -150 30 0 0 3.1415</start_pose>
-        <end_pose>-240 -240 0 0 0 3.1415</end_pose>
+        <area_bottom_left>-500 -500 0</area_bottom_left>
+        <area_upper_right>-480 -400 0</area_upper_right>
+        <start_pose>-490 -400 30 0 0 3.1415</start_pose>
+        <end_pose>-490 -490 0 0 0 3.1415</end_pose>
         <height_treshold>0.1</height_treshold>
         <velocity_threshold>3</velocity_threshold>
       </landing>
@@ -551,10 +685,10 @@
         <!-- runs score calculation at every update_rate milliseconds -->
         <update_rate>100</update_rate>
         <!-- widgh and height of total area in meters -->
-        <width>500</width>
-        <height>500</height>
+        <width>1000</width>
+        <height>1000</height>
         <!-- the size of a single cell in meters -->
-        <resolution>0.5</resolution>
+        <resolution>2.0</resolution>
         <factor>0.3</factor>
       </area_coverage_score>
       <detection_score>
@@ -579,7 +713,7 @@
     </plugin>
     <plugin name="scenario_manager" filename="libscenario_manager.so">
       <!-- how long the scenario is going to run unit is milliseconds-->
-      <sim_duration>300000</sim_duration>
+      <sim_duration>600</sim_duration>
     </plugin>
   </world>
 </sdf>
