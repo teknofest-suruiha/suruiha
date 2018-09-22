@@ -33,6 +33,8 @@ namespace gazebo {
 
     private: event::ConnectionPtr updateConnection;
     private: boost::mutex updateMutex;
+    private: boost::mutex updateMutex2;
+    private: boost::mutex updateMutex3;
 
     protected: ros::NodeHandle* rosNode;
     protected: ros::ServiceServer serviceServer;

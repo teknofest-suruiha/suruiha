@@ -141,7 +141,7 @@ namespace gazebo {
 //                modelPtr->SetWorldPose(initialModelPose);
                 justLanded.insert(uavName);
 
-                runway.SetStatus(air_traffic_constants::AVAILABLE);
+//                runway.SetStatus(air_traffic_constants::AVAILABLE);
                 SetUAVStatus(uavName, false);
             }
             else {
@@ -194,6 +194,18 @@ namespace gazebo {
                     uavBodyPtr = modelPtr->GetLink("iris_quadrotor_with_plugin::iris_quadrotor::base_link");
                 }
 
+                ignition::math::Vector3d zeroVelocity(0, 0, 0);
+                modelPtr->SetLinearVel(zeroVelocity);
+                modelPtr->SetAngularVel(zeroVelocity);
+
+                ignition::math::Pose3d initialModelPose = initialPoses[*landedIterator];
+                modelPtr->SetWorldPose(initialModelPose);
+
+                msgs::Any batteryReplaceMsg;
+                batteryReplaceMsg.set_type(msgs::Any::STRING);
+                batteryReplaceMsg.set_string_value(*landedIterator);
+                batteryReplacePub->Publish(batteryReplaceMsg);
+
                 if (uavBodyPtr != nullptr) {
 
                     ignition::math::Vector3d xyForce(uavBodyPtr->WorldForce().X(), uavBodyPtr->WorldForce().Y(), 0);
@@ -203,6 +215,7 @@ namespace gazebo {
 
                     if (uavBodyPtr->WorldTorque().Length() < 0.001 && xyForce.Length() < 0.001) {
                         justLanded.erase(*landedIterator);
+                        runway.SetStatus(air_traffic_constants::AVAILABLE);
                         continue;
                     }
                 } else {
@@ -215,22 +228,13 @@ namespace gazebo {
 //                ignition::math::Vector3d negativeTorque(-wingPtr->WorldTorque().X(), -wingPtr->WorldTorque().Y(),
 //                                                        -wingPtr->WorldTorque().Z());
 //                wingPtr->SetTorque(negativeTorque);
-                ignition::math::Vector3d zeroVelocity(0, 0, 0);
-                modelPtr->SetLinearVel(zeroVelocity);
-                modelPtr->SetAngularVel(zeroVelocity);
 
-                ignition::math::Pose3d initialModelPose = initialPoses[*landedIterator];
-                modelPtr->SetWorldPose(initialModelPose);
-
-                msgs::Any batteryReplaceMsg;
-                batteryReplaceMsg.set_type(msgs::Any::STRING);
-                batteryReplaceMsg.set_string_value(*landedIterator);
-                batteryReplacePub->Publish(batteryReplaceMsg);
             }
         }
     }
 
     void AirTrafficController::SetUAVStatus(std::string uavName, bool isActive) {
+        boost::mutex::scoped_lock lock(updateMutex2);
         isUAVActive.insert(std::pair<std::string, bool>(uavName, isActive));
 //        gzdbg << "uav " << uavName << " is set as " << isActive << std::endl;
         // send air traffic information to uav controllers
@@ -245,8 +249,10 @@ namespace gazebo {
     }
 
     bool AirTrafficController::AirTrafficService(AirTraffic::Request& req, AirTraffic::Response& resp) {
+        boost::mutex::scoped_lock lock(updateMutex3);
 //        gzdbg << "We get a service request command:" << req.command <<  " from " << req.sender << std::endl;
         resp.result = runway.ProcessCommand(req.command, req.sender);
+        gzdbg << "process cmd:" << req.command << " sender:" << req.sender << " result:" << resp.result << std::endl;
         return true;
     }
 }
