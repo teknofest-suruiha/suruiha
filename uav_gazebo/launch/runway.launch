@@ -1,4 +1,6 @@
 <launch>
+  <rosparam command="load" file="$(find uav_gazebo)/scenarios/runway.yaml" param="scenario" />
+
   <arg name="world_name" value="$(find uav_gazebo)/worlds/runway.world"/>
   <arg name="extra_gazebo_args" value="--verbose" />
   <arg name="paused" value="false"/>
