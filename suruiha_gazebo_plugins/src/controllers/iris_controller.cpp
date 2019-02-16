@@ -459,7 +459,6 @@ namespace gazebo {
 
     void IrisController::OnBatteryReplaceMsg(ConstAnyPtr& batteryReplaceMsg) {
         if (modelName == batteryReplaceMsg->string_value()) {
-            gzdbg << "model:" << modelName << " replace battery" << std::endl;
             battery.ReplaceBattery();
         }
     }

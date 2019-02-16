@@ -114,10 +114,11 @@
         <uri>model://osrf_first_office</uri>
       </include>
     </model>
+    
     <actor name="terrorist_0">
       <pose>300 300 1.07 0 0 -1.5708</pose>
       <skin>
-        <filename>model://actor/meshes/SKIN_man_red_shirt.dae</filename>
+        <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
         <scale>1.0</scale>
       </skin>
       <animation name="walking">
@@ -126,25 +127,37 @@
       </animation>
       <script>
         <loop>false</loop>
-        <delay_start>50.0</delay_start>
+        <delay_start>0.0</delay_start>
         <auto_start>true</auto_start>
         <trajectory id="0" type="walking">
           <waypoint>
             <time>0</time>
-            <pose>300 300 0 0 0 -1.5708</pose>
+            <pose>300 300 0 0 0 -2.3562</pose>
           </waypoint>
           <waypoint>
-            <time>180.00</time>
-            <pose>300 -300 0 0 0 -1.5708</pose>
+            <time>20</time>
+            <pose>280 280 0 0 0 -0.7854</pose>
+          </waypoint>
+          <waypoint>
+            <time>30</time>
+            <pose>320 260 0 0 0 -2.3562</pose>
           </waypoint>
         </trajectory>
       </script>
     </actor>
+    <model name="gun_0">
+      <static>true</static>
+      <pose>300 300 2.5 0 0 -1.5708</pose>
+      <include>
+        <uri>model://gun</uri>
+      </include>
+    </model>
     
+    <!--
     <actor name="terrorist_1">
       <pose>300 300 1.07 0 0 -1.5708</pose>
       <skin>
-        <filename>model://actor/meshes/SKIN_man_red_shirt.dae</filename>
+        <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
         <scale>1.0</scale>
       </skin>
       <animation name="walking">
@@ -172,7 +185,7 @@
     <actor name="terrorist_2">
       <pose>300 300 1.07 0 0 -1.5708</pose>
       <skin>
-        <filename>model://actor/meshes/SKIN_man_red_shirt.dae</filename>
+        <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
         <scale>1.0</scale>
       </skin>
       <animation name="walking">
@@ -199,7 +212,7 @@
     <actor name="terrorist_3">
       <pose>300 300 1.07 0 0 -1.5708</pose>
       <skin>
-        <filename>model://actor/meshes/SKIN_man_red_shirt.dae</filename>
+        <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
         <scale>1.0</scale>
       </skin>
       <animation name="walking">
@@ -226,7 +239,7 @@
     <actor name="terrorist_4">
       <pose>300 300 1.07 0 0 -1.5708</pose>
       <skin>
-        <filename>model://actor/meshes/SKIN_man_red_shirt.dae</filename>
+        <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
         <scale>1.0</scale>
       </skin>
       <animation name="walking">
@@ -253,7 +266,7 @@
    <actor name="terrorist_5">
       <pose>300 300 1.07 0 0 -1.5708</pose>
       <skin>
-        <filename>model://actor/meshes/SKIN_man_red_shirt.dae</filename>
+        <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
         <scale>1.0</scale>
       </skin>
       <animation name="walking">
@@ -280,7 +293,7 @@
    <actor name="terrorist_6">
       <pose>300 300 1.07 0 0 -1.5708</pose>
       <skin>
-        <filename>model://actor/meshes/SKIN_man_red_shirt.dae</filename>
+        <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
         <scale>1.0</scale>
       </skin>
       <animation name="walking">
@@ -307,7 +320,7 @@
    <actor name="terrorist_7">
       <pose>300 300 1.07 0 0 -1.5708</pose>
       <skin>
-        <filename>model://actor/meshes/SKIN_man_red_shirt.dae</filename>
+        <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
         <scale>1.0</scale>
       </skin>
       <animation name="walking">
@@ -334,7 +347,7 @@
    <actor name="terrorist_8">
       <pose>300 300 1.07 0 0 -1.5708</pose>
       <skin>
-        <filename>model://actor/meshes/SKIN_man_red_shirt.dae</filename>
+        <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
         <scale>1.0</scale>
       </skin>
       <animation name="walking">
@@ -361,7 +374,7 @@
    <actor name="terrorist_9">
       <pose>300 300 1.07 0 0 -1.5708</pose>
       <skin>
-        <filename>model://actor/meshes/SKIN_man_red_shirt.dae</filename>
+        <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
         <scale>1.0</scale>
       </skin>
       <animation name="walking">
@@ -388,7 +401,7 @@
    <actor name="terrorist_10">
       <pose>300 300 1.07 0 0 -1.5708</pose>
       <skin>
-        <filename>model://actor/meshes/SKIN_man_red_shirt.dae</filename>
+        <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
         <scale>1.0</scale>
       </skin>
       <animation name="walking">
@@ -415,7 +428,7 @@
    <actor name="terrorist_11">
       <pose>300 300 1.07 0 0 -1.5708</pose>
       <skin>
-        <filename>model://actor/meshes/SKIN_man_red_shirt.dae</filename>
+        <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
         <scale>1.0</scale>
       </skin>
       <animation name="walking">
@@ -442,7 +455,7 @@
    <actor name="terrorist_12">
       <pose>300 300 1.07 0 0 -1.5708</pose>
       <skin>
-        <filename>model://actor/meshes/SKIN_man_red_shirt.dae</filename>
+        <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
         <scale>1.0</scale>
       </skin>
       <animation name="walking">
@@ -469,7 +482,7 @@
    <actor name="terrorist_13">
       <pose>300 300 1.07 0 0 -1.5708</pose>
       <skin>
-        <filename>model://actor/meshes/SKIN_man_red_shirt.dae</filename>
+        <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
         <scale>1.0</scale>
       </skin>
       <animation name="walking">
@@ -496,7 +509,7 @@
    <actor name="terrorist_14">
       <pose>300 300 1.07 0 0 -1.5708</pose>
       <skin>
-        <filename>model://actor/meshes/SKIN_man_red_shirt.dae</filename>
+        <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
         <scale>1.0</scale>
       </skin>
       <animation name="walking">
@@ -523,7 +536,7 @@
    <actor name="terrorist_15">
       <pose>300 300 1.07 0 0 -1.5708</pose>
       <skin>
-        <filename>model://actor/meshes/SKIN_man_red_shirt.dae</filename>
+        <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
         <scale>1.0</scale>
       </skin>
       <animation name="walking">
@@ -549,7 +562,7 @@
    <actor name="terrorist_16">
       <pose>300 300 1.07 0 0 -1.5708</pose>
       <skin>
-        <filename>model://actor/meshes/SKIN_man_red_shirt.dae</filename>
+        <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
         <scale>1.0</scale>
       </skin>
       <animation name="walking">
@@ -576,7 +589,7 @@
    <actor name="terrorist_17">
       <pose>300 300 1.07 0 0 -1.5708</pose>
       <skin>
-        <filename>model://actor/meshes/SKIN_man_red_shirt.dae</filename>
+        <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
         <scale>1.0</scale>
       </skin>
       <animation name="walking">
@@ -603,7 +616,7 @@
    <actor name="terrorist_18">
       <pose>300 300 1.07 0 0 -1.5708</pose>
       <skin>
-        <filename>model://actor/meshes/SKIN_man_red_shirt.dae</filename>
+        <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
         <scale>1.0</scale>
       </skin>
       <animation name="walking">
@@ -630,7 +643,7 @@
    <actor name="terrorist_19">
       <pose>300 300 1.07 0 0 -1.5708</pose>
       <skin>
-        <filename>model://actor/meshes/SKIN_man_red_shirt.dae</filename>
+        <filename>model://actor/meshes/SKIN_man_gray_shirt.dae</filename>
         <scale>1.0</scale>
       </skin>
       <animation name="walking">
@@ -653,6 +666,7 @@
         </trajectory>
       </script>
     </actor>
+    -->
     
     <model name="zephyr0">
       <pose>485 -493 0 0 0 3.1415</pose>

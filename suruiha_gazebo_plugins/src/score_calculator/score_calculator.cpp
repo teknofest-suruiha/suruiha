@@ -17,6 +17,7 @@ namespace gazebo{
     ScoreCalculator::ScoreCalculator() {
         isCalculateScore = false;
         isThreadAlive = true;
+        finalScore = false;
     }
 
     ScoreCalculator::~ScoreCalculator() {
@@ -53,6 +54,18 @@ namespace gazebo{
 
         scoreCalculationThread = new boost::thread(boost::bind(&ScoreCalculator::CalculateAndPublishScore, this));
 
+        // get the sim time
+        sdf::ElementPtr worldSDF = world->SDF();
+        sdf::ElementPtr pluginSdf = worldSDF->GetElement("plugin");
+        while (pluginSdf != NULL) {
+            std::string pluginName = pluginSdf->GetAttribute("name")->GetAsString();
+            if (pluginName == "scenario_manager") {
+                simDuration = pluginSdf->Get<double>("sim_duration");
+            }
+            pluginSdf = pluginSdf->GetNextElement("plugin");
+        }
+        gzdbg << "simDuration:" << simDuration << std::endl;
+
         // New Mechanism for Updating every World Cycle
         // Listen to the update event. This event is broadcast every
         // simulation iteration.
@@ -74,6 +87,10 @@ namespace gazebo{
             isCalculateScore = true;
             lastPublishTime = currTime;
         }
+        if (currTime.Double() >= simDuration) {
+            finalScore = true;
+            isCalculateScore = true;
+        }
     }
 
     void ScoreCalculator::CalculateAndPublishScore() {
@@ -88,6 +105,14 @@ namespace gazebo{
                         scoreMsg.tracking_score * trackingScore.GetFactor();
                 scorePublisher.publish(scoreMsg);
                 isCalculateScore = false;
+                if (finalScore) {
+                    gzdbg << "-- FINAL SCORE --" << std::endl;
+                    gzdbg << "area_score:" << scoreMsg.area_score << std::endl;
+                    gzdbg << "detection_score:" << scoreMsg.detection_score << std::endl;
+                    gzdbg << "tracking_score:" << scoreMsg.tracking_score << std::endl;
+                    gzdbg << "total:" << scoreMsg.total_score << std::endl;
+                    finalScore = false;
+                }
             } else {
                 boost::this_thread::sleep_for(boost::chrono::milliseconds(10));
             }

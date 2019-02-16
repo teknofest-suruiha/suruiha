@@ -49,7 +49,7 @@ void DetectionScore::SetWorld(physics::WorldPtr _worldPtr) {
     }
 
     // get start and end times for the detection of the building
-    double distThresh = 0.1;
+    double distThresh = 0.5;
     for (unsigned int i = 0; i < buildingModels.size(); i++) {
         ignition::math::Pose3d buildingPose = buildingModels[i]->WorldPose();
         double earliestActorTime = std::numeric_limits<double>::max();

@@ -69,7 +69,7 @@ if __name__ == "__main__":
         name = model['name']
         pos = model['position']
         ori = model['ori']
-        print('<model name="building_' + str(counter) + '">')
+        print('<model name="building_' + str(counter) + '"
         print('  <static>true</static>')
         print('  <pose>'+str(pos[0])+' '+str(pos[1])+' 0 0 0 '+str(ori*2*math.pi/360.0)+'</pose>')
         print('  <include>')

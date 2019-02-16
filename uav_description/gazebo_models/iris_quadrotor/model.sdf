@@ -135,7 +135,7 @@
         <pose>0 0 0 0 1.5707 -1.5707</pose>
         <logical_camera>
           <near>0.1</near>
-          <far>100</far>
+          <far>500</far>
           <horizontal_fov>0.5</horizontal_fov>
           <aspect_ratio>1.3333</aspect_ratio>
         </logical_camera>
