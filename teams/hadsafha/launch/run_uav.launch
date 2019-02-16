@@ -1,0 +1,3 @@
+<launch>
+  <node name="hadsafha_$(arg uav_index)" pkg="hadsafha" type="uav_controller.py" args="$(arg uav_index)" output="screen" />
+</launch>

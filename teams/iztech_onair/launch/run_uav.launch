@@ -1,0 +1,3 @@
+<launch>
+  <node name="sample_team_$(arg uav_index)" pkg="iztech_onair" type="uav_controller.py" args="$(arg uav_index)" output="screen" />
+</launch>

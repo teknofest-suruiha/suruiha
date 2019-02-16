@@ -1,0 +1,3 @@
+<launch>
+  <node name="test_ucusu_$(arg uav_index)" pkg="test_ucusu" type="test_ucusu_main.py" args="$(arg uav_index)" output="screen" />
+</launch>
