@@ -81,6 +81,8 @@ class TaskPlanner:
             self.uavindex = 1
         elif self.uav_index == 5:
             self.uavindex = 3
+        
+        self.stepsize = 2
 
         if self.num_uavs == 3:
             self.stepsize = 2

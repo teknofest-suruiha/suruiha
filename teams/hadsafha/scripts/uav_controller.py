@@ -26,13 +26,14 @@ if __name__ == "__main__":
 
 
     # Alınan arguman "_" karakteri ile parçalanır ve bu sayede uav tipi ve index'i seçilmiş olur
-    args= sys.argv[1].split("_")
+    #args= sys.argv[1].split("_")
 
-    uav_index = int(args[0])
-    uav_type = args[1]
+    #uav_index = int(args[0])
+    #uav_type = args[1]
+    uav_index = int(sys.argv[1])
+    uav_type = 'zephyr'
 
     scenario_params = scenario.get_scenario_params()
-
 
     uav_name = 'iris' + str(uav_index)
     if uav_type == "zephyr":

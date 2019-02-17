@@ -12,13 +12,14 @@ from test_ucusu.test_ucusu_mapper import *
 from test_ucusu.test_ucusu_pid import *
 from test_ucusu.test_ucusu_detector import *
 from test_ucusu.test_ucusu_communication import *
+import sys
 
 
 def init_node():
     roslib.load_manifest('test_ucusu')
     rospy.init_node('test_ucusu', anonymous=True)
-    uav_name = rospy.get_param('~name')
-    uav_index = int(uav_name.replace("zephyr", ""))
+    uav_name = 'zephyr'+sys.argv[1]
+    uav_index = int(sys.argv[1])
     return uav_name, uav_index
 
 
